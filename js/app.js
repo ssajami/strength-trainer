@@ -28,6 +28,18 @@ function toast(msg, type = 'info') {
   }, 3800);
 }
 
+// ─── Error banner ────────────────────────────────────────────────────────────
+function showError(msg) {
+  const existing = document.getElementById('error-banner');
+  if (existing) existing.remove();
+  const banner = document.createElement('div');
+  banner.id = 'error-banner';
+  banner.className = 'error-banner';
+  banner.innerHTML = `<span class="error-banner-msg">Error: ${msg}</span><button class="error-banner-close" aria-label="Dismiss">✕</button>`;
+  banner.querySelector('.error-banner-close').onclick = () => banner.remove();
+  document.querySelector('main').prepend(banner);
+}
+
 // ─── Settings ────────────────────────────────────────────────────────────────
 function openSettings() {
   const p = Storage.getProfile();
@@ -186,7 +198,7 @@ async function handleGenerate() {
     toast('Program generated!', 'success');
   } catch (err) {
     console.error(err);
-    toast(`Error: ${err.message}`, 'error');
+    showError(err.message);
   } finally {
     hide($('loading-overlay'));
     $('generate-btn').disabled = false;

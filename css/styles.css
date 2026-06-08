@@ -707,6 +707,19 @@ textarea { resize: vertical; min-height: 80px; }
 .toast-error   { background: #7f1d1d; }
 .toast-info    { background: #1e3a5f; }
 
+/* ── Error banner ────────────────────────────────────────────────────────── */
+.error-banner {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: #7f1d1d; color: #fecaca;
+  border-radius: var(--radius); padding: 14px 16px;
+  margin-bottom: var(--sp-md); font-size: .875rem; line-height: 1.5;
+}
+.error-banner-msg { flex: 1; word-break: break-word; }
+.error-banner-close {
+  background: none; border: none; color: #fca5a5; cursor: pointer;
+  font-size: 1rem; line-height: 1; padding: 0; flex-shrink: 0;
+}
+
 /* ── Utility ──────────────────────────────────────────────────────────────── */
 .mt-sm { margin-top: var(--sp-sm); }
 .mt-md { margin-top: var(--sp-md); }

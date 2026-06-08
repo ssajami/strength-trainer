@@ -180,7 +180,7 @@ Rules:
       },
       body: JSON.stringify({
         model:      MODEL,
-        max_tokens: 16000,
+        max_tokens: 32000,
         system:     systemPrompt,
         messages:   [{ role: 'user', content: userMessage }],
       }),
