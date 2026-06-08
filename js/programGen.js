@@ -137,6 +137,7 @@ Return ONLY this JSON structure, no text outside it:
           "sets": 3,
           "reps": "5",
           "percentOfMax": 75,
+          "restSeconds": 180,
           "coachingNotes": "string or null"
         }
       ],
@@ -161,7 +162,12 @@ Rules:
 - If percentOfMax is null due to no saved max, set coachingNotes to explain how to choose weight
 - Carry loads should be absolute (e.g. "32 kg KB per hand") or bodyweight-based
 - Every session must have at least 1 posterior chain movement in strength
-- Keep metcons 10–20 min, CrossFit-style but fully low-impact`;
+- Keep metcons 10–20 min, CrossFit-style but fully low-impact
+- restSeconds: post-menopausal women need full recovery — use these guidelines:
+  • Heavy compound (≤5 reps or ≥80% 1RM): 180–240 s
+  • Moderate compound (6–10 reps): 120–180 s
+  • Accessory / isolation (10+ reps): 90–120 s
+  • Carries, loaded holds, core: 60–90 s`;
   }
 
   // ─── API call ────────────────────────────────────────────────────────────────
@@ -217,6 +223,7 @@ Rules:
         sets:           e.sets          ?? 3,
         reps:           String(e.reps   ?? '5'),
         percentOfMax:   e.percentOfMax  ?? null,
+        restSeconds:    e.restSeconds   ?? null,
         coachingNotes:  e.coachingNotes || null,
       })),
       metcon: {

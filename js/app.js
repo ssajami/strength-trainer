@@ -354,6 +354,7 @@ function renderStrength(items) {
         <div class="ex-rx">
           <strong>${ex.sets} sets × ${ex.reps} reps</strong>
           ${load ? `<span class="load-val">${load}</span>` : ''}
+          ${fmtRest(ex.restSeconds) ? `<span class="rest-val">Rest ${fmtRest(ex.restSeconds)}</span>` : ''}
         </div>
         ${ex.coachingNotes ? `<div class="coaching-notes">${ex.coachingNotes}</div>` : ''}
       </div>
@@ -539,7 +540,7 @@ function exportToHTML() {
         <div class="ex-num">${i + 1}</div>
         <div class="ex-detail">
           <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span></div>
-          <div class="ex-rx">${e.sets} sets × ${e.reps} reps${loadStr ? ` &nbsp;·&nbsp; <strong class="load">${loadStr}</strong>` : ''}</div>
+          <div class="ex-rx">${e.sets} sets × ${e.reps} reps${loadStr ? ` &nbsp;·&nbsp; <strong class="load">${loadStr}</strong>` : ''}${e.restSeconds ? ` &nbsp;·&nbsp; <span class="rest">Rest ${fmtRest(e.restSeconds)}</span>` : ''}</div>
           ${e.coachingNotes ? `<div class="note">${e.coachingNotes}</div>` : ''}
         </div>
       </div>`;
@@ -593,7 +594,7 @@ function exportToHTML() {
           <div class="ex-num">${i + 1}</div>
           <div class="ex-detail">
             <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span></div>
-            <div class="ex-rx">${e.sets} sets × ${e.reps} reps${loadStr ? ` &nbsp;·&nbsp; <strong class="load">${loadStr}</strong>` : ''}</div>
+            <div class="ex-rx">${e.sets} sets × ${e.reps} reps${loadStr ? ` &nbsp;·&nbsp; <strong class="load">${loadStr}</strong>` : ''}${e.restSeconds ? ` &nbsp;·&nbsp; <span class="rest">Rest ${fmtRest(e.restSeconds)}</span>` : ''}</div>
             ${e.coachingNotes ? `<div class="note">${e.coachingNotes}</div>` : ''}
           </div>
         </div>`;
@@ -663,6 +664,7 @@ function exportToHTML() {
   .note  { color: var(--muted); font-size: .8rem; font-style: italic; }
   .pct   { color: var(--muted); font-weight: 400; font-size: .85em; }
   .load  { color: var(--primary); }
+  .rest  { color: var(--muted); font-size: .85em; }
   .tag   { background: #f1f5f9; color: var(--muted); font-size: .7rem; font-weight: 700;
     padding: 1px 6px; border-radius: 100px; text-transform: capitalize; }
   .tag.cat { }
@@ -735,6 +737,13 @@ ${byWeek}
 }
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
+function fmtRest(seconds) {
+  if (!seconds) return null;
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return s ? `${m}:${String(s).padStart(2, '0')} min` : `${m} min`;
+}
+
 function fmtDate(str) {
   if (!str) return '';
   try {

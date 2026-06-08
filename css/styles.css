@@ -501,6 +501,12 @@ textarea { resize: vertical; min-height: 80px; }
   border-radius: 100px;
 }
 
+.rest-val {
+  font-size: .8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
 .coaching-notes {
   font-size: .8rem;
   color: var(--text-muted);
