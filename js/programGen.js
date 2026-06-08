@@ -74,11 +74,9 @@ ${prevText}
 ${commText}
 
 ## WEEKLY VOLUME TARGETS
-- Target: ${profile.weeklySetMin ?? 9}–${profile.weeklySetMax ?? 12} working sets per muscle group per week, distributed however you see fit across the week's sessions
-- HARD LIMIT (MAIN WORK ONLY): the total sets across the 2 main exercises targeting the same muscle group must not exceed ${Math.ceil((profile.weeklySetMax ?? 12) / 3)} per session
-  — Accessory exercises are excluded from this count entirely
-  — Since the 2 main movements must target different muscle groups, each main lift contributes its sets to a different group — this is the primary enforcement mechanism
-- Posterior chain (glutes, hamstrings, erectors) must receive at least as many weekly sets as anterior chain (quads, chest, front delts)
+- Target: ${profile.weeklySetMin ?? 9}–${profile.weeklySetMax ?? 12} working sets per muscle group per week (main-work sets only; accessories are excluded from this count)
+- Distribute freely across the week's sessions — no per-session set cap
+- Posterior chain (glutes, hamstrings, erectors) must receive at least as many weekly sets as anterior chain (quads)
 
 ## PROGRAM STRUCTURE
 - 3–4 sessions per week
@@ -101,7 +99,11 @@ ${commText}
 KB swings, KB cleans, KB snatches, DB snatches, DB thrusters, wall balls, step-ups,
 burpees (no-jump: step back/forward), pull-ups, ring rows, push-ups, dips,
 row machine, air bike, ski erg, battle ropes, med ball slams, loaded carries,
-sled pushes/pulls, hollow holds, GHD sit-ups, toes-to-bar, hanging knee raises.
+sled pushes/pulls, hollow holds, sit-ups, toes-to-bar, hanging knee raises,
+goblet squats, lunges, glute bridge, leg curl, planks, dead bugs, single arm row,
+lat pulldown, flies, split squats, leg press, reverse lunge, overhead press,
+air squat, push press, overhead squat, push jerk, overhead press, push press,
+db clean, db clean and jerk, overhead squat, any other crossfit movements.
 NOT allowed in metcons: running, jump rope, double-unders, box jumps with hard landing.
 
 ## MANDATORY ELEMENTS (spread across the full program)
@@ -144,7 +146,7 @@ Return ONLY this JSON structure, no text outside it:
           "type": "main",
           "order": 1,
           "movement": "string",
-          "category": "posterior chain | anterior chain | upper back | shoulders | core | carry | plyometric | balance | grip",
+          "category": "posterior chain | anterior chain | horizontal push | vertical push | upper back | shoulders | core | carry | plyometric | balance | grip",
           "isUnilateral": false,
           "sets": 3,
           "reps": "5",
@@ -171,11 +173,11 @@ Return ONLY this JSON structure, no text outside it:
 
 Rules:
 - type: exactly 2 "main" exercises per session (first in the array), then 3–5 "accessory" exercises
-- The 2 main movements must use different primary movement patterns (no two hip-hinges, no two squats, no two horizontal presses, etc.)
+- The 2 main movements must use different primary movement patterns (no two hip-hinges, no two squats, no two horizontal pushes, etc.)
+- category usage: "anterior chain" = lower-body quad-dominant only (squat, leg press, lunge); "horizontal push" = flat/incline pressing (bench press, push-up); "vertical push" = overhead pressing (overhead press, push press, jerk). Never use "anterior chain" for an upper-body pressing movement.
 - percentOfMax: use number (e.g. 75) for main lifts when the movement is in the saved maxes list; for accessory lifts set to null and explain load in coachingNotes
 - If percentOfMax is null due to no saved max, set coachingNotes to explain how to choose weight
 - Carry loads should be absolute (e.g. "32 kg KB per hand") or bodyweight-based
-- Every session must have at least 1 posterior chain movement among the main lifts
 - Keep metcons 10–20 min, CrossFit-style but fully low-impact
 - restSeconds: post-menopausal women need full recovery — use these guidelines:
   • Heavy compound (≤5 reps or ≥80% 1RM): 180–240 s
