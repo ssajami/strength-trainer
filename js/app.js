@@ -230,15 +230,43 @@ function renderProgramView() {
   showScreen('program-screen');
 }
 
+function calcWeekVolume(sessions) {
+  const totals = {};
+  sessions.forEach(s =>
+    (s.strength || []).filter(e => e.type === 'main').forEach(e => {
+      const cat = e.category || 'other';
+      totals[cat] = (totals[cat] || 0) + (e.sets || 0);
+    })
+  );
+  return totals;
+}
+
+function capFirst(str) {
+  return str ? str.charAt(0).toUpperCase() + str.slice(1) : str;
+}
+
 function renderWeek(week) {
   currentWeek = week;
   $('week-label').textContent = `Week ${week} of ${currentProgram.weeks}`;
   $('prev-week-btn').disabled = week <= 1;
   $('next-week-btn').disabled = week >= currentProgram.weeks;
 
+  const sessions = currentProgram.sessions.filter(s => s.week === week);
+
+  const summary = $('week-volume-summary');
+  summary.innerHTML = '';
+  const volume = calcWeekVolume(sessions);
+  Object.entries(volume)
+    .sort(([, a], [, b]) => b - a)
+    .forEach(([cat, sets]) => {
+      const chip = document.createElement('span');
+      chip.className = 'vol-chip';
+      chip.textContent = `${capFirst(cat)}: ${sets} sets`;
+      summary.appendChild(chip);
+    });
+
   const container = $('sessions-list');
   container.innerHTML = '';
-  const sessions = currentProgram.sessions.filter(s => s.week === week);
   if (!sessions.length) {
     container.innerHTML = '<p class="muted tc">No sessions for this week.</p>';
     return;
@@ -663,8 +691,15 @@ function exportToHTML() {
       </details>`;
     }).join('');
 
+    const weekVolume = calcWeekVolume(sessions);
+    const volChips = Object.entries(weekVolume)
+      .sort(([, a], [, b]) => b - a)
+      .map(([cat, sets]) => `<span class="vol-chip">${capFirst(cat)}: ${sets} sets</span>`)
+      .join('');
+
     return `<div class="week-block">
       <h2 class="week-heading">Week ${w} <span class="week-date">— starting ${weekDate}</span></h2>
+      ${volChips ? `<div class="vol-summary">${volChips}</div>` : ''}
       ${sessionsHTML}
     </div>`;
   }).join('');
@@ -711,8 +746,11 @@ function exportToHTML() {
   .prog-title { font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 16px; }
   .week-block  { margin-bottom: 28px; }
   .week-heading { font-size: 1rem; font-weight: 800; color: #0f172a;
-    border-bottom: 2px solid var(--primary); padding-bottom: 6px; margin-bottom: 14px; }
+    border-bottom: 2px solid var(--primary); padding-bottom: 6px; margin-bottom: 8px; }
   .week-date { font-weight: 400; color: var(--muted); font-size: .88rem; }
+  .vol-summary { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+  .vol-chip { font-size: .72rem; background: #f1f5f9; border: 1px solid #e2e8f0;
+    border-radius: 100px; padding: 3px 9px; color: #64748b; white-space: nowrap; }
   details.session { background: var(--surface); border-radius: 12px;
     margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.08); overflow: hidden; }
   details.session summary {

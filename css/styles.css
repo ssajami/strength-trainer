@@ -198,6 +198,23 @@ main {
 .form-row-tight { margin-bottom: 0; }
 .label-sub { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
 
+/* ── Weekly volume summary chips ─────────────────────────────────────────── */
+.week-volume-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-bottom: var(--sp-md);
+}
+.vol-chip {
+  font-size: .75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 3px 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
 label {
   font-size: .85rem;
   font-weight: 600;
