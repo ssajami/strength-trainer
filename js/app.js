@@ -251,7 +251,9 @@ function makeSessionCard(session) {
   const card = document.createElement('div');
   card.className = 'session-card card';
 
-  const preview = (session.strength || []).slice(0, 3).map(e => {
+  const mainMoves = (session.strength || []).filter(e => e.type === 'main');
+  const accCount  = (session.strength || []).filter(e => e.type !== 'main').length;
+  const preview = mainMoves.map(e => {
     const load = e.percentOfMax !== null ? resolveLoad(e.movement, e.percentOfMax) : null;
     return `<div class="preview-row">
       <span class="preview-name">${e.movement}${e.isUnilateral ? ' <em>(unilateral)</em>' : ''}</span>
@@ -259,8 +261,8 @@ function makeSessionCard(session) {
     </div>`;
   }).join('');
 
-  const more = session.strength.length > 3
-    ? `<p class="more-hint">+${session.strength.length - 3} more exercises</p>` : '';
+  const more = accCount > 0
+    ? `<p class="more-hint">+ ${accCount} accessory exercise${accCount > 1 ? 's' : ''}</p>` : '';
 
   card.innerHTML = `
     <div class="card-top">
@@ -336,31 +338,52 @@ function renderWarmup(items) {
   return wrap;
 }
 
+function makeStrengthRow(ex, i) {
+  const load = ex.percentOfMax !== null ? resolveLoad(ex.movement, ex.percentOfMax) : null;
+  const el = document.createElement('div');
+  el.className = `item-row strength-row${ex.type === 'main' ? ' strength-main' : ' strength-accessory'}`;
+  el.innerHTML = `
+    <div class="ex-number">${i + 1}</div>
+    <div class="ex-body">
+      <div class="ex-name">
+        ${ex.movement}
+        ${ex.isUnilateral ? '<span class="pill pill-uni">Unilateral</span>' : ''}
+        <span class="pill pill-cat">${ex.category}</span>
+      </div>
+      <div class="ex-rx">
+        <strong>${ex.sets} sets × ${ex.reps} reps</strong>
+        ${load ? `<span class="load-val">${load}</span>` : ''}
+        ${fmtRest(ex.restSeconds) ? `<span class="rest-val">Rest ${fmtRest(ex.restSeconds)}</span>` : ''}
+      </div>
+      ${ex.coachingNotes ? `<div class="coaching-notes">${ex.coachingNotes}</div>` : ''}
+    </div>
+  `;
+  return el;
+}
+
 function renderStrength(items) {
   const wrap = document.createElement('div');
   wrap.className = 'item-list';
-  items.forEach((ex, i) => {
-    const load = ex.percentOfMax !== null ? resolveLoad(ex.movement, ex.percentOfMax) : null;
-    const el = document.createElement('div');
-    el.className = 'item-row strength-row';
-    el.innerHTML = `
-      <div class="ex-number">${i + 1}</div>
-      <div class="ex-body">
-        <div class="ex-name">
-          ${ex.movement}
-          ${ex.isUnilateral ? '<span class="pill pill-uni">Unilateral</span>' : ''}
-          <span class="pill pill-cat">${ex.category}</span>
-        </div>
-        <div class="ex-rx">
-          <strong>${ex.sets} sets × ${ex.reps} reps</strong>
-          ${load ? `<span class="load-val">${load}</span>` : ''}
-          ${fmtRest(ex.restSeconds) ? `<span class="rest-val">Rest ${fmtRest(ex.restSeconds)}</span>` : ''}
-        </div>
-        ${ex.coachingNotes ? `<div class="coaching-notes">${ex.coachingNotes}</div>` : ''}
-      </div>
-    `;
-    wrap.appendChild(el);
-  });
+
+  const main      = items.filter(e => e.type === 'main');
+  const accessory = items.filter(e => e.type !== 'main');
+
+  if (main.length) {
+    const label = document.createElement('p');
+    label.className = 'strength-sublabel';
+    label.textContent = 'Main Work';
+    wrap.appendChild(label);
+    main.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, i)));
+  }
+
+  if (accessory.length) {
+    const label = document.createElement('p');
+    label.className = 'strength-sublabel strength-sublabel-acc';
+    label.textContent = 'Accessory Work';
+    wrap.appendChild(label);
+    accessory.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, main.length + i)));
+  }
+
   return wrap;
 }
 
@@ -528,15 +551,10 @@ function exportToHTML() {
     return `${kg} kg <span class="pct">(${pct}% of ${max} kg)</span>`;
   }
 
-  const sessionHTML = currentProgram.sessions.map(s => {
-    const warmupRows = (s.warmup || []).map(w => {
-      const detail = [w.duration, w.reps != null ? `${w.reps} reps` : null].filter(Boolean).join(' · ');
-      return `<li><strong>${w.name}</strong>${detail ? ` — ${detail}` : ''}${w.notes ? `<br><span class="note">${w.notes}</span>` : ''}</li>`;
-    }).join('');
-
-    const strengthRows = (s.strength || []).map((e, i) => {
+  function buildStrengthRows(strength) {
+    const makeRow = (e, i) => {
       const loadStr = rl(e.movement, e.percentOfMax);
-      return `<div class="ex">
+      return `<div class="ex${e.type === 'main' ? ' ex-main' : ''}">
         <div class="ex-num">${i + 1}</div>
         <div class="ex-detail">
           <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span></div>
@@ -544,7 +562,22 @@ function exportToHTML() {
           ${e.coachingNotes ? `<div class="note">${e.coachingNotes}</div>` : ''}
         </div>
       </div>`;
+    };
+    const main = strength.filter(e => e.type === 'main');
+    const acc  = strength.filter(e => e.type !== 'main');
+    return [
+      main.length ? `<p class="ex-sublabel">Main Work</p>${main.map((e, i) => makeRow(e, i)).join('')}` : '',
+      acc.length  ? `<p class="ex-sublabel ex-sublabel-acc">Accessory Work</p>${acc.map((e, i) => makeRow(e, main.length + i)).join('')}` : '',
+    ].join('');
+  }
+
+  const sessionHTML = currentProgram.sessions.map(s => {
+    const warmupRows = (s.warmup || []).map(w => {
+      const detail = [w.duration, w.reps != null ? `${w.reps} reps` : null].filter(Boolean).join(' · ');
+      return `<li><strong>${w.name}</strong>${detail ? ` — ${detail}` : ''}${w.notes ? `<br><span class="note">${w.notes}</span>` : ''}</li>`;
     }).join('');
+
+    const strengthRows = buildStrengthRows(s.strength || []);
 
     const metconMoves = (s.metcon.movements || []).map(m => {
       const qty = [m.reps ? `${m.reps} reps` : null, m.calories ? `${m.calories} cal` : null, m.distance || null].filter(Boolean).join('/');
@@ -665,6 +698,11 @@ function exportToHTML() {
   .pct   { color: var(--muted); font-weight: 400; font-size: .85em; }
   .load  { color: var(--primary); }
   .rest  { color: var(--muted); font-size: .85em; }
+  .ex-sublabel { font-size: .7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--strength); margin: 12px 0 6px; }
+  .ex-sublabel:first-child { margin-top: 0; }
+  .ex-sublabel-acc { color: var(--muted); }
+  .ex-main { border-left: 3px solid var(--strength); padding-left: 10px; }
   .tag   { background: #f1f5f9; color: var(--muted); font-size: .7rem; font-weight: 700;
     padding: 1px 6px; border-radius: 100px; text-transform: capitalize; }
   .tag.cat { }

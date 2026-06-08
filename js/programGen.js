@@ -75,17 +75,25 @@ ${commText}
 
 ## WEEKLY VOLUME TARGETS
 - Target: ${profile.weeklySetMin ?? 9}–${profile.weeklySetMax ?? 12} working sets per muscle group per week, distributed however you see fit across the week's sessions
-- HARD LIMIT: the TOTAL sets across ALL exercises targeting the same muscle group must not exceed ${Math.ceil((profile.weeklySetMax ?? 12) / 3)} in a single session
-  — Count every exercise in that group: conventional deadlift (4 sets) + RDL (3 sets) + single-leg RDL (3 sets) = 10 sets posterior chain. This VIOLATES the limit.
-  — Correct approach: pick ONE primary hip-hinge lift + at most ONE accessory hip-hinge, totalling ≤${Math.ceil((profile.weeklySetMax ?? 12) / 3)} sets
-- Movement pattern rule: no more than 2 exercises from the same movement pattern (hip hinge, squat, horizontal push, horizontal pull, vertical push, vertical pull) per session
+- HARD LIMIT (MAIN WORK ONLY): the total sets across the 2 main exercises targeting the same muscle group must not exceed ${Math.ceil((profile.weeklySetMax ?? 12) / 3)} per session
+  — Accessory exercises are excluded from this count entirely
+  — Since the 2 main movements must target different muscle groups, each main lift contributes its sets to a different group — this is the primary enforcement mechanism
 - Posterior chain (glutes, hamstrings, erectors) must receive at least as many weekly sets as anterior chain (quads, chest, front delts)
 
 ## PROGRAM STRUCTURE
 - 3–4 sessions per week
 - Each session must contain:
   1. WARM-UP (8–12 min, specific to that day's work)
-  2. STRENGTH (main compound lifts + accessories)
+  2. STRENGTH — structured in two parts:
+     a. MAIN WORK: exactly 2 heavy compound movements targeting different primary muscle groups
+        Examples: front squat + RDL; bench press + barbell row; power clean + back squat; overhead press + Romanian deadlift
+        - type: "main" in the JSON
+        - 3–5 sets, lower reps (3–8), high load
+        - The two movements MUST target different primary muscle groups (no two hip-hinge patterns, no two squat patterns, etc.)
+     b. ACCESSORY WORK: 3–5 lighter complementary exercises
+        - type: "accessory" in the JSON
+        - Lighter loads — unilateral work, isolation, carries, balance, grip, targeted weak-point training
+        - Accessory sets do NOT count toward the per-session muscle-group volume cap
   3. METCON (10–20 min, CrossFit-style — see allowed movements below)
   4. MOBILITY/COOLDOWN (target lat, thoracic, shoulder IR for sessions where it fits)
 
@@ -133,6 +141,7 @@ Return ONLY this JSON structure, no text outside it:
       ],
       "strength": [
         {
+          "type": "main",
           "order": 1,
           "movement": "string",
           "category": "posterior chain | anterior chain | upper back | shoulders | core | carry | plyometric | balance | grip",
@@ -161,10 +170,12 @@ Return ONLY this JSON structure, no text outside it:
 }
 
 Rules:
-- percentOfMax: use number (e.g. 75) when the lift should be percentage-based AND it is in the saved maxes list; otherwise null
+- type: exactly 2 "main" exercises per session (first in the array), then 3–5 "accessory" exercises
+- The 2 main movements must use different primary movement patterns (no two hip-hinges, no two squats, no two horizontal presses, etc.)
+- percentOfMax: use number (e.g. 75) for main lifts when the movement is in the saved maxes list; for accessory lifts set to null and explain load in coachingNotes
 - If percentOfMax is null due to no saved max, set coachingNotes to explain how to choose weight
 - Carry loads should be absolute (e.g. "32 kg KB per hand") or bodyweight-based
-- Every session must have at least 1 posterior chain movement in strength
+- Every session must have at least 1 posterior chain movement among the main lifts
 - Keep metcons 10–20 min, CrossFit-style but fully low-impact
 - restSeconds: post-menopausal women need full recovery — use these guidelines:
   • Heavy compound (≤5 reps or ≥80% 1RM): 180–240 s
@@ -219,6 +230,7 @@ Rules:
         notes:    w.notes    || null,
       })),
       strength: (s.strength || []).map((e, j) => ({
+        type:           e.type === 'main' ? 'main' : 'accessory',
         order:          e.order         ?? (j + 1),
         movement:       e.movement      || 'Unknown',
         category:       e.category      || '',

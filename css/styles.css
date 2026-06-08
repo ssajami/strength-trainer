@@ -501,6 +501,19 @@ textarea { resize: vertical; min-height: 80px; }
   border-radius: 100px;
 }
 
+.strength-sublabel {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--clr-strength);
+  margin: var(--sp-sm) 0 var(--sp-xs);
+}
+.strength-sublabel:first-child { margin-top: 0; }
+.strength-sublabel-acc { color: var(--text-muted); }
+
+.strength-main { border-left: 3px solid var(--clr-strength); padding-left: 10px; }
+
 .rest-val {
   font-size: .8rem;
   color: var(--text-muted);
