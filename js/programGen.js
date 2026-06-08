@@ -75,7 +75,10 @@ ${commText}
 
 ## WEEKLY VOLUME TARGETS
 - Target: ${profile.weeklySetMin ?? 9}–${profile.weeklySetMax ?? 12} working sets per muscle group per week, distributed however you see fit across the week's sessions
-- HARD LIMIT: no more than ${Math.ceil((profile.weeklySetMax ?? 12) / 3)} sets of the same muscle group in any single session — do NOT cluster all posterior-chain or all anterior-chain work into one day
+- HARD LIMIT: the TOTAL sets across ALL exercises targeting the same muscle group must not exceed ${Math.ceil((profile.weeklySetMax ?? 12) / 3)} in a single session
+  — Count every exercise in that group: conventional deadlift (4 sets) + RDL (3 sets) + single-leg RDL (3 sets) = 10 sets posterior chain. This VIOLATES the limit.
+  — Correct approach: pick ONE primary hip-hinge lift + at most ONE accessory hip-hinge, totalling ≤${Math.ceil((profile.weeklySetMax ?? 12) / 3)} sets
+- Movement pattern rule: no more than 2 exercises from the same movement pattern (hip hinge, squat, horizontal push, horizontal pull, vertical push, vertical pull) per session
 - Posterior chain (glutes, hamstrings, erectors) must receive at least as many weekly sets as anterior chain (quads, chest, front delts)
 
 ## PROGRAM STRUCTURE
