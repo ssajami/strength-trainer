@@ -226,8 +226,40 @@ function renderProgramView() {
   $('prog-name').textContent = currentProgram.programName;
   $('prog-meta').textContent =
     `${currentProgram.progressionModel} · ${currentProgram.weeks} weeks · starts ${fmtDate(currentProgram.startDate)}`;
+  renderVolumeAudit();
   renderWeek(currentWeek);
   showScreen('program-screen');
+}
+
+function renderVolumeAudit() {
+  const el = $('volume-audit');
+  if (!el) return;
+  const audit = currentProgram?.volumeAudit;
+  if (!audit?.length) { el.innerHTML = ''; return; }
+
+  const flagged = audit.filter(a => a.flag || a.meetsTarget === false || a.anySessionOver5);
+  const rows = audit.map(a => {
+    const bad = a.meetsTarget === false || a.anySessionOver5;
+    const warn = a.flag && !bad;
+    return `<tr class="${bad ? 'audit-fail' : warn ? 'audit-warn' : ''}">
+      <td>${catLabel(a.muscleGroup)}</td>
+      <td>${a.weeklyTarget}</td>
+      <td>${a.weeklySetsProgrammed ?? '—'}</td>
+      <td>${a.meetsTarget === true ? '✓' : a.meetsTarget === false ? '✗' : '—'}</td>
+      <td>${a.flag || ''}</td>
+    </tr>`;
+  }).join('');
+
+  el.innerHTML = `
+    <details class="audit-details"${flagged.length ? ' open' : ''}>
+      <summary class="audit-summary">
+        Volume audit ${flagged.length ? `<span class="audit-badge audit-badge-warn">${flagged.length} flag${flagged.length > 1 ? 's' : ''}</span>` : '<span class="audit-badge audit-badge-ok">all targets met</span>'}
+      </summary>
+      <table class="audit-table">
+        <thead><tr><th>Muscle group</th><th>Target</th><th>Sets</th><th>Met?</th><th>Flag</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </details>`;
 }
 
 function calcWeekVolume(sessions) {
@@ -239,6 +271,25 @@ function calcWeekVolume(sessions) {
     })
   );
   return totals;
+}
+
+const CAT_LABELS = {
+  GLUTES_HAMSTRINGS:   'Glutes & Hamstrings',
+  UPPER_BACK_ERECTORS: 'Upper Back / Erectors',
+  QUAD_DOMINANT:       'Quad Dominant',
+  PUSH:                'Push',
+  VERTICAL_PULL:       'Vertical Pull',
+  UNILATERAL_LOWER:    'Unilateral Lower',
+  CORE:                'Core',
+  CARRIES_LOADED:      'Carries',
+  ROTATOR_CUFF:        'Rotator Cuff',
+  GRIP:                'Grip',
+  BALANCE:             'Balance',
+  PLYOMETRIC:          'Plyometric',
+};
+
+function catLabel(cat) {
+  return CAT_LABELS[cat] || cat.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 }
 
 function capFirst(str) {
@@ -261,7 +312,7 @@ function renderWeek(week) {
     .forEach(([cat, sets]) => {
       const chip = document.createElement('span');
       chip.className = 'vol-chip';
-      chip.textContent = `${capFirst(cat)}: ${sets} sets`;
+      chip.textContent = `${catLabel(cat)}: ${sets} sets`;
       summary.appendChild(chip);
     });
 
@@ -694,7 +745,7 @@ function exportToHTML() {
     const weekVolume = calcWeekVolume(sessions);
     const volChips = Object.entries(weekVolume)
       .sort(([, a], [, b]) => b - a)
-      .map(([cat, sets]) => `<span class="vol-chip">${capFirst(cat)}: ${sets} sets</span>`)
+      .map(([cat, sets]) => `<span class="vol-chip">${catLabel(cat)}: ${sets} sets</span>`)
       .join('');
 
     return `<div class="week-block">

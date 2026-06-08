@@ -73,43 +73,70 @@ ${maxLoadsText}
 ${prevText}
 ${commText}
 
-## WEEKLY VOLUME TARGETS
-Main-work sets only. Distribute freely across sessions — no per-session cap.
+## WEEKLY VOLUME TARGETS (working sets, main-work only)
 
-HIGH PRIORITY — hit every week:
-- Posterior chain hinge (deadlift, RDL, hip thrust, cable pull-through): 10–12 sets/week
-  ⚠ Do NOT achieve this entirely via spinal-loading hinges — use hip thrusts or cable pull-throughs to make up the difference and reduce spinal fatigue
-- Squat / quad-dominant (back squat, front squat, goblet squat): 8–10 sets/week
-- Horizontal + vertical pull (barbell row, DB row, pull-up, lat pulldown): 10–12 sets/week
-  ⚠ Pulling is chronically underdone — err toward 12 sets/week; this is not excessive and pays off in shoulder health and posture
+GLUTES_HAMSTRINGS    10–12 sets/week, minimum 2 different movements
+UPPER_BACK_ERECTORS   8–10 sets/week, minimum 2 different movements
+QUAD_DOMINANT         8–10 sets/week
+PUSH                  6–8  sets/week
+VERTICAL_PULL         6–8  sets/week
+UNILATERAL_LOWER      6    sets/week per leg (count per leg, not bilateral)
+CORE                  4–6  sets/week
+CARRIES_LOADED        1–2 per week (presence required; not counted in sets)
 
-MEDIUM PRIORITY — target every week:
-- Vertical + horizontal push (bench press, strict press, landmine press, OHP): 6–8 sets/week
-- Unilateral lower body (single-leg RDL, Bulgarian split squat, step-up): 6–8 sets/week
-  ⚠ Count per leg — 3 sets × 8 reps each leg = 6 sets of stimulus. Do not count bilateral sets toward this total.
-- Core anti-flexion/rotation (plank, Pallof press, dead bug): 4–6 sets/week
+---
 
-ONCE PER WEEK — include but do not count toward any volume total:
-- Rotator cuff/scapular health (band pull-aparts, face pulls, external rotation)
-- Loaded carries (farmer, suitcase, overhead, Zercher)
-- Grip work (plate pinch, dead hang, fat-grip)
+## PER-SESSION CONSTRAINTS (enforce strictly)
+
+1. Maximum 5 working sets per muscle group per session
+2. Maximum 2 hinge-pattern movements per session
+   Hinge = any GLUTES_HAMSTRINGS or UPPER_BACK_ERECTORS movement that loads the lumbar spine (deadlift, RDL, good morning)
+   Hip thrust and cable pull-through do NOT count as hinges (hip-dominant, non-spinal-loading)
+3. No session may contain 3 or more exercises targeting the same primary muscle group consecutively
+4. Total working sets per session: 15–20
+5. Each muscle group's weekly volume must be spread across at least 2 of the 3 sessions
+6. If a muscle group target is ≥10 sets/week, it must appear in all 3 sessions
+7. No two consecutive sessions lead with the same primary movement pattern (if Session A leads with a hinge, Session B must lead with squat or push)
+
+---
+
+## EXERCISE SELECTION RULES
+
+- Rotate accessory selection across the cycle (do not repeat identical accessories every week — vary every 3–4 weeks)
+- Primary movements (deadlift variants, squat variants, press variants) stay consistent within a cycle for progressive overload
+- Include at least 1 unilateral lower body movement per session
+- Include at least 1 rowing movement per session
+- Include hip thrust or glute bridge at least 2× per week
+- Prefer landmine press over barbell overhead press for shoulder safety
+
+---
+
+## TWO-PASS GENERATION
+
+Generate the program in two passes:
+
+PASS 1 — Volume architecture:
+  For each session in the week, decide how many sets of each muscle group go where.
+  Verify every constraint is met. Output this allocation as the volumeAudit array in the JSON.
+
+PASS 2 — Exercise population:
+  Fill in specific exercises into the slots from Pass 1. Apply exercise selection rules. Assign loads.
+
+---
 
 ## PROGRAM STRUCTURE
-- 3–4 sessions per week
+- 3 sessions per week
 - Each session must contain:
   1. WARM-UP (8–12 min, specific to that day's work)
   2. STRENGTH — structured in two parts:
      a. MAIN WORK: exactly 2 heavy compound movements targeting different primary muscle groups
-        Examples: front squat + RDL; bench press + barbell row; power clean + back squat; overhead press + Romanian deadlift
-        - type: "main" in the JSON
-        - 3–5 sets, lower reps (3–8), high load
-        - The two movements MUST target different primary muscle groups (no two hip-hinge patterns, no two squat patterns, etc.)
+        - type: "main" in the JSON; 3–5 sets, reps 3–8, high load
+        - The two movements MUST target different primary muscle groups
      b. ACCESSORY WORK: 3–5 lighter complementary exercises
         - type: "accessory" in the JSON
-        - Lighter loads — unilateral work, isolation, carries, balance, grip, targeted weak-point training
-        - Accessory sets do NOT count toward the per-session muscle-group volume cap
+        - Unilateral work, carries, isolation, core, rotator cuff
   3. METCON (10–20 min, CrossFit-style — see allowed movements below)
-  4. MOBILITY/COOLDOWN (target lat, thoracic, shoulder IR for sessions where it fits)
+  4. MOBILITY/COOLDOWN (lat, thoracic, shoulder IR)
 
 ## METCON ALLOWED MOVEMENTS
 KB swings, KB cleans, KB snatches, DB snatches, DB thrusters, wall balls, step-ups,
@@ -118,9 +145,8 @@ row machine, air bike, ski erg, battle ropes, med ball slams, loaded carries,
 sled pushes/pulls, hollow holds, sit-ups, toes-to-bar, hanging knee raises,
 goblet squats, lunges, glute bridge, leg curl, planks, dead bugs, single arm row,
 lat pulldown, flies, split squats, leg press, reverse lunge, overhead press,
-air squat, push press, overhead squat, push jerk, overhead press, push press,
-db clean, db clean and jerk, overhead squat, any other crossfit movements.
-NOT allowed in metcons: running, jump rope, double-unders, box jumps with hard landing.
+air squat, push press, overhead squat, push jerk, db clean, db clean and jerk.
+NOT allowed: running, jump rope, double-unders, box jumps with hard landing.
 
 ## MANDATORY ELEMENTS (at least once per 2-week block)
 - Wrist/forearm (wrist curls, reverse curls, or rice bucket drill)
@@ -142,6 +168,17 @@ Return ONLY this JSON structure, no text outside it:
   "progressionModel": "string",
   "progressionJustification": "1–2 sentences",
   "weeklyVolumeNotes": "brief summary of how volume is distributed across muscle groups",
+  "volumeAudit": [
+    {
+      "muscleGroup": "GLUTES_HAMSTRINGS",
+      "weeklyTarget": "10–12",
+      "weeklySetsProgrammed": 11,
+      "sessionBreakdown": [4, 4, 3],
+      "meetsTarget": true,
+      "anySessionOver5": false,
+      "flag": "string or null"
+    }
+  ],
   "sessions": [
     {
       "sessionNumber": 1,
@@ -158,7 +195,7 @@ Return ONLY this JSON structure, no text outside it:
           "type": "main",
           "order": 1,
           "movement": "string",
-          "category": "posterior chain | anterior chain | horizontal pull | vertical pull | horizontal push | vertical push | unilateral lower body | core | rotator cuff | carry | grip | balance | plyometric",
+          "category": "GLUTES_HAMSTRINGS | UPPER_BACK_ERECTORS | QUAD_DOMINANT | PUSH | VERTICAL_PULL | UNILATERAL_LOWER | CORE | CARRIES_LOADED | ROTATOR_CUFF | GRIP | BALANCE | PLYOMETRIC",
           "isUnilateral": false,
           "sets": 3,
           "reps": "5",
@@ -185,21 +222,22 @@ Return ONLY this JSON structure, no text outside it:
 
 Rules:
 - type: exactly 2 "main" exercises per session (first in the array), then 3–5 "accessory" exercises
-- The 2 main movements must use different primary movement patterns (no two hip-hinges, no two squats, no two horizontal pushes, etc.)
-- category usage (use exactly these values):
-  "posterior chain"     = bilateral hip-hinge & hip extension (deadlift, RDL, hip thrust, cable pull-through, good morning)
-  "anterior chain"      = bilateral squat / quad-dominant (back squat, front squat, goblet squat, leg press)
-  "horizontal pull"     = horizontal pulling (barbell row, DB row, cable row, chest-supported row, inverted row)
-  "vertical pull"       = vertical pulling (pull-up, chin-up, lat pulldown, straight-arm pulldown)
-  "horizontal push"     = flat/incline pressing (bench press, incline press, push-up, dip)
-  "vertical push"       = overhead pressing (strict press, push press, jerk, landmine press)
-  "unilateral lower body" = single-leg work (single-leg RDL, Bulgarian split squat, step-up, reverse lunge, pistol)
-  "core"                = anti-flexion/rotation (plank, Pallof press, dead bug, hollow hold, GHD sit-up)
-  "rotator cuff"        = scapular/shoulder health (face pull, band pull-apart, external rotation, Y/T/W)
-  "carry"               = loaded carries (farmer, suitcase, overhead, Zercher)
-  "grip"                = grip-specific work (plate pinch, dead hang, fat-grip, rice bucket)
-  "balance"             = proprioception (single-leg stance, perturbation drills)
-  "plyometric"          = low-impact explosives (med ball slam, step-up for power, low pogo)
+- The 2 main movements must use different primary movement patterns (no two hinges, no two squats, no two pushes)
+- category — use exactly these values:
+  GLUTES_HAMSTRINGS   = deadlift, RDL, hip thrust, cable pull-through, good morning, hamstring curl
+  UPPER_BACK_ERECTORS = barbell row, DB row, cable row, chest-supported row, back extension
+  QUAD_DOMINANT       = back squat, front squat, goblet squat, leg press, hack squat
+  PUSH                = bench press, incline press, push-up, dip, strict press, push press, landmine press
+  VERTICAL_PULL       = pull-up, chin-up, lat pulldown, straight-arm pulldown
+  UNILATERAL_LOWER    = single-leg RDL, Bulgarian split squat, step-up, reverse lunge, pistol
+  CORE                = plank, Pallof press, dead bug, hollow hold, GHD sit-up
+  CARRIES_LOADED      = farmer carry, suitcase carry, overhead carry, Zercher carry
+  ROTATOR_CUFF        = face pull, band pull-apart, external rotation, Y/T/W raise
+  GRIP                = plate pinch, dead hang, fat-grip, rice bucket
+  BALANCE             = single-leg stance, perturbation drills
+  PLYOMETRIC          = med ball slam, step-up for power, low pogo
+- volumeAudit: populate one entry per tracked muscle group (GLUTES_HAMSTRINGS through CORE); sessionBreakdown is an array of sets per session in order; flag any violations
+- Do not reference a per-session set cap or per-session limit anywhere in coachingNotes, weeklyVolumeNotes, or any other text field — the only volume constraint is weekly
 - percentOfMax: use number (e.g. 75) for main lifts when the movement is in the saved maxes list; for accessory lifts set to null and explain load in coachingNotes
 - If percentOfMax is null due to no saved max, set coachingNotes to explain how to choose weight
 - Carry loads should be absolute (e.g. "32 kg KB per hand") or bodyweight-based
@@ -309,6 +347,15 @@ Rules:
       progressionModel:     raw.progressionModel     || 'Custom',
       progressionJustification: raw.progressionJustification || '',
       weeklyVolumeNotes:    raw.weeklyVolumeNotes    || '',
+      volumeAudit:          (raw.volumeAudit || []).map(a => ({
+        muscleGroup:         a.muscleGroup          || '',
+        weeklyTarget:        a.weeklyTarget         || '',
+        weeklySetsProgrammed: a.weeklySetsProgrammed ?? null,
+        sessionBreakdown:    Array.isArray(a.sessionBreakdown) ? a.sessionBreakdown : [],
+        meetsTarget:         a.meetsTarget          ?? null,
+        anySessionOver5:     a.anySessionOver5      ?? null,
+        flag:                a.flag                 || null,
+      })),
       sessions:             (raw.sessions || []).map(coerceSession),
     };
   }
