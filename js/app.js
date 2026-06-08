@@ -42,6 +42,17 @@ function closeSettings() {
   hide($('settings-modal'));
 }
 
+function clearAllData() {
+  if (!confirm('Delete all programs, max loads, and settings?\n\nThis cannot be undone.')) return;
+  ['spt_profile','spt_max_loads','spt_programs','spt_last_comments'].forEach(k => localStorage.removeItem(k));
+  currentProgram = null;
+  closeSettings();
+  hide($('current-program-card'));
+  $('previous-comments').value = '';
+  showScreen('home-screen');
+  toast('All data cleared', 'success');
+}
+
 function saveSettings() {
   Storage.saveProfile({
     apiKey:     $('setting-api-key').value.trim(),
@@ -636,6 +647,7 @@ function init() {
   $('close-settings-btn').addEventListener('click', closeSettings);
   $('settings-overlay').addEventListener('click', closeSettings);
   $('save-settings-btn').addEventListener('click', saveSettings);
+  $('clear-data-btn').addEventListener('click',   clearAllData);
   $('add-max-load-btn').addEventListener('click', () => {
     const row = makeMaxLoadRow();
     $('max-loads-list').appendChild(row);

@@ -146,6 +146,9 @@ main {
 .btn-ghost { background: transparent; color: var(--text-muted); }
 .btn-ghost:hover:not(:disabled) { background: var(--bg); color: var(--text); }
 
+.btn-danger { background: transparent; color: var(--error); border: 1.5px solid #fecaca; }
+.btn-danger:hover:not(:disabled) { background: #fef2f2; }
+
 .btn-large { width: 100%; font-size: 1rem; padding: 14px; min-height: 52px; margin-top: var(--sp-sm); }
 .btn-sm    { font-size: .82rem; padding: 7px 14px; min-height: 36px; }
 
