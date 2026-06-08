@@ -3,6 +3,7 @@ let currentProgram = null;
 let currentWeek    = 1;
 let maxLoadQueue   = [];
 let maxLoadResolve = null;
+let chatProgramId  = null;
 
 // ─── DOM helpers ─────────────────────────────────────────────────────────────
 const $     = id => document.getElementById(id);
@@ -409,6 +410,112 @@ function renderMobility(items) {
   return wrap;
 }
 
+// ─── Chat ─────────────────────────────────────────────────────────────────────
+function openChat() {
+  if (!currentProgram) return;
+  if (chatProgramId !== currentProgram.id) {
+    Chat.init(currentProgram, Storage.getProfile());
+    const container = $('chat-messages');
+    container.innerHTML = '';
+    const intro = document.createElement('p');
+    intro.className = 'chat-intro';
+    intro.textContent = 'Ask about your program — why something was programmed, request changes, or get coaching advice.';
+    container.appendChild(intro);
+    chatProgramId = currentProgram.id;
+  }
+  showScreen('chat-screen');
+  setTimeout(() => $('chat-input').focus(), 100);
+}
+
+function appendChatMessage(role, text, update) {
+  const container = $('chat-messages');
+  const bubble = document.createElement('div');
+  bubble.className = `chat-bubble chat-bubble-${role}`;
+
+  const body = document.createElement('div');
+  body.className = 'chat-bubble-body';
+  body.innerHTML = text
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+  bubble.appendChild(body);
+
+  if (update) {
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-sm btn-primary chat-apply-btn';
+    btn.textContent = 'Apply changes to program';
+    btn.onclick = () => applyChatUpdate(update, btn);
+    bubble.appendChild(btn);
+  }
+
+  container.appendChild(bubble);
+  container.scrollTop = container.scrollHeight;
+}
+
+function showChatTyping() {
+  const el = document.createElement('div');
+  el.id = 'chat-typing';
+  el.className = 'chat-bubble chat-bubble-assistant chat-typing';
+  el.innerHTML = '<span></span><span></span><span></span>';
+  $('chat-messages').appendChild(el);
+  $('chat-messages').scrollTop = $('chat-messages').scrollHeight;
+}
+
+function hideChatTyping() {
+  const el = $('chat-typing');
+  if (el) el.remove();
+}
+
+async function handleChatSend() {
+  const input = $('chat-input');
+  const text  = input.value.trim();
+  if (!text) return;
+
+  const profile = Storage.getProfile();
+  if (!profile.apiKey) {
+    toast('Add your Anthropic API key in Settings first', 'error');
+    return;
+  }
+
+  input.value = '';
+  appendChatMessage('user', text);
+  showChatTyping();
+  $('chat-send-btn').disabled = true;
+
+  try {
+    const reply  = await Chat.send(text, profile.apiKey);
+    hideChatTyping();
+    const update = Chat.extractUpdate(reply);
+    appendChatMessage('assistant', update ? Chat.stripUpdateTag(reply) : reply, update);
+  } catch (err) {
+    hideChatTyping();
+    appendChatMessage('assistant', `Sorry, something went wrong: ${err.message}`);
+  } finally {
+    $('chat-send-btn').disabled = false;
+    input.focus();
+  }
+}
+
+function applyChatUpdate(updatedProgram, btn) {
+  const merged = {
+    ...updatedProgram,
+    id:        Date.now().toString(),
+    createdAt: new Date().toISOString(),
+    startDate: currentProgram.startDate,
+    weeks:     updatedProgram.weeks ?? currentProgram.weeks,
+  };
+  Storage.saveProgram(merged);
+  currentProgram = merged;
+  chatProgramId  = merged.id;
+  currentWeek    = 1;
+  Chat.updateProgram(merged);
+  renderHomeSummary();
+  btn.textContent = 'Changes applied ✓';
+  btn.disabled = true;
+  toast('Program updated!', 'success');
+  setTimeout(() => { showScreen('program-screen'); renderProgramView(); }, 800);
+}
+
 // ─── HTML Export ─────────────────────────────────────────────────────────────
 function exportToHTML() {
   if (!currentProgram) return;
@@ -678,7 +785,13 @@ function init() {
   $('prev-week-btn').addEventListener('click',    () => { if (currentWeek > 1) renderWeek(currentWeek - 1); });
   $('next-week-btn').addEventListener('click',    () => { if (currentProgram && currentWeek < currentProgram.weeks) renderWeek(currentWeek + 1); });
   $('back-home-btn').addEventListener('click',    () => showScreen('home-screen'));
+  $('chat-btn').addEventListener('click',         openChat);
   $('export-html-btn').addEventListener('click',  exportToHTML);
+  $('back-from-chat-btn').addEventListener('click', () => showScreen('program-screen'));
+  $('chat-send-btn').addEventListener('click',    handleChatSend);
+  $('chat-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleChatSend(); }
+  });
   $('back-prog-btn').addEventListener('click',    () => showScreen('program-screen'));
 
   // Max load modal

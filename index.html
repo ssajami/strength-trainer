@@ -99,9 +99,24 @@
 
       <div class="program-actions">
         <button class="btn btn-ghost" id="back-home-btn">← Back to Home</button>
+        <button class="btn btn-secondary" id="chat-btn">Chat with coach</button>
         <button class="btn btn-secondary" id="export-html-btn">Export for mobile</button>
       </div>
     </div><!-- /program-screen -->
+
+    <!-- CHAT SCREEN -->
+    <div id="chat-screen" class="screen">
+      <div class="chat-nav">
+        <button class="btn btn-ghost" id="back-from-chat-btn">← Program</button>
+        <h2 class="chat-heading">Coach Chat</h2>
+      </div>
+      <div id="chat-messages" class="chat-messages"></div>
+      <div class="chat-input-area">
+        <textarea id="chat-input" class="chat-textarea" rows="2"
+          placeholder="Ask about your program, or request a change…"></textarea>
+        <button class="btn btn-primary" id="chat-send-btn">Send</button>
+      </div>
+    </div><!-- /chat-screen -->
 
     <!-- SESSION DETAIL SCREEN -->
     <div id="session-screen" class="screen">
@@ -191,6 +206,7 @@
 
   <script src="js/storage.js"></script>
   <script src="js/programGen.js"></script>
+  <script src="js/chat.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
