@@ -554,7 +554,7 @@ function exportToHTML() {
   function buildStrengthRows(strength) {
     const makeRow = (e, i) => {
       const loadStr = rl(e.movement, e.percentOfMax);
-      return `<div class="ex${e.type === 'main' ? ' ex-main' : ''}">
+      return `<div class="ex${e.type === 'main' ? ' ex-main' : ' ex-acc'}">
         <div class="ex-num">${i + 1}</div>
         <div class="ex-detail">
           <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span></div>
@@ -701,15 +701,14 @@ function exportToHTML() {
   .ex-sublabel { font-size: .7rem; font-weight: 700; text-transform: uppercase;
     letter-spacing: .06em; color: var(--strength); margin: 12px 0 6px; }
   .ex-sublabel:first-child { margin-top: 0; }
-  .ex-sublabel-acc { color: var(--muted); }
+  .ex-sublabel-acc { color: var(--muted); border-top: 1px solid #e2e8f0;
+    padding-top: 12px; margin-top: 16px; }
   .ex-main { border-left: 3px solid var(--strength); padding-left: 10px; }
+  .ex-acc  { border-left: 3px solid #e2e8f0; padding-left: 10px; opacity: .9; }
   .tag   { background: #f1f5f9; color: var(--muted); font-size: .7rem; font-weight: 700;
     padding: 1px 6px; border-radius: 100px; text-transform: capitalize; }
   .tag.cat { }
-  .prog-header { background: #0f172a; color: #f8fafc; border-radius: 14px;
-    padding: 20px; margin-bottom: 20px; }
-  .prog-header h1 { color: #f8fafc; }
-  .prog-header .meta, .prog-header .just { color: #94a3b8; }
+  .prog-title { font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 16px; }
   .week-block  { margin-bottom: 28px; }
   .week-heading { font-size: 1rem; font-weight: 800; color: #0f172a;
     border-bottom: 2px solid var(--primary); padding-bottom: 6px; margin-bottom: 14px; }
@@ -753,12 +752,7 @@ function exportToHTML() {
 </style>
 </head>
 <body>
-<div class="prog-header">
-  <h1>${currentProgram.programName}</h1>
-  <p class="meta">${currentProgram.weeks} weeks · starts ${fmtDate(currentProgram.startDate)}</p>
-  <p class="just">${currentProgram.progressionModel}: ${currentProgram.progressionJustification}</p>
-  ${currentProgram.weeklyVolumeNotes ? `<p class="just">${currentProgram.weeklyVolumeNotes}</p>` : ''}
-</div>
+<h1 class="prog-title">${currentProgram.programName}</h1>
 ${byWeek}
 </body>
 </html>`;
