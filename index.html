@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>Strength Program Generator</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────────────────── -->
+  <header class="app-header">
+    <h1 class="app-title">Strength Program</h1>
+    <button class="icon-btn" id="settings-btn" aria-label="Open settings">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- ── Main content ─────────────────────────────────────────────────────── -->
+  <main>
+
+    <!-- HOME SCREEN -->
+    <div id="home-screen" class="screen active">
+
+      <!-- Current program summary (hidden until a program exists) -->
+      <div id="current-program-card" class="card current-prog-card hidden">
+        <div class="current-prog-info">
+          <p class="label-chip">Current Program</p>
+          <h2 id="home-prog-name"></h2>
+          <p id="home-prog-model" class="muted"></p>
+        </div>
+        <button class="btn btn-secondary" id="view-current-prog-btn">View →</button>
+      </div>
+
+      <!-- Generate controls -->
+      <div class="card generate-card">
+        <h2 class="card-heading">Generate New Program</h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="start-date">Start date</label>
+            <input type="date" id="start-date">
+          </div>
+          <div class="form-group">
+            <label for="program-weeks">Length</label>
+            <select id="program-weeks">
+              <option value="4">4 weeks</option>
+              <option value="6" selected>6 weeks</option>
+              <option value="8">8 weeks</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="progression-model">Progression model</label>
+          <select id="progression-model">
+            <option value="auto">App chooses (recommended)</option>
+            <option value="linear progression">Linear Progression</option>
+            <option value="double progression">Double Progression</option>
+            <option value="daily undulating periodization (DUP)">DUP — Daily Undulating</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="previous-comments">Feedback on last program <span class="optional">(optional)</span></label>
+          <textarea id="previous-comments" rows="3"
+            placeholder="e.g. 'weights too light on squats', 'too many quad-dominant movements in one session', 'metcons were great'…"></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-large" id="generate-btn">
+          Generate New Program
+        </button>
+
+        <p class="hint">Generation takes 15–30 seconds via Claude AI.</p>
+      </div>
+
+    </div><!-- /home-screen -->
+
+    <!-- PROGRAM SCREEN -->
+    <div id="program-screen" class="screen hidden">
+      <div class="card prog-header-card">
+        <h2 id="prog-name"></h2>
+        <p id="prog-meta" class="muted"></p>
+        <p id="prog-model" class="prog-model-text"></p>
+        <p id="prog-volume" class="prog-volume-text hidden"></p>
+      </div>
+
+      <div class="week-nav">
+        <button class="btn btn-secondary" id="prev-week-btn" disabled>← Prev</button>
+        <span id="week-label" class="week-label"></span>
+        <button class="btn btn-secondary" id="next-week-btn">Next →</button>
+      </div>
+
+      <div id="sessions-list"></div>
+
+      <button class="btn btn-ghost" id="back-home-btn">← Back to Home</button>
+    </div><!-- /program-screen -->
+
+    <!-- SESSION DETAIL SCREEN -->
+    <div id="session-screen" class="screen hidden">
+      <div class="session-nav">
+        <button class="btn btn-ghost" id="back-prog-btn">← Program</button>
+        <h2 id="session-title" class="session-title"></h2>
+      </div>
+      <div id="session-detail"></div>
+    </div><!-- /session-screen -->
+
+  </main>
+
+  <!-- ── Settings Modal ────────────────────────────────────────────────────── -->
+  <div id="settings-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="settings-heading">
+    <div class="modal-overlay" id="settings-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="settings-heading">Settings</h2>
+        <button class="icon-btn" id="close-settings-btn" aria-label="Close settings">✕</button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="setting-api-key">Anthropic API key</label>
+          <input type="password" id="setting-api-key" placeholder="sk-ant-api03-…" autocomplete="off">
+          <p class="hint">Stored only in your browser's localStorage. Used exclusively to call the Anthropic API.</p>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="setting-age">Age</label>
+            <input type="number" id="setting-age" min="18" max="100" value="55">
+          </div>
+          <div class="form-group">
+            <label for="setting-bodyweight">Bodyweight (kg)</label>
+            <input type="number" id="setting-bodyweight" min="30" max="250" step="0.5" value="65">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Max loads (1RM, kg)</label>
+          <div id="max-loads-list"></div>
+          <button class="btn btn-ghost btn-sm mt-sm" id="add-max-load-btn">+ Add movement</button>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="save-settings-btn">Save settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Max Load Entry Modal ──────────────────────────────────────────────── -->
+  <div id="max-load-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-overlay"></div>
+    <div class="modal-content modal-sm">
+      <div class="modal-header">
+        <h2 id="ml-modal-title">Enter your 1RM</h2>
+      </div>
+      <div class="modal-body">
+        <p id="ml-modal-desc" class="muted"></p>
+        <div class="form-group mt-sm">
+          <label for="ml-modal-input">1-rep max (kg)</label>
+          <input type="number" id="ml-modal-input" min="0" step="0.5" placeholder="e.g. 80">
+        </div>
+        <p class="hint">No 1RM? Estimate: heaviest weight you can do for 3 reps × 1.08, or just enter a conservative working weight.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary"   id="ml-save-btn">Save &amp; continue</button>
+        <button class="btn btn-ghost"     id="ml-skip-btn">Skip for now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Loading Overlay ──────────────────────────────────────────────────── -->
+  <div id="loading-overlay" class="loading-overlay hidden" aria-live="polite">
+    <div class="loading-card">
+      <div class="spinner"></div>
+      <p class="loading-title">Generating your program…</p>
+      <p class="hint">Claude AI is designing your personalised plan. This takes 15–30 seconds.</p>
+    </div>
+  </div>
+
+  <!-- ── Toast container ──────────────────────────────────────────────────── -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/programGen.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
