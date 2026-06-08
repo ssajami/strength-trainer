@@ -74,8 +74,7 @@ ${prevText}
 ${commText}
 
 ## WEEKLY VOLUME TARGETS
-- Target: ${profile.weeklySetMin ?? 9}–${profile.weeklySetMax ?? 12} working sets per muscle group per week
-- Spread evenly across 3–4 sessions
+- Target: ${profile.weeklySetMin ?? 9}–${profile.weeklySetMax ?? 12} working sets per muscle group per week, distributed however you see fit across the week's sessions
 - HARD LIMIT: no more than ${Math.ceil((profile.weeklySetMax ?? 12) / 3)} sets of the same muscle group in any single session — do NOT cluster all posterior-chain or all anterior-chain work into one day
 - Posterior chain (glutes, hamstrings, erectors) must receive at least as many weekly sets as anterior chain (quads, chest, front delts)
 
