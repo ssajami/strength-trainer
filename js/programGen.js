@@ -74,9 +74,25 @@ ${prevText}
 ${commText}
 
 ## WEEKLY VOLUME TARGETS
-- Target: ${profile.weeklySetMin ?? 9}–${profile.weeklySetMax ?? 12} working sets per muscle group per week (main-work sets only; accessories are excluded from this count)
-- Distribute freely across the week's sessions — no per-session set cap
-- Posterior chain (glutes, hamstrings, erectors) must receive at least as many weekly sets as anterior chain (quads)
+Main-work sets only. Distribute freely across sessions — no per-session cap.
+
+HIGH PRIORITY — hit every week:
+- Posterior chain hinge (deadlift, RDL, hip thrust, cable pull-through): 10–12 sets/week
+  ⚠ Do NOT achieve this entirely via spinal-loading hinges — use hip thrusts or cable pull-throughs to make up the difference and reduce spinal fatigue
+- Squat / quad-dominant (back squat, front squat, goblet squat): 8–10 sets/week
+- Horizontal + vertical pull (barbell row, DB row, pull-up, lat pulldown): 10–12 sets/week
+  ⚠ Pulling is chronically underdone — err toward 12 sets/week; this is not excessive and pays off in shoulder health and posture
+
+MEDIUM PRIORITY — target every week:
+- Vertical + horizontal push (bench press, strict press, landmine press, OHP): 6–8 sets/week
+- Unilateral lower body (single-leg RDL, Bulgarian split squat, step-up): 6–8 sets/week
+  ⚠ Count per leg — 3 sets × 8 reps each leg = 6 sets of stimulus. Do not count bilateral sets toward this total.
+- Core anti-flexion/rotation (plank, Pallof press, dead bug): 4–6 sets/week
+
+ONCE PER WEEK — include but do not count toward any volume total:
+- Rotator cuff/scapular health (band pull-aparts, face pulls, external rotation)
+- Loaded carries (farmer, suitcase, overhead, Zercher)
+- Grip work (plate pinch, dead hang, fat-grip)
 
 ## PROGRAM STRUCTURE
 - 3–4 sessions per week
@@ -106,15 +122,11 @@ air squat, push press, overhead squat, push jerk, overhead press, push press,
 db clean, db clean and jerk, overhead squat, any other crossfit movements.
 NOT allowed in metcons: running, jump rope, double-unders, box jumps with hard landing.
 
-## MANDATORY ELEMENTS (spread across the full program)
-Include ALL of the following at least once in every 2-week block:
-- Grip strength (plate pinches, dead hangs, towel grip, fat-grip work)
+## MANDATORY ELEMENTS (at least once per 2-week block)
 - Wrist/forearm (wrist curls, reverse curls, or rice bucket drill)
 - Balance / proprioception (single-leg stance, perturbation drills)
-- Unilateral lower body (Bulgarian split squat, step-up, single-leg RDL, or pistol)
-- Low-impact plyometrics (step-ups for power, med ball slams, low pogo on soft surface)
-- Loaded carries (farmers, suitcase, overhead, Zercher) for bone density + core
-- Erg cardio intervals for VO₂ (row, air bike, ski erg)
+- Low-impact plyometrics (med ball slams, step-ups for power, low pogo on soft surface)
+- Erg cardio intervals for VO₂ (row, air bike, ski erg in metcon)
 
 ## PROGRESSION
 ${progReq}
@@ -146,7 +158,7 @@ Return ONLY this JSON structure, no text outside it:
           "type": "main",
           "order": 1,
           "movement": "string",
-          "category": "posterior chain | anterior chain | horizontal push | vertical push | upper back | shoulders | core | carry | plyometric | balance | grip",
+          "category": "posterior chain | anterior chain | horizontal pull | vertical pull | horizontal push | vertical push | unilateral lower body | core | rotator cuff | carry | grip | balance | plyometric",
           "isUnilateral": false,
           "sets": 3,
           "reps": "5",
@@ -174,7 +186,20 @@ Return ONLY this JSON structure, no text outside it:
 Rules:
 - type: exactly 2 "main" exercises per session (first in the array), then 3–5 "accessory" exercises
 - The 2 main movements must use different primary movement patterns (no two hip-hinges, no two squats, no two horizontal pushes, etc.)
-- category usage: "anterior chain" = lower-body quad-dominant only (squat, leg press, lunge); "horizontal push" = flat/incline pressing (bench press, push-up); "vertical push" = overhead pressing (overhead press, push press, jerk). Never use "anterior chain" for an upper-body pressing movement.
+- category usage (use exactly these values):
+  "posterior chain"     = bilateral hip-hinge & hip extension (deadlift, RDL, hip thrust, cable pull-through, good morning)
+  "anterior chain"      = bilateral squat / quad-dominant (back squat, front squat, goblet squat, leg press)
+  "horizontal pull"     = horizontal pulling (barbell row, DB row, cable row, chest-supported row, inverted row)
+  "vertical pull"       = vertical pulling (pull-up, chin-up, lat pulldown, straight-arm pulldown)
+  "horizontal push"     = flat/incline pressing (bench press, incline press, push-up, dip)
+  "vertical push"       = overhead pressing (strict press, push press, jerk, landmine press)
+  "unilateral lower body" = single-leg work (single-leg RDL, Bulgarian split squat, step-up, reverse lunge, pistol)
+  "core"                = anti-flexion/rotation (plank, Pallof press, dead bug, hollow hold, GHD sit-up)
+  "rotator cuff"        = scapular/shoulder health (face pull, band pull-apart, external rotation, Y/T/W)
+  "carry"               = loaded carries (farmer, suitcase, overhead, Zercher)
+  "grip"                = grip-specific work (plate pinch, dead hang, fat-grip, rice bucket)
+  "balance"             = proprioception (single-leg stance, perturbation drills)
+  "plyometric"          = low-impact explosives (med ball slam, step-up for power, low pogo)
 - percentOfMax: use number (e.g. 75) for main lifts when the movement is in the saved maxes list; for accessory lifts set to null and explain load in coachingNotes
 - If percentOfMax is null due to no saved max, set coachingNotes to explain how to choose weight
 - Carry loads should be absolute (e.g. "32 kg KB per hand") or bodyweight-based
