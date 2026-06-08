@@ -155,6 +155,21 @@
         </div>
 
         <div class="form-group">
+          <label>Sets per muscle group / week</label>
+          <div class="form-row form-row-tight">
+            <div class="form-group">
+              <label for="setting-set-min" class="label-sub">Min</label>
+              <input type="number" id="setting-set-min" min="4" max="30" value="9">
+            </div>
+            <div class="form-group">
+              <label for="setting-set-max" class="label-sub">Max</label>
+              <input type="number" id="setting-set-max" min="4" max="30" value="12">
+            </div>
+          </div>
+          <p class="hint">Per-session cap is calculated automatically (max ÷ 3).</p>
+        </div>
+
+        <div class="form-group">
           <label>Max loads (1RM, kg)</label>
           <div id="max-loads-list"></div>
           <button class="btn btn-ghost btn-sm mt-sm" id="add-max-load-btn">+ Add movement</button>

@@ -195,6 +195,8 @@ main {
   gap: var(--sp-md);
   margin-bottom: var(--sp-md);
 }
+.form-row-tight { margin-bottom: 0; }
+.label-sub { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
 
 label {
   font-size: .85rem;

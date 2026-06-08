@@ -6,7 +6,7 @@ const Storage = (() => {
     LAST_COMMENTS: 'spt_last_comments',
   };
 
-  const DEFAULT_PROFILE = { age: 55, bodyweight: 65, apiKey: '' };
+  const DEFAULT_PROFILE = { age: 55, bodyweight: 65, apiKey: '', weeklySetMin: 9, weeklySetMax: 12 };
 
   function read(key) {
     try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : null; }
@@ -19,7 +19,7 @@ const Storage = (() => {
   }
 
   return {
-    getProfile:   () => read(KEYS.PROFILE) || { ...DEFAULT_PROFILE },
+    getProfile:   () => ({ ...DEFAULT_PROFILE, ...(read(KEYS.PROFILE) || {}) }),
     saveProfile:  (p) => write(KEYS.PROFILE, p),
 
     getMaxLoads:  () => read(KEYS.MAX_LOADS) || {},

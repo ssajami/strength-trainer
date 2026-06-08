@@ -73,13 +73,11 @@ ${maxLoadsText}
 ${prevText}
 ${commText}
 
-## WEEKLY VOLUME TARGETS (evidence-based for post-menopausal trainee)
-- Posterior chain (hamstrings, glutes, erectors): 16–22 sets/week — DO NOT underload relative to anterior
-- Anterior chain (quads, chest, front delts): 10–16 sets/week
-- Upper back / horizontal & vertical pull: 12–18 sets/week
-- Shoulders: 8–14 sets/week
-- Core / anti-rotation / carries: 8–12 sets/week
-- Max ~9 working sets per muscle group per session; spread volume across sessions
+## WEEKLY VOLUME TARGETS
+- Target: ${profile.weeklySetMin ?? 9}–${profile.weeklySetMax ?? 12} working sets per muscle group per week
+- Spread evenly across 3–4 sessions
+- HARD LIMIT: no more than ${Math.ceil((profile.weeklySetMax ?? 12) / 3)} sets of the same muscle group in any single session — do NOT cluster all posterior-chain or all anterior-chain work into one day
+- Posterior chain (glutes, hamstrings, erectors) must receive at least as many weekly sets as anterior chain (quads, chest, front delts)
 
 ## PROGRAM STRUCTURE
 - 3–4 sessions per week

@@ -44,9 +44,11 @@ function showError(msg) {
 // ─── Settings ────────────────────────────────────────────────────────────────
 function openSettings() {
   const p = Storage.getProfile();
-  $('setting-api-key').value    = p.apiKey    || '';
-  $('setting-age').value        = p.age       || 55;
-  $('setting-bodyweight').value = p.bodyweight || 65;
+  $('setting-api-key').value    = p.apiKey       || '';
+  $('setting-age').value        = p.age          || 55;
+  $('setting-bodyweight').value = p.bodyweight   || 65;
+  $('setting-set-min').value    = p.weeklySetMin ?? 9;
+  $('setting-set-max').value    = p.weeklySetMax ?? 12;
   renderMaxLoadsList();
   show($('settings-modal'));
 }
@@ -68,9 +70,11 @@ function clearAllData() {
 
 function saveSettings() {
   Storage.saveProfile({
-    apiKey:     $('setting-api-key').value.trim(),
-    age:        parseInt($('setting-age').value)        || 55,
-    bodyweight: parseFloat($('setting-bodyweight').value) || 65,
+    apiKey:       $('setting-api-key').value.trim(),
+    age:          parseInt($('setting-age').value)          || 55,
+    bodyweight:   parseFloat($('setting-bodyweight').value) || 65,
+    weeklySetMin: parseInt($('setting-set-min').value)      || 9,
+    weeklySetMax: parseInt($('setting-set-max').value)      || 12,
   });
   persistMaxLoadsFromForm();
   toast('Settings saved', 'success');
