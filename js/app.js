@@ -219,15 +219,9 @@ function renderHomeSummary() {
 // ─── Program view ─────────────────────────────────────────────────────────────
 function renderProgramView() {
   if (!currentProgram) return;
-  $('prog-name').textContent  = currentProgram.programName;
-  $('prog-meta').textContent  =
-    `${currentProgram.weeks} weeks · starts ${fmtDate(currentProgram.startDate)}`;
-  $('prog-model').textContent =
-    `${currentProgram.progressionModel}: ${currentProgram.progressionJustification}`;
-  if (currentProgram.weeklyVolumeNotes) {
-    $('prog-volume').textContent = currentProgram.weeklyVolumeNotes;
-    show($('prog-volume'));
-  }
+  $('prog-name').textContent = currentProgram.programName;
+  $('prog-meta').textContent =
+    `${currentProgram.progressionModel} · ${currentProgram.weeks} weeks · starts ${fmtDate(currentProgram.startDate)}`;
   renderWeek(currentWeek);
   showScreen('program-screen');
 }

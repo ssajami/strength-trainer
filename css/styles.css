@@ -420,7 +420,11 @@ textarea { resize: vertical; min-height: 80px; }
   border-bottom: 1px solid var(--border);
 }
 
-/* Section colour bars */
+/* Section colour bars + background tints */
+.session-section:has(.warmup-row)   { background: #f0f9ff; }
+.session-section:has(.strength-row) { background: #fffbeb; }
+.session-section:has(.metcon-block) { background: #faf5ff; }
+.session-section:has(.mobility-row) { background: #f0fdf4; }
 .session-section:has(.warmup-row)   .section-title { color: var(--clr-warmup);   border-left: 4px solid var(--clr-warmup);   }
 .session-section:has(.strength-row) .section-title { color: var(--clr-strength); border-left: 4px solid var(--clr-strength); }
 .session-section:has(.metcon-block) .section-title { color: var(--clr-metcon);   border-left: 4px solid var(--clr-metcon);   }
