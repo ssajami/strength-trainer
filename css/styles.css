@@ -709,6 +709,15 @@ textarea { resize: vertical; min-height: 80px; }
 .mt-md { margin-top: var(--sp-md); }
 .mb-md { margin-bottom: var(--sp-md); }
 
+/* ── Program actions row ──────────────────────────────────────────────────── */
+.program-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-sm);
+  margin-top: var(--sp-sm);
+}
+
 /* ── Responsive tweaks ────────────────────────────────────────────────────── */
 @media (max-width: 400px) {
   .form-row {

@@ -386,6 +386,226 @@ function renderMobility(items) {
   return wrap;
 }
 
+// ─── HTML Export ─────────────────────────────────────────────────────────────
+function exportToHTML() {
+  if (!currentProgram) return;
+  const loads = Storage.getMaxLoads();
+
+  function rl(movement, pct) {
+    if (pct == null) return null;
+    const max = loads[movement.toLowerCase().trim()];
+    if (!max) return `${pct}%`;
+    const kg = Math.round((max * pct / 100) / 2.5) * 2.5;
+    return `${kg} kg <span class="pct">(${pct}% of ${max} kg)</span>`;
+  }
+
+  const sessionHTML = currentProgram.sessions.map(s => {
+    const warmupRows = (s.warmup || []).map(w => {
+      const detail = [w.duration, w.reps != null ? `${w.reps} reps` : null].filter(Boolean).join(' · ');
+      return `<li><strong>${w.name}</strong>${detail ? ` — ${detail}` : ''}${w.notes ? `<br><span class="note">${w.notes}</span>` : ''}</li>`;
+    }).join('');
+
+    const strengthRows = (s.strength || []).map((e, i) => {
+      const loadStr = rl(e.movement, e.percentOfMax);
+      return `<div class="ex">
+        <div class="ex-num">${i + 1}</div>
+        <div class="ex-detail">
+          <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span></div>
+          <div class="ex-rx">${e.sets} sets × ${e.reps} reps${loadStr ? ` &nbsp;·&nbsp; <strong class="load">${loadStr}</strong>` : ''}</div>
+          ${e.coachingNotes ? `<div class="note">${e.coachingNotes}</div>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+
+    const metconMoves = (s.metcon.movements || []).map(m => {
+      const qty = [m.reps ? `${m.reps} reps` : null, m.calories ? `${m.calories} cal` : null, m.distance || null].filter(Boolean).join('/');
+      const right = [qty, m.load].filter(Boolean).join(' @ ');
+      return `<li><strong>${m.name}</strong>${right ? ` — ${right}` : ''}${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`;
+    }).join('');
+
+    const mobilityRows = (s.mobility || []).map(m =>
+      `<li><strong>${m.name}</strong> — ${m.duration}${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`
+    ).join('');
+
+    return `<details class="session" open>
+      <summary>
+        <span class="s-label">${s.label}</span>
+        <span class="s-focus">${s.focus}</span>
+        <span class="s-day">${s.suggestedDay}</span>
+      </summary>
+      <div class="s-body">
+        ${warmupRows ? `<section class="sec warmup-sec"><h3>🔥 Warm-Up</h3><ul>${warmupRows}</ul></section>` : ''}
+        ${strengthRows ? `<section class="sec strength-sec"><h3>💪 Strength</h3><div class="ex-list">${strengthRows}</div></section>` : ''}
+        <section class="sec metcon-sec">
+          <h3>⚡ Metcon</h3>
+          <div class="metcon-header-row"><strong>${s.metcon.name}</strong> <span class="m-format">${s.metcon.format} · ${s.metcon.timeMinutes} min</span></div>
+          <p class="metcon-desc">${s.metcon.description}</p>
+          ${metconMoves ? `<ul>${metconMoves}</ul>` : ''}
+        </section>
+        ${mobilityRows ? `<section class="sec mobility-sec"><h3>🧘 Mobility & Cooldown</h3><ul>${mobilityRows}</ul></section>` : ''}
+      </div>
+    </details>`;
+  }).join('');
+
+  // Group sessions by week for the nav/headings
+  const weeks = [...new Set(currentProgram.sessions.map(s => s.week))].sort((a, b) => a - b);
+  const byWeek = weeks.map(w => {
+    const sessions = currentProgram.sessions.filter(s => s.week === w);
+    const firstLabel = sessions[0]?.label || '';
+    const weekDate = firstLabel.match(/starting (.+)$/)?.[1] || `Week ${w}`;
+    const sessionsHTML = sessions.map(s => {
+      const warmupRows = (s.warmup || []).map(w => {
+        const detail = [w.duration, w.reps != null ? `${w.reps} reps` : null].filter(Boolean).join(' · ');
+        return `<li><strong>${w.name}</strong>${detail ? ` — ${detail}` : ''}${w.notes ? `<br><span class="note">${w.notes}</span>` : ''}</li>`;
+      }).join('');
+
+      const strengthRows = (s.strength || []).map((e, i) => {
+        const loadStr = rl(e.movement, e.percentOfMax);
+        return `<div class="ex">
+          <div class="ex-num">${i + 1}</div>
+          <div class="ex-detail">
+            <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span></div>
+            <div class="ex-rx">${e.sets} sets × ${e.reps} reps${loadStr ? ` &nbsp;·&nbsp; <strong class="load">${loadStr}</strong>` : ''}</div>
+            ${e.coachingNotes ? `<div class="note">${e.coachingNotes}</div>` : ''}
+          </div>
+        </div>`;
+      }).join('');
+
+      const metconMoves = (s.metcon.movements || []).map(m => {
+        const qty = [m.reps ? `${m.reps} reps` : null, m.calories ? `${m.calories} cal` : null, m.distance || null].filter(Boolean).join('/');
+        const right = [qty, m.load].filter(Boolean).join(' @ ');
+        return `<li><strong>${m.name}</strong>${right ? ` — ${right}` : ''}${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`;
+      }).join('');
+
+      const mobilityRows = (s.mobility || []).map(m =>
+        `<li><strong>${m.name}</strong> — ${m.duration}${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`
+      ).join('');
+
+      return `<details class="session">
+        <summary>
+          <span class="s-label">${s.label}</span>
+          <span class="s-focus">${s.focus}</span>
+          <span class="s-day">${s.suggestedDay}</span>
+        </summary>
+        <div class="s-body">
+          ${warmupRows ? `<section class="sec warmup-sec"><h3>🔥 Warm-Up</h3><ul>${warmupRows}</ul></section>` : ''}
+          ${strengthRows ? `<section class="sec strength-sec"><h3>💪 Strength</h3><div class="ex-list">${strengthRows}</div></section>` : ''}
+          <section class="sec metcon-sec">
+            <h3>⚡ Metcon</h3>
+            <div class="metcon-header-row"><strong>${s.metcon.name}</strong> <span class="m-format">${s.metcon.format} · ${s.metcon.timeMinutes} min</span></div>
+            <p class="metcon-desc">${s.metcon.description}</p>
+            ${metconMoves ? `<ul>${metconMoves}</ul>` : ''}
+          </section>
+          ${mobilityRows ? `<section class="sec mobility-sec"><h3>🧘 Mobility & Cooldown</h3><ul>${mobilityRows}</ul></section>` : ''}
+        </div>
+      </details>`;
+    }).join('');
+
+    return `<div class="week-block">
+      <h2 class="week-heading">Week ${w} <span class="week-date">— starting ${weekDate}</span></h2>
+      ${sessionsHTML}
+    </div>`;
+  }).join('');
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${currentProgram.programName}</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --primary: #e11d48; --bg: #f1f5f9; --surface: #fff;
+    --border: #e2e8f0; --text: #0f172a; --muted: #64748b;
+    --warmup: #0ea5e9; --strength: #d97706; --metcon: #7c3aed; --mobility: #059669;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.55;
+    padding: 16px; max-width: 680px; margin: 0 auto; }
+  h1 { font-size: 1.3rem; margin-bottom: 4px; }
+  h2 { font-size: 1.05rem; margin-bottom: 12px; }
+  h3 { font-size: .85rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .06em; margin-bottom: 10px; }
+  p  { margin-bottom: 8px; }
+  ul { padding-left: 18px; }
+  li { margin-bottom: 6px; font-size: .9rem; line-height: 1.45; }
+  .meta  { color: var(--muted); font-size: .875rem; margin-bottom: 6px; }
+  .just  { color: var(--muted); font-size: .82rem; margin-bottom: 4px; }
+  .note  { color: var(--muted); font-size: .8rem; font-style: italic; }
+  .pct   { color: var(--muted); font-weight: 400; font-size: .85em; }
+  .load  { color: var(--primary); }
+  .tag   { background: #f1f5f9; color: var(--muted); font-size: .7rem; font-weight: 700;
+    padding: 1px 6px; border-radius: 100px; text-transform: capitalize; }
+  .tag.cat { }
+  .prog-header { background: #0f172a; color: #f8fafc; border-radius: 14px;
+    padding: 20px; margin-bottom: 20px; }
+  .prog-header h1 { color: #f8fafc; }
+  .prog-header .meta, .prog-header .just { color: #94a3b8; }
+  .week-block  { margin-bottom: 28px; }
+  .week-heading { font-size: 1rem; font-weight: 800; color: #0f172a;
+    border-bottom: 2px solid var(--primary); padding-bottom: 6px; margin-bottom: 14px; }
+  .week-date { font-weight: 400; color: var(--muted); font-size: .88rem; }
+  details.session { background: var(--surface); border-radius: 12px;
+    margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.08); overflow: hidden; }
+  details.session summary {
+    padding: 14px 16px; cursor: pointer; list-style: none;
+    display: flex; flex-direction: column; gap: 4px;
+    border-left: 4px solid var(--primary);
+  }
+  details.session summary::-webkit-details-marker { display: none; }
+  details.session[open] summary { border-bottom: 1px solid var(--border); }
+  .s-label { font-weight: 700; font-size: .95rem; }
+  .s-focus { display: inline-block; background: #fef9c3; color: #854d0e;
+    font-size: .72rem; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+  .s-day   { color: var(--muted); font-size: .8rem; }
+  .s-body  { padding: 0; }
+  .sec { padding: 14px 16px; border-bottom: 1px solid var(--bg); }
+  .sec:last-child { border-bottom: none; }
+  .warmup-sec   h3 { color: var(--warmup);   border-left: 3px solid var(--warmup);   padding-left: 8px; }
+  .strength-sec h3 { color: var(--strength); border-left: 3px solid var(--strength); padding-left: 8px; }
+  .metcon-sec   h3 { color: var(--metcon);   border-left: 3px solid var(--metcon);   padding-left: 8px; }
+  .mobility-sec h3 { color: var(--mobility); border-left: 3px solid var(--mobility); padding-left: 8px; }
+  .ex-list { display: flex; flex-direction: column; gap: 10px; }
+  .ex { display: flex; gap: 12px; align-items: flex-start; }
+  .ex-num { width: 26px; height: 26px; background: var(--strength); color: #fff;
+    border-radius: 50%; font-size: .78rem; font-weight: 700; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .ex-detail { flex: 1; }
+  .ex-name { font-weight: 600; font-size: .9rem; margin-bottom: 3px;
+    display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+  .ex-rx   { font-size: .875rem; margin-bottom: 3px; }
+  .metcon-header-row { display: flex; justify-content: space-between; flex-wrap: wrap;
+    gap: 6px; margin-bottom: 6px; align-items: baseline; }
+  .metcon-header-row strong { font-size: .95rem; }
+  .m-format { background: #ede9fe; color: #5b21b6; font-size: .75rem;
+    font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+  .metcon-desc { font-size: .85rem; color: var(--muted); margin-bottom: 8px; }
+  @media (max-width: 400px) { body { padding: 12px; font-size: 15px; } }
+</style>
+</head>
+<body>
+<div class="prog-header">
+  <h1>${currentProgram.programName}</h1>
+  <p class="meta">${currentProgram.weeks} weeks · starts ${fmtDate(currentProgram.startDate)}</p>
+  <p class="just">${currentProgram.progressionModel}: ${currentProgram.progressionJustification}</p>
+  ${currentProgram.weeklyVolumeNotes ? `<p class="just">${currentProgram.weeklyVolumeNotes}</p>` : ''}
+</div>
+${byWeek}
+</body>
+</html>`;
+
+  const blob = new Blob([html], { type: 'text/html' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const slug = currentProgram.programName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  a.href     = url;
+  a.download = `${slug}.html`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('HTML file downloaded — open it on any device', 'success');
+}
+
 // ─── Utilities ────────────────────────────────────────────────────────────────
 function fmtDate(str) {
   if (!str) return '';
@@ -431,9 +651,10 @@ function init() {
   });
 
   // Program screen navigation
-  $('prev-week-btn').addEventListener('click', () => { if (currentWeek > 1) renderWeek(currentWeek - 1); });
-  $('next-week-btn').addEventListener('click', () => { if (currentProgram && currentWeek < currentProgram.weeks) renderWeek(currentWeek + 1); });
+  $('prev-week-btn').addEventListener('click',    () => { if (currentWeek > 1) renderWeek(currentWeek - 1); });
+  $('next-week-btn').addEventListener('click',    () => { if (currentProgram && currentWeek < currentProgram.weeks) renderWeek(currentWeek + 1); });
   $('back-home-btn').addEventListener('click',    () => showScreen('home-screen'));
+  $('export-html-btn').addEventListener('click',  exportToHTML);
   $('back-prog-btn').addEventListener('click',    () => showScreen('program-screen'));
 
   // Max load modal
