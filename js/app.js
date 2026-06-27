@@ -488,6 +488,12 @@ function renderSessionDetail(session) {
   root.appendChild(mkSection(`⚡ Metcon · ~${te.metconMinutes} min`,                                            renderMetcon(session.metcon),           'metcon'));
   if (session.mobility?.length) root.appendChild(mkSection(`🧘 Mobility & Cooldown · ~${te.mobilityMinutes} min`, renderMobility(session.mobility),     'mobility'));
 
+  const logBtn = document.createElement('button');
+  logBtn.className = 'btn btn-primary log-weights-btn';
+  logBtn.textContent = 'Log Weights';
+  logBtn.addEventListener('click', () => openLogWeightsModal(session));
+  root.appendChild(logBtn);
+
   showScreen('session-screen');
 }
 
@@ -533,20 +539,10 @@ function makeStrengthRow(ex, i) {
   const typeCls = (ex.type === 'primary' || ex.type === 'main') ? ' strength-primary' : ex.type === 'secondary' ? ' strength-secondary' : ' strength-accessory';
   el.className = `item-row strength-row${typeCls}`;
 
-  let accTrackerHtml = '';
+  let accLastUsedHtml = '';
   if (isAccessory) {
     const saved = Storage.getAccessoryLoad(ex.movement);
-    const lastUsedHtml = saved
-      ? `<span class="acc-last-used">Last used: ${saved.kg} kg · ${fmtShortDate(saved.date)}</span>`
-      : '';
-    accTrackerHtml = `
-      <div class="acc-weight-tracker">
-        ${lastUsedHtml}
-        <div class="acc-weight-log">
-          <input type="number" class="acc-weight-input" placeholder="Log kg used today" min="0" step="0.5"${saved ? ` value="${saved.kg}"` : ''}>
-          <button class="btn-xs acc-save-btn">Save</button>
-        </div>
-      </div>`;
+    if (saved) accLastUsedHtml = `<div class="acc-last-used">Last used: ${saved.kg} kg · ${fmtShortDate(saved.date)}</div>`;
   }
 
   el.innerHTML = `
@@ -563,29 +559,9 @@ function makeStrengthRow(ex, i) {
         ${fmtRest(ex.restSeconds) ? `<span class="rest-val">Rest ${fmtRest(ex.restSeconds)}</span>` : ''}
       </div>
       ${ex.coachingNotes ? `<div class="coaching-notes">${ex.coachingNotes}</div>` : ''}
-      ${accTrackerHtml}
+      ${accLastUsedHtml}
     </div>
   `;
-
-  if (isAccessory) {
-    el.querySelector('.acc-save-btn').addEventListener('click', () => {
-      const input = el.querySelector('.acc-weight-input');
-      const kg = parseFloat(input.value);
-      if (isNaN(kg) || kg <= 0) { toast('Enter a valid weight', 'error'); return; }
-      Storage.setAccessoryLoad(ex.movement, kg);
-      const today = new Date().toISOString().split('T')[0];
-      let lastUsed = el.querySelector('.acc-last-used');
-      if (lastUsed) {
-        lastUsed.textContent = `Last used: ${kg} kg · ${fmtShortDate(today)}`;
-      } else {
-        lastUsed = document.createElement('span');
-        lastUsed.className = 'acc-last-used';
-        lastUsed.textContent = `Last used: ${kg} kg · ${fmtShortDate(today)}`;
-        el.querySelector('.acc-weight-tracker').prepend(lastUsed);
-      }
-      toast(`Saved ${kg} kg for ${ex.movement}`, 'success');
-    });
-  }
 
   return el;
 }
@@ -672,6 +648,125 @@ function renderMobility(items) {
     wrap.appendChild(el);
   });
   return wrap;
+}
+
+// ─── Log weights modal ────────────────────────────────────────────────────────
+function openLogWeightsModal(session) {
+  const existing = document.getElementById('log-weights-modal');
+  if (existing) existing.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'log-weights-modal';
+  overlay.className = 'modal-overlay';
+
+  const panel = document.createElement('div');
+  panel.className = 'modal log-weights-panel';
+
+  const header = document.createElement('div');
+  header.className = 'modal-header';
+  header.innerHTML = `<h3 class="modal-title">Log Weights</h3>`;
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'icon-btn-sm';
+  closeBtn.setAttribute('aria-label', 'Close');
+  closeBtn.textContent = '✕';
+  closeBtn.addEventListener('click', () => overlay.remove());
+  header.appendChild(closeBtn);
+  panel.appendChild(header);
+
+  const body = document.createElement('div');
+  body.className = 'log-weights-body';
+
+  const tiers = [
+    { label: 'Primary',   exercises: (session.strength || []).filter(e => e.type === 'primary' || e.type === 'main'),  isAccessory: false },
+    { label: 'Secondary', exercises: (session.strength || []).filter(e => e.type === 'secondary'),                      isAccessory: false },
+    { label: 'Accessory', exercises: (session.strength || []).filter(e => e.type === 'accessory'),                      isAccessory: true  },
+  ];
+
+  tiers.forEach(({ label, exercises, isAccessory }) => {
+    if (!exercises.length) return;
+    const sec = document.createElement('div');
+    sec.className = 'log-tier-section';
+    const tierLabel = document.createElement('p');
+    tierLabel.className = 'log-tier-label';
+    tierLabel.textContent = label;
+    sec.appendChild(tierLabel);
+
+    exercises.forEach(ex => {
+      const row = document.createElement('div');
+      row.className = 'log-row';
+
+      let rxText, inputLabel, inputValue;
+      if (isAccessory) {
+        const saved = Storage.getAccessoryLoad(ex.movement);
+        rxText      = saved ? `Last used: ${saved.kg} kg · ${fmtShortDate(saved.date)}` : `${ex.sets}×${ex.reps}`;
+        inputLabel  = 'Weight used (kg)';
+        inputValue  = saved?.kg ?? '';
+      } else {
+        const max     = Storage.getMaxLoad(ex.movement);
+        const working = (max && ex.percentOfMax) ? Math.round((max * ex.percentOfMax / 100) / 2.5) * 2.5 : null;
+        rxText        = working
+          ? `${ex.sets}×${ex.reps} · ${working} kg (${ex.percentOfMax}% of ${max} kg 1RM)`
+          : `${ex.sets}×${ex.reps}${ex.percentOfMax ? ` · ${ex.percentOfMax}%` : ''}`;
+        inputLabel  = 'Update 1RM (kg)';
+        inputValue  = max ?? '';
+      }
+
+      const info = document.createElement('div');
+      info.className = 'log-row-info';
+      info.innerHTML = `<span class="log-mv-name">${ex.movement}</span><span class="log-mv-rx">${rxText}</span>`;
+
+      const inputWrap = document.createElement('div');
+      inputWrap.className = 'log-row-input';
+      const lbl = document.createElement('label');
+      lbl.className = 'log-input-label';
+      lbl.textContent = inputLabel;
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.className = 'log-weight-input';
+      input.placeholder = 'kg';
+      input.min = '0';
+      input.step = '0.5';
+      input.dataset.movement  = ex.movement;
+      input.dataset.entryType = isAccessory ? 'accessory' : 'max';
+      if (inputValue !== '') input.value = inputValue;
+      inputWrap.appendChild(lbl);
+      inputWrap.appendChild(input);
+
+      row.appendChild(info);
+      row.appendChild(inputWrap);
+      sec.appendChild(row);
+    });
+
+    body.appendChild(sec);
+  });
+
+  const footer = document.createElement('div');
+  footer.className = 'log-weights-footer';
+  const saveBtn = document.createElement('button');
+  saveBtn.className = 'btn btn-primary';
+  saveBtn.textContent = 'Save & Close';
+  saveBtn.addEventListener('click', () => {
+    let saved = 0;
+    overlay.querySelectorAll('.log-weight-input').forEach(input => {
+      const kg = parseFloat(input.value);
+      if (isNaN(kg) || kg <= 0) return;
+      if (input.dataset.entryType === 'accessory') {
+        Storage.setAccessoryLoad(input.dataset.movement, kg);
+      } else {
+        Storage.setMaxLoad(input.dataset.movement, kg);
+      }
+      saved++;
+    });
+    overlay.remove();
+    if (saved > 0) toast(`${saved} weight${saved > 1 ? 's' : ''} saved`, 'success');
+  });
+  footer.appendChild(saveBtn);
+
+  panel.appendChild(body);
+  panel.appendChild(footer);
+  overlay.appendChild(panel);
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
 }
 
 // ─── Chat ─────────────────────────────────────────────────────────────────────

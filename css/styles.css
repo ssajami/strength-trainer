@@ -645,6 +645,110 @@ textarea { resize: vertical; min-height: 80px; }
 }
 .btn-xs:hover { opacity: .85; }
 
+/* ── Log Weights button ───────────────────────────────────────────────────── */
+.log-weights-btn {
+  display: block;
+  width: 100%;
+  margin-top: var(--sp-lg);
+  padding: 14px;
+  font-size: 1rem;
+  position: sticky;
+  bottom: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.18);
+}
+
+/* ── Log Weights modal ────────────────────────────────────────────────────── */
+.log-weights-panel {
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.log-weights-body {
+  overflow-y: auto;
+  flex: 1;
+  padding: var(--sp-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+}
+
+.log-tier-section { display: flex; flex-direction: column; gap: 10px; }
+
+.log-tier-label {
+  font-size: .68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.log-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border-radius: 8px;
+}
+
+.log-row-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.log-mv-name {
+  font-size: .9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.log-mv-rx {
+  font-size: .75rem;
+  color: var(--text-muted);
+}
+
+.log-row-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.log-input-label {
+  font-size: .68rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.log-weight-input {
+  width: 80px;
+  padding: 6px 8px;
+  font-size: .9rem;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  text-align: right;
+}
+
+.log-weights-footer {
+  padding: var(--sp-md);
+  border-top: 1px solid var(--border);
+}
+
+.log-weights-footer .btn { width: 100%; padding: 13px; font-size: 1rem; }
+
 .session-time-summary {
   display: flex;
   flex-direction: column;
