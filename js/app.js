@@ -933,7 +933,7 @@ function exportToHTML() {
       const metconMoves = (s.metcon.movements || []).map(m => {
         const qty = [m.reps ? `${m.reps} reps` : null, m.calories ? `${m.calories} cal` : null, m.distance || null].filter(Boolean).join('/');
         const right = [qty, m.load].filter(Boolean).join(' @ ');
-        return `<li><strong>${m.name}</strong>${right ? ` — ${right}` : ''} <a href="${ytUrl(m.name)}" target="_blank" rel="noopener" class="yt-link">▶</a>${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`;
+        return `<li><strong>${m.name}</strong>${right ? ` — ${right}` : ''}${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`;
       }).join('');
 
       const mobilityRows = (s.mobility || []).map(m =>
