@@ -25,6 +25,139 @@ const ProgramGen = (() => {
     );
   }
 
+  // ─── Metcon movement pool ────────────────────────────────────────────────────
+
+  const METCON_MOVEMENTS = {
+    // name: { pattern, modality, equipment, unilateral, ends_overhead, risk_flags, spawnWeight }
+    // spawnWeight: 1=rare, 2=occasional, 3=normal, 4=common
+    'KB swing':                   { pattern:'hinge',             modality:'weightlifting',  equipment:'kb',         unilateral:false, ends_overhead:false, risk_flags:['grip','lumbar'],               spawnWeight:4 },
+    'KB clean':                   { pattern:'hinge',             modality:'weightlifting',  equipment:'kb',         unilateral:false, ends_overhead:false, risk_flags:['grip','skill'],                spawnWeight:3 },
+    'KB snatch':                  { pattern:'hinge',             modality:'weightlifting',  equipment:'kb',         unilateral:true,  ends_overhead:true,  risk_flags:['grip','overhead','skill'],     spawnWeight:2 },
+    'DB snatch':                  { pattern:'hinge',             modality:'weightlifting',  equipment:'db',         unilateral:true,  ends_overhead:true,  risk_flags:['grip','overhead','skill'],     spawnWeight:2 },
+    'DB thruster':                { pattern:'squat',             modality:'weightlifting',  equipment:'db',         unilateral:false, ends_overhead:true,  risk_flags:['overhead'],                   spawnWeight:3 },
+    'wall ball':                  { pattern:'squat',             modality:'weightlifting',  equipment:'wallball',   unilateral:false, ends_overhead:true,  risk_flags:['overhead'],                   spawnWeight:4 },
+    'step-up':                    { pattern:'lunge',             modality:'weightlifting',  equipment:'bodyweight', unilateral:true,  ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'burpee (no-jump)':           { pattern:'horizontal_push',   modality:'gymnastics',     equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:['lumbar'],                     spawnWeight:3 },
+    'pull-up':                    { pattern:'vertical_pull',     modality:'gymnastics',     equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:['grip'],                       spawnWeight:4 },
+    'ring row':                   { pattern:'horizontal_pull',   modality:'gymnastics',     equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'push-up':                    { pattern:'horizontal_push',   modality:'gymnastics',     equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'dip':                        { pattern:'vertical_push',     modality:'gymnastics',     equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'row machine':                { pattern:'monostructural',    modality:'monostructural', equipment:'machine',    unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'air bike':                   { pattern:'monostructural',    modality:'monostructural', equipment:'machine',    unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'ski erg':                    { pattern:'monostructural',    modality:'monostructural', equipment:'machine',    unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'battle ropes':               { pattern:'monostructural',    modality:'monostructural', equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:['grip'],                       spawnWeight:3 },
+    'med ball slam':              { pattern:'hinge',             modality:'weightlifting',  equipment:'medball',    unilateral:false, ends_overhead:true,  risk_flags:['lumbar'],                     spawnWeight:4 },
+    'loaded carry':               { pattern:'carry',             modality:'weightlifting',  equipment:'kb',         unilateral:false, ends_overhead:false, risk_flags:['grip','lumbar'],               spawnWeight:3 },
+    'sled push':                  { pattern:'horizontal_push',   modality:'monostructural', equipment:'sled',       unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'sled pull':                  { pattern:'horizontal_pull',   modality:'monostructural', equipment:'sled',       unilateral:false, ends_overhead:false, risk_flags:['grip'],                       spawnWeight:3 },
+    'hollow hold':                { pattern:'core_isometric',    modality:'gymnastics',     equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'sit-up':                     { pattern:'core_flexion',      modality:'gymnastics',     equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'toes-to-bar':                { pattern:'core_flexion',      modality:'gymnastics',     equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:['grip','skill'],               spawnWeight:2 },
+    'hanging knee raise':         { pattern:'core_flexion',      modality:'gymnastics',     equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:['grip'],                       spawnWeight:3 },
+    'goblet squat':               { pattern:'squat',             modality:'weightlifting',  equipment:'kb',         unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'lunge':                      { pattern:'lunge',             modality:'weightlifting',  equipment:'bodyweight', unilateral:true,  ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'glute bridge':               { pattern:'hinge',             modality:'weightlifting',  equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'leg curl':                   { pattern:'hinge',             modality:'weightlifting',  equipment:'machine',    unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'plank':                      { pattern:'core_isometric',    modality:'gymnastics',     equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'dead bug':                   { pattern:'core_antirotation', modality:'gymnastics',     equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'single-arm row':             { pattern:'horizontal_pull',   modality:'weightlifting',  equipment:'db',         unilateral:true,  ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'lat pulldown':               { pattern:'vertical_pull',     modality:'weightlifting',  equipment:'band_cable', unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'fly':                        { pattern:'horizontal_push',   modality:'weightlifting',  equipment:'db',         unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'split squat':                { pattern:'lunge',             modality:'weightlifting',  equipment:'bodyweight', unilateral:true,  ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'leg press':                  { pattern:'squat',             modality:'weightlifting',  equipment:'machine',    unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'reverse lunge':              { pattern:'lunge',             modality:'weightlifting',  equipment:'bodyweight', unilateral:true,  ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'DB/landmine overhead press': { pattern:'vertical_push',     modality:'weightlifting',  equipment:'db',         unilateral:false, ends_overhead:true,  risk_flags:['overhead'],                   spawnWeight:3 },
+    'air squat':                  { pattern:'squat',             modality:'gymnastics',     equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:4 },
+    'push press':                 { pattern:'vertical_push',     modality:'weightlifting',  equipment:'db',         unilateral:false, ends_overhead:true,  risk_flags:['overhead'],                   spawnWeight:3 },
+    'overhead squat':             { pattern:'squat',             modality:'weightlifting',  equipment:'db',         unilateral:false, ends_overhead:true,  risk_flags:['overhead','skill','mobility'], spawnWeight:1 },
+    'push jerk':                  { pattern:'vertical_push',     modality:'weightlifting',  equipment:'kb',         unilateral:false, ends_overhead:true,  risk_flags:['overhead','skill'],           spawnWeight:2 },
+    'DB clean':                   { pattern:'hinge',             modality:'weightlifting',  equipment:'db',         unilateral:false, ends_overhead:false, risk_flags:['skill'],                      spawnWeight:3 },
+    'DB clean and jerk':          { pattern:'hinge',             modality:'weightlifting',  equipment:'db',         unilateral:false, ends_overhead:true,  risk_flags:['overhead','skill'],           spawnWeight:2 },
+    // additions
+    'DB floor press':             { pattern:'horizontal_push',   modality:'weightlifting',  equipment:'db',         unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'Romanian deadlift':          { pattern:'hinge',             modality:'weightlifting',  equipment:'db',         unilateral:false, ends_overhead:false, risk_flags:['lumbar'],                     spawnWeight:3 },
+    'KB deadlift':                { pattern:'hinge',             modality:'weightlifting',  equipment:'kb',         unilateral:false, ends_overhead:false, risk_flags:['lumbar'],                     spawnWeight:3 },
+    'Pallof press':               { pattern:'core_antirotation', modality:'weightlifting',  equipment:'band_cable', unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'rotational med ball throw':  { pattern:'core_rotational',   modality:'weightlifting',  equipment:'medball',    unilateral:false, ends_overhead:false, risk_flags:[],                             spawnWeight:3 },
+    'Turkish get-up':             { pattern:'carry',             modality:'weightlifting',  equipment:'kb',         unilateral:true,  ends_overhead:true,  risk_flags:['overhead','skill'],           spawnWeight:2 },
+    'good morning':               { pattern:'hinge',             modality:'weightlifting',  equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:['lumbar'],                     spawnWeight:2 },
+    'back extension':             { pattern:'hinge',             modality:'weightlifting',  equipment:'bodyweight', unilateral:false, ends_overhead:false, risk_flags:['lumbar'],                     spawnWeight:2 },
+    'single-leg squat':           { pattern:'squat',             modality:'gymnastics',     equipment:'bodyweight', unilateral:true,  ends_overhead:false, risk_flags:['skill'],                      spawnWeight:2 },
+  };
+
+  function buildMetconMovementPrompt() {
+    const lines = [
+      '## METCON MOVEMENT POOL',
+      'Format: name | pattern | modality | equipment | unilateral | ends_overhead | risk_flags | spawnWeight(1=rare,4=common)',
+      '',
+    ];
+    for (const [name, m] of Object.entries(METCON_MOVEMENTS)) {
+      const flags = m.risk_flags.length ? m.risk_flags.join(',') : 'none';
+      lines.push(
+        `${name} | ${m.pattern} | ${m.modality} | ${m.equipment} | ` +
+        `unilateral:${m.unilateral} | overhead:${m.ends_overhead} | flags:${flags} | w:${m.spawnWeight}`
+      );
+    }
+    return lines.join('\n');
+  }
+
+  function validateMetcon(metcon, format) {
+    const violations = [];
+    const movements  = metcon.movements || [];
+    const isTabata   = format === 'Tabata';
+    const isEMOM     = format === 'EMOM';
+
+    function lookupMeta(name) {
+      const key = Object.keys(METCON_MOVEMENTS).find(
+        k => k.toLowerCase() === (name || '').toLowerCase().trim()
+      );
+      return key ? METCON_MOVEMENTS[key] : null;
+    }
+
+    const tagged = movements.map(m => ({ m, meta: lookupMeta(m.name) }));
+
+    // HARD: max 1 ends_overhead
+    const overheadCount = tagged.filter(t => t.meta?.ends_overhead).length;
+    if (overheadCount > 1) {
+      violations.push(`overhead: ${overheadCount} ends_overhead movements (max 1)`);
+    }
+
+    // HARD: max 1 lumbar-flagged; no ballistic hinge + carry combo
+    const lumbarCount = tagged.filter(t => t.meta?.risk_flags?.includes('lumbar')).length;
+    if (lumbarCount > 1) {
+      violations.push(`lumbar: ${lumbarCount} lumbar-flagged movements (max 1)`);
+    }
+    const BALLISTIC = ['kb swing', 'med ball slam'];
+    const hasBallisticHinge = tagged.some(t => BALLISTIC.includes((t.m.name || '').toLowerCase().trim()));
+    const hasCarry          = tagged.some(t => t.meta?.pattern === 'carry');
+    if (hasBallisticHinge && hasCarry) {
+      violations.push('lumbar: ballistic hinge (KB swing / med ball slam) + loaded carry not allowed in same metcon');
+    }
+
+    // HARD: max 2 grip-flagged; no 3+ consecutive
+    const gripCount = tagged.filter(t => t.meta?.risk_flags?.includes('grip')).length;
+    if (gripCount > 2) {
+      violations.push(`grip: ${gripCount} grip-flagged movements (max 2)`);
+    }
+    let consecutive = 0;
+    for (const t of tagged) {
+      consecutive = t.meta?.risk_flags?.includes('grip') ? consecutive + 1 : 0;
+      if (consecutive >= 3) { violations.push('grip: 3+ grip movements sequenced consecutively'); break; }
+    }
+
+    // HARD: no skill in Tabata or EMOM
+    if (isTabata || isEMOM) {
+      const skillMoves = tagged.filter(t => t.meta?.risk_flags?.includes('skill'));
+      if (skillMoves.length > 0) {
+        violations.push(
+          `skill: [${skillMoves.map(t => t.m.name).join(', ')}] not allowed in ${format} — fatigue + speed breaks form`
+        );
+      }
+    }
+
+    return violations; // empty array = passes all hard constraints
+  }
+
   function buildSystemPrompt() {
     return `You are a world-class strength and conditioning coach specialising in training post-menopausal women. You have deep expertise in:
 - Periodisation models (LP, DUP, double progression, block)
@@ -128,25 +261,74 @@ PASS 2 — Exercise population:
 - 3 sessions per week
 - Each session must contain:
   1. WARM-UP (8–12 min, specific to that day's work)
-  2. STRENGTH — structured in two parts:
-     a. MAIN WORK: exactly 2 heavy compound movements targeting different primary muscle groups
-        - type: "main" in the JSON; 3–5 sets, reps 3–8, high load
-        - The two movements MUST target different primary muscle groups
-     b. ACCESSORY WORK: 3–5 lighter complementary exercises
-        - type: "accessory" in the JSON
-        - Unilateral work, carries, isolation, core, rotator cuff
+     Include rotator cuff / scapular activation here (band pull-aparts, external rotation, Y/T/W) — NOT as working sets
+  2. STRENGTH — structured in three tiers (see MOVEMENT CLASSIFICATION below):
+     a. PRIMARY: 1 heavy compound lift — type: "primary"
+     b. SECONDARY: 1–2 supporting compounds — type: "secondary"
+     c. ACCESSORY: 2–3 isolation / lower-load movements — type: "accessory"
   3. METCON (10–20 min, CrossFit-style — see allowed movements below)
   4. MOBILITY/COOLDOWN (lat, thoracic, shoulder IR)
 
-## METCON ALLOWED MOVEMENTS
-KB swings, KB cleans, KB snatches, DB snatches, DB thrusters, wall balls, step-ups,
-burpees (no-jump: step back/forward), pull-ups, ring rows, push-ups, dips,
-row machine, air bike, ski erg, battle ropes, med ball slams, loaded carries,
-sled pushes/pulls, hollow holds, sit-ups, toes-to-bar, hanging knee raises,
-goblet squats, lunges, glute bridge, leg curl, planks, dead bugs, single arm row,
-lat pulldown, flies, split squats, leg press, reverse lunge, overhead press,
-air squat, push press, overhead squat, push jerk, db clean, db clean and jerk.
-NOT allowed: running, jump rope, double-unders, box jumps with hard landing.
+## MOVEMENT CLASSIFICATION
+
+PRIMARY (type: "primary") — 1 per session:
+  The main compound lift, programmed to the DUP session type.
+  Sets/reps/load vary by session type (heavy/moderate/volume).
+  Examples: back squat, conventional deadlift, bench press, strict press, front squat
+
+SECONDARY (type: "secondary") — 1–2 per session:
+  Compound or semi-compound movements supporting the primary.
+  Fixed: 3–4 sets × 6–10 reps, moderate load, regardless of session type.
+  Examples: RDL, barbell row, hip thrust, Bulgarian split squat, landmine press, pull-up
+
+ACCESSORY (type: "accessory") — 2–3 per session:
+  Isolation or lower-load movements filling volume gaps or targeting weak points.
+  Fixed: 3 sets × 10–15 reps, load by feel (RPE 7–8).
+  Examples: single-leg RDL, cable pull-through, face pull, Pallof press, single-arm row, dead bug
+
+## ACCESSORY PROGRAMMING RULES
+
+1. Accessories must not duplicate the primary or secondary movement pattern in the same session
+   (e.g., if primary = deadlift and secondary = RDL, accessories must come from push, pull, unilateral, or core — no more hinges)
+
+2. After placing primary and secondary, check which muscle groups are still below their weekly target and prioritize those in accessory slots
+
+3. Accessory progression across the cycle:
+   Weeks 1–2: establish working weight at RPE 7
+   Weeks 3–4: add 1 rep per set at the same weight
+   Weeks 5–6: add 1–2 kg, reset to original rep target
+   Deload week (if applicable): 60% load, same reps
+
+4. Combined secondary + accessory sets per session must not exceed 15 working sets
+
+5. Core accessories always placed last in the session
+   Time-based: 2 sets × 20–40 s
+   Rep-based: 2 sets × 10–15 reps
+   Rotator cuff work belongs in the warm-up only — never as working sets
+
+${buildMetconMovementPrompt()}
+
+## METCON HARD CONSTRAINTS (enforce strictly — never violate)
+
+1. OVERHEAD: max 1 ends_overhead movement per metcon.
+   overhead squat (w=1): use rarely; cap reps ≤5/round; forbidden in Tabata and EMOM; counts as your sole overhead movement.
+
+2. LUMBAR: max 1 lumbar-flagged movement per metcon.
+   Never pair KB swing or med ball slam (ballistic hinge) with loaded carry in the same metcon.
+
+3. GRIP: max 2 grip-flagged movements per metcon.
+   Never sequence 3+ grip movements consecutively.
+
+4. SKILL: skill-flagged movements (snatches, toes-to-bar, get-ups, OHS, push jerk, pistols) must NOT appear in Tabata or EMOM — fatigue and time pressure break technique.
+
+## METCON SOFT PREFERENCES
+
+- Push/pull balance: if the metcon has any push pattern, include at least one pull (and vice versa).
+- Modality variety: avoid all-weightlifting or all-gymnastics metcons; mix modalities.
+- Cardio machine rotation: rotate row machine / air bike / ski erg across sessions; avoid the same machine in consecutive sessions.
+- Spawn weight guidance: prefer w=3–4 movements for routine selection; w=1–2 sparingly (overhead squat at most once per 4 sessions).
+- Use DB/landmine overhead press only — never strict barbell press in a metcon.
+NOT allowed in any metcon: running, jump rope, double-unders, box jumps with hard landing.
 
 ## MANDATORY ELEMENTS (at least once per 2-week block)
 - Wrist/forearm (wrist curls, reverse curls, or rice bucket drill)
@@ -175,7 +357,6 @@ Return ONLY this JSON structure, no text outside it:
       "weeklySetsProgrammed": 11,
       "sessionBreakdown": [4, 4, 3],
       "meetsTarget": true,
-      "anySessionOver5": false,
       "flag": "string or null"
     }
   ],
@@ -192,7 +373,7 @@ Return ONLY this JSON structure, no text outside it:
       ],
       "strength": [
         {
-          "type": "main",
+          "type": "primary | secondary | accessory",
           "order": 1,
           "movement": "string",
           "category": "GLUTES_HAMSTRINGS | UPPER_BACK_ERECTORS | QUAD_DOMINANT | PUSH | VERTICAL_PULL | UNILATERAL_LOWER | CORE | CARRIES_LOADED | ROTATOR_CUFF | GRIP | BALANCE | PLYOMETRIC",
@@ -221,8 +402,8 @@ Return ONLY this JSON structure, no text outside it:
 }
 
 Rules:
-- type: exactly 2 "main" exercises per session (first in the array), then 3–5 "accessory" exercises
-- The 2 main movements must use different primary movement patterns (no two hinges, no two squats, no two pushes)
+- type: exactly 1 "primary", then 1–2 "secondary", then 2–3 "accessory" exercises (in that order in the array)
+- Primary and secondary must target different muscle groups (no two hinges, no two squats, no two pushes)
 - category — use exactly these values:
   GLUTES_HAMSTRINGS   = deadlift, RDL, hip thrust, cable pull-through, good morning, hamstring curl
   UPPER_BACK_ERECTORS = barbell row, DB row, cable row, chest-supported row, back extension
@@ -236,12 +417,12 @@ Rules:
   GRIP                = plate pinch, dead hang, fat-grip, rice bucket
   BALANCE             = single-leg stance, perturbation drills
   PLYOMETRIC          = med ball slam, step-up for power, low pogo
-- volumeAudit: populate one entry per tracked muscle group (GLUTES_HAMSTRINGS through CORE); sessionBreakdown is an array of sets per session in order; flag any violations
+- volumeAudit: populate one entry per tracked muscle group (GLUTES_HAMSTRINGS through CORE); sessionBreakdown is an array of primary + secondary working sets per session in order (do not count accessory sets); flag any violations
 - Do not reference a per-session set cap or per-session limit anywhere in coachingNotes, weeklyVolumeNotes, or any other text field — the only volume constraint is weekly
-- percentOfMax: use number (e.g. 75) for main lifts when the movement is in the saved maxes list; for accessory lifts set to null and explain load in coachingNotes
-- If percentOfMax is null due to no saved max, set coachingNotes to explain how to choose weight
+- percentOfMax: set a number for ALL primary and secondary exercises — use a sensible training % (e.g. 75 for primary heavy day, 65 for secondary) regardless of whether the movement is in the saved maxes list (the app will show "65 kg" when a max is saved, or "65%" when it is not, which is still useful); set to null ONLY for type "accessory" exercises
+- For accessory exercises (percentOfMax null): coachingNotes MUST describe how to choose weight (e.g. "moderate weight, RPE 7–8 — approximately 20–25 kg DB")
 - Carry loads should be absolute (e.g. "32 kg KB per hand") or bodyweight-based
-- Keep metcons 10–20 min, CrossFit-style but fully low-impact
+- Keep metcons 10–20 min, CrossFit-style but fully low-impact; select exclusively from the METCON MOVEMENT POOL above and enforce all hard constraints before finalising
 - restSeconds: post-menopausal women need full recovery — use these guidelines:
   • Heavy compound (≤5 reps or ≥80% 1RM): 180–240 s
   • Moderate compound (6–10 reps): 120–180 s
@@ -295,7 +476,7 @@ Rules:
         notes:    w.notes    || null,
       })),
       strength: (s.strength || []).map((e, j) => ({
-        type:           e.type === 'main' ? 'main' : 'accessory',
+        type:           ['primary','secondary','accessory'].includes(e.type) ? e.type : 'accessory',
         order:          e.order         ?? (j + 1),
         movement:       e.movement      || 'Unknown',
         category:       e.category      || '',
@@ -353,7 +534,6 @@ Rules:
         weeklySetsProgrammed: a.weeklySetsProgrammed ?? null,
         sessionBreakdown:    Array.isArray(a.sessionBreakdown) ? a.sessionBreakdown : [],
         meetsTarget:         a.meetsTarget          ?? null,
-        anySessionOver5:     a.anySessionOver5      ?? null,
         flag:                a.flag                 || null,
       })),
       sessions:             (raw.sessions || []).map(coerceSession),
@@ -363,15 +543,26 @@ Rules:
   // ─── Public API ──────────────────────────────────────────────────────────────
 
   return {
+    validateMetcon,
+
     async generate(params) {
       const { profile } = params;
       if (!profile.apiKey?.trim()) {
         throw new Error('API key not set. Please add your Anthropic API key in Settings.');
       }
-      const sys  = buildSystemPrompt();
-      const user = buildUserMessage(params);
-      const text = await callClaude(sys, user, profile.apiKey.trim());
-      return parseResponse(text, params);
+      const sys     = buildSystemPrompt();
+      const user    = buildUserMessage(params);
+      const text    = await callClaude(sys, user, profile.apiKey.trim());
+      const program = parseResponse(text, params);
+
+      for (const session of program.sessions) {
+        const violations = validateMetcon(session.metcon, session.metcon.format);
+        if (violations.length > 0) {
+          session.metcon.validationViolations = violations;
+        }
+      }
+
+      return program;
     },
   };
 })();
