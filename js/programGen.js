@@ -299,6 +299,21 @@ PASS 2 — Exercise population:
      a. PRIMARY: 1 heavy compound lift — type: "primary"
      b. SECONDARY: 1–2 supporting compounds — type: "secondary"
      c. ACCESSORY: 2–3 isolation / lower-load movements — type: "accessory"
+
+## SUPERSET PAIRING (primary + secondary tiers only)
+
+Where primary and secondary exercises target non-competing muscle groups, pair them as supersets to reduce total session time (the rest period of one exercise is used to perform the other).
+
+Rules:
+- Assign the same supersetGroup letter ("A", "B", …) to exercises that should be supersetted
+- Non-competing = different primary muscle group patterns (e.g. squat + row, hinge + push, press + pull)
+- Supersets must be pairs of exactly 2 exercises
+- Primary may be supersetted with one secondary when the primary is moderate-intensity (≤80% 1RM)
+  Do NOT superset a max-effort or near-max primary set (>85% 1RM) — full neural recovery required
+- Two secondary exercises may be supersetted if they target non-competing groups
+- Accessory exercises are NEVER given a supersetGroup
+- Standalone exercises (not in a superset) get supersetGroup: null
+- Each exercise's restSeconds still reflects the desired rest for that movement; the app handles timing
   3. METCON (10–20 min, CrossFit-style — see allowed movements below)
   4. MOBILITY/COOLDOWN (lat, thoracic, shoulder IR)
 
@@ -408,6 +423,7 @@ Return ONLY this JSON structure, no text outside it:
         {
           "type": "primary | secondary | accessory",
           "order": 1,
+          "supersetGroup": "A | null",
           "movement": "string",
           "category": "GLUTES_HAMSTRINGS | UPPER_BACK_ERECTORS | QUAD_DOMINANT | PUSH | VERTICAL_PULL | UNILATERAL_LOWER | CORE | CARRIES_LOADED | ROTATOR_CUFF | GRIP | BALANCE | PLYOMETRIC",
           "isUnilateral": false,
@@ -435,6 +451,7 @@ Return ONLY this JSON structure, no text outside it:
 }
 
 Rules:
+- supersetGroup: assign matching letters ("A", "B", …) to exercises that should be performed as a superset (primary + secondary, or two secondaries); set to null for standalone exercises and ALL accessory exercises
 - type: exactly 1 "primary", then 1–2 "secondary", then 2–3 "accessory" exercises (in that order in the array)
 - Primary and secondary must target different muscle groups (no two hinges, no two squats, no two pushes)
 - category — use exactly these values:
@@ -531,6 +548,26 @@ Rules:
     const accessoryMinutes = Math.round(sum(byType.accessory,  60));
     const metconMinutes    = session.metcon?.timeMinutes ?? 15;
 
+    // Superset savings: each paired exercise saves (sets-1) × its own rest (the shared rest
+    // comes from the partner; only the max rest of the pair is used per round)
+    const allStrength = [...byType.primary, ...byType.secondary];
+    const seenGroups = new Set();
+    let supersetSavingsSec = 0;
+    for (const ex of allStrength) {
+      if (ex.supersetGroup && !seenGroups.has(ex.supersetGroup)) {
+        seenGroups.add(ex.supersetGroup);
+        const group = allStrength.filter(e => e.supersetGroup === ex.supersetGroup);
+        if (group.length > 1) {
+          const sets = group[0].sets || 3;
+          const rests = group.map(e => e.restSeconds || 90).sort((a, b) => b - a);
+          // Save (sets-1) × all rests except the longest (the one shared rest)
+          supersetSavingsSec += (sets - 1) * rests.slice(1).reduce((a, b) => a + b, 0);
+          supersetSavingsSec += 60; // one fewer transition per extra exercise in the pair
+        }
+      }
+    }
+    const supersetSavingsMinutes = Math.round(supersetSavingsSec / 60);
+
     return {
       warmupMinutes:    10,
       primaryMinutes,
@@ -538,7 +575,7 @@ Rules:
       accessoryMinutes,
       metconMinutes,
       mobilityMinutes:  8,
-      totalMinutes:     10 + primaryMinutes + secondaryMinutes + accessoryMinutes + metconMinutes + 8,
+      totalMinutes:     10 + primaryMinutes + secondaryMinutes + accessoryMinutes - supersetSavingsMinutes + metconMinutes + 8,
     };
   }
 
@@ -559,6 +596,7 @@ Rules:
       strength: (s.strength || []).map((e, j) => ({
         type:           ['primary','secondary','accessory'].includes(e.type) ? e.type : 'accessory',
         order:          e.order         ?? (j + 1),
+        supersetGroup:  e.supersetGroup || null,
         movement:       e.movement      || 'Unknown',
         category:       e.category      || '',
         isUnilateral:   e.isUnilateral  ?? false,

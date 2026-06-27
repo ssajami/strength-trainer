@@ -532,7 +532,7 @@ function renderWarmup(items) {
   return wrap;
 }
 
-function makeStrengthRow(ex, i) {
+function makeStrengthRow(ex, i, hideSupTag) {
   const load = ex.percentOfMax !== null ? resolveLoad(ex.movement, ex.percentOfMax) : null;
   const isAccessory = ex.type === 'accessory';
   const el = document.createElement('div');
@@ -545,11 +545,15 @@ function makeStrengthRow(ex, i) {
     if (saved) accLastUsedHtml = `<div class="acc-last-used">Last used: ${saved.kg} kg · ${fmtShortDate(saved.date)}</div>`;
   }
 
+  const ssTag = (!hideSupTag && ex.supersetGroup)
+    ? `<span class="pill pill-superset">SS:${ex.supersetGroup}</span>` : '';
+
   el.innerHTML = `
     <div class="ex-number">${i + 1}</div>
     <div class="ex-body">
       <div class="ex-name">
         ${ex.movement}
+        ${ssTag}
         ${ex.isUnilateral ? '<span class="pill pill-uni">Unilateral</span>' : ''}
         <span class="pill pill-cat">${ex.category}</span>
       </div>
@@ -570,36 +574,57 @@ function renderStrength(items, te) {
   const wrap = document.createElement('div');
   wrap.className = 'item-list';
 
-  // legacy 'main' (pre-3-tier) treated as primary for display
   const primary   = items.filter(e => e.type === 'primary' || e.type === 'main');
   const secondary = items.filter(e => e.type === 'secondary');
   const accessory = items.filter(e => e.type === 'accessory');
-  let offset = 0;
+  let idx = 0;
+
+  function renderTier(exs) {
+    const renderedGroups = new Set();
+    for (const ex of exs) {
+      if (ex.supersetGroup) {
+        if (renderedGroups.has(ex.supersetGroup)) continue;
+        renderedGroups.add(ex.supersetGroup);
+        const group = exs.filter(e => e.supersetGroup === ex.supersetGroup);
+        if (group.length > 1) {
+          const block = document.createElement('div');
+          block.className = 'superset-block';
+          const lbl = document.createElement('div');
+          lbl.className = 'superset-block-label';
+          lbl.textContent = `Superset ${ex.supersetGroup} — alternate sets, rest once`;
+          block.appendChild(lbl);
+          group.forEach(e => block.appendChild(makeStrengthRow(e, idx++, true)));
+          wrap.appendChild(block);
+        } else {
+          // Partner is in another tier — show SS tag on the solo row
+          wrap.appendChild(makeStrengthRow(ex, idx++, false));
+        }
+      } else {
+        wrap.appendChild(makeStrengthRow(ex, idx++, false));
+      }
+    }
+  }
 
   if (primary.length) {
     const label = document.createElement('p');
     label.className = 'strength-sublabel strength-sublabel-primary';
     label.textContent = te ? `Primary · ~${te.primaryMinutes} min` : 'Primary';
     wrap.appendChild(label);
-    primary.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, offset + i)));
-    offset += primary.length;
+    renderTier(primary);
   }
-
   if (secondary.length) {
     const label = document.createElement('p');
     label.className = 'strength-sublabel strength-sublabel-secondary';
     label.textContent = te ? `Secondary · ~${te.secondaryMinutes} min` : 'Secondary';
     wrap.appendChild(label);
-    secondary.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, offset + i)));
-    offset += secondary.length;
+    renderTier(secondary);
   }
-
   if (accessory.length) {
     const label = document.createElement('p');
     label.className = 'strength-sublabel strength-sublabel-acc';
     label.textContent = te ? `Accessory · ~${te.accessoryMinutes} min` : 'Accessory';
     wrap.appendChild(label);
-    accessory.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, offset + i)));
+    renderTier(accessory);
   }
 
   return wrap;
@@ -893,25 +918,63 @@ function exportToHTML() {
   }
 
   function buildStrengthRows(strength) {
-    const makeRow = (e, i) => {
+    const makeRow = (e, i, inBlock) => {
       const loadStr = rl(e.movement, e.percentOfMax);
       const typeCls = (e.type === 'primary' || e.type === 'main') ? 'ex-primary' : e.type === 'secondary' ? 'ex-secondary' : 'ex-acc';
+      const ssTag = (!inBlock && e.supersetGroup) ? ` <span class="tag ss-tag">SS:${e.supersetGroup}</span>` : '';
+      const ytTag = e.type === 'accessory' ? ` <a href="${ytUrl(e.movement)}" target="_blank" rel="noopener" class="yt-link">▶ Demo</a>` : '';
       return `<div class="ex ${typeCls}">
         <div class="ex-num">${i + 1}</div>
         <div class="ex-detail">
-          <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span>${e.type === 'accessory' ? ` <a href="${ytUrl(e.movement)}" target="_blank" rel="noopener" class="yt-link">▶ Demo</a>` : ''}</div>
+          <div class="ex-name">${e.movement}${ssTag}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span>${ytTag}</div>
           <div class="ex-rx">${e.sets} sets × ${e.reps} reps${loadStr ? ` &nbsp;·&nbsp; <strong class="load">${loadStr}</strong>` : ''}${e.restSeconds ? ` &nbsp;·&nbsp; <span class="rest">Rest ${fmtRest(e.restSeconds)}</span>` : ''}</div>
           ${e.coachingNotes ? `<div class="note">${e.coachingNotes}</div>` : ''}
         </div>
       </div>`;
     };
+
+    function renderTierHTML(exs, startIdx) {
+      const renderedGroups = new Set();
+      let html = '';
+      let idx = startIdx;
+      for (const ex of exs) {
+        if (ex.supersetGroup) {
+          if (renderedGroups.has(ex.supersetGroup)) continue;
+          renderedGroups.add(ex.supersetGroup);
+          const group = exs.filter(e => e.supersetGroup === ex.supersetGroup);
+          if (group.length > 1) {
+            html += `<div class="ex-superset-block"><div class="ex-superset-label">Superset ${ex.supersetGroup} — alternate sets, rest once</div>`;
+            group.forEach(e => { html += makeRow(e, idx++, true); });
+            html += '</div>';
+          } else {
+            html += makeRow(ex, idx++, false);
+          }
+        } else {
+          html += makeRow(ex, idx++, false);
+        }
+      }
+      return { html, idx };
+    }
+
     const primary   = strength.filter(e => e.type === 'primary' || e.type === 'main');
     const secondary = strength.filter(e => e.type === 'secondary');
     const acc       = strength.filter(e => e.type === 'accessory');
     let html = '';
-    if (primary.length)   html += `<p class="ex-sublabel ex-sublabel-primary">Primary</p>${primary.map((e, i) => makeRow(e, i)).join('')}`;
-    if (secondary.length) html += `<p class="ex-sublabel ex-sublabel-secondary">Secondary</p>${secondary.map((e, i) => makeRow(e, primary.length + i)).join('')}`;
-    if (acc.length)       html += `<p class="ex-sublabel ex-sublabel-acc">Accessory</p>${acc.map((e, i) => makeRow(e, primary.length + secondary.length + i)).join('')}`;
+    let idx = 0;
+    if (primary.length) {
+      const r = renderTierHTML(primary, idx);
+      html += `<p class="ex-sublabel ex-sublabel-primary">Primary</p>${r.html}`;
+      idx = r.idx;
+    }
+    if (secondary.length) {
+      const r = renderTierHTML(secondary, idx);
+      html += `<p class="ex-sublabel ex-sublabel-secondary">Secondary</p>${r.html}`;
+      idx = r.idx;
+    }
+    if (acc.length) {
+      const r = renderTierHTML(acc, idx);
+      html += `<p class="ex-sublabel ex-sublabel-acc">Accessory</p>${r.html}`;
+    }
     return html;
   }
 
@@ -1018,9 +1081,15 @@ function exportToHTML() {
   .ex-primary   { border-left: 4px solid var(--strength); padding-left: 10px; }
   .ex-secondary { border-left: 4px solid #0ea5e9; padding-left: 10px; }
   .ex-acc       { border-left: 3px solid #cbd5e1; padding-left: 10px; opacity: .88; }
-  .tag   { background: #f1f5f9; color: var(--muted); font-size: .7rem; font-weight: 700;
+  .tag     { background: #f1f5f9; color: var(--muted); font-size: .7rem; font-weight: 700;
     padding: 1px 6px; border-radius: 100px; text-transform: capitalize; }
   .tag.cat { }
+  .ss-tag  { background: #ccfbf1; color: #0f766e; font-weight: 700; }
+  .ex-superset-block { border-left: 4px solid #0891b2; background: rgba(8,145,178,.05);
+    border-radius: 0 10px 10px 0; margin-bottom: 10px; padding: 8px 0; }
+  .ex-superset-label { font-size: .65rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .07em; color: #0891b2; padding: 0 16px 6px 16px; }
+  .ex-superset-block .ex { border-left: none; }
   .yt-link { font-size: .72rem; font-weight: 700; color: #dc2626;
     text-decoration: none; background: #fef2f2; border: 1px solid #fecaca;
     border-radius: 100px; padding: 1px 7px; white-space: nowrap; }

@@ -792,8 +792,29 @@ textarea { resize: vertical; min-height: 80px; }
   white-space: nowrap;
   text-transform: capitalize;
 }
-.pill-uni { background: #dbeafe; color: #1e40af; }
-.pill-cat { background: var(--bg); color: var(--text-muted); }
+.pill-uni      { background: #dbeafe; color: #1e40af; }
+.pill-cat      { background: var(--bg); color: var(--text-muted); }
+.pill-superset { background: #ccfbf1; color: #0f766e; font-weight: 700; }
+
+/* ── Superset blocks ─────────────────────────────────────────────────────── */
+.superset-block {
+  border-left: 4px solid #0891b2;
+  background: rgba(8, 145, 178, 0.05);
+  border-radius: 0 10px 10px 0;
+  margin: 4px 0 8px 0;
+  padding: 8px 0;
+}
+.superset-block-label {
+  font-size: .65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: #0891b2;
+  padding: 0 12px 6px 14px;
+}
+.superset-block .strength-row {
+  border-left: none;
+}
 
 /* ── Metcon block ─────────────────────────────────────────────────────────── */
 .metcon-block { padding: var(--sp-md); }
