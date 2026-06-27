@@ -888,6 +888,10 @@ function exportToHTML() {
     return `${kg} kg <span class="pct">(${pct}% of ${max} kg)</span>`;
   }
 
+  function ytUrl(name) {
+    return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(name + ' exercise how to');
+  }
+
   function buildStrengthRows(strength) {
     const makeRow = (e, i) => {
       const loadStr = rl(e.movement, e.percentOfMax);
@@ -895,7 +899,7 @@ function exportToHTML() {
       return `<div class="ex ${typeCls}">
         <div class="ex-num">${i + 1}</div>
         <div class="ex-detail">
-          <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span></div>
+          <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span> <a href="${ytUrl(e.movement)}" target="_blank" rel="noopener" class="yt-link">▶ Demo</a></div>
           <div class="ex-rx">${e.sets} sets × ${e.reps} reps${loadStr ? ` &nbsp;·&nbsp; <strong class="load">${loadStr}</strong>` : ''}${e.restSeconds ? ` &nbsp;·&nbsp; <span class="rest">Rest ${fmtRest(e.restSeconds)}</span>` : ''}</div>
           ${e.coachingNotes ? `<div class="note">${e.coachingNotes}</div>` : ''}
         </div>
@@ -918,6 +922,7 @@ function exportToHTML() {
     const firstLabel = sessions[0]?.label || '';
     const weekDate = firstLabel.match(/starting (.+)$/)?.[1] || `Week ${w}`;
     const sessionsHTML = sessions.map(s => {
+      const te = ProgramGen.estimateSessionTimes(s);
       const warmupRows = (s.warmup || []).map(w => {
         const detail = [w.duration, w.reps != null ? `${w.reps} reps` : null].filter(Boolean).join(' · ');
         return `<li><strong>${w.name}</strong>${detail ? ` — ${detail}` : ''}${w.notes ? `<br><span class="note">${w.notes}</span>` : ''}</li>`;
@@ -928,7 +933,7 @@ function exportToHTML() {
       const metconMoves = (s.metcon.movements || []).map(m => {
         const qty = [m.reps ? `${m.reps} reps` : null, m.calories ? `${m.calories} cal` : null, m.distance || null].filter(Boolean).join('/');
         const right = [qty, m.load].filter(Boolean).join(' @ ');
-        return `<li><strong>${m.name}</strong>${right ? ` — ${right}` : ''}${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`;
+        return `<li><strong>${m.name}</strong>${right ? ` — ${right}` : ''} <a href="${ytUrl(m.name)}" target="_blank" rel="noopener" class="yt-link">▶</a>${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`;
       }).join('');
 
       const mobilityRows = (s.mobility || []).map(m =>
@@ -938,10 +943,14 @@ function exportToHTML() {
       return `<details class="session">
         <summary>
           <span class="s-label">${s.label}</span>
-          <span class="s-focus">${s.focus}</span>
+          <div class="s-summary-row">
+            <span class="s-focus">${s.focus}</span>
+            <span class="s-time-badge">~${te.totalMinutes} min</span>
+          </div>
           <span class="s-day">${s.suggestedDay}</span>
         </summary>
         <div class="s-body">
+          <div class="s-time-breakdown">~${te.totalMinutes} min total &nbsp;·&nbsp; Warm-up ${te.warmupMinutes} &nbsp;·&nbsp; Primary ~${te.primaryMinutes} &nbsp;·&nbsp; Secondary ~${te.secondaryMinutes} &nbsp;·&nbsp; Accessory ~${te.accessoryMinutes} &nbsp;·&nbsp; Metcon ${te.metconMinutes} &nbsp;·&nbsp; Mobility ${te.mobilityMinutes}</div>
           ${warmupRows ? `<section class="sec warmup-sec"><h3>🔥 Warm-Up</h3><ul>${warmupRows}</ul></section>` : ''}
           ${strengthRows ? `<section class="sec strength-sec"><h3>💪 Strength</h3><div class="ex-list">${strengthRows}</div></section>` : ''}
           <section class="sec metcon-sec">
@@ -982,22 +991,22 @@ function exportToHTML() {
     --warmup: #0ea5e9; --strength: #d97706; --metcon: #7c3aed; --mobility: #059669;
   }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.55;
+    background: var(--bg); color: var(--text); font-size: 17px; line-height: 1.55;
     padding: 16px; max-width: 680px; margin: 0 auto; }
-  h1 { font-size: 1.3rem; margin-bottom: 4px; }
-  h2 { font-size: 1.05rem; margin-bottom: 12px; }
-  h3 { font-size: .85rem; font-weight: 700; text-transform: uppercase;
+  h1 { font-size: 1.35rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; margin-bottom: 12px; }
+  h3 { font-size: .9rem; font-weight: 700; text-transform: uppercase;
     letter-spacing: .06em; margin-bottom: 10px; }
   p  { margin-bottom: 8px; }
   ul { padding-left: 18px; }
-  li { margin-bottom: 6px; font-size: .9rem; line-height: 1.45; }
-  .meta  { color: var(--muted); font-size: .875rem; margin-bottom: 6px; }
+  li { margin-bottom: 6px; font-size: .95rem; line-height: 1.5; }
+  .meta  { color: var(--muted); font-size: .9rem; margin-bottom: 6px; }
   .just  { color: var(--muted); font-size: .82rem; margin-bottom: 4px; }
   .note  { color: var(--muted); font-size: .8rem; font-style: italic; }
   .pct   { color: var(--muted); font-weight: 400; font-size: .85em; }
   .load  { color: var(--primary); }
   .rest  { color: var(--muted); font-size: .85em; }
-  .ex-sublabel { font-size: .65rem; font-weight: 800; text-transform: uppercase;
+  .ex-sublabel { font-size: .68rem; font-weight: 800; text-transform: uppercase;
     letter-spacing: .07em; margin: 0; padding: 7px 16px; display: block;
     border-left: 4px solid transparent; }
   .ex-sublabel-primary   { background: rgba(217,119,6,.12); color: #92400e;
@@ -1012,9 +1021,13 @@ function exportToHTML() {
   .tag   { background: #f1f5f9; color: var(--muted); font-size: .7rem; font-weight: 700;
     padding: 1px 6px; border-radius: 100px; text-transform: capitalize; }
   .tag.cat { }
-  .prog-title { font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 16px; }
+  .yt-link { font-size: .72rem; font-weight: 700; color: #dc2626;
+    text-decoration: none; background: #fef2f2; border: 1px solid #fecaca;
+    border-radius: 100px; padding: 1px 7px; white-space: nowrap; }
+  .yt-link:hover { background: #dc2626; color: #fff; }
+  .prog-title { font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 16px; }
   .week-block  { margin-bottom: 28px; }
-  .week-heading { font-size: 1rem; font-weight: 800; color: #0f172a;
+  .week-heading { font-size: 1.05rem; font-weight: 800; color: #0f172a;
     border-bottom: 2px solid var(--primary); padding-bottom: 6px; margin-bottom: 8px; }
   .week-date { font-weight: 400; color: var(--muted); font-size: .88rem; }
   .vol-summary { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
@@ -1029,10 +1042,16 @@ function exportToHTML() {
   }
   details.session summary::-webkit-details-marker { display: none; }
   details.session[open] summary { border-bottom: 1px solid var(--border); }
-  .s-label { font-weight: 700; font-size: .95rem; }
+  .s-label { font-weight: 700; font-size: 1rem; }
+  .s-summary-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .s-focus { display: inline-block; background: #fef9c3; color: #854d0e;
     font-size: .72rem; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
-  .s-day   { color: var(--muted); font-size: .8rem; }
+  .s-time-badge { font-size: .72rem; font-weight: 700; color: #475569;
+    background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 100px;
+    padding: 2px 8px; }
+  .s-day   { color: var(--muted); font-size: .82rem; }
+  .s-time-breakdown { font-size: .78rem; color: var(--muted); padding: 8px 16px;
+    background: #f8fafc; border-bottom: 1px solid var(--border); }
   .s-body  { padding: 0; }
   .sec { padding: 14px 16px; border-bottom: 1px solid var(--bg); }
   .sec:last-child { border-bottom: none; }
@@ -1053,27 +1072,28 @@ function exportToHTML() {
   .ex-secondary .ex-num { background: #0ea5e9; }
   .ex-acc .ex-num { background: #94a3b8; }
   .ex-detail { flex: 1; }
-  .ex-name { font-weight: 600; font-size: .95rem; margin-bottom: 4px;
+  .ex-name { font-weight: 600; font-size: 1rem; margin-bottom: 4px;
     display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
-  .ex-rx   { font-size: .9rem; margin-bottom: 4px; }
+  .ex-rx   { font-size: .95rem; margin-bottom: 4px; }
   .metcon-header-row { display: flex; justify-content: space-between; flex-wrap: wrap;
     gap: 6px; margin-bottom: 6px; align-items: baseline; }
-  .metcon-header-row strong { font-size: .95rem; }
+  .metcon-header-row strong { font-size: 1rem; }
   .m-format { background: #ede9fe; color: #5b21b6; font-size: .75rem;
     font-weight: 700; padding: 2px 8px; border-radius: 100px; }
   .metcon-desc { font-size: .85rem; color: var(--muted); margin-bottom: 8px; }
   @media (max-width: 640px) {
-    body { padding: 10px; font-size: 16px; }
+    body { padding: 12px; font-size: 17px; }
     .sec { padding: 12px 14px; }
     .ex  { padding: 0 12px; }
-    h3   { font-size: .9rem; margin-bottom: 8px; }
-    .ex-name { font-size: 1rem; }
-    .ex-rx   { font-size: .95rem; }
-    .note    { font-size: .85rem; }
+    h3   { font-size: .92rem; margin-bottom: 8px; }
+    .ex-name { font-size: 1.05rem; }
+    .ex-rx   { font-size: 1rem; }
+    .note    { font-size: .82rem; }
     .ex-sublabel { font-size: .72rem; padding: 8px 14px; }
     .ex-sublabel-secondary,
     .ex-sublabel-acc { margin-top: 10px; }
-    li { font-size: .95rem; }
+    li { font-size: 1rem; }
+    .s-time-breakdown { font-size: .8rem; }
   }
 </style>
 </head>
