@@ -307,8 +307,8 @@ Where primary and secondary exercises target non-competing muscle groups, pair t
 Rules:
 - Assign the same supersetGroup letter ("A", "B", …) to exercises that should be supersetted
 - Non-competing = different primary muscle group patterns (e.g. squat + row, hinge + push, press + pull)
-- Supersets must be pairs of exactly 2 exercises
-- Primary may be supersetted with one secondary when the primary is moderate-intensity (≤80% 1RM)
+- Groups can be 2 exercises (superset) or 3 exercises (tri-set) — never 4+
+- Primary may be supersetted with one or both secondaries when the primary is moderate-intensity (≤80% 1RM)
   Do NOT superset a max-effort or near-max primary set (>85% 1RM) — full neural recovery required
 - Two secondary exercises may be supersetted if they target non-competing groups
 - Accessory exercises are NEVER given a supersetGroup
