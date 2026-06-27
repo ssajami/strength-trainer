@@ -899,7 +899,7 @@ function exportToHTML() {
       return `<div class="ex ${typeCls}">
         <div class="ex-num">${i + 1}</div>
         <div class="ex-detail">
-          <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span> <a href="${ytUrl(e.movement)}" target="_blank" rel="noopener" class="yt-link">▶ Demo</a></div>
+          <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span>${e.type === 'accessory' ? ` <a href="${ytUrl(e.movement)}" target="_blank" rel="noopener" class="yt-link">▶ Demo</a>` : ''}</div>
           <div class="ex-rx">${e.sets} sets × ${e.reps} reps${loadStr ? ` &nbsp;·&nbsp; <strong class="load">${loadStr}</strong>` : ''}${e.restSeconds ? ` &nbsp;·&nbsp; <span class="rest">Rest ${fmtRest(e.restSeconds)}</span>` : ''}</div>
           ${e.coachingNotes ? `<div class="note">${e.coachingNotes}</div>` : ''}
         </div>
@@ -937,7 +937,7 @@ function exportToHTML() {
       }).join('');
 
       const mobilityRows = (s.mobility || []).map(m =>
-        `<li><strong>${m.name}</strong> — ${m.duration}${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`
+        `<li><strong>${m.name}</strong> — ${m.duration} <a href="${ytUrl(m.name)}" target="_blank" rel="noopener" class="yt-link">▶ Demo</a>${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`
       ).join('');
 
       return `<details class="session">
