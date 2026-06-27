@@ -311,7 +311,7 @@ Rules:
 - Primary may be supersetted with one or both secondaries when the primary is moderate-intensity (≤80% 1RM)
   Do NOT superset a max-effort or near-max primary set (>85% 1RM) — full neural recovery required
 - Two secondary exercises may be supersetted if they target non-competing groups
-- Accessory exercises are NEVER given a supersetGroup
+- Accessory exercises may also be supersetted with each other when they target non-competing muscles (e.g. face pull + tricep extension, single-leg RDL + lateral raise)
 - Standalone exercises (not in a superset) get supersetGroup: null
 - Each exercise's restSeconds still reflects the desired rest for that movement; the app handles timing
   3. METCON (10–20 min, CrossFit-style — see allowed movements below)
@@ -451,7 +451,7 @@ Return ONLY this JSON structure, no text outside it:
 }
 
 Rules:
-- supersetGroup: assign matching letters ("A", "B", …) to exercises that should be performed as a superset (primary + secondary, or two secondaries); set to null for standalone exercises and ALL accessory exercises
+- supersetGroup: assign matching letters ("A", "B", …) to exercises that should be performed as a superset; applies to any tier — primary, secondary, or accessory; set to null for standalone exercises
 - type: exactly 1 "primary", then 1–2 "secondary", then 2–3 "accessory" exercises (in that order in the array)
 - Primary and secondary must target different muscle groups (no two hinges, no two squats, no two pushes)
 - category — use exactly these values:
