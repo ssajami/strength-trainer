@@ -474,6 +474,15 @@ function renderSessionDetail(session) {
   root.appendChild(badge(session.focus, 'focus-badge'));
 
   const te = getTimeEstimates(session);
+  const timeSummary = document.createElement('div');
+  timeSummary.className = 'session-time-summary';
+  timeSummary.innerHTML = `
+    <span class="session-total-time">~${te.totalMinutes} min</span>
+    <span class="session-time-breakdown">
+      Warm-up ${te.warmupMinutes} · Primary ~${te.primaryMinutes} · Secondary ~${te.secondaryMinutes} · Accessory ~${te.accessoryMinutes} · Metcon ${te.metconMinutes} · Mobility ${te.mobilityMinutes}
+    </span>
+  `;
+  root.appendChild(timeSummary);
   if (session.warmup?.length)   root.appendChild(mkSection(`🔥 Warm-Up · ~${te.warmupMinutes} min`,            renderWarmup(session.warmup),          'warmup'));
   if (session.strength?.length) root.appendChild(mkSection('💪 Strength',                                       renderStrength(session.strength, te),   'strength'));
   root.appendChild(mkSection(`⚡ Metcon · ~${te.metconMinutes} min`,                                            renderMetcon(session.metcon),           'metcon'));
