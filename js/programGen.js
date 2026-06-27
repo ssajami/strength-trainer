@@ -104,6 +104,10 @@ const ProgramGen = (() => {
     'BB strict press':            { pattern:'vertical_push',     modality:'weightlifting',  equipment:'barbell',    unilateral:false, ends_overhead:true,  risk_flags:['overhead','mobility'],              spawnWeight:2 },
     'BB front rack lunge':        { pattern:'lunge',             modality:'weightlifting',  equipment:'barbell',    unilateral:true,  ends_overhead:false, risk_flags:['mobility'],                        spawnWeight:3 },
     'BB overhead lunge':          { pattern:'lunge',             modality:'weightlifting',  equipment:'barbell',    unilateral:true,  ends_overhead:true,  risk_flags:['overhead','mobility'],              spawnWeight:2 },
+    'DB bench press':             { pattern:'horizontal_push',   modality:'weightlifting',  equipment:'db',         unilateral:false, ends_overhead:false, risk_flags:[],                                  spawnWeight:3 },
+    'BB bench press':             { pattern:'horizontal_push',   modality:'weightlifting',  equipment:'barbell',    unilateral:false, ends_overhead:false, risk_flags:[],                                  spawnWeight:3 },
+    'DB incline press':           { pattern:'horizontal_push',   modality:'weightlifting',  equipment:'db',         unilateral:false, ends_overhead:false, risk_flags:[],                                  spawnWeight:3 },
+    'BB incline press':           { pattern:'horizontal_push',   modality:'weightlifting',  equipment:'barbell',    unilateral:false, ends_overhead:false, risk_flags:[],                                  spawnWeight:3 },
   };
 
   function buildMetconMovementPrompt() {
