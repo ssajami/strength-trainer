@@ -59,7 +59,7 @@ function closeSettings() {
 
 function clearAllData() {
   if (!confirm('Delete all programs, max loads, and settings?\n\nThis cannot be undone.')) return;
-  ['spt_profile','spt_max_loads','spt_programs','spt_last_comments'].forEach(k => localStorage.removeItem(k));
+  ['spt_profile','spt_max_loads','spt_accessory_loads','spt_programs','spt_last_comments'].forEach(k => localStorage.removeItem(k));
   currentProgram = null;
   closeSettings();
   hide($('current-program-card'));
@@ -171,10 +171,11 @@ async function handleGenerate() {
 
   const params = {
     profile,
-    maxLoads:        Storage.getMaxLoads(),
-    previousProgram: Storage.getCurrentProgram(),
-    comments:        $('previous-comments').value.trim(),
-    weeks:           parseInt($('program-weeks').value),
+    maxLoads:         Storage.getMaxLoads(),
+    accessoryLoads:   Storage.getAccessoryLoads(),
+    previousProgram:  Storage.getCurrentProgram(),
+    comments:         $('previous-comments').value.trim(),
+    weeks:            parseInt($('program-weeks').value),
     progressionModel: $('progression-model').value,
     startDate,
   };
@@ -226,50 +227,131 @@ function renderProgramView() {
   $('prog-name').textContent = currentProgram.programName;
   $('prog-meta').textContent =
     `${currentProgram.progressionModel} · ${currentProgram.weeks} weeks · starts ${fmtDate(currentProgram.startDate)}`;
-  renderVolumeAudit();
   renderWeek(currentWeek);
   showScreen('program-screen');
 }
 
 function renderVolumeAudit() {
   const el = $('volume-audit');
-  if (!el) return;
-  const audit = currentProgram?.volumeAudit;
-  if (!audit?.length) { el.innerHTML = ''; return; }
+  if (!el || !currentProgram) return;
 
-  const flagged = audit.filter(a => a.flag || a.meetsTarget === false || a.anySessionOver5);
-  const rows = audit.map(a => {
-    const bad = a.meetsTarget === false || a.anySessionOver5;
-    const warn = a.flag && !bad;
+  // ── Session load breakdown (computed from actual session data) ──────────────
+  const weekSessions = currentProgram.sessions.filter(s => s.week === currentWeek);
+  const sessionLoads = weekSessions.map((s, i) => {
+    const sum = (...types) => (s.strength || []).filter(e => types.includes(e.type)).reduce((n, e) => n + (e.sets || 0), 0);
+    const primary   = sum('primary', 'main');
+    const secondary = sum('secondary');
+    const accessory = sum('accessory');
+    const total  = primary + secondary + accessory;
+    const secAcc = secondary + accessory;
+    return { label: s.suggestedDay || `Session ${i + 1}`, primary, secondary, accessory, total, secAcc, flagged: secAcc > 15 };
+  });
+  const anyLoadFlagged = sessionLoads.some(s => s.flagged);
+  const loadRows = sessionLoads.map(s => `
+    <tr class="${s.flagged ? 'audit-fail' : ''}">
+      <td>${s.label}</td>
+      <td>${s.primary}</td>
+      <td>${s.secondary}</td>
+      <td>${s.accessory}</td>
+      <td><strong>${s.total}</strong></td>
+      <td class="audit-flag-cell">${s.flagged ? `⚠ Sec+Acc = ${s.secAcc}` : ''}</td>
+    </tr>`).join('');
+
+  // ── Muscle group volume — fully client-computed ────────────────────────────
+  const TARGETS = [
+    { cat: 'GLUTES_HAMSTRINGS',   label: '10–12', min: 10, max: 12 },
+    { cat: 'UPPER_BACK_ERECTORS', label: '8–10',  min: 8,  max: 10 },
+    { cat: 'QUAD_DOMINANT',       label: '8–10',  min: 8,  max: 10 },
+    { cat: 'PUSH',                label: '6–8',   min: 6,  max: 8  },
+    { cat: 'VERTICAL_PULL',       label: '6–8',   min: 6,  max: 8  },
+    { cat: 'UNILATERAL_LOWER',    label: '6/leg', min: 6,  max: null },
+    { cat: 'CORE',                label: '4–6',   min: 4,  max: 6  },
+    { cat: 'CARRIES_LOADED',      label: '1–2×',  min: 1,  max: 2, presence: true },
+  ];
+
+  // Per-session set counts by category.
+  // CORE and UNILATERAL_LOWER count all tiers; everything else counts primary + secondary only.
+  const ALL_TIERS = new Set(['CORE', 'UNILATERAL_LOWER']);
+  const catSets = {};
+  weekSessions.forEach((s, si) => {
+    (s.strength || []).forEach(e => {
+      const cat = e.category;
+      if (!cat) return;
+      if (!ALL_TIERS.has(cat) && !['primary', 'main', 'secondary'].includes(e.type)) return;
+      if (!catSets[cat]) catSets[cat] = Array(weekSessions.length).fill(0);
+      catSets[cat][si] += (e.sets || 0);
+    });
+    // Carries: count presence across all tiers
+    if ((s.strength || []).some(e => e.category === 'CARRIES_LOADED')) {
+      if (!catSets['CARRIES_LOADED']) catSets['CARRIES_LOADED'] = Array(weekSessions.length).fill(0);
+      catSets['CARRIES_LOADED'][si] = 1;
+    }
+  });
+
+  const groupRows = TARGETS.map(t => {
+    const breakdown = catSets[t.cat] || Array(weekSessions.length).fill(0);
+    const total = breakdown.reduce((n, x) => n + x, 0);
+    const meetsTarget = total >= t.min;
+    const overMax = t.max !== null && total > t.max;
+    const bad  = !meetsTarget;
+    const warn = overMax && !bad;
+    const flag = bad  ? `${total} of ${t.min} required`
+               : warn ? `${total} exceeds max ${t.max}`
+               : '';
+    const bdStr = `<span class="audit-breakdown">${breakdown.join(' / ')}</span>`;
+    const setDisplay = t.presence
+      ? (total >= 1 ? `✓ present ${bdStr}` : `✗ missing`)
+      : `${total} ${bdStr}`;
     return `<tr class="${bad ? 'audit-fail' : warn ? 'audit-warn' : ''}">
-      <td>${catLabel(a.muscleGroup)}</td>
-      <td>${a.weeklyTarget}</td>
-      <td>${a.weeklySetsProgrammed ?? '—'}</td>
-      <td>${a.meetsTarget === true ? '✓' : a.meetsTarget === false ? '✗' : '—'}</td>
-      <td>${a.flag || ''}</td>
+      <td>${catLabel(t.cat)}</td>
+      <td>${t.label}</td>
+      <td>${setDisplay}</td>
+      <td>${meetsTarget ? '✓' : '✗'}</td>
+      <td class="audit-flag-cell">${flag}</td>
     </tr>`;
   }).join('');
 
+  const flaggedGroupCount = TARGETS.filter(t => {
+    const total = (catSets[t.cat] || []).reduce((n, x) => n + x, 0);
+    return total < t.min || (t.max !== null && total > t.max);
+  }).length;
+  const totalFlags = (anyLoadFlagged ? 1 : 0) + flaggedGroupCount;
+  const badgeTxt = totalFlags
+    ? `<span class="audit-badge audit-badge-warn">${totalFlags} flag${totalFlags > 1 ? 's' : ''}</span>`
+    : '<span class="audit-badge audit-badge-ok">all targets met</span>';
+
   el.innerHTML = `
-    <details class="audit-details"${flagged.length ? ' open' : ''}>
-      <summary class="audit-summary">
-        Volume audit ${flagged.length ? `<span class="audit-badge audit-badge-warn">${flagged.length} flag${flagged.length > 1 ? 's' : ''}</span>` : '<span class="audit-badge audit-badge-ok">all targets met</span>'}
-      </summary>
+    <details class="audit-details"${totalFlags ? ' open' : ''}>
+      <summary class="audit-summary">Volume audit ${badgeTxt}</summary>
+
+      <p class="audit-section-label">Session load — Week ${currentWeek}</p>
       <table class="audit-table">
-        <thead><tr><th>Muscle group</th><th>Target</th><th>Sets</th><th>Met?</th><th>Flag</th></tr></thead>
-        <tbody>${rows}</tbody>
+        <thead><tr><th>Session</th><th>Primary</th><th>Secondary</th><th>Accessory</th><th>Total</th><th>Flag</th></tr></thead>
+        <tbody>${loadRows}</tbody>
       </table>
+
+      ${groupRows ? `
+      <p class="audit-section-label">Weekly volume by muscle group</p>
+      <table class="audit-table">
+        <thead><tr><th>Muscle group</th><th>Target</th><th>Sets (S1/S2/S3)</th><th>Met?</th><th>Flag</th></tr></thead>
+        <tbody>${groupRows}</tbody>
+      </table>` : ''}
     </details>`;
 }
 
+const ALL_TIERS_CATS = new Set(['CORE', 'UNILATERAL_LOWER']);
+
 function calcWeekVolume(sessions) {
   const totals = {};
-  sessions.forEach(s =>
-    (s.strength || []).filter(e => e.type === 'main').forEach(e => {
+  sessions.forEach(s => {
+    (s.strength || []).forEach(e => {
       const cat = e.category || 'other';
+      if (!ALL_TIERS_CATS.has(cat) && !['primary', 'main', 'secondary'].includes(e.type)) return;
       totals[cat] = (totals[cat] || 0) + (e.sets || 0);
-    })
-  );
+    });
+    if ((s.strength || []).some(e => e.category === 'CARRIES_LOADED'))
+      totals['CARRIES_LOADED'] = (totals['CARRIES_LOADED'] || 0) + 1;
+  });
   return totals;
 }
 
@@ -301,6 +383,7 @@ function renderWeek(week) {
   $('week-label').textContent = `Week ${week} of ${currentProgram.weeks}`;
   $('prev-week-btn').disabled = week <= 1;
   $('next-week-btn').disabled = week >= currentProgram.weeks;
+  renderVolumeAudit();
 
   const sessions = currentProgram.sessions.filter(s => s.week === week);
 
@@ -330,18 +413,32 @@ function makeSessionCard(session) {
   const card = document.createElement('div');
   card.className = 'session-card card';
 
-  const mainMoves = (session.strength || []).filter(e => e.type === 'main');
-  const accCount  = (session.strength || []).filter(e => e.type !== 'main').length;
-  const preview = mainMoves.map(e => {
+  const primaryMove    = (session.strength || []).find(e => e.type === 'primary' || e.type === 'main');
+  const secondaryMoves = (session.strength || []).filter(e => e.type === 'secondary');
+  const accCount     = (session.strength || []).filter(e => e.type === 'accessory').length;
+
+  const makePreviewRow = (e, cls = '') => {
     const load = e.percentOfMax !== null ? resolveLoad(e.movement, e.percentOfMax) : null;
-    return `<div class="preview-row">
+    return `<div class="preview-row${cls ? ' ' + cls : ''}">
       <span class="preview-name">${e.movement}${e.isUnilateral ? ' <em>(unilateral)</em>' : ''}</span>
       <span class="preview-rx">${e.sets}×${e.reps}${load ? ` @ ${load}` : ''}</span>
     </div>`;
-  }).join('');
+  };
 
-  const more = accCount > 0
-    ? `<p class="more-hint">+ ${accCount} accessory exercise${accCount > 1 ? 's' : ''}</p>` : '';
+  const primaryBlock = primaryMove ? `
+    <p class="preview-tier-label preview-tier-primary">Primary</p>
+    ${makePreviewRow(primaryMove, 'preview-primary')}` : '';
+
+  const secondaryBlock = secondaryMoves.length ? `
+    <p class="preview-tier-label preview-tier-secondary">Secondary</p>
+    ${secondaryMoves.map(e => makePreviewRow(e, 'preview-secondary')).join('')}` : '';
+
+  const accessoryBlock = accCount > 0 ? `
+    <p class="preview-tier-label preview-tier-acc">Accessory</p>
+    <p class="more-hint">+ ${accCount} exercise${accCount > 1 ? 's' : ''}</p>` : '';
+
+  const preview = primaryBlock + secondaryBlock + accessoryBlock;
+  const more = '';
 
   card.innerHTML = `
     <div class="card-top">
@@ -355,7 +452,7 @@ function makeSessionCard(session) {
       <span>${session.strength.length} exercises · ${totalSets} sets</span>
       <span class="metcon-chip">${session.metcon.format || 'Metcon'} ${session.metcon.timeMinutes} min</span>
     </div>
-    <div class="strength-preview">${preview}${more}</div>
+    <div class="strength-preview">${preview}</div>
     <button class="btn btn-primary btn-sm open-session-btn" data-id="${session.sessionNumber}">
       View full session →
     </button>
@@ -374,10 +471,10 @@ function renderSessionDetail(session) {
 
   root.appendChild(badge(session.focus, 'focus-badge'));
 
-  if (session.warmup?.length)   root.appendChild(mkSection('🔥 Warm-Up',           renderWarmup(session.warmup)));
-  if (session.strength?.length) root.appendChild(mkSection('💪 Strength',           renderStrength(session.strength)));
-  root.appendChild(mkSection('⚡ Metcon',          renderMetcon(session.metcon)));
-  if (session.mobility?.length) root.appendChild(mkSection('🧘 Mobility & Cooldown', renderMobility(session.mobility)));
+  if (session.warmup?.length)   root.appendChild(mkSection('🔥 Warm-Up',           renderWarmup(session.warmup),    'warmup'));
+  if (session.strength?.length) root.appendChild(mkSection('💪 Strength',           renderStrength(session.strength), 'strength'));
+  root.appendChild(mkSection('⚡ Metcon',          renderMetcon(session.metcon),    'metcon'));
+  if (session.mobility?.length) root.appendChild(mkSection('🧘 Mobility & Cooldown', renderMobility(session.mobility), 'mobility'));
 
   showScreen('session-screen');
 }
@@ -389,9 +486,9 @@ function badge(text, cls) {
   return el;
 }
 
-function mkSection(title, content) {
+function mkSection(title, content, type) {
   const sec = document.createElement('div');
-  sec.className = 'session-section';
+  sec.className = type ? `session-section section-${type}` : 'session-section';
   const h = document.createElement('h3');
   h.className = 'section-title';
   h.textContent = title;
@@ -419,8 +516,27 @@ function renderWarmup(items) {
 
 function makeStrengthRow(ex, i) {
   const load = ex.percentOfMax !== null ? resolveLoad(ex.movement, ex.percentOfMax) : null;
+  const isAccessory = ex.type === 'accessory';
   const el = document.createElement('div');
-  el.className = `item-row strength-row${ex.type === 'main' ? ' strength-main' : ' strength-accessory'}`;
+  const typeCls = (ex.type === 'primary' || ex.type === 'main') ? ' strength-primary' : ex.type === 'secondary' ? ' strength-secondary' : ' strength-accessory';
+  el.className = `item-row strength-row${typeCls}`;
+
+  let accTrackerHtml = '';
+  if (isAccessory) {
+    const saved = Storage.getAccessoryLoad(ex.movement);
+    const lastUsedHtml = saved
+      ? `<span class="acc-last-used">Last used: ${saved.kg} kg · ${fmtShortDate(saved.date)}</span>`
+      : '';
+    accTrackerHtml = `
+      <div class="acc-weight-tracker">
+        ${lastUsedHtml}
+        <div class="acc-weight-log">
+          <input type="number" class="acc-weight-input" placeholder="Log kg used today" min="0" step="0.5"${saved ? ` value="${saved.kg}"` : ''}>
+          <button class="btn-xs acc-save-btn">Save</button>
+        </div>
+      </div>`;
+  }
+
   el.innerHTML = `
     <div class="ex-number">${i + 1}</div>
     <div class="ex-body">
@@ -435,8 +551,30 @@ function makeStrengthRow(ex, i) {
         ${fmtRest(ex.restSeconds) ? `<span class="rest-val">Rest ${fmtRest(ex.restSeconds)}</span>` : ''}
       </div>
       ${ex.coachingNotes ? `<div class="coaching-notes">${ex.coachingNotes}</div>` : ''}
+      ${accTrackerHtml}
     </div>
   `;
+
+  if (isAccessory) {
+    el.querySelector('.acc-save-btn').addEventListener('click', () => {
+      const input = el.querySelector('.acc-weight-input');
+      const kg = parseFloat(input.value);
+      if (isNaN(kg) || kg <= 0) { toast('Enter a valid weight', 'error'); return; }
+      Storage.setAccessoryLoad(ex.movement, kg);
+      const today = new Date().toISOString().split('T')[0];
+      let lastUsed = el.querySelector('.acc-last-used');
+      if (lastUsed) {
+        lastUsed.textContent = `Last used: ${kg} kg · ${fmtShortDate(today)}`;
+      } else {
+        lastUsed = document.createElement('span');
+        lastUsed.className = 'acc-last-used';
+        lastUsed.textContent = `Last used: ${kg} kg · ${fmtShortDate(today)}`;
+        el.querySelector('.acc-weight-tracker').prepend(lastUsed);
+      }
+      toast(`Saved ${kg} kg for ${ex.movement}`, 'success');
+    });
+  }
+
   return el;
 }
 
@@ -444,23 +582,36 @@ function renderStrength(items) {
   const wrap = document.createElement('div');
   wrap.className = 'item-list';
 
-  const main      = items.filter(e => e.type === 'main');
-  const accessory = items.filter(e => e.type !== 'main');
+  // legacy 'main' (pre-3-tier) treated as primary for display
+  const primary   = items.filter(e => e.type === 'primary' || e.type === 'main');
+  const secondary = items.filter(e => e.type === 'secondary');
+  const accessory = items.filter(e => e.type === 'accessory');
+  let offset = 0;
 
-  if (main.length) {
+  if (primary.length) {
     const label = document.createElement('p');
-    label.className = 'strength-sublabel';
-    label.textContent = 'Main Work';
+    label.className = 'strength-sublabel strength-sublabel-primary';
+    label.textContent = 'Primary';
     wrap.appendChild(label);
-    main.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, i)));
+    primary.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, offset + i)));
+    offset += primary.length;
+  }
+
+  if (secondary.length) {
+    const label = document.createElement('p');
+    label.className = 'strength-sublabel strength-sublabel-secondary';
+    label.textContent = 'Secondary';
+    wrap.appendChild(label);
+    secondary.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, offset + i)));
+    offset += secondary.length;
   }
 
   if (accessory.length) {
     const label = document.createElement('p');
     label.className = 'strength-sublabel strength-sublabel-acc';
-    label.textContent = 'Accessory Work';
+    label.textContent = 'Accessory';
     wrap.appendChild(label);
-    accessory.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, main.length + i)));
+    accessory.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, offset + i)));
   }
 
   return wrap;
@@ -633,7 +784,8 @@ function exportToHTML() {
   function buildStrengthRows(strength) {
     const makeRow = (e, i) => {
       const loadStr = rl(e.movement, e.percentOfMax);
-      return `<div class="ex${e.type === 'main' ? ' ex-main' : ' ex-acc'}">
+      const typeCls = (e.type === 'primary' || e.type === 'main') ? 'ex-primary' : e.type === 'secondary' ? 'ex-secondary' : 'ex-acc';
+      return `<div class="ex ${typeCls}">
         <div class="ex-num">${i + 1}</div>
         <div class="ex-detail">
           <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span></div>
@@ -642,51 +794,15 @@ function exportToHTML() {
         </div>
       </div>`;
     };
-    const main = strength.filter(e => e.type === 'main');
-    const acc  = strength.filter(e => e.type !== 'main');
-    return [
-      main.length ? `<p class="ex-sublabel">Main Work</p>${main.map((e, i) => makeRow(e, i)).join('')}` : '',
-      acc.length  ? `<p class="ex-sublabel ex-sublabel-acc">Accessory Work</p>${acc.map((e, i) => makeRow(e, main.length + i)).join('')}` : '',
-    ].join('');
+    const primary   = strength.filter(e => e.type === 'primary' || e.type === 'main');
+    const secondary = strength.filter(e => e.type === 'secondary');
+    const acc       = strength.filter(e => e.type === 'accessory');
+    let html = '';
+    if (primary.length)   html += `<p class="ex-sublabel ex-sublabel-primary">Primary</p>${primary.map((e, i) => makeRow(e, i)).join('')}`;
+    if (secondary.length) html += `<p class="ex-sublabel ex-sublabel-secondary">Secondary</p>${secondary.map((e, i) => makeRow(e, primary.length + i)).join('')}`;
+    if (acc.length)       html += `<p class="ex-sublabel ex-sublabel-acc">Accessory</p>${acc.map((e, i) => makeRow(e, primary.length + secondary.length + i)).join('')}`;
+    return html;
   }
-
-  const sessionHTML = currentProgram.sessions.map(s => {
-    const warmupRows = (s.warmup || []).map(w => {
-      const detail = [w.duration, w.reps != null ? `${w.reps} reps` : null].filter(Boolean).join(' · ');
-      return `<li><strong>${w.name}</strong>${detail ? ` — ${detail}` : ''}${w.notes ? `<br><span class="note">${w.notes}</span>` : ''}</li>`;
-    }).join('');
-
-    const strengthRows = buildStrengthRows(s.strength || []);
-
-    const metconMoves = (s.metcon.movements || []).map(m => {
-      const qty = [m.reps ? `${m.reps} reps` : null, m.calories ? `${m.calories} cal` : null, m.distance || null].filter(Boolean).join('/');
-      const right = [qty, m.load].filter(Boolean).join(' @ ');
-      return `<li><strong>${m.name}</strong>${right ? ` — ${right}` : ''}${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`;
-    }).join('');
-
-    const mobilityRows = (s.mobility || []).map(m =>
-      `<li><strong>${m.name}</strong> — ${m.duration}${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`
-    ).join('');
-
-    return `<details class="session" open>
-      <summary>
-        <span class="s-label">${s.label}</span>
-        <span class="s-focus">${s.focus}</span>
-        <span class="s-day">${s.suggestedDay}</span>
-      </summary>
-      <div class="s-body">
-        ${warmupRows ? `<section class="sec warmup-sec"><h3>🔥 Warm-Up</h3><ul>${warmupRows}</ul></section>` : ''}
-        ${strengthRows ? `<section class="sec strength-sec"><h3>💪 Strength</h3><div class="ex-list">${strengthRows}</div></section>` : ''}
-        <section class="sec metcon-sec">
-          <h3>⚡ Metcon</h3>
-          <div class="metcon-header-row"><strong>${s.metcon.name}</strong> <span class="m-format">${s.metcon.format} · ${s.metcon.timeMinutes} min</span></div>
-          <p class="metcon-desc">${s.metcon.description}</p>
-          ${metconMoves ? `<ul>${metconMoves}</ul>` : ''}
-        </section>
-        ${mobilityRows ? `<section class="sec mobility-sec"><h3>🧘 Mobility & Cooldown</h3><ul>${mobilityRows}</ul></section>` : ''}
-      </div>
-    </details>`;
-  }).join('');
 
   // Group sessions by week for the nav/headings
   const weeks = [...new Set(currentProgram.sessions.map(s => s.week))].sort((a, b) => a - b);
@@ -700,17 +816,7 @@ function exportToHTML() {
         return `<li><strong>${w.name}</strong>${detail ? ` — ${detail}` : ''}${w.notes ? `<br><span class="note">${w.notes}</span>` : ''}</li>`;
       }).join('');
 
-      const strengthRows = (s.strength || []).map((e, i) => {
-        const loadStr = rl(e.movement, e.percentOfMax);
-        return `<div class="ex">
-          <div class="ex-num">${i + 1}</div>
-          <div class="ex-detail">
-            <div class="ex-name">${e.movement}${e.isUnilateral ? ' <span class="tag">Unilateral</span>' : ''} <span class="tag cat">${e.category}</span></div>
-            <div class="ex-rx">${e.sets} sets × ${e.reps} reps${loadStr ? ` &nbsp;·&nbsp; <strong class="load">${loadStr}</strong>` : ''}${e.restSeconds ? ` &nbsp;·&nbsp; <span class="rest">Rest ${fmtRest(e.restSeconds)}</span>` : ''}</div>
-            ${e.coachingNotes ? `<div class="note">${e.coachingNotes}</div>` : ''}
-          </div>
-        </div>`;
-      }).join('');
+      const strengthRows = buildStrengthRows(s.strength || []);
 
       const metconMoves = (s.metcon.movements || []).map(m => {
         const qty = [m.reps ? `${m.reps} reps` : null, m.calories ? `${m.calories} cal` : null, m.distance || null].filter(Boolean).join('/');
@@ -784,13 +890,18 @@ function exportToHTML() {
   .pct   { color: var(--muted); font-weight: 400; font-size: .85em; }
   .load  { color: var(--primary); }
   .rest  { color: var(--muted); font-size: .85em; }
-  .ex-sublabel { font-size: .7rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .06em; color: var(--strength); margin: 12px 0 6px; }
-  .ex-sublabel:first-child { margin-top: 0; }
-  .ex-sublabel-acc { color: var(--muted); border-top: 1px solid #e2e8f0;
-    padding-top: 12px; margin-top: 16px; }
-  .ex-main { border-left: 3px solid var(--strength); padding-left: 10px; }
-  .ex-acc  { border-left: 3px solid #e2e8f0; padding-left: 10px; opacity: .9; }
+  .ex-sublabel { font-size: .65rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .07em; margin: 0; padding: 7px 16px; display: block;
+    border-left: 4px solid transparent; }
+  .ex-sublabel-primary   { background: rgba(217,119,6,.12); color: #92400e;
+    border-left-color: #d97706; }
+  .ex-sublabel-secondary { background: rgba(14,165,233,.12); color: #0369a1;
+    border-left-color: #0ea5e9; margin-top: 8px; border-top: 2px solid rgba(14,165,233,.25); }
+  .ex-sublabel-acc { background: #f1f5f9; color: #475569;
+    border-left-color: #94a3b8; margin-top: 8px; border-top: 2px solid #e2e8f0; }
+  .ex-primary   { border-left: 4px solid var(--strength); padding-left: 10px; }
+  .ex-secondary { border-left: 4px solid #0ea5e9; padding-left: 10px; }
+  .ex-acc       { border-left: 3px solid #cbd5e1; padding-left: 10px; opacity: .88; }
   .tag   { background: #f1f5f9; color: var(--muted); font-size: .7rem; font-weight: 700;
     padding: 1px 6px; border-radius: 100px; text-transform: capitalize; }
   .tag.cat { }
@@ -818,26 +929,45 @@ function exportToHTML() {
   .s-body  { padding: 0; }
   .sec { padding: 14px 16px; border-bottom: 1px solid var(--bg); }
   .sec:last-child { border-bottom: none; }
-  .warmup-sec   h3 { color: var(--warmup);   border-left: 3px solid var(--warmup);   padding-left: 8px; }
-  .strength-sec h3 { color: var(--strength); border-left: 3px solid var(--strength); padding-left: 8px; }
-  .metcon-sec   h3 { color: var(--metcon);   border-left: 3px solid var(--metcon);   padding-left: 8px; }
-  .mobility-sec h3 { color: var(--mobility); border-left: 3px solid var(--mobility); padding-left: 8px; }
-  .ex-list { display: flex; flex-direction: column; gap: 10px; }
-  .ex { display: flex; gap: 12px; align-items: flex-start; }
-  .ex-num { width: 26px; height: 26px; background: var(--strength); color: #fff;
-    border-radius: 50%; font-size: .78rem; font-weight: 700; display: flex;
+  .warmup-sec   { background: #f0f9ff; }
+  .strength-sec { background: #fffbeb; }
+  .metcon-sec   { background: #ede9fe; }
+  .mobility-sec { background: #f0fdf4; }
+  .warmup-sec   h3 { color: var(--warmup);   border-left: 4px solid var(--warmup);   padding-left: 8px; }
+  .strength-sec h3 { color: var(--strength); border-left: 4px solid var(--strength); padding-left: 8px; }
+  .metcon-sec   h3 { color: var(--metcon);   border-left: 4px solid var(--metcon);   padding-left: 8px; }
+  .mobility-sec h3 { color: var(--mobility); border-left: 4px solid var(--mobility); padding-left: 8px; }
+  .ex-list { display: flex; flex-direction: column; gap: 0; }
+  .ex { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; padding: 0 16px; }
+  .ex:last-child { margin-bottom: 0; }
+  .ex-num { width: 28px; height: 28px; background: var(--strength); color: #fff;
+    border-radius: 50%; font-size: .8rem; font-weight: 700; display: flex;
     align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .ex-secondary .ex-num { background: #0ea5e9; }
+  .ex-acc .ex-num { background: #94a3b8; }
   .ex-detail { flex: 1; }
-  .ex-name { font-weight: 600; font-size: .9rem; margin-bottom: 3px;
+  .ex-name { font-weight: 600; font-size: .95rem; margin-bottom: 4px;
     display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
-  .ex-rx   { font-size: .875rem; margin-bottom: 3px; }
+  .ex-rx   { font-size: .9rem; margin-bottom: 4px; }
   .metcon-header-row { display: flex; justify-content: space-between; flex-wrap: wrap;
     gap: 6px; margin-bottom: 6px; align-items: baseline; }
   .metcon-header-row strong { font-size: .95rem; }
   .m-format { background: #ede9fe; color: #5b21b6; font-size: .75rem;
     font-weight: 700; padding: 2px 8px; border-radius: 100px; }
   .metcon-desc { font-size: .85rem; color: var(--muted); margin-bottom: 8px; }
-  @media (max-width: 400px) { body { padding: 12px; font-size: 15px; } }
+  @media (max-width: 640px) {
+    body { padding: 10px; font-size: 16px; }
+    .sec { padding: 12px 14px; }
+    .ex  { padding: 0 12px; }
+    h3   { font-size: .9rem; margin-bottom: 8px; }
+    .ex-name { font-size: 1rem; }
+    .ex-rx   { font-size: .95rem; }
+    .note    { font-size: .85rem; }
+    .ex-sublabel { font-size: .72rem; padding: 8px 14px; }
+    .ex-sublabel-secondary,
+    .ex-sublabel-acc { margin-top: 10px; }
+    li { font-size: .95rem; }
+  }
 </style>
 </head>
 <body>
@@ -870,6 +1000,13 @@ function fmtDate(str) {
   try {
     return new Date(str + 'T12:00:00').toLocaleDateString('en-US',
       { month: 'long', day: 'numeric', year: 'numeric' });
+  } catch { return str; }
+}
+
+function fmtShortDate(str) {
+  if (!str) return '';
+  try {
+    return new Date(str + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   } catch { return str; }
 }
 

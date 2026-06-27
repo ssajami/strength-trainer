@@ -373,6 +373,21 @@ textarea { resize: vertical; min-height: 80px; }
   border-bottom: 1px solid #f1f5f9;
 }
 .preview-row:last-of-type { border-bottom: none; }
+.preview-primary  .preview-name { font-weight: 700; color: var(--clr-strength); }
+.preview-secondary .preview-name { color: #0369a1; }
+
+.preview-tier-label {
+  font-size: .6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin: 8px 0 2px;
+  padding: 0;
+}
+.preview-tier-label:first-child { margin-top: 2px; }
+.preview-tier-primary   { color: #92400e; }
+.preview-tier-secondary { color: #0369a1; }
+.preview-tier-acc       { color: #64748b; }
 
 .preview-name {
   font-weight: 500;
@@ -439,7 +454,16 @@ textarea { resize: vertical; min-height: 80px; }
   border-bottom: 1px solid var(--border);
 }
 
-/* Section colour bars + background tints */
+/* Section colour bars + background tints — class-based (works on all browsers) */
+.section-warmup   { background: #f0f9ff; }
+.section-strength { background: #fffbeb; }
+.section-metcon   { background: #ede9fe; }
+.section-mobility { background: #f0fdf4; }
+.section-warmup   .section-title { color: var(--clr-warmup);   border-left: 4px solid var(--clr-warmup);   }
+.section-strength .section-title { color: var(--clr-strength); border-left: 4px solid var(--clr-strength); }
+.section-metcon   .section-title { color: var(--clr-metcon);   border-left: 4px solid var(--clr-metcon);   }
+.section-mobility .section-title { color: var(--clr-mobility); border-left: 4px solid var(--clr-mobility); }
+/* :has() fallback for any sections rendered without an explicit type class */
 .session-section:has(.warmup-row)   { background: #f0f9ff; }
 .session-section:has(.strength-row) { background: #fffbeb; }
 .session-section:has(.metcon-block) { background: #ede9fe; }
@@ -519,30 +543,51 @@ textarea { resize: vertical; min-height: 80px; }
 }
 
 .strength-sublabel {
-  font-size: .72rem;
-  font-weight: 700;
+  font-size: .68rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--clr-strength);
-  margin: var(--sp-sm) 0 var(--sp-xs);
+  letter-spacing: .07em;
+  padding: 7px var(--sp-md);
+  margin: 0;
+  border-left: 4px solid transparent;
 }
-.strength-sublabel:first-child { margin-top: 0; }
+.strength-sublabel-primary {
+  background: rgba(217, 119, 6, .12);
+  color: #92400e;
+  border-left-color: var(--clr-strength);
+}
+.strength-sublabel-secondary {
+  background: rgba(14, 165, 233, .12);
+  color: #0369a1;
+  border-left-color: #0ea5e9;
+  margin-top: var(--sp-sm);
+  border-top: 2px solid rgba(14, 165, 233, .25);
+}
 .strength-sublabel-acc {
-  color: var(--text-muted);
-  border-top: 1px solid var(--border);
-  padding-top: var(--sp-sm);
-  margin-top: var(--sp-md);
+  background: #f1f5f9;
+  color: #475569;
+  border-left-color: #94a3b8;
+  margin-top: var(--sp-sm);
+  border-top: 2px solid #e2e8f0;
 }
 
-.strength-main {
-  border-left: 3px solid var(--clr-strength);
+.strength-primary {
+  border-left: 4px solid var(--clr-strength);
+  padding-left: 10px;
+}
+.strength-secondary {
+  border-left: 4px solid #0ea5e9;
   padding-left: 10px;
 }
 .strength-accessory {
-  border-left: 3px solid var(--border);
+  border-left: 3px solid #cbd5e1;
   padding-left: 10px;
-  opacity: .9;
+  opacity: .88;
 }
+
+/* Tier-coloured number badges */
+.strength-secondary .ex-number { background: #0ea5e9; }
+.strength-accessory .ex-number { background: #94a3b8; }
 
 .rest-val {
   font-size: .8rem;
@@ -557,6 +602,48 @@ textarea { resize: vertical; min-height: 80px; }
   line-height: 1.45;
   margin-top: 3px;
 }
+
+.acc-weight-tracker {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 7px;
+}
+
+.acc-last-used {
+  font-size: .75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.acc-weight-log {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.acc-weight-input {
+  width: 110px;
+  padding: 4px 8px;
+  font-size: .8rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.btn-xs {
+  padding: 4px 10px;
+  font-size: .75rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-xs:hover { opacity: .85; }
 
 /* ── Pills / tags ─────────────────────────────────────────────────────────── */
 .pill {
@@ -860,6 +947,14 @@ textarea { resize: vertical; min-height: 80px; }
 .audit-table tr:last-child td { border-bottom: none; }
 .audit-fail td { background: #fef2f2; color: #991b1b; }
 .audit-warn td { background: #fffbeb; }
+.audit-section-label {
+  font-size: .7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--text-muted);
+  margin: var(--sp-sm) 0 4px;
+}
+.audit-section-label:first-of-type { margin-top: var(--sp-sm); }
+.audit-flag-cell { color: #b45309; font-size: .78rem; }
+.audit-breakdown { color: var(--text-muted); font-size: .78rem; margin-left: 4px; }
 
 /* ── Error banner ────────────────────────────────────────────────────────── */
 .error-banner {
@@ -889,14 +984,36 @@ textarea { resize: vertical; min-height: 80px; }
 }
 
 /* ── Responsive tweaks ────────────────────────────────────────────────────── */
-@media (max-width: 400px) {
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  .card-top { flex-direction: column; gap: var(--sp-sm); }
-  .day-badge { align-self: flex-start; }
-  .ex-name   { font-size: .88rem; }
+@media (max-width: 640px) {
+  /* layout */
+  .form-row       { grid-template-columns: 1fr; gap: 0; }
+  .card-top       { flex-direction: column; gap: var(--sp-sm); }
+  .day-badge      { align-self: flex-start; }
+
+  /* fonts — bump everything up a notch for phone readability */
+  .section-title          { font-size: 1rem; padding: 14px var(--sp-md); }
+  .ex-name                { font-size: 1rem; }
+  .ex-rx                  { font-size: .95rem; gap: 10px; }
+  .load-val               { font-size: .95rem; }
+  .coaching-notes         { font-size: .88rem; }
+  .item-name              { font-size: 1rem; }
+  .item-meta              { font-size: .88rem; }
+  .preview-name           { font-size: .95rem; }
+  .preview-rx             { font-size: .88rem; }
+
+  /* strength tier bands — taller + bigger label text on mobile */
+  .strength-sublabel      { font-size: .75rem; padding: 9px var(--sp-md); }
+  .strength-sublabel-secondary,
+  .strength-sublabel-acc  { margin-top: var(--sp-md); }
+
+  /* preview tier labels in session cards */
+  .preview-tier-label     { font-size: .68rem; margin-top: 10px; }
+
+  /* exercise number bubble — slightly bigger */
+  .ex-number { width: 30px; height: 30px; font-size: .85rem; }
+
+  /* more breathing room on exercise rows */
+  .strength-row { padding: 14px var(--sp-md); }
 }
 
 @media (min-width: 600px) {

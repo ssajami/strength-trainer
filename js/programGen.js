@@ -189,12 +189,16 @@ const ProgramGen = (() => {
 You output ONLY valid JSON — no markdown fences, no prose, no comments outside the JSON object. Your JSON must exactly match the schema given.`;
   }
 
-  function buildUserMessage({ profile, maxLoads, previousProgram, comments, weeks, progressionModel, startDate }) {
+  function buildUserMessage({ profile, maxLoads, accessoryLoads, previousProgram, comments, weeks, progressionModel, startDate }) {
     const dates = weekStartDates(startDate, weeks);
 
     const maxLoadsText = Object.keys(maxLoads).length
       ? Object.entries(maxLoads).map(([k, v]) => `  ${k}: ${v} kg`).join('\n')
       : '  (none saved yet — use "start conservative" guidance for all lifts)';
+
+    const accessoryLoadsText = Object.keys(accessoryLoads || {}).length
+      ? Object.entries(accessoryLoads).map(([mv, { kg, date }]) => `  ${mv}: ${kg} kg (last used ${date})`).join('\n')
+      : '  (none saved yet)';
 
     const prevText  = prevProgramSummary(previousProgram);
     const commText  = comments?.trim()
@@ -222,6 +226,10 @@ You output ONLY valid JSON — no markdown fences, no prose, no comments outside
 
 ## CURRENT MAX LOADS
 ${maxLoadsText}
+
+## PREVIOUSLY USED ACCESSORY WEIGHTS
+When an accessory exercise matches one of these, reference the saved weight in coachingNotes to maintain continuity (e.g. "start at 20 kg — your last logged weight").
+${accessoryLoadsText}
 
 ## HISTORY
 ${prevText}
@@ -482,8 +490,56 @@ Rules:
 
   // ─── Response parsing ────────────────────────────────────────────────────────
 
-  function coerceSession(s, i) {
+  function estimateSessionTimes(session) {
+    function parseReps(repsStr) {
+      const s = String(repsStr || '').trim();
+      const timeMatch = s.match(/^(\d+)(?:[–\-](\d+))?\s*s/i);
+      if (timeMatch) {
+        const lo = parseInt(timeMatch[1]);
+        const hi = timeMatch[2] ? parseInt(timeMatch[2]) : lo;
+        return { type: 'time', seconds: Math.round((lo + hi) / 2) };
+      }
+      const rangeMatch = s.match(/^(\d+)[–\-](\d+)/);
+      if (rangeMatch) {
+        return { type: 'reps', count: Math.round((parseInt(rangeMatch[1]) + parseInt(rangeMatch[2])) / 2) };
+      }
+      const num = parseInt(s);
+      return { type: 'reps', count: isNaN(num) ? 8 : num };
+    }
+
+    function exerciseMinutes(ex, transitionSec) {
+      const sets = ex.sets || 3;
+      const rest = ex.restSeconds || 90;
+      const parsed = parseReps(ex.reps);
+      const setDuration = parsed.type === 'time' ? parsed.seconds : parsed.count * 4;
+      return (sets * setDuration + (sets - 1) * rest + transitionSec) / 60;
+    }
+
+    const byType = { primary: [], secondary: [], accessory: [] };
+    for (const ex of session.strength || []) {
+      if (byType[ex.type]) byType[ex.type].push(ex);
+    }
+
+    const sum = (exs, trans) => exs.reduce((acc, ex) => acc + exerciseMinutes(ex, trans), 0);
+
+    const primaryMinutes   = Math.round(sum(byType.primary,   120));
+    const secondaryMinutes = Math.round(sum(byType.secondary,  90));
+    const accessoryMinutes = Math.round(sum(byType.accessory,  60));
+    const metconMinutes    = session.metcon?.timeMinutes ?? 15;
+
     return {
+      warmupMinutes:    10,
+      primaryMinutes,
+      secondaryMinutes,
+      accessoryMinutes,
+      metconMinutes,
+      mobilityMinutes:  8,
+      totalMinutes:     10 + primaryMinutes + secondaryMinutes + accessoryMinutes + metconMinutes + 8,
+    };
+  }
+
+  function coerceSession(s, i) {
+    const session = {
       sessionNumber:  s.sessionNumber  ?? (i + 1),
       week:           s.week           ?? 1,
       dayWithinWeek:  s.dayWithinWeek  ?? 1,
@@ -528,6 +584,8 @@ Rules:
         notes:    m.notes    || null,
       })),
     };
+    session.timeEstimates = estimateSessionTimes(session);
+    return session;
   }
 
   function parseResponse(text, { weeks, startDate, comments }) {

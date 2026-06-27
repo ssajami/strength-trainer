@@ -1,9 +1,10 @@
 const Storage = (() => {
   const KEYS = {
-    PROFILE:       'spt_profile',
-    MAX_LOADS:     'spt_max_loads',
-    PROGRAMS:      'spt_programs',
-    LAST_COMMENTS: 'spt_last_comments',
+    PROFILE:          'spt_profile',
+    MAX_LOADS:        'spt_max_loads',
+    ACCESSORY_LOADS:  'spt_accessory_loads',
+    PROGRAMS:         'spt_programs',
+    LAST_COMMENTS:    'spt_last_comments',
   };
 
   const DEFAULT_PROFILE = { age: 55, bodyweight: 65, apiKey: '', weeklySetMin: 9, weeklySetMax: 12 };
@@ -44,6 +45,17 @@ const Storage = (() => {
       p.unshift(program);
       if (p.length > 15) p.length = 15;
       write(KEYS.PROGRAMS, p);
+    },
+
+    getAccessoryLoads: () => read(KEYS.ACCESSORY_LOADS) || {},
+    getAccessoryLoad(movement) {
+      const m = read(KEYS.ACCESSORY_LOADS) || {};
+      return m[movement.toLowerCase().trim()] ?? null;
+    },
+    setAccessoryLoad(movement, kg) {
+      const m = read(KEYS.ACCESSORY_LOADS) || {};
+      m[movement.toLowerCase().trim()] = { kg, date: new Date().toISOString().split('T')[0] };
+      write(KEYS.ACCESSORY_LOADS, m);
     },
 
     getLastComments:  () => read(KEYS.LAST_COMMENTS) || '',
