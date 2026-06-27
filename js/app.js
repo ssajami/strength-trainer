@@ -410,6 +410,7 @@ function renderWeek(week) {
 
 function makeSessionCard(session) {
   const totalSets = (session.strength || []).reduce((n, e) => n + (e.sets || 0), 0);
+  const te = getTimeEstimates(session);
   const card = document.createElement('div');
   card.className = 'session-card card';
 
@@ -451,6 +452,7 @@ function makeSessionCard(session) {
     <div class="session-stats">
       <span>${session.strength.length} exercises · ${totalSets} sets</span>
       <span class="metcon-chip">${session.metcon.format || 'Metcon'} ${session.metcon.timeMinutes} min</span>
+      <span class="time-chip">~${te.totalMinutes} min total</span>
     </div>
     <div class="strength-preview">${preview}</div>
     <button class="btn btn-primary btn-sm open-session-btn" data-id="${session.sessionNumber}">
@@ -471,10 +473,11 @@ function renderSessionDetail(session) {
 
   root.appendChild(badge(session.focus, 'focus-badge'));
 
-  if (session.warmup?.length)   root.appendChild(mkSection('🔥 Warm-Up',           renderWarmup(session.warmup),    'warmup'));
-  if (session.strength?.length) root.appendChild(mkSection('💪 Strength',           renderStrength(session.strength), 'strength'));
-  root.appendChild(mkSection('⚡ Metcon',          renderMetcon(session.metcon),    'metcon'));
-  if (session.mobility?.length) root.appendChild(mkSection('🧘 Mobility & Cooldown', renderMobility(session.mobility), 'mobility'));
+  const te = getTimeEstimates(session);
+  if (session.warmup?.length)   root.appendChild(mkSection(`🔥 Warm-Up · ~${te.warmupMinutes} min`,            renderWarmup(session.warmup),          'warmup'));
+  if (session.strength?.length) root.appendChild(mkSection('💪 Strength',                                       renderStrength(session.strength, te),   'strength'));
+  root.appendChild(mkSection(`⚡ Metcon · ~${te.metconMinutes} min`,                                            renderMetcon(session.metcon),           'metcon'));
+  if (session.mobility?.length) root.appendChild(mkSection(`🧘 Mobility & Cooldown · ~${te.mobilityMinutes} min`, renderMobility(session.mobility),     'mobility'));
 
   showScreen('session-screen');
 }
@@ -578,7 +581,7 @@ function makeStrengthRow(ex, i) {
   return el;
 }
 
-function renderStrength(items) {
+function renderStrength(items, te) {
   const wrap = document.createElement('div');
   wrap.className = 'item-list';
 
@@ -591,7 +594,7 @@ function renderStrength(items) {
   if (primary.length) {
     const label = document.createElement('p');
     label.className = 'strength-sublabel strength-sublabel-primary';
-    label.textContent = 'Primary';
+    label.textContent = te ? `Primary · ~${te.primaryMinutes} min` : 'Primary';
     wrap.appendChild(label);
     primary.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, offset + i)));
     offset += primary.length;
@@ -600,7 +603,7 @@ function renderStrength(items) {
   if (secondary.length) {
     const label = document.createElement('p');
     label.className = 'strength-sublabel strength-sublabel-secondary';
-    label.textContent = 'Secondary';
+    label.textContent = te ? `Secondary · ~${te.secondaryMinutes} min` : 'Secondary';
     wrap.appendChild(label);
     secondary.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, offset + i)));
     offset += secondary.length;
@@ -609,7 +612,7 @@ function renderStrength(items) {
   if (accessory.length) {
     const label = document.createElement('p');
     label.className = 'strength-sublabel strength-sublabel-acc';
-    label.textContent = 'Accessory';
+    label.textContent = te ? `Accessory · ~${te.accessoryMinutes} min` : 'Accessory';
     wrap.appendChild(label);
     accessory.forEach((ex, i) => wrap.appendChild(makeStrengthRow(ex, offset + i)));
   }
@@ -1001,6 +1004,10 @@ function fmtDate(str) {
     return new Date(str + 'T12:00:00').toLocaleDateString('en-US',
       { month: 'long', day: 'numeric', year: 'numeric' });
   } catch { return str; }
+}
+
+function getTimeEstimates(session) {
+  return session.timeEstimates || ProgramGen.estimateSessionTimes(session);
 }
 
 function fmtShortDate(str) {

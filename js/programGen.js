@@ -627,6 +627,7 @@ Rules:
 
   return {
     validateMetcon,
+    estimateSessionTimes,
 
     async generate(params) {
       const { profile } = params;

@@ -645,6 +645,17 @@ textarea { resize: vertical; min-height: 80px; }
 }
 .btn-xs:hover { opacity: .85; }
 
+.time-chip {
+  font-size: .72rem;
+  font-weight: 700;
+  background: #f1f5f9;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
 /* ── Pills / tags ─────────────────────────────────────────────────────────── */
 .pill {
   font-size: .68rem;
