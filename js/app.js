@@ -83,7 +83,18 @@ function saveSettings() {
   Sync.init(token);
   toast('Settings saved', 'success');
   closeSettings();
-  if (token) Sync.save();
+  if (token) {
+    // If this device already has programs, push. If it's empty, pull from GitHub.
+    if (Storage.getCurrentProgram()) {
+      Sync.save();
+    } else {
+      Sync.load().then(() => {
+        currentProgram = Storage.getCurrentProgram();
+        renderHomeSummary();
+        if (currentProgram) show($('current-program-card'));
+      });
+    }
+  }
 }
 
 function renderMaxLoadsList() {
@@ -1329,8 +1340,12 @@ async function init() {
   $('clear-data-btn').addEventListener('click',   clearAllData);
   $('sync-now-btn').addEventListener('click', async () => {
     if (!Sync.isConfigured()) { toast('Enter a GitHub token in settings first', 'error'); return; }
-    await Sync.save();
-    toast('Synced to GitHub', 'success');
+    await Sync.load();
+    currentProgram = Storage.getCurrentProgram();
+    renderHomeSummary();
+    if (currentProgram) show($('current-program-card'));
+    closeSettings();
+    toast('Pulled latest data from GitHub', 'success');
   });
   $('add-max-load-btn').addEventListener('click', () => {
     const row = makeMaxLoadRow();
