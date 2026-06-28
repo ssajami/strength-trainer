@@ -1327,6 +1327,11 @@ async function init() {
   $('settings-overlay').addEventListener('click', closeSettings);
   $('save-settings-btn').addEventListener('click', saveSettings);
   $('clear-data-btn').addEventListener('click',   clearAllData);
+  $('sync-now-btn').addEventListener('click', async () => {
+    if (!Sync.isConfigured()) { toast('Enter a GitHub token in settings first', 'error'); return; }
+    await Sync.save();
+    toast('Synced to GitHub', 'success');
+  });
   $('add-max-load-btn').addEventListener('click', () => {
     const row = makeMaxLoadRow();
     $('max-loads-list').appendChild(row);
