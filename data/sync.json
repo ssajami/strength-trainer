@@ -1,1 +1,16 @@
-{"version":1,"updatedAt":null,"data":{}}
+{
+  "version": 1,
+  "updatedAt": "2026-06-28T17:49:03.957Z",
+  "data": {
+    "spt_profile": {
+      "age": 55,
+      "bodyweight": 65,
+      "weeklySetMin": 9,
+      "weeklySetMax": 12
+    },
+    "spt_max_loads": {},
+    "spt_accessory_loads": null,
+    "spt_programs": null,
+    "spt_last_comments": null
+  }
+}
