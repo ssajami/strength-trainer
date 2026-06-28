@@ -83,18 +83,7 @@ function saveSettings() {
   Sync.init(token);
   toast('Settings saved', 'success');
   closeSettings();
-  if (token) {
-    // If this device already has programs, push. If it's empty, pull from GitHub.
-    if (Storage.getCurrentProgram()) {
-      Sync.save();
-    } else {
-      Sync.load().then(() => {
-        currentProgram = Storage.getCurrentProgram();
-        renderHomeSummary();
-        if (currentProgram) show($('current-program-card'));
-      });
-    }
-  }
+  // Don't auto-push or auto-pull on save — user controls direction explicitly
 }
 
 function renderMaxLoadsList() {
@@ -1338,14 +1327,20 @@ async function init() {
   $('settings-overlay').addEventListener('click', closeSettings);
   $('save-settings-btn').addEventListener('click', saveSettings);
   $('clear-data-btn').addEventListener('click',   clearAllData);
-  $('sync-now-btn').addEventListener('click', async () => {
+  $('sync-push-btn').addEventListener('click', async () => {
     if (!Sync.isConfigured()) { toast('Enter a GitHub token in settings first', 'error'); return; }
+    await Sync.save();
+    toast('Data pushed to GitHub ↑', 'success');
+  });
+  $('sync-pull-btn').addEventListener('click', async () => {
+    if (!Sync.isConfigured()) { toast('Enter a GitHub token in settings first', 'error'); return; }
+    if (!confirm('Pull from GitHub? This will overwrite your local data on this device.')) return;
     await Sync.load();
     currentProgram = Storage.getCurrentProgram();
     renderHomeSummary();
     if (currentProgram) show($('current-program-card'));
     closeSettings();
-    toast('Pulled latest data from GitHub', 'success');
+    toast('Data pulled from GitHub ↓', 'success');
   });
   $('add-max-load-btn').addEventListener('click', () => {
     const row = makeMaxLoadRow();
