@@ -84,6 +84,11 @@ const Sync = (() => {
           snapshot[key] = v ? JSON.parse(v) : null;
         } catch { snapshot[key] = null; }
       }
+      // Never sync sensitive credentials — entered once per device
+      if (snapshot['spt_profile']) {
+        const { apiKey, ...rest } = snapshot['spt_profile'];
+        snapshot['spt_profile'] = rest;
+      }
 
       const payload = { version: 1, updatedAt: new Date().toISOString(), data: snapshot };
       const body    = {
