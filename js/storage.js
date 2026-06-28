@@ -5,6 +5,7 @@ const Storage = (() => {
     ACCESSORY_LOADS:  'spt_accessory_loads',
     PROGRAMS:         'spt_programs',
     LAST_COMMENTS:    'spt_last_comments',
+    GITHUB_TOKEN:     'spt_github_token',
   };
 
   const DEFAULT_PROFILE = { age: 55, bodyweight: 65, apiKey: '', weeklySetMin: 9, weeklySetMax: 12 };
@@ -63,5 +64,8 @@ const Storage = (() => {
 
     getLastComments:  () => read(KEYS.LAST_COMMENTS) || '',
     saveLastComments: (c) => write(KEYS.LAST_COMMENTS, c),
+
+    getGithubToken:   () => read(KEYS.GITHUB_TOKEN) || '',
+    saveGithubToken:  (t) => write(KEYS.GITHUB_TOKEN, t),
   };
 })();

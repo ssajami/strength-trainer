@@ -44,11 +44,12 @@ function showError(msg) {
 // ─── Settings ────────────────────────────────────────────────────────────────
 function openSettings() {
   const p = Storage.getProfile();
-  $('setting-api-key').value    = p.apiKey       || '';
-  $('setting-age').value        = p.age          || 55;
-  $('setting-bodyweight').value = p.bodyweight   || 65;
-  $('setting-set-min').value    = p.weeklySetMin ?? 9;
-  $('setting-set-max').value    = p.weeklySetMax ?? 12;
+  $('setting-api-key').value       = p.apiKey || '';
+  $('setting-github-token').value  = Storage.getGithubToken();
+  $('setting-age').value           = p.age          || 55;
+  $('setting-bodyweight').value    = p.bodyweight   || 65;
+  $('setting-set-min').value       = p.weeklySetMin ?? 9;
+  $('setting-set-max').value       = p.weeklySetMax ?? 12;
   renderMaxLoadsList();
   show($('settings-modal'));
 }
@@ -77,8 +78,12 @@ function saveSettings() {
     weeklySetMax: parseInt($('setting-set-max').value)      || 12,
   });
   persistMaxLoadsFromForm();
+  const token = $('setting-github-token').value.trim();
+  Storage.saveGithubToken(token);
+  Sync.init(token);
   toast('Settings saved', 'success');
   closeSettings();
+  if (token) Sync.save();
 }
 
 function renderMaxLoadsList() {
@@ -192,6 +197,7 @@ async function handleGenerate() {
     currentWeek    = 1;
     $('previous-comments').value = '';
     renderHomeSummary();
+    Sync.save();
 
     const missing = collectMissingMaxMovements(program);
     if (missing.length) {
@@ -859,7 +865,10 @@ function openLogWeightsModal(session) {
     });
 
     overlay.remove();
-    if (saved > 0) toast(`${saved} entr${saved > 1 ? 'ies' : 'y'} saved`, 'success');
+    if (saved > 0) {
+      toast(`${saved} entr${saved > 1 ? 'ies' : 'y'} saved`, 'success');
+      Sync.save();
+    }
   });
   footer.appendChild(saveBtn);
 
@@ -970,6 +979,7 @@ function applyChatUpdate(updatedProgram, btn) {
   currentWeek    = 1;
   Chat.updateProgram(merged);
   renderHomeSummary();
+  Sync.save();
   btn.textContent = 'Changes applied ✓';
   btn.disabled = true;
   toast('Program updated!', 'success');
@@ -1295,8 +1305,17 @@ function setDefaultStartDate() {
 }
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
-function init() {
+async function init() {
   setDefaultStartDate();
+
+  // Init sync — load from GitHub first so we get the latest data on any device
+  const ghToken = Storage.getGithubToken();
+  Sync.init(ghToken);
+  if (ghToken) {
+    await Sync.load();
+  } else {
+    Sync.setStatus('off');
+  }
 
   currentProgram = Storage.getCurrentProgram();
   renderHomeSummary();

@@ -87,6 +87,21 @@ p  { margin: 0; }
 
 .app-title { font-size: 1.1rem; letter-spacing: -.01em; color: #f8fafc; }
 
+.header-actions { display: flex; align-items: center; gap: 8px; }
+
+#sync-status {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  transition: background .3s;
+}
+#sync-status[data-state="off"]     { background: #475569; }
+#sync-status[data-state="syncing"] { background: #f59e0b; animation: pulse .8s infinite alternate; }
+#sync-status[data-state="ok"]      { background: #22c55e; }
+#sync-status[data-state="error"]   { background: #ef4444; }
+@keyframes pulse { from { opacity: 1; } to { opacity: .4; } }
+
 /* ── Main / screens ───────────────────────────────────────────────────────── */
 main {
   max-width: 680px;
