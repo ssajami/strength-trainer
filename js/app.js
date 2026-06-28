@@ -725,7 +725,16 @@ function openLogWeightsModal(session) {
       const row = document.createElement('div');
       row.className = 'log-row';
 
-      let rxText, inputLabel, inputValue;
+      // Parse reps string to a single number (midpoint of range, ignore time-based)
+      function parseLogReps(repsStr) {
+        const s = String(repsStr || '').trim();
+        const range = s.match(/^(\d+)[–\-](\d+)/);
+        if (range) return Math.round((parseInt(range[1]) + parseInt(range[2])) / 2);
+        const n = parseInt(s);
+        return isNaN(n) ? 8 : n;
+      }
+
+      let rxText, inputValue;
       if (isAccessory) {
         const saved = Storage.getAccessoryLoad(ex.movement);
         if (saved) {
@@ -736,16 +745,14 @@ function openLogWeightsModal(session) {
         } else {
           rxText = `${ex.sets}×${ex.reps}`;
         }
-        inputLabel  = 'Weight used (kg)';
-        inputValue  = saved?.kg ?? '';
+        inputValue = saved?.kg ?? '';
       } else {
         const max     = Storage.getMaxLoad(ex.movement);
         const working = (max && ex.percentOfMax) ? Math.round((max * ex.percentOfMax / 100) / 2.5) * 2.5 : null;
-        rxText        = working
-          ? `${ex.sets}×${ex.reps} · ${working} kg (${ex.percentOfMax}% of ${max} kg 1RM)`
+        rxText = working
+          ? `${ex.sets}×${ex.reps} · planned ${working} kg`
           : `${ex.sets}×${ex.reps}${ex.percentOfMax ? ` · ${ex.percentOfMax}%` : ''}`;
-        inputLabel  = 'Update 1RM (kg)';
-        inputValue  = max ?? '';
+        inputValue = working ?? '';
       }
 
       const info = document.createElement('div');
@@ -757,7 +764,7 @@ function openLogWeightsModal(session) {
 
       const lbl = document.createElement('label');
       lbl.className = 'log-input-label';
-      lbl.textContent = inputLabel;
+      lbl.textContent = 'Weight used (kg)';
       const input = document.createElement('input');
       input.type = 'number';
       input.className = 'log-weight-input';
@@ -766,9 +773,28 @@ function openLogWeightsModal(session) {
       input.step = '0.5';
       input.dataset.movement  = ex.movement;
       input.dataset.entryType = isAccessory ? 'accessory' : 'max';
+      input.dataset.reps      = ex.reps;
       if (inputValue !== '') input.value = inputValue;
       inputWrap.appendChild(lbl);
       inputWrap.appendChild(input);
+
+      if (!isAccessory) {
+        const hint = document.createElement('span');
+        hint.className = 'est-1rm-hint';
+        const updateHint = () => {
+          const kg = parseFloat(input.value);
+          const reps = parseLogReps(ex.reps);
+          if (!isNaN(kg) && kg > 0 && reps > 0) {
+            const est = Math.round((kg * (1 + reps / 30)) / 2.5) * 2.5;
+            hint.textContent = `→ est. 1RM: ~${est} kg`;
+          } else {
+            hint.textContent = '';
+          }
+        };
+        input.addEventListener('input', updateHint);
+        updateHint();
+        inputWrap.appendChild(hint);
+      }
 
       if (isAccessory) {
         const notesLbl = document.createElement('label');
@@ -801,11 +827,17 @@ function openLogWeightsModal(session) {
   saveBtn.addEventListener('click', () => {
     let saved = 0;
 
-    // Primary / secondary — update 1RM
+    // Primary / secondary — calculate estimated 1RM from working weight + reps
     overlay.querySelectorAll('.log-weight-input[data-entry-type="max"]').forEach(input => {
       const kg = parseFloat(input.value);
       if (isNaN(kg) || kg <= 0) return;
-      Storage.setMaxLoad(input.dataset.movement, kg);
+      const repsStr = input.dataset.reps || '5';
+      const repsRange = repsStr.match(/^(\d+)[–\-](\d+)/);
+      const reps = repsRange
+        ? Math.round((parseInt(repsRange[1]) + parseInt(repsRange[2])) / 2)
+        : (parseInt(repsStr) || 5);
+      const est1RM = Math.round((kg * (1 + reps / 30)) / 2.5) * 2.5;
+      Storage.setMaxLoad(input.dataset.movement, est1RM);
       saved++;
     });
 

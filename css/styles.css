@@ -741,6 +741,13 @@ textarea { resize: vertical; min-height: 80px; }
   color: var(--text);
   text-align: right;
 }
+.est-1rm-hint {
+  display: block;
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+  min-height: 1em;
+}
 .log-notes-input {
   width: 100%;
   padding: 6px 8px;
