@@ -52,9 +52,12 @@ const Storage = (() => {
       const m = read(KEYS.ACCESSORY_LOADS) || {};
       return m[movement.toLowerCase().trim()] ?? null;
     },
-    setAccessoryLoad(movement, kg) {
+    setAccessoryLoad(movement, kg, notes) {
       const m = read(KEYS.ACCESSORY_LOADS) || {};
-      m[movement.toLowerCase().trim()] = { kg, date: new Date().toISOString().split('T')[0] };
+      const entry = { date: new Date().toISOString().split('T')[0] };
+      if (kg != null) entry.kg = kg;
+      if (notes != null) entry.notes = notes;
+      m[movement.toLowerCase().trim()] = entry;
       write(KEYS.ACCESSORY_LOADS, m);
     },
 

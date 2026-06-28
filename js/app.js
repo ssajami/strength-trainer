@@ -542,7 +542,12 @@ function makeStrengthRow(ex, i, hideSupTag) {
   let accLastUsedHtml = '';
   if (isAccessory) {
     const saved = Storage.getAccessoryLoad(ex.movement);
-    if (saved) accLastUsedHtml = `<div class="acc-last-used">Last used: ${saved.kg} kg · ${fmtShortDate(saved.date)}</div>`;
+    if (saved) {
+      const parts = [];
+      if (saved.kg != null) parts.push(`${saved.kg} kg`);
+      if (saved.notes)      parts.push(saved.notes);
+      accLastUsedHtml = `<div class="acc-last-used">Last used: ${parts.join(' · ')} &nbsp;<span class="acc-last-date">${fmtShortDate(saved.date)}</span></div>`;
+    }
   }
 
   const ssTag = (!hideSupTag && ex.supersetGroup)
@@ -723,7 +728,14 @@ function openLogWeightsModal(session) {
       let rxText, inputLabel, inputValue;
       if (isAccessory) {
         const saved = Storage.getAccessoryLoad(ex.movement);
-        rxText      = saved ? `Last used: ${saved.kg} kg · ${fmtShortDate(saved.date)}` : `${ex.sets}×${ex.reps}`;
+        if (saved) {
+          const parts = [];
+          if (saved.kg != null) parts.push(`${saved.kg} kg`);
+          if (saved.notes)      parts.push(saved.notes);
+          rxText = `Last used: ${parts.join(' · ')} · ${fmtShortDate(saved.date)}`;
+        } else {
+          rxText = `${ex.sets}×${ex.reps}`;
+        }
         inputLabel  = 'Weight used (kg)';
         inputValue  = saved?.kg ?? '';
       } else {
@@ -742,6 +754,7 @@ function openLogWeightsModal(session) {
 
       const inputWrap = document.createElement('div');
       inputWrap.className = 'log-row-input';
+
       const lbl = document.createElement('label');
       lbl.className = 'log-input-label';
       lbl.textContent = inputLabel;
@@ -756,6 +769,21 @@ function openLogWeightsModal(session) {
       if (inputValue !== '') input.value = inputValue;
       inputWrap.appendChild(lbl);
       inputWrap.appendChild(input);
+
+      if (isAccessory) {
+        const notesLbl = document.createElement('label');
+        notesLbl.className = 'log-input-label';
+        notesLbl.textContent = 'Notes (band colour, grip, etc.)';
+        const notesInput = document.createElement('input');
+        notesInput.type = 'text';
+        notesInput.className = 'log-notes-input';
+        notesInput.placeholder = 'e.g. blue band, close grip';
+        notesInput.dataset.movement = ex.movement;
+        const savedEntry = Storage.getAccessoryLoad(ex.movement);
+        if (savedEntry?.notes) notesInput.value = savedEntry.notes;
+        inputWrap.appendChild(notesLbl);
+        inputWrap.appendChild(notesInput);
+      }
 
       row.appendChild(info);
       row.appendChild(inputWrap);
@@ -772,18 +800,34 @@ function openLogWeightsModal(session) {
   saveBtn.textContent = 'Save & Close';
   saveBtn.addEventListener('click', () => {
     let saved = 0;
-    overlay.querySelectorAll('.log-weight-input').forEach(input => {
+
+    // Primary / secondary — update 1RM
+    overlay.querySelectorAll('.log-weight-input[data-entry-type="max"]').forEach(input => {
       const kg = parseFloat(input.value);
       if (isNaN(kg) || kg <= 0) return;
-      if (input.dataset.entryType === 'accessory') {
-        Storage.setAccessoryLoad(input.dataset.movement, kg);
-      } else {
-        Storage.setMaxLoad(input.dataset.movement, kg);
-      }
+      Storage.setMaxLoad(input.dataset.movement, kg);
       saved++;
     });
+
+    // Accessory — save kg and/or notes (either field alone is enough to save)
+    overlay.querySelectorAll('.log-weight-input[data-entry-type="accessory"]').forEach(kgInput => {
+      const movement = kgInput.dataset.movement;
+      const kg       = parseFloat(kgInput.value);
+      const notesEl  = overlay.querySelector(`.log-notes-input[data-movement="${movement}"]`);
+      const notes    = notesEl?.value.trim() || null;
+      const hasKg    = !isNaN(kg) && kg > 0;
+      if (!hasKg && !notes) return;
+      const existing = Storage.getAccessoryLoad(movement);
+      Storage.setAccessoryLoad(
+        movement,
+        hasKg ? kg : (existing?.kg ?? null),
+        notes ?? existing?.notes ?? null
+      );
+      saved++;
+    });
+
     overlay.remove();
-    if (saved > 0) toast(`${saved} weight${saved > 1 ? 's' : ''} saved`, 'success');
+    if (saved > 0) toast(`${saved} entr${saved > 1 ? 'ies' : 'y'} saved`, 'success');
   });
   footer.appendChild(saveBtn);
 
