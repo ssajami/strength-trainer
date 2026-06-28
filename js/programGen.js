@@ -369,6 +369,15 @@ ${buildMetconMovementPrompt()}
 
 4. SKILL: skill-flagged movements (snatches, toes-to-bar, get-ups, OHS, push jerk, pistols) must NOT appear in Tabata or EMOM — fatigue and time pressure break technique.
 
+## METCON VARIETY — MANDATORY
+
+Across the full program, metcon movements must be deliberately rotated:
+- No single movement may appear in more than 4 of the 12 sessions (3 sessions × 4 weeks)
+- Each week's 3 metcons must collectively use at least 8 distinct movements
+- No movement may appear in all 3 sessions of the same week
+- Across consecutive weeks, at least half the movements must differ
+- Format variety: no format (AMRAP, For Time, EMOM, Tabata, Rounds For Time) may be used more than 4 times across the full program; each format must appear at least once
+
 ## METCON SOFT PREFERENCES
 
 - Push/pull balance: if the metcon has any push pattern, include at least one pull (and vice versa).
