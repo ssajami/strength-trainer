@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-29T03:06:15.740Z",
+  "updatedAt": "2026-06-29T03:36:12.614Z",
   "data": {
     "spt_profile": {
       "age": 55,
@@ -12,15 +12,15 @@
     "spt_accessory_loads": null,
     "spt_programs": [
       {
-        "id": "1782702375734",
-        "createdAt": "2026-06-29T03:06:15.734Z",
+        "id": "1782704172611",
+        "createdAt": "2026-06-29T03:36:12.611Z",
         "startDate": "2026-06-28",
         "weeks": 4,
         "commentsUsed": "",
-        "programName": "4-Week Low-Impact Strength & Bone Density Program",
-        "progressionModel": "Daily Undulating Periodization (DUP)",
-        "progressionJustification": "DUP rotates heavy (3–5 reps), moderate (6–8 reps), and volume (10–12 reps) sessions across the week, providing sufficient mechanical loading stimulus for bone density while varying metabolic stress to support muscle retention — both critical for post-menopausal women. The within-week intensity variation also reduces joint fatigue compared to linear progression, making it ideal for a trainee starting a new program with no established maxes.",
-        "weeklyVolumeNotes": "GLUTES_HAMSTRINGS receives 11 sets/week spread across all 3 sessions via hip thrusts, RDLs, and deadlift primary work. UPPER_BACK_ERECTORS receives 9 sets/week via rows across all 3 sessions. QUAD_DOMINANT receives 9 sets/week split across Sessions 1 and 2 primarily with goblet squat, back squat. PUSH receives 7 sets/week across Sessions 2 and 3. VERTICAL_PULL receives 7 sets/week across Sessions 1 and 3 primarily. UNILATERAL_LOWER receives 6 sets/week per leg across all 3 sessions. CORE receives 5 sets/week across all 3 sessions (accessory tier, last in session). CARRIES_LOADED appear at least once per week in strength or metcon.",
+        "programName": "4-Week Foundation Strength Cycle — Post-Menopausal Bone & Muscle Protocol",
+        "progressionModel": "Daily Undulating Periodisation (DUP)",
+        "progressionJustification": "DUP rotates heavy (3–5 rep), moderate (6–8 rep), and volume (10–12 rep) sessions across the week, simultaneously driving neural adaptations for strength and metabolic stress for hypertrophy — both critical for sarcopenia prevention and bone density in post-menopausal women. Because no prior maxes are recorded, the first two weeks function as a conservative load-calibration phase before meaningful intensity increases in weeks 3–4.",
+        "weeklyVolumeNotes": "GLUTES_HAMSTRINGS receives 11 sets/week spread across all 3 sessions (hip thrust 2×/week + RDL + KB swing accessories). UPPER_BACK_ERECTORS gets 9 sets across all 3 sessions via barbell rows, DB rows, and cable rows as secondaries. QUAD_DOMINANT receives 9 sets across sessions 1 and 2 as primary and secondary slots. PUSH gets 6 sets across sessions 2 and 3. VERTICAL_PULL gets 6 sets across sessions 2 and 3. UNILATERAL_LOWER gets 6 sets per leg across all 3 sessions (2 per session). CORE gets 6 sets across all 3 sessions (2 per session). CARRIES_LOADED appear once in session 3 each week as a mandatory loaded carry finisher.",
         "volumeAudit": [
           {
             "muscleGroup": "GLUTES_HAMSTRINGS",
@@ -51,8 +51,8 @@
             "weeklyTarget": "8–10",
             "weeklySetsProgrammed": 9,
             "sessionBreakdown": [
-              4,
               5,
+              4,
               0
             ],
             "meetsTarget": true,
@@ -61,10 +61,10 @@
           {
             "muscleGroup": "PUSH",
             "weeklyTarget": "6–8",
-            "weeklySetsProgrammed": 7,
+            "weeklySetsProgrammed": 6,
             "sessionBreakdown": [
               0,
-              4,
+              3,
               3
             ],
             "meetsTarget": true,
@@ -73,11 +73,11 @@
           {
             "muscleGroup": "VERTICAL_PULL",
             "weeklyTarget": "6–8",
-            "weeklySetsProgrammed": 7,
+            "weeklySetsProgrammed": 6,
             "sessionBreakdown": [
-              3,
               0,
-              4
+              3,
+              3
             ],
             "meetsTarget": true,
             "flag": null
@@ -97,10 +97,22 @@
           {
             "muscleGroup": "CORE",
             "weeklyTarget": "4–6",
-            "weeklySetsProgrammed": 5,
+            "weeklySetsProgrammed": 6,
             "sessionBreakdown": [
               2,
               2,
+              2
+            ],
+            "meetsTarget": true,
+            "flag": null
+          },
+          {
+            "muscleGroup": "CARRIES_LOADED",
+            "weeklyTarget": "1–2 presence",
+            "weeklySetsProgrammed": 1,
+            "sessionBreakdown": [
+              0,
+              0,
               1
             ],
             "meetsTarget": true,
@@ -114,49 +126,49 @@
             "dayWithinWeek": 1,
             "suggestedDay": "Monday",
             "label": "Workout 1 for the week starting June 28, 2026",
-            "focus": "Lower Body Posterior Chain — Heavy Day (DUP: 3–5 reps)",
+            "focus": "Lower Body — Posterior Chain Heavy + Quad Volume",
             "warmup": [
               {
-                "name": "Rowing Machine Easy Pace",
-                "duration": "4 min",
+                "name": "Rowing machine easy pace",
+                "duration": "3 min",
                 "reps": null,
-                "notes": "Build from very easy to moderate; focus on hip hinge drive, keep lumbar neutral"
+                "notes": "Low intensity, focus on breathing and posture — spine tall, shoulders relaxed"
               },
               {
-                "name": "Hip 90/90 Stretch",
+                "name": "Hip 90/90 stretch",
                 "duration": "60 s each side",
                 "reps": null,
-                "notes": "Sit on floor, rotate between both hip positions; breathe into tightness"
+                "notes": "Sit on floor, front and back leg at 90°; press through floor to rotate torso toward front shin"
               },
               {
-                "name": "Cat-Cow on Hands and Knees",
-                "duration": "10 reps",
+                "name": "Thoracic extension over foam roller",
+                "duration": "90 s",
                 "reps": null,
-                "notes": "Slow, controlled; emphasise thoracic extension on the 'cow' phase"
+                "notes": "Place roller at mid-back, arms across chest; gently extend over roller, pause 2 s at bottom; inch up 3–4 positions"
               },
               {
-                "name": "Band Pull-Apart",
+                "name": "Band pull-apart",
                 "duration": null,
-                "reps": "15 reps",
-                "notes": "Light band; retract scapulae fully — warm-up only, not a working set"
+                "reps": "15",
+                "notes": "Light band; keep arms straight; squeeze scapulae together at end range — rotator cuff activation"
               },
               {
-                "name": "Band External Rotation (elbow at side)",
+                "name": "Band external rotation (side-lying or standing)",
                 "duration": null,
-                "reps": "12 reps each side",
-                "notes": "Light resistance; prime rotator cuff before any loading"
+                "reps": "12 each side",
+                "notes": "Elbow at 90°; rotate forearm away from body; 2-second hold at end range"
               },
               {
-                "name": "Glute Bridge Bodyweight",
+                "name": "Glute bridge bodyweight activation",
                 "duration": null,
-                "reps": "15 reps",
-                "notes": "Drive through heels, squeeze glutes at top, hold 1 s; prime posterior chain"
+                "reps": "15",
+                "notes": "Squeeze glutes hard at top; hold 1 s; prime the posterior chain before deadlifts"
               },
               {
-                "name": "Bodyweight Good Morning",
+                "name": "Goblet squat with pause (empty KB)",
                 "duration": null,
-                "reps": "10 reps",
-                "notes": "Hinge practice — soft knees, flat back, feel hamstring stretch"
+                "reps": "8",
+                "notes": "3-second pause at bottom; cue elbows up, chest tall; open hips and prepare quads"
               }
             ],
             "strength": [
@@ -171,33 +183,33 @@
                 "reps": "4",
                 "percentOfMax": 75,
                 "restSeconds": 210,
-                "coachingNotes": "No established max — start with an empty bar and add weight each warm-up set (20 kg → 40 kg → 55 kg → work sets). Work sets should feel heavy but crisp: RPE 7–8. Brace hard through the belly, drive the floor away. Focus on bar path staying close to the shins. Suggested starting work weight: 55–65 kg for all 4 sets."
+                "coachingNotes": "DUP Heavy day. Start conservative — select a load that feels like RPE 7 at most; technique is the priority in week 1. Brace hard, hinge at hips, push floor away. No touch-and-go; full reset each rep. Increase load slightly if form is solid by set 3."
               },
               {
                 "type": "secondary",
                 "order": 2,
                 "supersetGroup": "A",
-                "movement": "Barbell Hip Thrust",
-                "category": "GLUTES_HAMSTRINGS",
+                "movement": "Barbell Back Squat",
+                "category": "QUAD_DOMINANT",
                 "isUnilateral": false,
                 "sets": 3,
                 "reps": "8",
-                "percentOfMax": 60,
-                "restSeconds": 120,
-                "coachingNotes": "Use a barbell pad. Upper back on bench at shoulder-blade level. Drive hips up until torso is horizontal, squeeze glutes hard at top for 1 s. Suggested starting weight: 40–50 kg on the bar. Pair with the lat pulldown below (superset group A) to save time."
+                "percentOfMax": 62,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with the barbell row (exercise 3). Non-competing muscle groups allow concurrent performance. Moderate load — hips crease below parallel if mobility allows; otherwise stop at parallel. Brace and brace again before each rep."
               },
               {
                 "type": "secondary",
                 "order": 3,
                 "supersetGroup": "A",
-                "movement": "Lat Pulldown (cable or band)",
-                "category": "VERTICAL_PULL",
+                "movement": "Barbell Bent-Over Row",
+                "category": "UPPER_BACK_ERECTORS",
                 "isUnilateral": false,
                 "sets": 3,
                 "reps": "8",
-                "percentOfMax": 65,
-                "restSeconds": 120,
-                "coachingNotes": "Wide grip, slight lean back, pull the bar to upper chest. Focus on depressing the shoulder blades before pulling — this directly addresses lat tightness. Suggested starting weight: 30–40 kg cable stack. Perform immediately after hip thrust; rest 120 s then repeat."
+                "percentOfMax": 60,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with back squat (exercise 2). Hinge to 45° torso angle; pull bar to lower ribs; squeeze shoulder blades hard at top. Conservative load in week 1 — choose a weight where the last 2 reps are a challenge but form stays perfect."
               },
               {
                 "type": "accessory",
@@ -207,108 +219,90 @@
                 "category": "UNILATERAL_LOWER",
                 "isUnilateral": true,
                 "sets": 2,
-                "reps": "12",
+                "reps": "12 each leg",
                 "percentOfMax": null,
                 "restSeconds": 90,
-                "coachingNotes": "Rear foot elevated on bench, front foot forward enough so knee stays behind toes. Use light DBs to start — RPE 7, approximately 8–12 kg per hand. Complete all reps on one leg then switch. Week 1–2: establish weight at RPE 7. Weeks 3–4: add 1 rep per set at same weight."
+                "coachingNotes": "RPE 7–8 — start with 10–12 kg DBs each hand for week 1. Rear foot elevated on a bench; front foot far enough forward that the knee stays behind toes. Superset with Pallof press (exercise 5) — alternate sides to save time."
               },
               {
                 "type": "accessory",
                 "order": 5,
                 "supersetGroup": "B",
-                "movement": "Single-Arm DB Row",
-                "category": "UPPER_BACK_ERECTORS",
-                "isUnilateral": true,
-                "sets": 3,
-                "reps": "12",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Brace knee and same-side hand on bench. Pull DB to hip, not shoulder. Full range — let shoulder blade slide out at bottom, fully retract at top. Approximately 14–18 kg DB, RPE 7–8. Pair with split squat (superset group B): do a set of split squats, immediately do a set of rows, rest 90 s."
-              },
-              {
-                "type": "accessory",
-                "order": 6,
-                "supersetGroup": null,
-                "movement": "Dead Bug",
+                "movement": "Pallof Press",
                 "category": "CORE",
                 "isUnilateral": false,
                 "sets": 2,
-                "reps": "10 each side",
+                "reps": "12 each side",
                 "percentOfMax": null,
-                "restSeconds": 60,
-                "coachingNotes": "Lie on back, arms vertical, knees bent 90°. Press lower back firmly into floor (this is the cue). Slowly lower opposite arm and leg until they nearly touch the floor. Return. Keep breathing. Bodyweight only. This is anti-extension core work — important for spinal stability given deadlift focus today."
+                "restSeconds": 90,
+                "coachingNotes": "Use a cable stack or resistance band anchored at chest height. Start light — RPE 7; the core should work hard to resist rotation. Press hands straight out, pause 2 s, return. Superset with split squat (exercise 4)."
               }
             ],
             "metcon": {
-              "name": "Posterior Pulse",
+              "name": "Swing & Row",
               "format": "AMRAP",
               "timeMinutes": 14,
-              "description": "14-minute AMRAP. Complete as many rounds as possible of the following sequence. Move at a sustainable pace — this is not a sprint; keep technique clean on KB swings. Scale the air bike calories down if needed. Step-ups should be on a 20-inch box or lower.",
+              "description": "14-minute AMRAP. Complete as many rounds as possible of: 12 KB swings, 10 push-ups, 200 m row machine, 10 step-ups (5 each leg, bodyweight or light DBs). Move steadily — this is an aerobic effort, not a sprint. Rest briefly when form degrades.",
               "movements": [
                 {
                   "name": "KB swing",
                   "reps": "12",
-                  "load": "16 kg",
+                  "load": "12–16 kg",
                   "calories": null,
                   "distance": null,
-                  "notes": "Hip hinge drive, not a squat. Hike the bell back aggressively, snap hips at top. Stop at shoulder height — American swing NOT required."
+                  "notes": "Hip hinge drive; keep lumbar neutral; bell to eye level at most"
                 },
                 {
-                  "name": "ring row",
+                  "name": "push-up",
                   "reps": "10",
                   "load": null,
                   "calories": null,
                   "distance": null,
-                  "notes": "Rings set so body is at 45° when arms are extended. Keep body plank-rigid; pull chest to rings. Adjust foot position to scale difficulty."
+                  "notes": "From toes or knees — choose a version you can complete unbroken; full range of motion"
+                },
+                {
+                  "name": "row machine",
+                  "reps": null,
+                  "load": null,
+                  "calories": null,
+                  "distance": "200 m",
+                  "notes": "Moderate pace — damper 4–5; drive with legs first then lean back"
                 },
                 {
                   "name": "step-up",
-                  "reps": "10 each leg",
+                  "reps": "10 total (5 each leg)",
                   "load": null,
                   "calories": null,
                   "distance": null,
-                  "notes": "Unweighted or light DB in each hand (optional). Step fully onto box, drive through heel, stand tall at top. Alternate legs or do all reps on one side then switch."
-                },
-                {
-                  "name": "air bike",
-                  "reps": null,
-                  "load": null,
-                  "calories": 8,
-                  "distance": null,
-                  "notes": "Moderate effort — conversational pace. Use both arms and legs."
+                  "notes": "Box or bench at knee height; step fully through at top; bodyweight only or hold 5–8 kg DBs if comfortable"
                 }
               ]
             },
             "mobility": [
               {
-                "name": "Doorway Lat Stretch (or rig assisted)",
+                "name": "Lat stretch — doorframe or rig hang",
                 "duration": "60 s each side",
-                "notes": "Grab rig upright at hip height, step back and push hips away. Feel stretch in lat. Breathe deeply. Addresses lat tightness directly."
+                "notes": "Grip rig at shoulder height, step back, shift hips away; feel the stretch along the side of the torso; breathe into tight spots"
               },
               {
-                "name": "Thoracic Extension over Foam Roller",
-                "duration": "90 s",
-                "notes": "Place roller perpendicular to spine at mid-back. Support head. Gently extend over roller; move 2–3 segments. Do not force — gentle gravity stretch."
+                "name": "Thoracic rotation in quadruped",
+                "duration": "8 reps each side",
+                "notes": "Hand behind head; rotate elbow toward the sky; follow with eyes; pause at end range; keep hips level"
               },
               {
-                "name": "Sleeper Stretch (shoulder IR)",
+                "name": "Sleeper stretch (shoulder IR)",
                 "duration": "45 s each side",
-                "notes": "Side-lying with shoulder at 90°, push wrist gently toward floor. Hold at first point of resistance. Critical for limited internal rotation."
-              },
-              {
-                "name": "Figure-4 Hip Stretch (Piriformis)",
-                "duration": "60 s each side",
-                "notes": "Lie on back, cross ankle over opposite knee, pull thigh toward chest. Complements posterior chain work done today."
+                "notes": "Lie on side, arm at 90°; gently push forearm toward floor to improve internal rotation; never force — mild tension only"
               }
             ],
             "timeEstimates": {
               "warmupMinutes": 10,
               "primaryMinutes": 14,
-              "secondaryMinutes": 14,
-              "accessoryMinutes": 14,
+              "secondaryMinutes": 16,
+              "accessoryMinutes": 8,
               "metconMinutes": 14,
               "mobilityMinutes": 8,
-              "totalMinutes": 69
+              "totalMinutes": 64
             }
           },
           {
@@ -317,43 +311,43 @@
             "dayWithinWeek": 2,
             "suggestedDay": "Wednesday",
             "label": "Workout 2 for the week starting June 28, 2026",
-            "focus": "Squat & Push — Moderate Day (DUP: 6–8 reps)",
+            "focus": "Upper Body — Push & Vertical Pull + Glute Accessory",
             "warmup": [
               {
-                "name": "Air Bike Easy Pace",
+                "name": "Air bike easy",
                 "duration": "3 min",
                 "reps": null,
-                "notes": "Low effort warm-up; get the joints moving before any loading"
+                "notes": "Easy pace — warm up the shoulders and thoracic spine; breathe through the nose"
               },
               {
-                "name": "Thoracic Rotation in 90/90 Position",
-                "duration": "8 reps each side",
+                "name": "Y/T/W raises (prone on bench or floor, light or bodyweight)",
+                "duration": null,
+                "reps": "10 each position",
+                "notes": "Control each movement; pause 2 s at top; scapular retraction and depression are the goal — rotator cuff prehab"
+              },
+              {
+                "name": "Band pull-apart",
+                "duration": null,
+                "reps": "15",
+                "notes": "Light band; arms straight; squeeze shoulder blades at end"
+              },
+              {
+                "name": "Cat-cow thoracic mobilisation",
+                "duration": "60 s",
                 "reps": null,
-                "notes": "Sit in 90/90 hip position, hands behind head, rotate upper torso. Emphasise reaching elbow to ceiling."
+                "notes": "Slow and deliberate; try to isolate thoracic extension, not just lumbar"
               },
               {
-                "name": "Band Y/T/W Raises (prone or standing lean)",
+                "name": "Lat pulldown (cable, very light)",
                 "duration": null,
-                "reps": "8 reps each position",
-                "notes": "Light band or bodyweight. Y = arms overhead; T = arms out wide; W = pull elbows back. Warm-up only."
+                "reps": "12",
+                "notes": "Warm-up sets only; feel the lats engage; prep for working sets"
               },
               {
-                "name": "Band Pull-Apart",
+                "name": "Hip thrust bodyweight activation",
                 "duration": null,
-                "reps": "15 reps",
-                "notes": "Light band; focus on squeezing shoulder blades together at full extension"
-              },
-              {
-                "name": "Goblet Squat Bodyweight (slow descent)",
-                "duration": null,
-                "reps": "10 reps",
-                "notes": "Hold a 12 kg KB to chest. 4-second descent, pause 2 s at bottom, drive up. Primes quads and teaches bracing."
-              },
-              {
-                "name": "Wrist Circles + Wrist Extension Stretch",
-                "duration": "30 s each direction",
-                "reps": null,
-                "notes": "Rotate wrists slowly in each direction, then press palm against wall for flexor stretch — mandatory wrist/forearm prep element"
+                "reps": "15",
+                "notes": "Pause 2 s at top; ensure glutes — not lower back — are doing the work"
               }
             ],
             "strength": [
@@ -361,412 +355,31 @@
                 "type": "primary",
                 "order": 1,
                 "supersetGroup": null,
-                "movement": "Back Squat",
-                "category": "QUAD_DOMINANT",
-                "isUnilateral": false,
-                "sets": 4,
-                "reps": "6",
-                "percentOfMax": 70,
-                "restSeconds": 180,
-                "coachingNotes": "No established max — begin with bar only, add 10–15 kg each warm-up set, find a moderate working weight where rep 6 is RPE 7–8. Suggested starting work weight: 45–55 kg. Bar high-bar position. Descend until thighs are parallel — depth before load. Brace and breathe with each rep."
-              },
-              {
-                "type": "secondary",
-                "order": 2,
-                "supersetGroup": "A",
                 "movement": "Landmine Press",
                 "category": "PUSH",
                 "isUnilateral": false,
-                "sets": 4,
-                "reps": "8",
-                "percentOfMax": 60,
-                "restSeconds": 120,
-                "coachingNotes": "Set barbell in landmine attachment or corner. Standing position, grip with both hands, press at ~45° angle. This angle is far safer for the shoulder than a vertical press — preferred for limited internal rotation. Start with 10–15 kg on the sleeve. Superset with barbell row (group A): press, immediately row, then rest 120 s."
-              },
-              {
-                "type": "secondary",
-                "order": 3,
-                "supersetGroup": "A",
-                "movement": "Barbell Row (pronated grip)",
-                "category": "UPPER_BACK_ERECTORS",
-                "isUnilateral": false,
                 "sets": 3,
                 "reps": "8",
                 "percentOfMax": 65,
-                "restSeconds": 120,
-                "coachingNotes": "Hinge to roughly 45°, bar hangs at mid-shin. Pull to lower sternum, elbows track back close to ribs. Control the descent. Suggested starting weight: 35–45 kg. Pair with landmine press (superset A). This is not a hinge for volume-audit purposes — it targets upper back."
-              },
-              {
-                "type": "accessory",
-                "order": 4,
-                "supersetGroup": "B",
-                "movement": "Barbell Hip Thrust",
-                "category": "GLUTES_HAMSTRINGS",
-                "isUnilateral": false,
-                "sets": 4,
-                "reps": "10",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Same set-up as Session 1. Moderate weight — RPE 7, approximately 40–50 kg. Focus on full glute squeeze at top. Weeks 1–2: establish weight. Weeks 3–4: add 1 rep (11 reps) at same load."
-              },
-              {
-                "type": "accessory",
-                "order": 5,
-                "supersetGroup": "B",
-                "movement": "Reverse Lunge (DB)",
-                "category": "UNILATERAL_LOWER",
-                "isUnilateral": true,
-                "sets": 2,
-                "reps": "12 each leg",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Step back, lower rear knee to just above the floor, drive through front heel to return. Light DBs to start — approximately 8–12 kg per hand, RPE 7. Good single-leg loading without the joint stress of a forward lunge. Pair with hip thrust (group B): hip thrust set → reverse lunge set → rest 90 s."
-              },
-              {
-                "type": "accessory",
-                "order": 6,
-                "supersetGroup": null,
-                "movement": "Pallof Press (cable or band)",
-                "category": "CORE",
-                "isUnilateral": false,
-                "sets": 2,
-                "reps": "12 each side",
-                "percentOfMax": null,
-                "restSeconds": 60,
-                "coachingNotes": "Stand perpendicular to anchor, feet shoulder-width. Press handle straight out from chest and hold for 2 s, return. The resistance pulls you into rotation — resist it. Light band or cable, RPE 6–7. Anti-rotation core work placed last."
-              }
-            ],
-            "metcon": {
-              "name": "Squatman's Holiday",
-              "format": "For Time",
-              "timeMinutes": 15,
-              "description": "For Time — complete 4 rounds of the following. Target time 12–15 minutes. Scale goblet squat load as needed. Med ball slams are low-impact plyometric — let the ball do the work on the way down, not your lumbar. Rest as needed to maintain form.",
-              "movements": [
-                {
-                  "name": "goblet squat",
-                  "reps": "12",
-                  "load": "16 kg KB",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Hold KB at chest, elbows inside knees at bottom. Full depth. Controlled descent."
-                },
-                {
-                  "name": "push-up",
-                  "reps": "10",
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Hands slightly wider than shoulder width. Chest touches floor. Scale to knee push-up or elevated hands on box if needed."
-                },
-                {
-                  "name": "row machine",
-                  "reps": null,
-                  "load": null,
-                  "calories": 10,
-                  "distance": null,
-                  "notes": "Damper 4–6. Drive with legs first, then pull arms. Relax grip slightly on the recovery."
-                },
-                {
-                  "name": "med ball slam",
-                  "reps": "8",
-                  "load": "6 kg",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Raise ball overhead, slam straight down. Step back to pick up. No jumping. Low-impact plyometric — power from the lats and core, not the lumbar."
-                }
-              ]
-            },
-            "mobility": [
-              {
-                "name": "Child's Pose with Lat Reach",
-                "duration": "60 s each side",
-                "notes": "From child's pose, walk hands to one side and reach through the underarm. Breathe into the lat stretch. Direct treatment for lat tightness."
-              },
-              {
-                "name": "Thoracic Extension over Foam Roller",
-                "duration": "90 s",
-                "notes": "As per Session 1. Different thoracic segments — focus mid-upper back today."
-              },
-              {
-                "name": "Cross-Body Shoulder Stretch",
-                "duration": "45 s each side",
-                "notes": "Draw arm across chest, apply gentle pressure with opposite arm at the elbow. Targets posterior capsule and assists shoulder IR."
-              },
-              {
-                "name": "Hip Flexor Kneeling Stretch",
-                "duration": "60 s each side",
-                "notes": "Lunge position, rear knee on floor, shift hips forward. Squeeze rear glute to increase stretch. Post-squat essential."
-              }
-            ],
-            "timeEstimates": {
-              "warmupMinutes": 10,
-              "primaryMinutes": 13,
-              "secondaryMinutes": 17,
-              "accessoryMinutes": 16,
-              "metconMinutes": 15,
-              "mobilityMinutes": 8,
-              "totalMinutes": 72
-            }
-          },
-          {
-            "sessionNumber": 3,
-            "week": 1,
-            "dayWithinWeek": 3,
-            "suggestedDay": "Friday",
-            "label": "Workout 3 for the week starting June 28, 2026",
-            "focus": "Pull & Carry — Volume Day (DUP: 10–12 reps)",
-            "warmup": [
-              {
-                "name": "Ski Erg Easy Pace",
-                "duration": "3 min",
-                "reps": null,
-                "notes": "Arms only; focus on lat engagement and shoulder depression through the stroke"
-              },
-              {
-                "name": "Thoracic Rotation (seated on box)",
-                "duration": "10 reps each side",
-                "reps": null,
-                "notes": "Sit tall on box, arms crossed over chest, rotate thoracic without moving hips"
-              },
-              {
-                "name": "Band External Rotation (lying on side)",
-                "duration": null,
-                "reps": "12 reps each side",
-                "notes": "Elbow at 90°, rotate forearm toward ceiling. Rotator cuff activation before vertical pull work."
-              },
-              {
-                "name": "Band Pull-Apart",
-                "duration": null,
-                "reps": "15 reps",
-                "notes": "As previous sessions — warm-up only."
-              },
-              {
-                "name": "Scapular Pull-Up or Dead Hang Shrug",
-                "duration": null,
-                "reps": "8 reps",
-                "notes": "Hang from bar, depress and retract shoulder blades without bending elbows. Activates lower traps for pulling work."
-              },
-              {
-                "name": "Single-Leg Balance Stance",
-                "duration": "20 s each side",
-                "reps": null,
-                "notes": "Eyes open, on flat floor. Progress to eyes closed if comfortable — balance/proprioception mandatory element."
-              }
-            ],
-            "strength": [
-              {
-                "type": "primary",
-                "order": 1,
-                "supersetGroup": null,
-                "movement": "Romanian Deadlift (Barbell)",
-                "category": "GLUTES_HAMSTRINGS",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "10",
-                "percentOfMax": 60,
                 "restSeconds": 150,
-                "coachingNotes": "Volume day — lighter load, higher reps. Hinge pattern: soft knees, bar travels close to thighs, feel the hamstring stretch at the bottom (just below the knee). Do NOT round the lower back. Suggested starting weight: 45–55 kg. This is session 3 and the primary is a hinge — differs from Session 2 (squat primary) and Session 1 (hinge primary) but Session 1 was heavy and this is volume, so the pattern is justified by DUP structure."
+                "coachingNotes": "DUP Moderate day — leading with push. Landmine preferred over barbell overhead press for shoulder safety given limited shoulder internal rotation. Stand tall; press at 45° angle; brace core; controlled eccentric 3 seconds down. Both hands on the sleeve — bilateral press. Conservative load week 1."
               },
               {
                 "type": "secondary",
                 "order": 2,
                 "supersetGroup": "A",
-                "movement": "Pull-Up (assisted or band)",
+                "movement": "Lat Pulldown",
                 "category": "VERTICAL_PULL",
                 "isUnilateral": false,
-                "sets": 4,
-                "reps": "6",
-                "percentOfMax": 70,
+                "sets": 3,
+                "reps": "10",
+                "percentOfMax": 60,
                 "restSeconds": 120,
-                "coachingNotes": "Use a resistance band looped over the bar if needed (start with a thick band). Full hang at bottom, chin clears bar at top. Initiate by pulling shoulder blades down and together before bending elbows — directly addresses lat tightness. Superset with chest-supported row (group A)."
+                "coachingNotes": "Superset with hip thrust (exercise 3). Non-competing muscle groups — upper back vs. glutes. Pull bar to upper chest; keep chest tall; avoid shrugging. Lead with elbows driving toward hips. 2-second pause at bottom of movement."
               },
               {
                 "type": "secondary",
                 "order": 3,
-                "supersetGroup": "A",
-                "movement": "Chest-Supported DB Row",
-                "category": "UPPER_BACK_ERECTORS",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "10",
-                "percentOfMax": 65,
-                "restSeconds": 120,
-                "coachingNotes": "Set bench to 30–45° incline, lie face down, row DBs to hips. Chest support eliminates lower back fatigue — good choice on a day already containing an RDL primary. Suggested starting weight: 14–18 kg per DB. Superset with pull-up."
-              },
-              {
-                "type": "accessory",
-                "order": 4,
-                "supersetGroup": "B",
-                "movement": "Step-Up with DB (unilateral)",
-                "category": "UNILATERAL_LOWER",
-                "isUnilateral": true,
-                "sets": 2,
-                "reps": "12 each leg",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Box height: knee height or lower. Hold light DBs at sides — approximately 8–12 kg per hand, RPE 7. Drive through the heel of the top foot, don't push off the bottom foot. Great unilateral load for bone density. Weeks 1–2 establish weight; Weeks 3–4 add 1 rep per set."
-              },
-              {
-                "type": "accessory",
-                "order": 5,
-                "supersetGroup": "B",
-                "movement": "Farmer Carry (KB)",
-                "category": "CARRIES_LOADED",
-                "isUnilateral": false,
-                "sets": 2,
-                "reps": "30 m per set",
-                "percentOfMax": null,
-                "restSeconds": 75,
-                "coachingNotes": "Hold a KB in each hand — approximately 16–20 kg per hand to start, RPE 7. Tall posture, shoulders packed down, core braced. Walk 30 m (or down and back in the gym). This is a grip, core, and trap stimulus and counts as the mandatory loaded carry for the week. Pair with step-up (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 6,
-                "supersetGroup": null,
-                "movement": "Hollow Hold",
-                "category": "CORE",
-                "isUnilateral": false,
-                "sets": 1,
-                "reps": "30 s",
-                "percentOfMax": null,
-                "restSeconds": 60,
-                "coachingNotes": "Lie on back, press lower back into floor, raise shoulders and legs to form a 'dish' shape. Arms extended overhead. If this is too intense, bend knees to 90°. Hold for 30 s. Bodyweight only. Anti-extension core work."
-              }
-            ],
-            "metcon": {
-              "name": "Ski & Swing",
-              "format": "EMOM",
-              "timeMinutes": 12,
-              "description": "12-minute EMOM — every minute on the minute, alternate between two movements. Odd minutes: ski erg calories. Even minutes: KB deadlift + hanging knee raise. Rest for any remaining time in the minute. Scale calories and reps to finish with 15–20 s rest each minute.",
-              "movements": [
-                {
-                  "name": "air bike",
-                  "reps": null,
-                  "load": null,
-                  "calories": 10,
-                  "distance": null,
-                  "notes": "Odd minutes: 10 calories on air bike. All-out effort then rest remaining time in minute. Alternates with ski erg across weeks."
-                },
-                {
-                  "name": "DB floor press",
-                  "reps": "8",
-                  "load": "12–16 kg per DB",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Even minutes: 8 reps DB floor press. Lie on floor, elbows at 45°, lower until triceps touch floor, press. Floor stops excessive range of motion — shoulder safe."
-                },
-                {
-                  "name": "hanging knee raise",
-                  "reps": "8",
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "From bar hang, pull knees to chest slowly. Control the descent. If bar is inaccessible, substitute lying leg raise."
-                },
-                {
-                  "name": "KB deadlift",
-                  "reps": "10",
-                  "load": "24 kg",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Place two KBs outside feet, hinge and grip handles, drive through floor. Touch-and-go or reset each rep. Lumbar-flagged movement — only one per this metcon."
-                }
-              ]
-            },
-            "mobility": [
-              {
-                "name": "Doorway Lat Stretch",
-                "duration": "60 s each side",
-                "notes": "As Session 1 — frequency important for addressing chronic lat tightness."
-              },
-              {
-                "name": "Book Opening (Thoracic Rotation, Side-Lying)",
-                "duration": "8 reps each side",
-                "notes": "Lie on side, knees stacked, top arm rotates overhead and back. Follow hand with eyes. Excellent thoracic mobility drill — different stimulus to the foam roller work."
-              },
-              {
-                "name": "Sleeper Stretch",
-                "duration": "45 s each side",
-                "notes": "As Session 1. End each week here — consistency builds lasting shoulder IR improvement."
-              },
-              {
-                "name": "Calf and Ankle Circles",
-                "duration": "30 s each foot",
-                "notes": "After step-up work — maintain ankle mobility to protect the knee during unilateral movements."
-              }
-            ],
-            "timeEstimates": {
-              "warmupMinutes": 10,
-              "primaryMinutes": 9,
-              "secondaryMinutes": 17,
-              "accessoryMinutes": 12,
-              "metconMinutes": 12,
-              "mobilityMinutes": 8,
-              "totalMinutes": 61
-            }
-          },
-          {
-            "sessionNumber": 4,
-            "week": 2,
-            "dayWithinWeek": 1,
-            "suggestedDay": "Monday",
-            "label": "Workout 4 for the week starting July 5, 2026",
-            "focus": "Lower Body Posterior Chain — Volume Day (DUP: 10–12 reps)",
-            "warmup": [
-              {
-                "name": "Rowing Machine Easy Pace",
-                "duration": "4 min",
-                "reps": null,
-                "notes": "Settle into a rhythm; focus on leg drive"
-              },
-              {
-                "name": "Hip 90/90 Stretch",
-                "duration": "60 s each side",
-                "reps": null,
-                "notes": "As Week 1 Session 1"
-              },
-              {
-                "name": "Quadruped Thoracic Rotation",
-                "duration": "10 reps each side",
-                "reps": null,
-                "notes": "On hands and knees, place one hand behind head, rotate elbow toward ceiling. New variation for thoracic mobility."
-              },
-              {
-                "name": "Band Pull-Apart",
-                "duration": null,
-                "reps": "15 reps",
-                "notes": "Warm-up only"
-              },
-              {
-                "name": "Band External Rotation (elbow at side)",
-                "duration": null,
-                "reps": "12 each side",
-                "notes": "Rotator cuff warm-up"
-              },
-              {
-                "name": "Romanian Deadlift (barbell, light)",
-                "duration": null,
-                "reps": "10 reps at 30 kg",
-                "notes": "Movement prep for today's volume deadlift work. Keep it light — just groove the pattern."
-              }
-            ],
-            "strength": [
-              {
-                "type": "primary",
-                "order": 1,
-                "supersetGroup": null,
-                "movement": "Conventional Deadlift",
-                "category": "GLUTES_HAMSTRINGS",
-                "isUnilateral": false,
-                "sets": 4,
-                "reps": "10",
-                "percentOfMax": 60,
-                "restSeconds": 150,
-                "coachingNotes": "Volume day — same movement as Session 1 but lighter, more reps. Drop 15–20 kg from your Session 1 weight. Suggested work weight: 40–50 kg. Focus on smooth, controlled technique across all 10 reps. Hinge pattern repeated from Session 1 but DUP intensity changes the stimulus. Session 2 will be squat-led, maintaining pattern alternation across the week."
-              },
-              {
-                "type": "secondary",
-                "order": 2,
                 "supersetGroup": "A",
                 "movement": "Barbell Hip Thrust",
                 "category": "GLUTES_HAMSTRINGS",
@@ -775,24 +388,24 @@
                 "reps": "10",
                 "percentOfMax": 62,
                 "restSeconds": 120,
-                "coachingNotes": "Moderate-heavy for glute hypertrophy. Use same or slightly more than Session 2 Week 1. Approximately 42–52 kg. Squeeze at top for 1 s each rep. Superset with lat pulldown (group A)."
-              },
-              {
-                "type": "secondary",
-                "order": 3,
-                "supersetGroup": "A",
-                "movement": "Lat Pulldown (cable or band)",
-                "category": "VERTICAL_PULL",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "10",
-                "percentOfMax": 65,
-                "restSeconds": 120,
-                "coachingNotes": "Same set-up as Session 1. Aim for 2 extra reps vs Session 1 (if using same weight) or same reps with slightly more weight — RPE 7–8. Approximately 30–40 kg. Superset with hip thrust."
+                "coachingNotes": "Superset with lat pulldown (exercise 2). Upper back on bench; barbell padded across hip crease; drive hips to full extension; squeeze glutes at top 2 seconds. Chin tucked — avoid hyperextending the lumbar. Start conservative week 1 — hip thrust is a cornerstone of this cycle for bone loading."
               },
               {
                 "type": "accessory",
                 "order": 4,
+                "supersetGroup": "B",
+                "movement": "Single-Arm DB Row",
+                "category": "UPPER_BACK_ERECTORS",
+                "isUnilateral": true,
+                "sets": 3,
+                "reps": "12 each side",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "RPE 7–8 — choose approximately 16–20 kg DB to start in week 1. Brace on bench; pull elbow high; think 'row the elbow, not the hand'. Superset with reverse lunge (exercise 5)."
+              },
+              {
+                "type": "accessory",
+                "order": 5,
                 "supersetGroup": "B",
                 "movement": "Reverse Lunge (DB)",
                 "category": "UNILATERAL_LOWER",
@@ -801,20 +414,7 @@
                 "reps": "12 each leg",
                 "percentOfMax": null,
                 "restSeconds": 90,
-                "coachingNotes": "Same as Session 2 Week 1 — use same weight and aim for cleaner reps. Approximately 8–12 kg per DB, RPE 7. Pair with single-arm row (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 5,
-                "supersetGroup": "B",
-                "movement": "Single-Arm DB Row",
-                "category": "UPPER_BACK_ERECTORS",
-                "isUnilateral": true,
-                "sets": 3,
-                "reps": "12",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Same as Session 1 Week 1 — match or slightly exceed that weight. Approximately 14–18 kg DB, RPE 7–8. Alternate sides within the set (12 left, 12 right = 1 set). Pair with reverse lunge (group B)."
+                "coachingNotes": "RPE 7 — start with 10–12 kg DBs each hand week 1. Step back, lower rear knee toward floor without touching; front knee tracks over second toe; upright torso. Superset with single-arm row (exercise 4)."
               },
               {
                 "type": "accessory",
@@ -827,79 +427,444 @@
                 "reps": "10 each side",
                 "percentOfMax": null,
                 "restSeconds": 60,
-                "coachingNotes": "Same as Session 1. Try to slow the movement further — 3 s lowering phase. Bodyweight only. Anti-extension core placed last."
+                "coachingNotes": "Bodyweight. Press lower back into floor throughout; extend opposite arm and leg slowly; exhale on extension; pause 1 s at full extension. Quality over speed — this is anti-extension core stability."
               }
             ],
             "metcon": {
-              "name": "Nordic Pull",
-              "format": "Rounds For Time",
-              "timeMinutes": 16,
-              "description": "5 Rounds For Time. Target: complete all 5 rounds in 14–16 minutes. Scale pull-up with a thick resistance band. Lunge steps should be controlled — no bouncing at the bottom. Rest briefly between rounds if needed to maintain form on pull-ups.",
+              "name": "EMOM Triple Threat",
+              "format": "EMOM",
+              "timeMinutes": 15,
+              "description": "15-minute EMOM. Rotate through 3 movements: Minute 1 = 10 goblet squats, Minute 2 = 10 ring rows, Minute 3 = 5 med ball slams. Repeat 5 rounds. Choose weights so you finish each minute with 15–20 seconds rest. Log loads for next week.",
               "movements": [
                 {
-                  "name": "KB swing",
-                  "reps": "15",
-                  "load": "16 kg",
+                  "name": "goblet squat",
+                  "reps": "10",
+                  "load": "12–16 kg KB",
                   "calories": null,
                   "distance": null,
-                  "notes": "Hip snap, not squat. Bell to shoulder height. Lumbar-flagged — only lumbar movement in this metcon."
+                  "notes": "Hold KB at chest; elbows in; sit between knees; drive through heels to stand"
                 },
                 {
-                  "name": "pull-up",
+                  "name": "ring row",
+                  "reps": "10",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Adjust body angle to make 10 reps challenging but unbroken; squeeze shoulder blades at top"
+                },
+                {
+                  "name": "med ball slam",
                   "reps": "5",
-                  "load": null,
+                  "load": "6–8 kg",
                   "calories": null,
                   "distance": null,
-                  "notes": "Strict or banded. Full hang at bottom, chin over bar at top. Scale: ring row if pull-ups are not yet accessible."
-                },
-                {
-                  "name": "lunge",
-                  "reps": "10 each leg",
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Unweighted. Step forward, lower rear knee close to floor, push back to standing. Alternate legs."
-                },
-                {
-                  "name": "ski erg",
-                  "reps": null,
-                  "load": null,
-                  "calories": 12,
-                  "distance": null,
-                  "notes": "12 calories each round. Moderate pace — pull to hips, not just chest. Rotate away from row machine."
+                  "notes": "Reach overhead; slam hard into floor; catch on bounce or pick up; hinge on the pick-up, not flex the spine"
                 }
               ]
             },
             "mobility": [
               {
-                "name": "Doorway Lat Stretch",
+                "name": "Child's pose with arm reach (lat focus)",
                 "duration": "60 s each side",
-                "notes": "Consistency — every session"
+                "notes": "Walk hand to one side; pull hip opposite way; breathe into the lat"
               },
               {
-                "name": "Thoracic Extension over Foam Roller",
-                "duration": "90 s",
-                "notes": "Focus upper thoracic today (near shoulder blades)"
+                "name": "Thread-the-needle thoracic rotation",
+                "duration": "8 reps each side",
+                "notes": "From quadruped; slide one arm under body; allow thoracic rotation; keep hips level"
               },
               {
-                "name": "Sleeper Stretch",
+                "name": "Cross-body shoulder stretch (IR focus)",
                 "duration": "45 s each side",
-                "notes": "Shoulder IR — maintain each session"
-              },
-              {
-                "name": "Seated Piriformis Stretch (figure-4 in chair)",
-                "duration": "60 s each side",
-                "notes": "After glute-heavy day. Cross ankle over knee, lean forward slightly."
+                "notes": "Pull elbow across chest; use opposite hand to deepen; keep shoulder blade down"
               }
             ],
             "timeEstimates": {
               "warmupMinutes": 10,
-              "primaryMinutes": 12,
+              "primaryMinutes": 9,
               "secondaryMinutes": 18,
               "accessoryMinutes": 14,
+              "metconMinutes": 15,
+              "mobilityMinutes": 8,
+              "totalMinutes": 69
+            }
+          },
+          {
+            "sessionNumber": 3,
+            "week": 1,
+            "dayWithinWeek": 3,
+            "suggestedDay": "Friday",
+            "label": "Workout 3 for the week starting June 28, 2026",
+            "focus": "Full Body — Squat Volume + Upper Pull + Carries",
+            "warmup": [
+              {
+                "name": "Ski erg easy",
+                "duration": "3 min",
+                "reps": null,
+                "notes": "Light pull, arms only first 60 s then full body; prime thoracic extension and shoulder girdle"
+              },
+              {
+                "name": "Wall slide with foam roller (shoulder IR mobility)",
+                "duration": null,
+                "reps": "10",
+                "notes": "Stand against wall, arms at 90°; slide arms up wall keeping forearms in contact; corrects limited IR and thoracic stiffness"
+              },
+              {
+                "name": "Band pull-apart",
+                "duration": null,
+                "reps": "15",
+                "notes": "Rotator cuff activation — light band, straight arms, retract scapulae at end"
+              },
+              {
+                "name": "Hip flexor stretch (lunge position)",
+                "duration": "45 s each side",
+                "reps": null,
+                "notes": "Rear knee on ground; drive hips forward; tuck pelvis slightly; release psoas before squatting"
+              },
+              {
+                "name": "Goblet squat with 3-second pause (light KB)",
+                "duration": null,
+                "reps": "8",
+                "notes": "Warm up the squat pattern with mobility emphasis; open hips at bottom"
+              }
+            ],
+            "strength": [
+              {
+                "type": "primary",
+                "order": 1,
+                "supersetGroup": null,
+                "movement": "Goblet Squat (KB)",
+                "category": "QUAD_DOMINANT",
+                "isUnilateral": false,
+                "sets": 4,
+                "reps": "12",
+                "percentOfMax": 60,
+                "restSeconds": 150,
+                "coachingNotes": "DUP Volume day — leading with squat pattern (not hinge — satisfies alternating-lead constraint after session 1 hinge and session 2 push). High rep, moderate load; hold KB at chest. Excellent for bone loading and quad hypertrophy. Choose a KB that makes sets 3–4 challenging. Consider 20–24 kg as starting point."
+              },
+              {
+                "type": "secondary",
+                "order": 2,
+                "supersetGroup": "A",
+                "movement": "Romanian Deadlift (Barbell)",
+                "category": "GLUTES_HAMSTRINGS",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "10",
+                "percentOfMax": 60,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with DB row (exercise 3). Hinge at hips; slight knee bend; lower bar along shins until hamstring tension; no rounding of lower back. Conservative load week 1 — this is a secondary after the squat primary. NOTE: this is the only hinge this session (hinge cap = 2 per session; 1 used here as secondary)."
+              },
+              {
+                "type": "secondary",
+                "order": 3,
+                "supersetGroup": "A",
+                "movement": "DB Bent-Over Row (bilateral)",
+                "category": "UPPER_BACK_ERECTORS",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "10",
+                "percentOfMax": 60,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with RDL (exercise 2). Non-competing muscle groups. Hinge to 45°; pull DBs to hips; squeeze scapulae. Choose a weight that challenges at rep 8–10. Approximately 14–18 kg each DB as starting point week 1."
+              },
+              {
+                "type": "accessory",
+                "order": 4,
+                "supersetGroup": "B",
+                "movement": "Step-Up with DB (unilateral)",
+                "category": "UNILATERAL_LOWER",
+                "isUnilateral": true,
+                "sets": 2,
+                "reps": "12 each leg",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "RPE 7 — start with 10–12 kg DBs each hand. Box at knee height; drive through the elevated heel; avoid pushing off the rear foot. Superset with face pull / band pull-apart (exercise 5) for time efficiency."
+              },
+              {
+                "type": "accessory",
+                "order": 5,
+                "supersetGroup": "B",
+                "movement": "Band Pull-Apart with External Rotation Emphasis",
+                "category": "UPPER_BACK_ERECTORS",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "15",
+                "percentOfMax": null,
+                "restSeconds": 60,
+                "coachingNotes": "Light band. Arms straight; pull band to chest level; at end range rotate hands outward (supinate); hold 2 s. Superset with step-up (exercise 4). Targets rear deltoid and upper back — critical for posture given thoracic stiffness."
+              },
+              {
+                "type": "accessory",
+                "order": 6,
+                "supersetGroup": null,
+                "movement": "Farmer Carry (KB)",
+                "category": "CARRIES_LOADED",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "30 m each set",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Mandatory loaded carry — appears once this week. Choose 20–24 kg KBs per hand; shoulders packed; walk with purpose. Grip, core, and bone loading all in one. Increase load when 30 m feels easy. Rest 90 s between sets."
+              },
+              {
+                "type": "accessory",
+                "order": 7,
+                "supersetGroup": null,
+                "movement": "Plank (forearm)",
+                "category": "CORE",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "30–40 s",
+                "percentOfMax": null,
+                "restSeconds": 60,
+                "coachingNotes": "Brace as if bracing for a punch; squeeze glutes; don't let hips sag or pike. Progress to 40 s in weeks 3–4 at the same effort. Final exercise of the session — finish strong."
+              }
+            ],
+            "metcon": {
+              "name": "Full Send Friday",
+              "format": "For Time",
+              "timeMinutes": 16,
+              "description": "For Time — 4 rounds of: 15/12 cal air bike, 12 DB floor press, 8 pull-ups (or ring rows as scale), 10 alternating reverse lunges. Record total time. Aim to keep each round within 30 s of the first.",
+              "movements": [
+                {
+                  "name": "air bike",
+                  "reps": null,
+                  "load": null,
+                  "calories": 15,
+                  "distance": null,
+                  "notes": "Women: 12 cal; push the pace but keep it sustainable for 4 rounds"
+                },
+                {
+                  "name": "DB floor press",
+                  "reps": "12",
+                  "load": "12–16 kg each DB",
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Lie on floor; DBs at chest; press to lockout; controlled lowering — floor limits ROM and protects shoulders"
+                },
+                {
+                  "name": "pull-up",
+                  "reps": "8",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Use band assistance if needed; full hang to chin over bar; scale to ring rows if no pull-up yet"
+                },
+                {
+                  "name": "lunge",
+                  "reps": "10 alternating",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Bodyweight; step forward, lower rear knee near floor, drive back to standing; stay tall"
+                }
+              ]
+            },
+            "mobility": [
+              {
+                "name": "Doorframe lat stretch",
+                "duration": "60 s each side",
+                "notes": "Grip frame at hip height; walk feet back; shift hips away; feel the pull along the lat"
+              },
+              {
+                "name": "Thoracic extension over foam roller",
+                "duration": "90 s",
+                "notes": "3–4 positions along mid-back; arms across chest; exhale as you extend over the roller"
+              },
+              {
+                "name": "Sleeper stretch",
+                "duration": "45 s each side",
+                "notes": "Shoulder IR focus — gentle pressure only; never force; breathe into the stretch"
+              }
+            ],
+            "timeEstimates": {
+              "warmupMinutes": 10,
+              "primaryMinutes": 13,
+              "secondaryMinutes": 17,
+              "accessoryMinutes": 18,
               "metconMinutes": 16,
               "mobilityMinutes": 8,
-              "totalMinutes": 71
+              "totalMinutes": 76
+            }
+          },
+          {
+            "sessionNumber": 4,
+            "week": 2,
+            "dayWithinWeek": 1,
+            "suggestedDay": "Monday",
+            "label": "Workout 1 for the week starting July 5, 2026",
+            "focus": "Lower Body — Posterior Chain Heavy + Quad Volume",
+            "warmup": [
+              {
+                "name": "Rowing machine easy pace",
+                "duration": "3 min",
+                "reps": null,
+                "notes": "Build to a comfortable pace; focus on posture — chest open, shoulders back"
+              },
+              {
+                "name": "Hip 90/90 stretch",
+                "duration": "60 s each side",
+                "reps": null,
+                "notes": "Same as week 1; note any improvement in range"
+              },
+              {
+                "name": "Thoracic extension over foam roller",
+                "duration": "90 s",
+                "reps": null,
+                "notes": "3–4 positions; exhale at each position"
+              },
+              {
+                "name": "Band pull-apart",
+                "duration": null,
+                "reps": "15",
+                "notes": "Rotator cuff activation — light band"
+              },
+              {
+                "name": "Y/T/W raises (prone on bench)",
+                "duration": null,
+                "reps": "8 each position",
+                "notes": "Scapular stability — hold each rep 2 s at top"
+              },
+              {
+                "name": "Glute bridge with 2-second hold",
+                "duration": null,
+                "reps": "15",
+                "notes": "Posterior chain primer before deadlift"
+              }
+            ],
+            "strength": [
+              {
+                "type": "primary",
+                "order": 1,
+                "supersetGroup": null,
+                "movement": "Conventional Deadlift",
+                "category": "GLUTES_HAMSTRINGS",
+                "isUnilateral": false,
+                "sets": 4,
+                "reps": "4",
+                "percentOfMax": 78,
+                "restSeconds": 210,
+                "coachingNotes": "Week 2 — add approximately 2.5–5 kg to week 1 working weight if RPE was ≤7 last session. DUP Heavy day continues. 4 working sets of 4; still conservative but beginning to push into meaningful intensity. Reset fully between reps."
+              },
+              {
+                "type": "secondary",
+                "order": 2,
+                "supersetGroup": "A",
+                "movement": "Barbell Back Squat",
+                "category": "QUAD_DOMINANT",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "8",
+                "percentOfMax": 65,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with barbell row (exercise 3). Add 2.5 kg from week 1 if form was solid. Controlled descent; pause briefly at bottom; drive through heels."
+              },
+              {
+                "type": "secondary",
+                "order": 3,
+                "supersetGroup": "A",
+                "movement": "Barbell Bent-Over Row",
+                "category": "UPPER_BACK_ERECTORS",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "8",
+                "percentOfMax": 63,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with back squat (exercise 2). Add 2.5 kg from week 1 if form was solid. Same cues — pull to lower ribs, squeeze scapulae, 45° hinge."
+              },
+              {
+                "type": "accessory",
+                "order": 4,
+                "supersetGroup": "B",
+                "movement": "Bulgarian Split Squat (DB)",
+                "category": "UNILATERAL_LOWER",
+                "isUnilateral": true,
+                "sets": 2,
+                "reps": "12 each leg",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "RPE 7–8 — maintain the same load as week 1 (approximately 10–12 kg each hand); focus on technique refinement. Weeks 3–4 add 1 rep per set at same load. Superset with Pallof press (exercise 5)."
+              },
+              {
+                "type": "accessory",
+                "order": 5,
+                "supersetGroup": "B",
+                "movement": "Pallof Press",
+                "category": "CORE",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "12 each side",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Same load and reps as week 1; ensure technique is solid before adding weight. 2-second pause on each press-out. Superset with split squat (exercise 4)."
+              }
+            ],
+            "metcon": {
+              "name": "Rounds of Reckoning",
+              "format": "Rounds For Time",
+              "timeMinutes": 15,
+              "description": "5 Rounds For Time: 15 KB swings, 10 push-ups, 250 m ski erg, 10 hanging knee raises. Rest as needed between rounds but aim to beat your slowest round by the end. Log total time.",
+              "movements": [
+                {
+                  "name": "KB swing",
+                  "reps": "15",
+                  "load": "12–16 kg",
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Same KB as week 1 — aim for unbroken sets; hinge, not squat"
+                },
+                {
+                  "name": "push-up",
+                  "reps": "10",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Maintain same standard as week 1; from toes if possible"
+                },
+                {
+                  "name": "ski erg",
+                  "reps": null,
+                  "load": null,
+                  "calories": null,
+                  "distance": "250 m",
+                  "notes": "Drive from hips and lats; consistent pace across 5 rounds"
+                },
+                {
+                  "name": "hanging knee raise",
+                  "reps": "10",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "From bar or rings; control the descent; avoid swinging"
+                }
+              ]
+            },
+            "mobility": [
+              {
+                "name": "Lat stretch — doorframe or rig",
+                "duration": "60 s each side",
+                "notes": "Same protocol as week 1"
+              },
+              {
+                "name": "Thoracic rotation in quadruped",
+                "duration": "8 reps each side",
+                "notes": "Move slowly; maximise rotation at each rep"
+              },
+              {
+                "name": "Sleeper stretch",
+                "duration": "45 s each side",
+                "notes": "Shoulder IR — note any improvement vs week 1"
+              }
+            ],
+            "timeEstimates": {
+              "warmupMinutes": 10,
+              "primaryMinutes": 14,
+              "secondaryMinutes": 16,
+              "accessoryMinutes": 8,
+              "metconMinutes": 15,
+              "mobilityMinutes": 8,
+              "totalMinutes": 65
             }
           },
           {
@@ -907,44 +872,38 @@
             "week": 2,
             "dayWithinWeek": 2,
             "suggestedDay": "Wednesday",
-            "label": "Workout 5 for the week starting July 5, 2026",
-            "focus": "Squat & Push — Heavy Day (DUP: 3–5 reps)",
+            "label": "Workout 2 for the week starting July 5, 2026",
+            "focus": "Upper Body — Push & Vertical Pull + Glute Accessory",
             "warmup": [
               {
-                "name": "Air Bike Easy-Moderate Pace",
+                "name": "Air bike easy",
                 "duration": "3 min",
                 "reps": null,
-                "notes": "Slightly more effort than warm-up pace — raise heart rate before heavy squats"
+                "notes": "Warm up shoulders and thoracic; moderate resistance"
               },
               {
-                "name": "Ankle Mobility Drill (wall knee drive)",
-                "duration": "10 reps each side",
+                "name": "Y/T/W raises (prone)",
+                "duration": null,
+                "reps": "10 each position",
+                "notes": "Rotator cuff — hold 2 s at top of each rep"
+              },
+              {
+                "name": "Band pull-apart",
+                "duration": null,
+                "reps": "15",
+                "notes": "Light band; retract scapulae"
+              },
+              {
+                "name": "Cat-cow thoracic mobilisation",
+                "duration": "60 s",
                 "reps": null,
-                "notes": "Hands on wall, drive knee over little toe. Improves squat depth."
+                "notes": "Slow; isolate thoracic not just lumbar"
               },
               {
-                "name": "Thoracic Extension with Arms Overhead (rib cage reach)",
-                "duration": "8 reps",
-                "reps": null,
-                "notes": "Stand, clasp hands, raise arms overhead, extend through mid-back. New warm-up variation."
-              },
-              {
-                "name": "Band Pull-Apart",
+                "name": "Hip thrust bodyweight with 2-second hold",
                 "duration": null,
-                "reps": "15 reps",
-                "notes": "Warm-up only"
-              },
-              {
-                "name": "Band External Rotation (standing)",
-                "duration": null,
-                "reps": "12 each side",
-                "notes": "Rotator cuff — warm-up only"
-              },
-              {
-                "name": "Back Squat (bar only and build up)",
-                "duration": null,
-                "reps": "5 reps at bar, 5 at 30 kg, 3 at 40 kg",
-                "notes": "Progressive warm-up sets. Focus on bracing and bar placement before working sets."
+                "reps": "15",
+                "notes": "Glute activation before hip thrust working sets"
               }
             ],
             "strength": [
@@ -952,151 +911,146 @@
                 "type": "primary",
                 "order": 1,
                 "supersetGroup": null,
-                "movement": "Back Squat",
-                "category": "QUAD_DOMINANT",
+                "movement": "Landmine Press",
+                "category": "PUSH",
                 "isUnilateral": false,
-                "sets": 5,
-                "reps": "4",
-                "percentOfMax": 78,
-                "restSeconds": 210,
-                "coachingNotes": "Heavy day — add 2.5–5 kg over Session 2 Week 1 if those sets felt RPE 7. Suggested work weight: 47.5–57.5 kg. 5 sets × 4 reps. This is a near-max effort — full rest between sets. Do NOT superset this primary. Shoes with a heel lift or squat shoes preferred."
+                "sets": 3,
+                "reps": "8",
+                "percentOfMax": 68,
+                "restSeconds": 150,
+                "coachingNotes": "DUP Moderate day. Add approximately 2.5 kg from week 1 if last session felt like RPE ≤7. Continue bilateral landmine press. Controlled 3-second descent. Brace the core hard throughout."
               },
               {
                 "type": "secondary",
                 "order": 2,
                 "supersetGroup": "A",
-                "movement": "Landmine Press",
-                "category": "PUSH",
+                "movement": "Lat Pulldown",
+                "category": "VERTICAL_PULL",
                 "isUnilateral": false,
-                "sets": 4,
-                "reps": "6",
-                "percentOfMax": 65,
+                "sets": 3,
+                "reps": "10",
+                "percentOfMax": 63,
                 "restSeconds": 120,
-                "coachingNotes": "Add 2.5 kg to sleeve vs Session 2 Week 1. Suggested: 12.5–17.5 kg on sleeve. 4 sets × 6 reps. Heavy-ish for the push pattern. Pair with DB row (group A): press → row → rest 120 s."
+                "coachingNotes": "Superset with hip thrust (exercise 3). Add 2.5 kg from week 1 if form was solid. Pull to upper chest; lead with elbows; 2-second pause."
               },
               {
                 "type": "secondary",
                 "order": 3,
                 "supersetGroup": "A",
-                "movement": "Chest-Supported DB Row",
-                "category": "UPPER_BACK_ERECTORS",
+                "movement": "Barbell Hip Thrust",
+                "category": "GLUTES_HAMSTRINGS",
                 "isUnilateral": false,
-                "sets": 3,
-                "reps": "8",
-                "percentOfMax": 67,
+                "sets": 4,
+                "reps": "10",
+                "percentOfMax": 65,
                 "restSeconds": 120,
-                "coachingNotes": "Week 2 — try to add 2 kg per DB or 1 extra rep vs Session 3 Week 1. Approximately 16–20 kg per DB. Pull to hips, elbows track back. Pair with landmine press (group A)."
+                "coachingNotes": "Superset with lat pulldown (exercise 2). Add 5 kg from week 1 if glutes were working and form was solid. 2-second hold at the top. This is the primary glute stimulus this session."
               },
               {
                 "type": "accessory",
                 "order": 4,
                 "supersetGroup": "B",
-                "movement": "Bulgarian Split Squat (DB)",
+                "movement": "Single-Arm DB Row",
+                "category": "UPPER_BACK_ERECTORS",
+                "isUnilateral": true,
+                "sets": 3,
+                "reps": "12 each side",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Same load as week 1 (approximately 16–20 kg); weeks 3–4 add 1 rep per set. Focus on scapular retraction. Superset with reverse lunge (exercise 5)."
+              },
+              {
+                "type": "accessory",
+                "order": 5,
+                "supersetGroup": "B",
+                "movement": "Reverse Lunge (DB)",
                 "category": "UNILATERAL_LOWER",
                 "isUnilateral": true,
                 "sets": 2,
                 "reps": "12 each leg",
                 "percentOfMax": null,
                 "restSeconds": 90,
-                "coachingNotes": "Match Session 1 Week 1 weight — approximately 8–12 kg per DB, RPE 7. Consistency and technique first in week 2. Pair with hip thrust (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 5,
-                "supersetGroup": "B",
-                "movement": "Barbell Hip Thrust",
-                "category": "GLUTES_HAMSTRINGS",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "12",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Third hip thrust session this week — lighter, higher reps for volume accumulation. Approximately 35–45 kg, RPE 6–7. This is accessory volume, not a primary stimulus. Pair with split squat (group B)."
+                "coachingNotes": "Same load as week 1 (approximately 10–12 kg each hand); maintain form. Superset with single-arm row (exercise 4)."
               },
               {
                 "type": "accessory",
                 "order": 6,
                 "supersetGroup": null,
-                "movement": "Pallof Press (cable or band)",
+                "movement": "Dead Bug",
                 "category": "CORE",
                 "isUnilateral": false,
                 "sets": 2,
-                "reps": "12 each side",
+                "reps": "10 each side",
                 "percentOfMax": null,
                 "restSeconds": 60,
-                "coachingNotes": "As Session 2 Week 1 — same set-up. Try to increase hold time at the extended position to 3 s this week. Light band or cable, RPE 6–7."
+                "coachingNotes": "Bodyweight. Same as week 1 — prioritise pressing lower back into floor throughout the movement. No rush."
               }
             ],
             "metcon": {
-              "name": "Tabata Ladder",
+              "name": "Tabata Grind",
               "format": "Tabata",
               "timeMinutes": 16,
-              "description": "Tabata protocol: 8 rounds of each movement (20 s work / 10 s rest). Complete all 8 rounds of Movement 1, then rest 1 min, then all 8 rounds of Movement 2, etc. Total 4 movements × 4 min each = 16 min including inter-movement rest. Count total reps for each movement and log them.",
+              "description": "4 rounds of Tabata (8 intervals of 20 s work / 10 s rest) cycling through 4 movements: air bike, ring row, step-up, push-up. Each movement gets 2 consecutive Tabata intervals before rotating. Score = total reps. Note: no skill movements in Tabata per protocol rules.",
               "movements": [
-                {
-                  "name": "step-up",
-                  "reps": "max in 20 s",
-                  "load": "bodyweight",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Alternating legs. Box height: knee level. Drive through heel of top foot. Low-impact plyometric element."
-                },
-                {
-                  "name": "push-up",
-                  "reps": "max in 20 s",
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Scale to elevated hands if needed. Aim for the same reps each round — don't blow out round 1."
-                },
-                {
-                  "name": "ring row",
-                  "reps": "max in 20 s",
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Keep hips up, pull chest to rings. Adjust foot position to manage difficulty."
-                },
                 {
                   "name": "air bike",
                   "reps": null,
                   "load": null,
                   "calories": null,
                   "distance": null,
-                  "notes": "Max calories in 20 s. All-out effort each interval. Note calories per round."
+                  "notes": "Max calories in 20 s; 2 intervals before rotating"
+                },
+                {
+                  "name": "ring row",
+                  "reps": null,
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Max reps in 20 s; adjust angle to maintain quality; 2 intervals"
+                },
+                {
+                  "name": "step-up",
+                  "reps": null,
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Bodyweight or light DBs; alternate legs; 2 intervals"
+                },
+                {
+                  "name": "push-up",
+                  "reps": null,
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "From toes or knees; full range of motion; 2 intervals"
                 }
               ]
             },
             "mobility": [
               {
-                "name": "Child's Pose with Lat Reach",
+                "name": "Child's pose with arm reach (lat focus)",
                 "duration": "60 s each side",
-                "notes": "Post-squat day — decompress the spine and stretch the lats simultaneously"
+                "notes": "Walk hand further this week; breathe into the lat"
               },
               {
-                "name": "Book Opening (Side-Lying Thoracic Rotation)",
+                "name": "Thread-the-needle thoracic rotation",
                 "duration": "8 reps each side",
-                "notes": "New variation from Week 1 Session 3 — thoracic rotation"
+                "notes": "Attempt to get more rotation than week 1"
               },
               {
-                "name": "Sleeper Stretch",
+                "name": "Cross-body shoulder stretch",
                 "duration": "45 s each side",
-                "notes": "Shoulder IR maintenance"
-              },
-              {
-                "name": "Quad Stretch (standing)",
-                "duration": "45 s each side",
-                "notes": "After heavy squat day — pull heel to glute, brace wall for balance if needed"
+                "notes": "Deepen stretch slightly if comfortable"
               }
             ],
             "timeEstimates": {
               "warmupMinutes": 10,
-              "primaryMinutes": 17,
-              "secondaryMinutes": 16,
+              "primaryMinutes": 9,
+              "secondaryMinutes": 18,
               "accessoryMinutes": 14,
               "metconMinutes": 16,
               "mobilityMinutes": 8,
-              "totalMinutes": 74
+              "totalMinutes": 70
             }
           },
           {
@@ -1104,44 +1058,38 @@
             "week": 2,
             "dayWithinWeek": 3,
             "suggestedDay": "Friday",
-            "label": "Workout 6 for the week starting July 5, 2026",
-            "focus": "Pull & Carry — Moderate Day (DUP: 6–8 reps)",
+            "label": "Workout 3 for the week starting July 5, 2026",
+            "focus": "Full Body — Squat Volume + Upper Pull + Carries",
             "warmup": [
               {
-                "name": "Ski Erg Easy Pace",
+                "name": "Ski erg easy",
                 "duration": "3 min",
                 "reps": null,
-                "notes": "Light pull — activate lats before vertical pulling work"
+                "notes": "Full body warm-up; focus on thoracic extension during pull phase"
               },
               {
-                "name": "Prone Y/T/W Raises (on bench)",
+                "name": "Wall slide with foam roller",
                 "duration": null,
-                "reps": "8 each position",
-                "notes": "Lie face down on incline bench, perform Y, T, W raise patterns. Rotator cuff and lower trap — warm-up only."
+                "reps": "10",
+                "notes": "Shoulder IR and thoracic prime — same as week 1"
               },
               {
-                "name": "Band Pull-Apart",
+                "name": "Band pull-apart",
                 "duration": null,
-                "reps": "15 reps",
-                "notes": "Warm-up only"
+                "reps": "15",
+                "notes": "Rotator cuff activation"
               },
               {
-                "name": "Scapular Pull-Up Dead Hang",
-                "duration": null,
-                "reps": "8 reps",
-                "notes": "Hang, retract and depress scapulae only. Prepare shoulders for pull-ups."
-              },
-              {
-                "name": "Rice Bucket Drill or Reverse Wrist Curls",
-                "duration": "60 s each direction",
+                "name": "Hip flexor lunge stretch",
+                "duration": "45 s each side",
                 "reps": null,
-                "notes": "Mandatory wrist/forearm element. If no rice bucket, use a light DB for reverse wrist curls — 3 kg, slow controlled."
+                "notes": "Release psoas before heavy squatting"
               },
               {
-                "name": "Single-Leg Balance with Perturbation",
-                "duration": "20 s each side",
-                "reps": null,
-                "notes": "Balance on one leg while a partner lightly taps your shoulders in various directions (or self-apply by catching a light ball). Balance/proprioception mandatory element."
+                "name": "Goblet squat pause (light KB)",
+                "duration": null,
+                "reps": "8",
+                "notes": "Mobility and movement prep"
               }
             ],
             "strength": [
@@ -1149,40 +1097,40 @@
                 "type": "primary",
                 "order": 1,
                 "supersetGroup": null,
-                "movement": "Romanian Deadlift (Barbell)",
-                "category": "GLUTES_HAMSTRINGS",
+                "movement": "Goblet Squat (KB)",
+                "category": "QUAD_DOMINANT",
                 "isUnilateral": false,
-                "sets": 3,
-                "reps": "8",
-                "percentOfMax": 65,
+                "sets": 4,
+                "reps": "12",
+                "percentOfMax": 63,
                 "restSeconds": 150,
-                "coachingNotes": "Moderate day — add 2.5–5 kg vs Session 3 Week 1. Suggested: 47.5–57.5 kg. 3 sets × 8 reps. This is DUP moderate intensity for the hinge. Control the descent over 3 seconds. Session leads with hinge following last session's squat-lead — pattern alternation maintained."
+                "coachingNotes": "DUP Volume day. Add 2–4 kg to the KB from week 1 if last session felt manageable at RPE 7. Keep tempo controlled — 3-second descent. Excellent for bone loading via compressive forces."
               },
               {
                 "type": "secondary",
                 "order": 2,
                 "supersetGroup": "A",
-                "movement": "Pull-Up (assisted or band)",
-                "category": "VERTICAL_PULL",
+                "movement": "Romanian Deadlift (Barbell)",
+                "category": "GLUTES_HAMSTRINGS",
                 "isUnilateral": false,
-                "sets": 4,
-                "reps": "8",
-                "percentOfMax": 72,
-                "restSeconds": 120,
-                "coachingNotes": "Week 2 — aim for 2 more reps or thinner band vs Session 3 Week 1. 4 × 8 reps. Initiate with shoulder blades, then elbows. Superset with barbell row (group A)."
+                "sets": 3,
+                "reps": "10",
+                "percentOfMax": 63,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with DB row (exercise 3). Add 2.5 kg from week 1. Focus on the stretch in hamstrings; don't push range beyond where back can stay neutral. One hinge this session (RDL) — hinge cap respected."
               },
               {
                 "type": "secondary",
                 "order": 3,
                 "supersetGroup": "A",
-                "movement": "Barbell Row (pronated grip)",
+                "movement": "DB Bent-Over Row (bilateral)",
                 "category": "UPPER_BACK_ERECTORS",
                 "isUnilateral": false,
                 "sets": 3,
-                "reps": "8",
-                "percentOfMax": 67,
-                "restSeconds": 120,
-                "coachingNotes": "Add 2.5 kg vs Session 2 Week 1. Suggested: 37.5–47.5 kg. Pair with pull-up (group A). Same technique cues: pull to lower sternum, elbows close."
+                "reps": "10",
+                "percentOfMax": 63,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with RDL (exercise 2). Add 2 kg from week 1. Same 45° hinge; pull to hips; squeeze at top."
               },
               {
                 "type": "accessory",
@@ -1195,105 +1143,113 @@
                 "reps": "12 each leg",
                 "percentOfMax": null,
                 "restSeconds": 90,
-                "coachingNotes": "Match Session 3 Week 1 — approximately 8–12 kg per DB, RPE 7. Focus on slow, controlled step down (eccentric). Pair with farmer carry (group B)."
+                "coachingNotes": "Same load as week 1 (approximately 10–12 kg each hand); technical focus. Superset with band pull-apart with ER emphasis (exercise 5)."
               },
               {
                 "type": "accessory",
                 "order": 5,
                 "supersetGroup": "B",
-                "movement": "Farmer Carry (KB)",
-                "category": "CARRIES_LOADED",
+                "movement": "Band Pull-Apart with External Rotation Emphasis",
+                "category": "UPPER_BACK_ERECTORS",
                 "isUnilateral": false,
                 "sets": 2,
-                "reps": "30 m per set",
+                "reps": "15",
                 "percentOfMax": null,
-                "restSeconds": 75,
-                "coachingNotes": "Match or slightly exceed Session 3 Week 1 — approximately 16–20 kg per hand. Maintain tall posture, don't let shoulders shrug. Mandatory loaded carry for the week. Pair with step-up (group B)."
+                "restSeconds": 60,
+                "coachingNotes": "Same band and technique as week 1. Focus on the rotation at end range. Superset with step-up (exercise 4)."
               },
               {
                 "type": "accessory",
                 "order": 6,
                 "supersetGroup": null,
-                "movement": "Hollow Hold",
+                "movement": "Farmer Carry (KB)",
+                "category": "CARRIES_LOADED",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "30 m each set",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Add 2–4 kg per hand vs week 1 if grip and posture held. Mandatory loaded carry. Shoulders packed; walk tall."
+              },
+              {
+                "type": "accessory",
+                "order": 7,
+                "supersetGroup": null,
+                "movement": "Plank (forearm)",
                 "category": "CORE",
                 "isUnilateral": false,
-                "sets": 1,
-                "reps": "35 s",
+                "sets": 2,
+                "reps": "30–40 s",
                 "percentOfMax": null,
                 "restSeconds": 60,
-                "coachingNotes": "Extend the hold by 5 s vs Session 3 Week 1. If the position breaks, rest and reset rather than compensating. Bodyweight only."
+                "coachingNotes": "Push toward 40 s if 30 s felt easy in week 1. Brace and squeeze glutes throughout."
               }
             ],
             "metcon": {
-              "name": "DB Snatch Grinder",
+              "name": "Saturday Eve AMRAP",
               "format": "AMRAP",
-              "timeMinutes": 12,
-              "description": "12-minute AMRAP. Keep pace steady — this AMRAP has a DB snatch which requires technique focus. Rest briefly between movements rather than rushing and breaking form. Scale snatch load to a weight you can control overhead safely.",
+              "timeMinutes": 14,
+              "description": "14-minute AMRAP: 200 m row machine, 10 DB floor press, 12 goblet squats, 15 sit-ups. Move continuously but not recklessly — this is the end of your training week; save something in the tank for recovery.",
               "movements": [
-                {
-                  "name": "DB snatch",
-                  "reps": "6 each arm",
-                  "load": "10–12 kg DB",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Unilateral, overhead — counts as the sole overhead movement this session. Start light; hinge, pull, punch. Land with stable locked-out elbow. Scale load aggressively — technique is paramount. Skill-flagged: coach cues and reduce load before speed."
-                },
                 {
                   "name": "row machine",
                   "reps": null,
                   "load": null,
-                  "calories": 10,
-                  "distance": null,
-                  "notes": "10 calories per round. Rotate away from ski erg this session."
+                  "calories": null,
+                  "distance": "200 m",
+                  "notes": "Consistent pace; same damper setting as earlier in the week"
                 },
                 {
-                  "name": "burpee (no-jump)",
-                  "reps": "8",
-                  "load": null,
+                  "name": "DB floor press",
+                  "reps": "10",
+                  "load": "12–16 kg each DB",
                   "calories": null,
                   "distance": null,
-                  "notes": "No jumping. Step feet back, lower chest to floor, press up, step feet in, stand. Lumbar-flagged — only other flagged movement; no ballistic hinge in this metcon so the pairing is safe."
+                  "notes": "Same load as week 1 session 3 — push for quality reps"
+                },
+                {
+                  "name": "goblet squat",
+                  "reps": "12",
+                  "load": "12–16 kg KB",
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Same KB as EMOM week 1 — drive elbows up; sit tall"
                 },
                 {
                   "name": "sit-up",
-                  "reps": "12",
+                  "reps": "15",
                   "load": null,
                   "calories": null,
                   "distance": null,
-                  "notes": "Abmat or standard. Hands cross over chest or touch temples. Full range, controlled descent."
+                  "notes": "Anchor feet or use AbMat; full range; control the descent"
                 }
               ]
             },
             "mobility": [
               {
-                "name": "Doorway Lat Stretch",
+                "name": "Doorframe lat stretch",
                 "duration": "60 s each side",
-                "notes": "Every session — building a habit"
+                "notes": "End of week — spend extra time here; breathe deeply"
               },
               {
-                "name": "Thoracic Extension over Foam Roller",
-                "duration": "90 s",
-                "notes": "Mid-back focus. Three positions: lower, middle, upper thoracic."
+                "name": "Thoracic extension over foam roller",
+                "duration": "2 min",
+                "notes": "5–6 positions today; extra time as weekly cooldown"
               },
               {
-                "name": "Sleeper Stretch",
-                "duration": "45 s each side",
-                "notes": "Consistent shoulder IR work"
-              },
-              {
-                "name": "Wrist Flexor Stretch (wall)",
-                "duration": "30 s each side",
-                "notes": "Press palm into wall with arm extended. After grip-intensive session. Mandatory wrist/forearm element."
+                "name": "Sleeper stretch",
+                "duration": "60 s each side",
+                "notes": "Slightly longer than usual — end-of-week shoulder recovery"
               }
             ],
             "timeEstimates": {
               "warmupMinutes": 10,
-              "primaryMinutes": 9,
+              "primaryMinutes": 13,
               "secondaryMinutes": 17,
-              "accessoryMinutes": 12,
-              "metconMinutes": 12,
+              "accessoryMinutes": 18,
+              "metconMinutes": 14,
               "mobilityMinutes": 8,
-              "totalMinutes": 61
+              "totalMinutes": 74
             }
           },
           {
@@ -1301,44 +1257,44 @@
             "week": 3,
             "dayWithinWeek": 1,
             "suggestedDay": "Monday",
-            "label": "Workout 7 for the week starting July 12, 2026",
-            "focus": "Lower Body Posterior Chain — Moderate Day (DUP: 6–8 reps)",
+            "label": "Workout 1 for the week starting July 12, 2026",
+            "focus": "Lower Body — Posterior Chain Heavy + Quad Volume",
             "warmup": [
               {
-                "name": "Rowing Machine Easy-Moderate Pace",
-                "duration": "4 min",
+                "name": "Rowing machine easy",
+                "duration": "3 min",
                 "reps": null,
-                "notes": "Build pace over 4 minutes; warm up the posterior chain with each stroke"
+                "notes": "Notice any weekend stiffness; extra focus on hip hinge warm-up"
               },
               {
-                "name": "Hip 90/90 with Active Rotation",
-                "duration": "10 reps each direction",
+                "name": "Hip 90/90 stretch",
+                "duration": "60 s each side",
                 "reps": null,
-                "notes": "Actively rotate between positions; don't just sit passively"
+                "notes": "Week 3 — you may feel more opening; explore the range"
               },
               {
-                "name": "Cat-Cow with Thoracic Emphasis",
-                "duration": "10 reps",
+                "name": "Thoracic extension over foam roller",
+                "duration": "90 s",
                 "reps": null,
-                "notes": "Slow; pause in 'cow' (extension) for 2 s, really open the chest"
+                "notes": "Standard protocol; 3–4 positions"
               },
               {
-                "name": "Band Pull-Apart",
+                "name": "Band pull-apart",
                 "duration": null,
-                "reps": "15 reps",
-                "notes": "Warm-up only"
+                "reps": "15",
+                "notes": "Rotator cuff activation"
               },
               {
-                "name": "Band External Rotation (elbow at side)",
+                "name": "Y/T/W raises",
                 "duration": null,
-                "reps": "12 each side",
-                "notes": "Rotator cuff warm-up"
+                "reps": "8 each position",
+                "notes": "Scapular stability prep; hold 2 s at top"
               },
               {
-                "name": "Goblet Squat with Heel Elevation (if needed)",
+                "name": "Glute bridge with resistance band above knees",
                 "duration": null,
-                "reps": "8 reps at 12 kg",
-                "notes": "Warm up quads and hips; optional heel elevation to increase depth"
+                "reps": "15",
+                "notes": "Add band to increase glute med activation before deadlifts"
               }
             ],
             "strength": [
@@ -1350,36 +1306,36 @@
                 "category": "GLUTES_HAMSTRINGS",
                 "isUnilateral": false,
                 "sets": 4,
-                "reps": "6",
-                "percentOfMax": 72,
-                "restSeconds": 180,
-                "coachingNotes": "Moderate day (Week 3). Add 2.5–5 kg vs the heavy day (Session 1) but do 6 reps rather than 4. Suggested: 57.5–67.5 kg. The DUP wave: Heavy (W1S1 4 reps) → Volume (W2S4 10 reps) → Moderate (W3S7 6 reps) — each week rotates differently across the three intensities. Near-moderate intensity, not a max effort — no superset needed but takes full rest."
+                "reps": "3",
+                "percentOfMax": 82,
+                "restSeconds": 240,
+                "coachingNotes": "Week 3 — intensity increases. DUP Heavy: 3 reps, higher percentage. Add 5–7.5 kg from week 2 working weight if RPE was ≤8. This should feel heavy but not maximal — rate 8 RPE target. Full 4-minute rest between sets. This is where bone-loading mechanical stress peaks in the cycle."
               },
               {
                 "type": "secondary",
                 "order": 2,
                 "supersetGroup": "A",
-                "movement": "Barbell Hip Thrust",
-                "category": "GLUTES_HAMSTRINGS",
+                "movement": "Barbell Back Squat",
+                "category": "QUAD_DOMINANT",
                 "isUnilateral": false,
-                "sets": 4,
+                "sets": 3,
                 "reps": "8",
-                "percentOfMax": 65,
-                "restSeconds": 120,
-                "coachingNotes": "Week 3 — add 2.5 kg vs Week 1 hip thrust, or add 1 rep per set. Approximately 42.5–52.5 kg. 4 × 8. Superset with lat pulldown (group A)."
+                "percentOfMax": 68,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with barbell row (exercise 3). Weeks 3–4: add 2.5–5 kg from block 1 average. Same depth and cues — the goal is progressive overload."
               },
               {
                 "type": "secondary",
                 "order": 3,
                 "supersetGroup": "A",
-                "movement": "Lat Pulldown (cable or band)",
-                "category": "VERTICAL_PULL",
+                "movement": "Barbell Bent-Over Row",
+                "category": "UPPER_BACK_ERECTORS",
                 "isUnilateral": false,
                 "sets": 3,
-                "reps": "9",
-                "percentOfMax": 67,
-                "restSeconds": 120,
-                "coachingNotes": "Week 3 progression: add 1 rep per set (9 reps vs 8 last time) at same weight. Approximately 30–40 kg. Per accessory rule: Weeks 3–4 add 1 rep, same weight. Superset with hip thrust (group A)."
+                "reps": "8",
+                "percentOfMax": 66,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with back squat (exercise 2). Weeks 3–4: add 2.5 kg from block 1. Maintain hinge angle; rows should feel heavier than weeks 1–2."
               },
               {
                 "type": "accessory",
@@ -1392,1057 +1348,59 @@
                 "reps": "13 each leg",
                 "percentOfMax": null,
                 "restSeconds": 90,
-                "coachingNotes": "Week 3 progression: add 1 rep per set (13 vs 12 in Weeks 1–2) at same weight — approximately 8–12 kg per DB. Pair with single-arm row (group B)."
+                "coachingNotes": "Week 3 progression: add 1 rep per set vs weeks 1–2 (now 13 reps). Same load as weeks 1–2 (approximately 10–12 kg each hand). Superset with Pallof press (exercise 5)."
               },
               {
                 "type": "accessory",
                 "order": 5,
                 "supersetGroup": "B",
-                "movement": "Single-Arm DB Row",
-                "category": "UPPER_BACK_ERECTORS",
-                "isUnilateral": true,
-                "sets": 3,
-                "reps": "13",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Week 3 progression: 13 reps vs 12 in Weeks 1–2, same weight — approximately 14–18 kg DB. Pair with split squat (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 6,
-                "supersetGroup": null,
-                "movement": "Dead Bug",
+                "movement": "Pallof Press",
                 "category": "CORE",
                 "isUnilateral": false,
                 "sets": 2,
-                "reps": "11 each side",
+                "reps": "13 each side",
                 "percentOfMax": null,
-                "restSeconds": 60,
-                "coachingNotes": "Week 3 progression: 11 reps per side vs 10 in Weeks 1–2. Same bodyweight. Focus on breath control — exhale as the limb lowers."
+                "restSeconds": 90,
+                "coachingNotes": "Week 3 progression: add 1 rep per set (now 13 reps). Same load as weeks 1–2. 2-second pause. Superset with split squat (exercise 4)."
               }
             ],
             "metcon": {
-              "name": "Triple Threat",
+              "name": "Slam & Pull",
               "format": "For Time",
-              "timeMinutes": 15,
-              "description": "For Time — 3 rounds of the following. Target 13–15 minutes. Single-arm row in the metcon uses a DB — different implement and context vs strength single-arm row. Med ball slams are explosive — the low-impact plyometric element for this block. Rest briefly between rounds if form degrades.",
+              "timeMinutes": 16,
+              "description": "For Time — 3 rounds: 250 m ski erg, 10 KB swings, 8 pull-ups, 6 med ball slams. Then 2 rounds: 250 m ski erg, 12 KB swings, 10 pull-ups, 8 med ball slams. Record total time.",
               "movements": [
-                {
-                  "name": "goblet squat",
-                  "reps": "15",
-                  "load": "16 kg KB",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Higher reps than Week 1 metcon. Maintain upright torso, full depth."
-                },
-                {
-                  "name": "single-arm row",
-                  "reps": "12 each arm",
-                  "load": "16 kg DB",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Use a bench for support. Pull to hip. Both arms = one set of the movement."
-                },
-                {
-                  "name": "med ball slam",
-                  "reps": "10",
-                  "load": "6 kg",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Raise overhead, slam down hard. Step to pick up — no jumping. Low-impact plyometric element."
-                },
                 {
                   "name": "ski erg",
                   "reps": null,
                   "load": null,
-                  "calories": 15,
-                  "distance": null,
-                  "notes": "15 calories per round. Rotating from row machine last session."
-                }
-              ]
-            },
-            "mobility": [
-              {
-                "name": "Doorway Lat Stretch",
-                "duration": "60 s each side",
-                "notes": "Consistent — every session"
-              },
-              {
-                "name": "Thoracic Extension over Foam Roller",
-                "duration": "90 s",
-                "notes": "Week 3 — spend more time on each segment; breathe slowly"
-              },
-              {
-                "name": "Sleeper Stretch",
-                "duration": "45 s each side",
-                "notes": "Shoulder IR — daily if possible at home"
-              },
-              {
-                "name": "Supine Hip Flexor Stretch (knee to chest / opposite leg flat)",
-                "duration": "60 s each side",
-                "notes": "After hinge-heavy session"
-              }
-            ],
-            "timeEstimates": {
-              "warmupMinutes": 10,
-              "primaryMinutes": 13,
-              "secondaryMinutes": 17,
-              "accessoryMinutes": 14,
-              "metconMinutes": 15,
-              "mobilityMinutes": 8,
-              "totalMinutes": 70
-            }
-          },
-          {
-            "sessionNumber": 8,
-            "week": 3,
-            "dayWithinWeek": 2,
-            "suggestedDay": "Wednesday",
-            "label": "Workout 8 for the week starting July 12, 2026",
-            "focus": "Squat & Push — Volume Day (DUP: 10–12 reps)",
-            "warmup": [
-              {
-                "name": "Air Bike Easy Pace",
-                "duration": "3 min",
-                "reps": null,
-                "notes": "Light warm-up; think about posture and breathing"
-              },
-              {
-                "name": "World's Greatest Stretch",
-                "duration": "5 reps each side",
-                "reps": null,
-                "notes": "Step forward into lunge, plant same-side hand, rotate upper arm toward ceiling. Thoracic + hip in one drill."
-              },
-              {
-                "name": "Band Y/T/W Raises",
-                "duration": null,
-                "reps": "8 each position",
-                "notes": "Scapular and rotator cuff — warm-up only"
-              },
-              {
-                "name": "Band Pull-Apart",
-                "duration": null,
-                "reps": "15 reps",
-                "notes": "Warm-up only"
-              },
-              {
-                "name": "Goblet Squat (slow tempo)",
-                "duration": null,
-                "reps": "10 reps at 14 kg",
-                "notes": "4 s down, 2 s hold, 2 s up. Build tissue tolerance for volume squats."
-              },
-              {
-                "name": "Wrist Circles + Finger Flexor Stretch",
-                "duration": "30 s",
-                "reps": null,
-                "notes": "Wrist/forearm mandatory element — rotate then press fingers back gently."
-              }
-            ],
-            "strength": [
-              {
-                "type": "primary",
-                "order": 1,
-                "supersetGroup": null,
-                "movement": "Back Squat",
-                "category": "QUAD_DOMINANT",
-                "isUnilateral": false,
-                "sets": 4,
-                "reps": "10",
-                "percentOfMax": 62,
-                "restSeconds": 150,
-                "coachingNotes": "Volume day — lighter load, highest rep count. Drop approximately 15 kg from your heavy-day working weight. Suggested: 32–42 kg. Focus on controlled descent, full depth, breathing pattern each rep. The volume week differs from W1 (moderate 6 reps) and W2 (heavy 4 reps) — DUP rotation ensures all intensity zones are hit."
-              },
-              {
-                "type": "secondary",
-                "order": 2,
-                "supersetGroup": "A",
-                "movement": "Landmine Press",
-                "category": "PUSH",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "10",
-                "percentOfMax": 58,
-                "restSeconds": 120,
-                "coachingNotes": "Volume day push — higher reps, lighter load. 3 × 10. Approximately 10–15 kg on the sleeve. Focus on full range of motion and shoulder stability. Superset with barbell row (group A)."
-              },
-              {
-                "type": "secondary",
-                "order": 3,
-                "supersetGroup": "A",
-                "movement": "Barbell Row (pronated grip)",
-                "category": "UPPER_BACK_ERECTORS",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "10",
-                "percentOfMax": 65,
-                "restSeconds": 120,
-                "coachingNotes": "Week 3 — add 1 rep vs Week 2 (10 reps). Same weight as Week 2 or up to 2.5 kg more. Approximately 37.5–50 kg. Pair with landmine press (group A)."
-              },
-              {
-                "type": "accessory",
-                "order": 4,
-                "supersetGroup": "B",
-                "movement": "Reverse Lunge (DB)",
-                "category": "UNILATERAL_LOWER",
-                "isUnilateral": true,
-                "sets": 2,
-                "reps": "13 each leg",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Week 3 progression: 13 reps vs 12 in Weeks 1–2, same weight — approximately 8–12 kg per DB. Pair with hip thrust (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 5,
-                "supersetGroup": "B",
-                "movement": "Barbell Hip Thrust",
-                "category": "GLUTES_HAMSTRINGS",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "13",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Week 3 progression: 13 reps vs 12 in Week 2 at same weight — approximately 35–45 kg. Accessory volume for glutes. Pair with reverse lunge (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 6,
-                "supersetGroup": null,
-                "movement": "Pallof Press (cable or band)",
-                "category": "CORE",
-                "isUnilateral": false,
-                "sets": 2,
-                "reps": "13 each side",
-                "percentOfMax": null,
-                "restSeconds": 60,
-                "coachingNotes": "Week 3 progression: 13 reps per side vs 12 in Weeks 1–2. Same resistance. Hold extended position for 2–3 s each rep."
-              }
-            ],
-            "metcon": {
-              "name": "Engine Builder",
-              "format": "EMOM",
-              "timeMinutes": 16,
-              "description": "16-minute EMOM — 4 movements rotating every minute. Minute 1: KB swing. Minute 2: push-up. Minute 3: air bike. Minute 4: lunge. Repeat 4 full rotations. Scale reps so you finish each minute with 10–15 s rest.",
-              "movements": [
+                  "calories": null,
+                  "distance": "250 m",
+                  "notes": "Drive hard; maintain pace across all 5 rounds"
+                },
                 {
                   "name": "KB swing",
-                  "reps": "15",
-                  "load": "16 kg",
+                  "reps": "10 (first 3 rounds) / 12 (last 2 rounds)",
+                  "load": "14–16 kg",
                   "calories": null,
                   "distance": null,
-                  "notes": "Minute 1. Hip-snap drive. Only lumbar movement this metcon. Consistent bell height (shoulder)."
-                },
-                {
-                  "name": "push-up",
-                  "reps": "12",
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Minute 2. Strict or elevated. Maintain body plank. Scale reps to ensure full range."
-                },
-                {
-                  "name": "air bike",
-                  "reps": null,
-                  "load": null,
-                  "calories": 12,
-                  "distance": null,
-                  "notes": "Minute 3. Hard effort for 20 s then settle. Use arms and legs."
-                },
-                {
-                  "name": "lunge",
-                  "reps": "10 each leg",
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Minute 4. Alternating. Bodyweight. Controlled descent. No bouncing."
-                }
-              ]
-            },
-            "mobility": [
-              {
-                "name": "Child's Pose with Lat Reach",
-                "duration": "60 s each side",
-                "notes": "Lat stretch — frequency important"
-              },
-              {
-                "name": "Thoracic Rotation (Quadruped)",
-                "duration": "10 reps each side",
-                "notes": "Different stimulus from roller work — active mobility"
-              },
-              {
-                "name": "Sleeper Stretch",
-                "duration": "45 s each side",
-                "notes": "Consistent IR work"
-              },
-              {
-                "name": "Quad and Hip Flexor Stretch (kneeling)",
-                "duration": "60 s each side",
-                "notes": "After squat-dominant session"
-              }
-            ],
-            "timeEstimates": {
-              "warmupMinutes": 10,
-              "primaryMinutes": 12,
-              "secondaryMinutes": 15,
-              "accessoryMinutes": 15,
-              "metconMinutes": 16,
-              "mobilityMinutes": 8,
-              "totalMinutes": 71
-            }
-          },
-          {
-            "sessionNumber": 9,
-            "week": 3,
-            "dayWithinWeek": 3,
-            "suggestedDay": "Friday",
-            "label": "Workout 9 for the week starting July 12, 2026",
-            "focus": "Pull & Carry — Heavy Day (DUP: 3–5 reps)",
-            "warmup": [
-              {
-                "name": "Ski Erg Easy Pace",
-                "duration": "3 min",
-                "reps": null,
-                "notes": "Lat and upper back activation through the pull"
-              },
-              {
-                "name": "Prone Thoracic Extension (Superman hold)",
-                "duration": "5 reps × 5 s hold",
-                "reps": null,
-                "notes": "Lie face down, raise chest and arms, hold. Erector and thoracic activation."
-              },
-              {
-                "name": "Band External Rotation (lying on side)",
-                "duration": null,
-                "reps": "12 each side",
-                "notes": "Rotator cuff warm-up"
-              },
-              {
-                "name": "Band Pull-Apart",
-                "duration": null,
-                "reps": "15 reps",
-                "notes": "Warm-up only"
-              },
-              {
-                "name": "Scapular Pull-Up Dead Hang",
-                "duration": null,
-                "reps": "10 reps",
-                "notes": "Week 3 — aim for more control and range vs Weeks 1–2"
-              },
-              {
-                "name": "Single-Leg Balance Eyes Closed",
-                "duration": "20 s each side",
-                "reps": null,
-                "notes": "Balance/proprioception mandatory element — progress to eyes closed if comfortable"
-              }
-            ],
-            "strength": [
-              {
-                "type": "primary",
-                "order": 1,
-                "supersetGroup": null,
-                "movement": "Romanian Deadlift (Barbell)",
-                "category": "GLUTES_HAMSTRINGS",
-                "isUnilateral": false,
-                "sets": 4,
-                "reps": "5",
-                "percentOfMax": 75,
-                "restSeconds": 180,
-                "coachingNotes": "Heavy day for the RDL — add 5 kg vs Session 6 Week 2 moderate day. Suggested: 52.5–62.5 kg. 4 × 5 reps. This is the highest load on the RDL this cycle. Control every inch of the descent — the hamstring stretch at bottom is the key driver for bone density loading. Full rest between sets."
-              },
-              {
-                "type": "secondary",
-                "order": 2,
-                "supersetGroup": "A",
-                "movement": "Pull-Up (assisted or band)",
-                "category": "VERTICAL_PULL",
-                "isUnilateral": false,
-                "sets": 4,
-                "reps": "5",
-                "percentOfMax": 80,
-                "restSeconds": 150,
-                "coachingNotes": "Heavy week for pull-ups — use thinner band or attempt unassisted if possible. 4 × 5 strict reps. Rest 150 s between supersets. Superset with chest-supported row (group A). Pull-up at near-max effort — initiate movement from shoulder blades, elbows follow."
-              },
-              {
-                "type": "secondary",
-                "order": 3,
-                "supersetGroup": "A",
-                "movement": "Chest-Supported DB Row",
-                "category": "UPPER_BACK_ERECTORS",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "8",
-                "percentOfMax": 70,
-                "restSeconds": 150,
-                "coachingNotes": "Week 3 — add 2 kg per DB vs Session 5 Week 2. Approximately 18–22 kg per DB. 3 × 8. Pair with pull-up (group A). Elbows at 45° off the bench, squeeze shoulder blades at top."
-              },
-              {
-                "type": "accessory",
-                "order": 4,
-                "supersetGroup": "B",
-                "movement": "Step-Up with DB (unilateral)",
-                "category": "UNILATERAL_LOWER",
-                "isUnilateral": true,
-                "sets": 2,
-                "reps": "13 each leg",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Week 3 progression: 13 reps vs 12 in Weeks 1–2, same weight — approximately 8–12 kg per DB. Slow, controlled step-down (3 s eccentric) — builds bone density via eccentric loading. Pair with farmer carry (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 5,
-                "supersetGroup": "B",
-                "movement": "Farmer Carry (KB)",
-                "category": "CARRIES_LOADED",
-                "isUnilateral": false,
-                "sets": 2,
-                "reps": "30 m per set",
-                "percentOfMax": null,
-                "restSeconds": 75,
-                "coachingNotes": "Week 3 — add 2 kg per hand if Week 2 felt manageable. Approximately 18–22 kg per hand. Mandatory loaded carry. Tall posture, brace core. Pair with step-up (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 6,
-                "supersetGroup": null,
-                "movement": "Hollow Hold",
-                "category": "CORE",
-                "isUnilateral": false,
-                "sets": 1,
-                "reps": "40 s",
-                "percentOfMax": null,
-                "restSeconds": 60,
-                "coachingNotes": "Week 3 progression: 40 s vs 35 s in Week 2. If position degrades at 30 s, bend knees to 90° and continue. Quality over duration."
-              }
-            ],
-            "metcon": {
-              "name": "Row & Step Machine",
-              "format": "Rounds For Time",
-              "timeMinutes": 14,
-              "description": "4 Rounds For Time. Target 12–14 minutes. Push-pull balance: ring rows balance the DB floor press. Rotate from ski erg (Session 7) to row machine today. Step-ups are the low-impact plyometric element.",
-              "movements": [
-                {
-                  "name": "step-up",
-                  "reps": "12 each leg",
-                  "load": "bodyweight",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "No added load. Emphasis on power — drive up quickly (concentric) and lower slowly (eccentric 2 s). Low-impact plyometric element."
-                },
-                {
-                  "name": "ring row",
-                  "reps": "12",
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Horizontal pull. Adjust feet to maintain challenging angle (more horizontal = harder)."
-                },
-                {
-                  "name": "DB floor press",
-                  "reps": "10",
-                  "load": "14–16 kg per DB",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Horizontal push. Floor limits range — shoulder-safe. Lower until triceps touch floor."
-                },
-                {
-                  "name": "row machine",
-                  "reps": null,
-                  "load": null,
-                  "calories": 15,
-                  "distance": null,
-                  "notes": "15 calories per round. Strong leg drive."
-                }
-              ]
-            },
-            "mobility": [
-              {
-                "name": "Doorway Lat Stretch",
-                "duration": "60 s each side",
-                "notes": "Maintain throughout cycle"
-              },
-              {
-                "name": "Book Opening (Side-Lying Thoracic Rotation)",
-                "duration": "10 reps each side",
-                "notes": "More reps than earlier sessions — improving range"
-              },
-              {
-                "name": "Sleeper Stretch",
-                "duration": "50 s each side",
-                "notes": "Extend hold by 5 s vs Week 2"
-              },
-              {
-                "name": "Calf Stretch (wall)",
-                "duration": "45 s each side",
-                "notes": "After step-up work — straight knee (gastrocnemius) and bent knee (soleus)"
-              }
-            ],
-            "timeEstimates": {
-              "warmupMinutes": 10,
-              "primaryMinutes": 12,
-              "secondaryMinutes": 18,
-              "accessoryMinutes": 12,
-              "metconMinutes": 14,
-              "mobilityMinutes": 8,
-              "totalMinutes": 65
-            }
-          },
-          {
-            "sessionNumber": 10,
-            "week": 4,
-            "dayWithinWeek": 1,
-            "suggestedDay": "Monday",
-            "label": "Workout 10 for the week starting July 19, 2026",
-            "focus": "Lower Body Posterior Chain — Heavy Day (DUP: 3–5 reps)",
-            "warmup": [
-              {
-                "name": "Rowing Machine Moderate Pace",
-                "duration": "4 min",
-                "reps": null,
-                "notes": "Build to 65–70% effort over 4 minutes; prime the posterior chain"
-              },
-              {
-                "name": "Hip 90/90 with Active Lift-Off",
-                "duration": "5 reps each side",
-                "reps": null,
-                "notes": "In 90/90, lift the front shin off the floor for 3 s. Activates external rotators."
-              },
-              {
-                "name": "Thoracic Extension (hands behind head, seated)",
-                "duration": "10 reps",
-                "reps": null,
-                "notes": "Sit on bench, hands behind head, extend upper back over the backrest"
-              },
-              {
-                "name": "Band Pull-Apart",
-                "duration": null,
-                "reps": "15 reps",
-                "notes": "Warm-up only"
-              },
-              {
-                "name": "Band External Rotation (elbow at side)",
-                "duration": null,
-                "reps": "12 each side",
-                "notes": "Rotator cuff warm-up"
-              },
-              {
-                "name": "Deadlift Warm-Up (bar → progressive)",
-                "duration": null,
-                "reps": "5 at 20 kg, 4 at 40 kg, 3 at 55 kg",
-                "notes": "Build to near working weight. Last set should feel fast and confident before the work sets."
-              }
-            ],
-            "strength": [
-              {
-                "type": "primary",
-                "order": 1,
-                "supersetGroup": null,
-                "movement": "Conventional Deadlift",
-                "category": "GLUTES_HAMSTRINGS",
-                "isUnilateral": false,
-                "sets": 4,
-                "reps": "4",
-                "percentOfMax": 80,
-                "restSeconds": 240,
-                "coachingNotes": "Heavy week — add 2.5–5 kg vs Session 1 Week 1 (the previous heavy deadlift day). Suggested: 57.5–70 kg. This is the heaviest deadlift of the 4-week cycle. RPE 8. All reps must be crisp — if bar speed slows significantly on rep 3, stop the set and rest. Full 240 s between sets."
-              },
-              {
-                "type": "secondary",
-                "order": 2,
-                "supersetGroup": "A",
-                "movement": "Barbell Hip Thrust",
-                "category": "GLUTES_HAMSTRINGS",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "8",
-                "percentOfMax": 68,
-                "restSeconds": 120,
-                "coachingNotes": "Week 4 — add 2.5 kg vs Week 3. Approximately 45–55 kg. Moderate-heavy for the hip thrust. Superset with lat pulldown (group A)."
-              },
-              {
-                "type": "secondary",
-                "order": 3,
-                "supersetGroup": "A",
-                "movement": "Lat Pulldown (cable or band)",
-                "category": "VERTICAL_PULL",
-                "isUnilateral": false,
-                "sets": 4,
-                "reps": "6",
-                "percentOfMax": 72,
-                "restSeconds": 120,
-                "coachingNotes": "Week 4 heavy pull — increase weight by 2.5–5 kg vs Week 3 and drop to 6 reps. Approximately 32.5–42.5 kg. Heavy lat pulldown to match the heavy deadlift week. Pair with hip thrust (group A)."
-              },
-              {
-                "type": "accessory",
-                "order": 4,
-                "supersetGroup": "B",
-                "movement": "Bulgarian Split Squat (DB)",
-                "category": "UNILATERAL_LOWER",
-                "isUnilateral": true,
-                "sets": 2,
-                "reps": "13 each leg",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Week 4 (Weeks 3–4 add 1 rep rule): 13 reps at same weight as Weeks 1–2 — approximately 8–12 kg per DB. Technique is the priority in Week 4; load stays the same. Pair with single-arm row (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 5,
-                "supersetGroup": "B",
-                "movement": "Single-Arm DB Row",
-                "category": "UPPER_BACK_ERECTORS",
-                "isUnilateral": true,
-                "sets": 3,
-                "reps": "13",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Week 4: 13 reps at same weight as Weeks 1–2 — approximately 14–18 kg DB. Pair with split squat (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 6,
-                "supersetGroup": null,
-                "movement": "Dead Bug",
-                "category": "CORE",
-                "isUnilateral": false,
-                "sets": 2,
-                "reps": "11 each side",
-                "percentOfMax": null,
-                "restSeconds": 60,
-                "coachingNotes": "Week 4: maintain 11 reps per side from Week 3. Focus on slower tempo — 4 s lowering phase. Quality over quantity as we finish the cycle."
-              }
-            ],
-            "metcon": {
-              "name": "Tabata Finale A",
-              "format": "Tabata",
-              "timeMinutes": 16,
-              "description": "Tabata protocol — 8 rounds of each movement (20 s work / 10 s rest), 1 min rest between movements. 4 movements × 4 min = 16 min total. Log total reps for each movement and compare to Week 2 Tabata (Session 5) to see improvement.",
-              "movements": [
-                {
-                  "name": "air bike",
-                  "reps": null,
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Max calories per interval. Compare total across 8 rounds to Session 5 results."
-                },
-                {
-                  "name": "push-up",
-                  "reps": "max in 20 s",
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Maintain consistent reps each round. Full range."
-                },
-                {
-                  "name": "sit-up",
-                  "reps": "max in 20 s",
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Full range, hands touch mat overhead then touch toes."
-                },
-                {
-                  "name": "KB deadlift",
-                  "reps": "max in 20 s",
-                  "load": "24 kg",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Touch-and-go. Hip hinge, flat back. Lumbar-flagged — only one per this metcon."
-                }
-              ]
-            },
-            "mobility": [
-              {
-                "name": "Doorway Lat Stretch",
-                "duration": "60 s each side",
-                "notes": "Every session — must become a daily habit"
-              },
-              {
-                "name": "Thoracic Extension over Foam Roller",
-                "duration": "2 min",
-                "notes": "Week 4 — extend duration. Breathe into the extension. Three thoracic segments."
-              },
-              {
-                "name": "Sleeper Stretch",
-                "duration": "50 s each side",
-                "notes": "IR maintenance"
-              },
-              {
-                "name": "Figure-4 Hip Stretch",
-                "duration": "60 s each side",
-                "notes": "After heavy posterior chain work"
-              }
-            ],
-            "timeEstimates": {
-              "warmupMinutes": 10,
-              "primaryMinutes": 15,
-              "secondaryMinutes": 16,
-              "accessoryMinutes": 14,
-              "metconMinutes": 16,
-              "mobilityMinutes": 8,
-              "totalMinutes": 74
-            }
-          },
-          {
-            "sessionNumber": 11,
-            "week": 4,
-            "dayWithinWeek": 2,
-            "suggestedDay": "Wednesday",
-            "label": "Workout 11 for the week starting July 19, 2026",
-            "focus": "Squat & Push — Moderate Day (DUP: 6–8 reps)",
-            "warmup": [
-              {
-                "name": "Air Bike Moderate Pace",
-                "duration": "4 min",
-                "reps": null,
-                "notes": "Build to 65% effort by minute 4"
-              },
-              {
-                "name": "World's Greatest Stretch",
-                "duration": "5 reps each side",
-                "reps": null,
-                "notes": "Full hip, thoracic, and lat opener — comprehensive warm-up for squat day"
-              },
-              {
-                "name": "Band Y/T/W Raises",
-                "duration": null,
-                "reps": "8 each position",
-                "notes": "Scapular activation — warm-up only"
-              },
-              {
-                "name": "Band Pull-Apart",
-                "duration": null,
-                "reps": "15 reps",
-                "notes": "Warm-up only"
-              },
-              {
-                "name": "Back Squat Warm-Up (build to working weight)",
-                "duration": null,
-                "reps": "5 at 20 kg, 5 at 35 kg, 3 at 45 kg",
-                "notes": "Progressive build; each set faster than the last to prime neural drive."
-              },
-              {
-                "name": "Wrist Mobility — Prayer Stretch and Reverse Prayer",
-                "duration": "30 s each position",
-                "reps": null,
-                "notes": "Mandatory wrist/forearm element. Prayer: palms together in front of chest, push elbows apart. Reverse: backs of hands together, push down."
-              }
-            ],
-            "strength": [
-              {
-                "type": "primary",
-                "order": 1,
-                "supersetGroup": null,
-                "movement": "Back Squat",
-                "category": "QUAD_DOMINANT",
-                "isUnilateral": false,
-                "sets": 5,
-                "reps": "6",
-                "percentOfMax": 75,
-                "restSeconds": 180,
-                "coachingNotes": "Moderate day — Week 4 adds a 5th set vs the 4 sets in Week 1 moderate. Add 2.5 kg vs Session 2 Week 1 (moderate squat day). Suggested: 47.5–57.5 kg. 5 × 6 is the highest volume-intensity combination of the cycle. RPE 7–8 on final set. Controlled 3 s descent."
-              },
-              {
-                "type": "secondary",
-                "order": 2,
-                "supersetGroup": "A",
-                "movement": "Landmine Press",
-                "category": "PUSH",
-                "isUnilateral": false,
-                "sets": 4,
-                "reps": "8",
-                "percentOfMax": 65,
-                "restSeconds": 120,
-                "coachingNotes": "Week 4 — add 2.5 kg vs Session 5 Week 2 (heavy press day), or match Session 2 Week 1 weight and aim for cleaner 8 reps. Approximately 12.5–17.5 kg on sleeve. Pair with barbell row (group A)."
-              },
-              {
-                "type": "secondary",
-                "order": 3,
-                "supersetGroup": "A",
-                "movement": "Barbell Row (pronated grip)",
-                "category": "UPPER_BACK_ERECTORS",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "10",
-                "percentOfMax": 68,
-                "restSeconds": 120,
-                "coachingNotes": "Week 4 — add 2.5 kg vs Session 8 Week 3. Approximately 40–52.5 kg. 3 × 10. Pair with landmine press (group A). Controlled throughout — no jerking."
-              },
-              {
-                "type": "accessory",
-                "order": 4,
-                "supersetGroup": "B",
-                "movement": "Reverse Lunge (DB)",
-                "category": "UNILATERAL_LOWER",
-                "isUnilateral": true,
-                "sets": 2,
-                "reps": "13 each leg",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Week 4: 13 reps same weight as Weeks 1–2 — approximately 8–12 kg per DB. Accessory progression complete — set up for a load increase in the next cycle. Pair with hip thrust (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 5,
-                "supersetGroup": "B",
-                "movement": "Barbell Hip Thrust",
-                "category": "GLUTES_HAMSTRINGS",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "13",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Week 4: 13 reps same weight as Week 3 — approximately 35–45 kg. Accessory glute volume. Pair with reverse lunge (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 6,
-                "supersetGroup": null,
-                "movement": "Pallof Press (cable or band)",
-                "category": "CORE",
-                "isUnilateral": false,
-                "sets": 2,
-                "reps": "13 each side",
-                "percentOfMax": null,
-                "restSeconds": 60,
-                "coachingNotes": "Week 4: maintain 13 reps from Week 3. Try to add 5% resistance (slightly thicker band or extra plate on cable) while keeping the same reps. Anti-rotation core — placed last."
-              }
-            ],
-            "metcon": {
-              "name": "Machine & Swing Complex",
-              "format": "AMRAP",
-              "timeMinutes": 14,
-              "description": "14-minute AMRAP. Final push week — aim for more rounds than any previous AMRAP session. KB swings are the metcon staple of this program; track how your technique has improved over 4 weeks. Pull-ups balance the push (step-up). Ski erg rotates from air bike (Session 10).",
-              "movements": [
-                {
-                  "name": "KB swing",
-                  "reps": "15",
-                  "load": "16 kg",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Consistent swing — hip snap, bell to shoulder height. Lumbar-flagged — only lumbar movement here."
+                  "notes": "Hinge and snap; lumbar neutral; bell to eye level"
                 },
                 {
                   "name": "pull-up",
-                  "reps": "5",
+                  "reps": "8 (first 3 rounds) / 10 (last 2 rounds)",
                   "load": null,
                   "calories": null,
                   "distance": null,
-                  "notes": "Strict or banded. Initiate with shoulder blades. Scale: ring row if needed."
-                },
-                {
-                  "name": "step-up",
-                  "reps": "10 each leg",
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Drive up powerfully. Low-impact plyometric element for the cycle."
-                },
-                {
-                  "name": "ski erg",
-                  "reps": null,
-                  "load": null,
-                  "calories": 10,
-                  "distance": null,
-                  "notes": "10 calories per round. All upper body pull — complements the swing and pull-up."
-                }
-              ]
-            },
-            "mobility": [
-              {
-                "name": "Child's Pose with Lat Reach",
-                "duration": "60 s each side",
-                "notes": "Week 4 — try to reach further; notice improvement vs Week 1"
-              },
-              {
-                "name": "Thoracic Rotation (Book Opening)",
-                "duration": "10 reps each side",
-                "notes": "Active thoracic mobility — the movement should feel easier than Week 1"
-              },
-              {
-                "name": "Sleeper Stretch",
-                "duration": "50 s each side",
-                "notes": "Consistent IR work — you should notice increased range vs Week 1"
-              },
-              {
-                "name": "Hip Flexor Kneeling Stretch",
-                "duration": "60 s each side",
-                "notes": "Post-squat standard. Squeeze rear glute to deepen stretch."
-              }
-            ],
-            "timeEstimates": {
-              "warmupMinutes": 10,
-              "primaryMinutes": 16,
-              "secondaryMinutes": 17,
-              "accessoryMinutes": 15,
-              "metconMinutes": 14,
-              "mobilityMinutes": 8,
-              "totalMinutes": 73
-            }
-          },
-          {
-            "sessionNumber": 12,
-            "week": 4,
-            "dayWithinWeek": 3,
-            "suggestedDay": "Friday",
-            "label": "Workout 12 for the week starting July 19, 2026",
-            "focus": "Pull & Carry — Volume Day (DUP: 10–12 reps)",
-            "warmup": [
-              {
-                "name": "Ski Erg Easy-Moderate Pace",
-                "duration": "3 min",
-                "reps": null,
-                "notes": "Final week — activate lats with intention; notice the connection from the pull through to the hips"
-              },
-              {
-                "name": "Prone Y/T/W on Bench (with light plates)",
-                "duration": null,
-                "reps": "8 each position",
-                "notes": "Progress from bodyweight: hold 1–2 kg plates per hand. Rotator cuff — warm-up only."
-              },
-              {
-                "name": "Band Pull-Apart",
-                "duration": null,
-                "reps": "15 reps",
-                "notes": "Warm-up only"
-              },
-              {
-                "name": "Scapular Pull-Up Dead Hang",
-                "duration": null,
-                "reps": "10 reps",
-                "notes": "Full dead hang, shrug scapulae down and together. Note any improvement in shoulder position vs Week 1."
-              },
-              {
-                "name": "Single-Leg Balance with Arm Reach",
-                "duration": "20 s each side",
-                "reps": null,
-                "notes": "Balance on one leg, reach opposite arm in various directions (forward, diagonal, lateral). Progressive balance/proprioception element for final week."
-              },
-              {
-                "name": "Rice Bucket Drill or Reverse Wrist Curls",
-                "duration": "60 s each direction",
-                "reps": null,
-                "notes": "Mandatory wrist/forearm element — final session of the cycle."
-              }
-            ],
-            "strength": [
-              {
-                "type": "primary",
-                "order": 1,
-                "supersetGroup": null,
-                "movement": "Romanian Deadlift (Barbell)",
-                "category": "GLUTES_HAMSTRINGS",
-                "isUnilateral": false,
-                "sets": 4,
-                "reps": "10",
-                "percentOfMax": 63,
-                "restSeconds": 150,
-                "coachingNotes": "Volume day for final week — add 2.5 kg vs Session 3 Week 1 volume RDL. Suggested: 47.5–57.5 kg. 4 × 10. This is the most accumulated volume for the RDL in this cycle. Smooth, controlled reps — no bouncing. The 4th set should challenge you but not break form. Record your weight for the next cycle's starting point."
-              },
-              {
-                "type": "secondary",
-                "order": 2,
-                "supersetGroup": "A",
-                "movement": "Pull-Up (assisted or band)",
-                "category": "VERTICAL_PULL",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "10",
-                "percentOfMax": 68,
-                "restSeconds": 120,
-                "coachingNotes": "Volume day — 3 × 10 pull-ups. Use band if needed. If you've been progressing the band size, you may now be on a lighter band than Week 1. Note improvement. Pair with chest-supported row (group A)."
-              },
-              {
-                "type": "secondary",
-                "order": 3,
-                "supersetGroup": "A",
-                "movement": "Chest-Supported DB Row",
-                "category": "UPPER_BACK_ERECTORS",
-                "isUnilateral": false,
-                "sets": 3,
-                "reps": "10",
-                "percentOfMax": 68,
-                "restSeconds": 120,
-                "coachingNotes": "Week 4 — add 2 kg per DB vs Session 9 Week 3. Approximately 20–24 kg per DB. 3 × 10. Pair with pull-up (group A). Final set should be RPE 8."
-              },
-              {
-                "type": "accessory",
-                "order": 4,
-                "supersetGroup": "B",
-                "movement": "Step-Up with DB (unilateral)",
-                "category": "UNILATERAL_LOWER",
-                "isUnilateral": true,
-                "sets": 2,
-                "reps": "13 each leg",
-                "percentOfMax": null,
-                "restSeconds": 90,
-                "coachingNotes": "Week 4: 13 reps same weight as Weeks 1–2 — approximately 8–12 kg per DB. Document your weight for the next cycle where you will start at a heavier load. Pair with farmer carry (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 5,
-                "supersetGroup": "B",
-                "movement": "Farmer Carry (KB)",
-                "category": "CARRIES_LOADED",
-                "isUnilateral": false,
-                "sets": 2,
-                "reps": "35 m per set",
-                "percentOfMax": null,
-                "restSeconds": 75,
-                "coachingNotes": "Week 4 — extend the carry distance from 30 m to 35 m at same weight. Approximately 18–22 kg per hand. This is the final loaded carry of the cycle — note how it compares to Week 1. Pair with step-up (group B)."
-              },
-              {
-                "type": "accessory",
-                "order": 6,
-                "supersetGroup": null,
-                "movement": "Hollow Hold",
-                "category": "CORE",
-                "isUnilateral": false,
-                "sets": 1,
-                "reps": "40 s",
-                "percentOfMax": null,
-                "restSeconds": 60,
-                "coachingNotes": "Week 4: maintain 40 s from Week 3. If 40 s is comfortable with perfect form, add 5 s as a bonus. Log your final hollow hold time — it will be the starting point for the next cycle. Core placed last as always."
-              }
-            ],
-            "metcon": {
-              "name": "Cycle Closer",
-              "format": "For Time",
-              "timeMinutes": 15,
-              "description": "For Time — 3 rounds. This is your benchmark finisher for the 4-week cycle. Record your time and compare total volume to Week 1 (Session 2 and 3 metcons). Goblet squat load can be increased if the 16 kg felt easy in earlier weeks. Med ball slams are the mandatory low-impact plyometric — finish strong.",
-              "movements": [
-                {
-                  "name": "goblet squat",
-                  "reps": "15",
-                  "load": "16–20 kg KB",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Increase to 20 kg KB if 16 kg is comfortable. Full depth, upright torso."
-                },
-                {
-                  "name": "single-arm row",
-                  "reps": "12 each arm",
-                  "load": "16–18 kg DB",
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Slightly heavier DB than Week 3 metcon if strength has increased. Full range each rep."
+                  "notes": "Band assist if needed; full hang each rep; scale to ring rows"
                 },
                 {
                   "name": "med ball slam",
-                  "reps": "12",
+                  "reps": "6 (first 3 rounds) / 8 (last 2 rounds)",
                   "load": "6–8 kg",
                   "calories": null,
                   "distance": null,
-                  "notes": "Higher reps than Week 3 (10 → 12). Explosive — low-impact plyometric element. Step back to pick up."
-                },
-                {
-                  "name": "burpee (no-jump)",
-                  "reps": "8",
-                  "load": null,
-                  "calories": null,
-                  "distance": null,
-                  "notes": "Step feet, no jump. Lumbar-flagged — only one lumbar movement in this metcon alongside the med ball slam requires note: med ball slam IS lumbar-flagged. SUBSTITUTION: replace burpee with 10 push-ups to comply with the 1 lumbar movement limit. Use push-up variant instead — chest to floor, no jump at top."
+                  "notes": "Reach overhead; slam; hinge to retrieve — do NOT round the spine to pick it up"
                 }
               ],
               "validationViolations": [
@@ -2451,34 +1409,984 @@
             },
             "mobility": [
               {
-                "name": "Doorway Lat Stretch",
-                "duration": "90 s each side",
-                "notes": "Final session — extended duration. Compare your range to Week 1. Celebrate any improvement."
-              },
-              {
-                "name": "Thoracic Extension over Foam Roller (full thoracic)",
-                "duration": "2 min",
-                "notes": "Work all three thoracic segments. By Week 4, this should feel more comfortable and produce greater range."
-              },
-              {
-                "name": "Sleeper Stretch",
+                "name": "Lat stretch — doorframe or rig",
                 "duration": "60 s each side",
-                "notes": "Final IR session — hold slightly longer. Record any subjective improvement in shoulder freedom."
+                "notes": "Week 3 — focus on breathing into restriction; try to feel more release than week 1"
               },
               {
-                "name": "Supine Spinal Twist",
-                "duration": "60 s each side",
-                "notes": "Lie on back, draw one knee across the body. Gentle rotation to decompress after 4 weeks of loading. A perfect end to the cycle."
+                "name": "Thoracic rotation in quadruped",
+                "duration": "10 reps each side",
+                "notes": "Increase to 10 reps this week; maximise rotation at each"
+              },
+              {
+                "name": "Sleeper stretch",
+                "duration": "45 s each side",
+                "notes": "Assess whether IR has improved vs week 1; note progress"
               }
             ],
             "timeEstimates": {
               "warmupMinutes": 10,
-              "primaryMinutes": 12,
-              "secondaryMinutes": 15,
-              "accessoryMinutes": 13,
+              "primaryMinutes": 15,
+              "secondaryMinutes": 16,
+              "accessoryMinutes": 8,
+              "metconMinutes": 16,
+              "mobilityMinutes": 8,
+              "totalMinutes": 67
+            }
+          },
+          {
+            "sessionNumber": 8,
+            "week": 3,
+            "dayWithinWeek": 2,
+            "suggestedDay": "Wednesday",
+            "label": "Workout 2 for the week starting July 12, 2026",
+            "focus": "Upper Body — Push & Vertical Pull + Glute Accessory",
+            "warmup": [
+              {
+                "name": "Air bike easy",
+                "duration": "3 min",
+                "reps": null,
+                "notes": "Thoracic prime — push handles back and open the chest"
+              },
+              {
+                "name": "Y/T/W raises (prone)",
+                "duration": null,
+                "reps": "10 each position",
+                "notes": "Rotator cuff — add light DBs (1–2 kg) if bodyweight feels easy"
+              },
+              {
+                "name": "Band pull-apart",
+                "duration": null,
+                "reps": "15",
+                "notes": "Light band — activation only"
+              },
+              {
+                "name": "Cat-cow thoracic mobilisation",
+                "duration": "60 s",
+                "reps": null,
+                "notes": "Slower today — maximise each segment"
+              },
+              {
+                "name": "Hip thrust bodyweight pause holds",
+                "duration": null,
+                "reps": "15",
+                "notes": "3-second hold at top; glute activation before working sets"
+              }
+            ],
+            "strength": [
+              {
+                "type": "primary",
+                "order": 1,
+                "supersetGroup": null,
+                "movement": "Landmine Press",
+                "category": "PUSH",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "8",
+                "percentOfMax": 70,
+                "restSeconds": 150,
+                "coachingNotes": "Week 3 — add 2.5 kg from week 2. DUP Moderate day continues. Focus on power out of the bottom — think 'punch through'. Controlled eccentric remains 3 seconds."
+              },
+              {
+                "type": "secondary",
+                "order": 2,
+                "supersetGroup": "A",
+                "movement": "Lat Pulldown",
+                "category": "VERTICAL_PULL",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "10",
+                "percentOfMax": 65,
+                "restSeconds": 120,
+                "coachingNotes": "Superset with hip thrust (exercise 3). Add 2.5 kg from week 2. Squeeze lats at bottom; 2-second pause."
+              },
+              {
+                "type": "secondary",
+                "order": 3,
+                "supersetGroup": "A",
+                "movement": "Barbell Hip Thrust",
+                "category": "GLUTES_HAMSTRINGS",
+                "isUnilateral": false,
+                "sets": 4,
+                "reps": "10",
+                "percentOfMax": 68,
+                "restSeconds": 120,
+                "coachingNotes": "Superset with lat pulldown (exercise 2). Add 5 kg from week 2. 2-second hold at top; chin tucked; ribs down. Week 3 hip thrust should feel challenging by set 4."
+              },
+              {
+                "type": "accessory",
+                "order": 4,
+                "supersetGroup": "B",
+                "movement": "Single-Arm DB Row",
+                "category": "UPPER_BACK_ERECTORS",
+                "isUnilateral": true,
+                "sets": 3,
+                "reps": "13 each side",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Week 3 progression: add 1 rep per set (now 13 reps). Same load as weeks 1–2 (approximately 16–20 kg). Superset with reverse lunge (exercise 5)."
+              },
+              {
+                "type": "accessory",
+                "order": 5,
+                "supersetGroup": "B",
+                "movement": "Reverse Lunge (DB)",
+                "category": "UNILATERAL_LOWER",
+                "isUnilateral": true,
+                "sets": 2,
+                "reps": "13 each leg",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Week 3 progression: add 1 rep per set (now 13 reps). Same load as weeks 1–2 (approximately 10–12 kg each hand). Superset with single-arm row (exercise 4)."
+              },
+              {
+                "type": "accessory",
+                "order": 6,
+                "supersetGroup": null,
+                "movement": "Dead Bug",
+                "category": "CORE",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "11 each side",
+                "percentOfMax": null,
+                "restSeconds": 60,
+                "coachingNotes": "Week 3 progression: add 1 rep per side (now 11 reps). Bodyweight. Same technique emphasis — lower back pressed to floor throughout."
+              }
+            ],
+            "metcon": {
+              "name": "EMOM Push-Lunge",
+              "format": "EMOM",
+              "timeMinutes": 15,
+              "description": "15-minute EMOM. Minute 1 = 12 cal air bike, Minute 2 = 10 push-ups, Minute 3 = 10 alternating reverse lunges (5 each leg). Repeat 5 rounds. Note: no skill movements in EMOM. Score = rounds completed without breaking into the rest period.",
+              "movements": [
+                {
+                  "name": "air bike",
+                  "reps": null,
+                  "load": null,
+                  "calories": 12,
+                  "distance": null,
+                  "notes": "Women 10 cal; push and pull the handles; strong legs"
+                },
+                {
+                  "name": "push-up",
+                  "reps": "10",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Maintain same standard throughout all 5 rounds; from toes if possible"
+                },
+                {
+                  "name": "lunge",
+                  "reps": "10 alternating (5 each leg)",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Bodyweight; step back rather than forward to reduce knee stress; torso upright"
+                },
+                {
+                  "name": "hanging knee raise",
+                  "reps": "10",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Controlled descent; if grip fatigues use straps; sub ab mat sit-ups if needed"
+                }
+              ]
+            },
+            "mobility": [
+              {
+                "name": "Child's pose with arm reach (lat)",
+                "duration": "60 s each side",
+                "notes": "Week 3 — walk hand further; actively breathe into restriction"
+              },
+              {
+                "name": "Thread-the-needle thoracic rotation",
+                "duration": "10 reps each side",
+                "notes": "Increase to 10 reps; maximise rotation"
+              },
+              {
+                "name": "Cross-body shoulder stretch",
+                "duration": "45 s each side",
+                "notes": "Deepen slowly; note any restriction change vs earlier weeks"
+              }
+            ],
+            "timeEstimates": {
+              "warmupMinutes": 10,
+              "primaryMinutes": 9,
+              "secondaryMinutes": 18,
+              "accessoryMinutes": 14,
               "metconMinutes": 15,
               "mobilityMinutes": 8,
-              "totalMinutes": 68
+              "totalMinutes": 69
+            }
+          },
+          {
+            "sessionNumber": 9,
+            "week": 3,
+            "dayWithinWeek": 3,
+            "suggestedDay": "Friday",
+            "label": "Workout 3 for the week starting July 12, 2026",
+            "focus": "Full Body — Squat Volume + Upper Pull + Carries + Balance",
+            "warmup": [
+              {
+                "name": "Ski erg easy",
+                "duration": "3 min",
+                "reps": null,
+                "notes": "Full body; thoracic emphasis on pull phase"
+              },
+              {
+                "name": "Wall slide with foam roller",
+                "duration": null,
+                "reps": "10",
+                "notes": "Shoulder IR prime"
+              },
+              {
+                "name": "Band pull-apart",
+                "duration": null,
+                "reps": "15",
+                "notes": "Rotator cuff"
+              },
+              {
+                "name": "Single-leg stance balance drill",
+                "duration": "30 s each leg",
+                "reps": null,
+                "notes": "Mandatory balance element — stand on one leg; eyes open first then close if comfortable; proprioceptive challenge"
+              },
+              {
+                "name": "Goblet squat pause (moderate KB)",
+                "duration": null,
+                "reps": "8",
+                "notes": "Movement prep — slightly heavier than week 1 warm-up"
+              }
+            ],
+            "strength": [
+              {
+                "type": "primary",
+                "order": 1,
+                "supersetGroup": null,
+                "movement": "Goblet Squat (KB)",
+                "category": "QUAD_DOMINANT",
+                "isUnilateral": false,
+                "sets": 4,
+                "reps": "12",
+                "percentOfMax": 66,
+                "restSeconds": 150,
+                "coachingNotes": "DUP Volume day. Week 3 — add 2–4 kg to the KB from week 2. Maintain 3-second descent. At this load, sets 3–4 should be genuinely challenging — that's the stimulus for bone density and hypertrophy."
+              },
+              {
+                "type": "secondary",
+                "order": 2,
+                "supersetGroup": "A",
+                "movement": "Romanian Deadlift (Barbell)",
+                "category": "GLUTES_HAMSTRINGS",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "10",
+                "percentOfMax": 66,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with DB row (exercise 3). Add 2.5–5 kg from week 2. Hamstring stretch is the cue — lower only as far as neutral spine allows. One hinge this session — hinge cap respected."
+              },
+              {
+                "type": "secondary",
+                "order": 3,
+                "supersetGroup": "A",
+                "movement": "DB Bent-Over Row (bilateral)",
+                "category": "UPPER_BACK_ERECTORS",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "10",
+                "percentOfMax": 65,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with RDL (exercise 2). Add 2 kg from week 2. Pull to hips; squeeze scapulae."
+              },
+              {
+                "type": "accessory",
+                "order": 4,
+                "supersetGroup": "B",
+                "movement": "Step-Up with DB (unilateral)",
+                "category": "UNILATERAL_LOWER",
+                "isUnilateral": true,
+                "sets": 2,
+                "reps": "13 each leg",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Week 3 progression: add 1 rep per set (now 13 reps). Same load as weeks 1–2 (approximately 10–12 kg each hand). Superset with band pull-apart ER (exercise 5)."
+              },
+              {
+                "type": "accessory",
+                "order": 5,
+                "supersetGroup": "B",
+                "movement": "Band Pull-Apart with External Rotation Emphasis",
+                "category": "UPPER_BACK_ERECTORS",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "16",
+                "percentOfMax": null,
+                "restSeconds": 60,
+                "coachingNotes": "Week 3 progression: add 1 rep (now 16 reps). Same band. Superset with step-up (exercise 4)."
+              },
+              {
+                "type": "accessory",
+                "order": 6,
+                "supersetGroup": null,
+                "movement": "Suitcase Carry (KB, single side)",
+                "category": "CARRIES_LOADED",
+                "isUnilateral": true,
+                "sets": 2,
+                "reps": "20 m each side",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Mandatory loaded carry. Week 3 variant: suitcase carry (single side) to challenge lateral core stability. Choose 24–28 kg KB; hold at side; resist the lean; walk tall. 20 m per side per set. Increases anti-lateral-flexion demand."
+              },
+              {
+                "type": "accessory",
+                "order": 7,
+                "supersetGroup": null,
+                "movement": "Plank (forearm)",
+                "category": "CORE",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "40 s",
+                "percentOfMax": null,
+                "restSeconds": 60,
+                "coachingNotes": "Week 3 progression: hold for 40 s. Same form cues — brace, squeeze glutes, flat back."
+              }
+            ],
+            "metcon": {
+              "name": "Row & Ring",
+              "format": "Rounds For Time",
+              "timeMinutes": 15,
+              "description": "5 Rounds For Time: 250 m row machine, 10 ring rows, 12 step-ups (6 each leg), 15 sit-ups. Record total time and compare to week 1 session 1 AMRAP as a proxy for fitness change.",
+              "movements": [
+                {
+                  "name": "row machine",
+                  "reps": null,
+                  "load": null,
+                  "calories": null,
+                  "distance": "250 m",
+                  "notes": "Consistent split across 5 rounds; damper 4–5"
+                },
+                {
+                  "name": "ring row",
+                  "reps": "10",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Challenging angle — feet forward enough to make it work; squeeze at top"
+                },
+                {
+                  "name": "step-up",
+                  "reps": "12 total (6 each leg)",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Bodyweight or light DBs (5–8 kg each hand); drive through heel at top"
+                },
+                {
+                  "name": "sit-up",
+                  "reps": "15",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Full range; hands at temples; controlled descent"
+                }
+              ]
+            },
+            "mobility": [
+              {
+                "name": "Doorframe lat stretch",
+                "duration": "60 s each side",
+                "notes": "Week 3 — maximise the hold; breathe deeply for 5 full breaths each side"
+              },
+              {
+                "name": "Thoracic extension over foam roller",
+                "duration": "2 min",
+                "notes": "5–6 positions; linger at the stiffest segments"
+              },
+              {
+                "name": "Sleeper stretch",
+                "duration": "60 s each side",
+                "notes": "Push into the restriction gently; note whether it has improved vs week 1"
+              }
+            ],
+            "timeEstimates": {
+              "warmupMinutes": 10,
+              "primaryMinutes": 13,
+              "secondaryMinutes": 17,
+              "accessoryMinutes": 17,
+              "metconMinutes": 15,
+              "mobilityMinutes": 8,
+              "totalMinutes": 74
+            }
+          },
+          {
+            "sessionNumber": 10,
+            "week": 4,
+            "dayWithinWeek": 1,
+            "suggestedDay": "Monday",
+            "label": "Workout 1 for the week starting July 19, 2026",
+            "focus": "Lower Body — Posterior Chain Peak + Quad Volume",
+            "warmup": [
+              {
+                "name": "Rowing machine easy",
+                "duration": "3 min",
+                "reps": null,
+                "notes": "Final week — focus on feeling ready, not fatigued; prime the CNS gently"
+              },
+              {
+                "name": "Hip 90/90 stretch",
+                "duration": "60 s each side",
+                "reps": null,
+                "notes": "Note any improvement in range vs week 1"
+              },
+              {
+                "name": "Thoracic extension over foam roller",
+                "duration": "90 s",
+                "reps": null,
+                "notes": "4 positions; thoracic prep for deadlift bracing"
+              },
+              {
+                "name": "Band pull-apart",
+                "duration": null,
+                "reps": "15",
+                "notes": "Rotator cuff activation"
+              },
+              {
+                "name": "Y/T/W raises",
+                "duration": null,
+                "reps": "8 each",
+                "notes": "Scapular stability; light or bodyweight"
+              },
+              {
+                "name": "Glute bridge with band and 3-second hold",
+                "duration": null,
+                "reps": "15",
+                "notes": "Full posterior chain prime before peak week deadlifts"
+              }
+            ],
+            "strength": [
+              {
+                "type": "primary",
+                "order": 1,
+                "supersetGroup": null,
+                "movement": "Conventional Deadlift",
+                "category": "GLUTES_HAMSTRINGS",
+                "isUnilateral": false,
+                "sets": 4,
+                "reps": "3",
+                "percentOfMax": 85,
+                "restSeconds": 240,
+                "coachingNotes": "Week 4 — peak heavy day. Add 2.5–5 kg from week 3 if RPE was ≤8. Target RPE 8.5 on set 4 — the heaviest single working load of the cycle. Full 4-minute rest between sets. This is a meaningful bone-loading stimulus. Do NOT attempt more than planned — technique preservation is non-negotiable."
+              },
+              {
+                "type": "secondary",
+                "order": 2,
+                "supersetGroup": "A",
+                "movement": "Barbell Back Squat",
+                "category": "QUAD_DOMINANT",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "8",
+                "percentOfMax": 70,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with barbell row (exercise 3). Final week — add 2.5 kg from week 3. Controlled and strong — demonstrate mastery of the movement."
+              },
+              {
+                "type": "secondary",
+                "order": 3,
+                "supersetGroup": "A",
+                "movement": "Barbell Bent-Over Row",
+                "category": "UPPER_BACK_ERECTORS",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "8",
+                "percentOfMax": 68,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with back squat (exercise 2). Final week — add 2.5 kg from week 3. End-of-cycle record the total load moved — this becomes the baseline for the next program."
+              },
+              {
+                "type": "accessory",
+                "order": 4,
+                "supersetGroup": "B",
+                "movement": "Bulgarian Split Squat (DB)",
+                "category": "UNILATERAL_LOWER",
+                "isUnilateral": true,
+                "sets": 2,
+                "reps": "13 each leg",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Week 4 progression: same 13 reps as week 3. Add 2 kg per DB if 13 reps felt smooth at RPE ≤7 in week 3. Superset with Pallof press (exercise 5)."
+              },
+              {
+                "type": "accessory",
+                "order": 5,
+                "supersetGroup": "B",
+                "movement": "Pallof Press",
+                "category": "CORE",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "13 each side",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Week 4: add 1 rep (now 14) or a small load increase if week 3 felt easy. 2-second pause every rep. Superset with split squat (exercise 4)."
+              }
+            ],
+            "metcon": {
+              "name": "AMRAP Finish Line",
+              "format": "AMRAP",
+              "timeMinutes": 14,
+              "description": "14-minute AMRAP: 250 m ski erg, 10 DB floor press, 8 pull-ups, 12 goblet squats. This is the final week — aim for more rounds than week 1 session 1. Record your score.",
+              "movements": [
+                {
+                  "name": "ski erg",
+                  "reps": null,
+                  "load": null,
+                  "calories": null,
+                  "distance": "250 m",
+                  "notes": "Hard effort; this is the start of each round — set the pace"
+                },
+                {
+                  "name": "DB floor press",
+                  "reps": "10",
+                  "load": "14–18 kg each DB",
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Slightly heavier than week 1 if comfortable; full ROM; control the descent"
+                },
+                {
+                  "name": "pull-up",
+                  "reps": "8",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Aim for unbroken sets; band if needed; chin clearly over bar"
+                },
+                {
+                  "name": "goblet squat",
+                  "reps": "12",
+                  "load": "14–18 kg KB",
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Heavier KB than week 1 if comfortable; sit tall; drive through heels"
+                }
+              ]
+            },
+            "mobility": [
+              {
+                "name": "Lat stretch — doorframe or rig",
+                "duration": "90 s each side",
+                "notes": "Final week — extra hold time; breathe into restriction for 6+ breaths each side"
+              },
+              {
+                "name": "Thoracic rotation in quadruped",
+                "duration": "10 reps each side",
+                "notes": "Full 10 reps; maximise rotation; compare to week 1 range"
+              },
+              {
+                "name": "Sleeper stretch",
+                "duration": "60 s each side",
+                "notes": "Note total improvement in shoulder IR across the 4 weeks"
+              }
+            ],
+            "timeEstimates": {
+              "warmupMinutes": 10,
+              "primaryMinutes": 15,
+              "secondaryMinutes": 16,
+              "accessoryMinutes": 8,
+              "metconMinutes": 14,
+              "mobilityMinutes": 8,
+              "totalMinutes": 65
+            }
+          },
+          {
+            "sessionNumber": 11,
+            "week": 4,
+            "dayWithinWeek": 2,
+            "suggestedDay": "Wednesday",
+            "label": "Workout 2 for the week starting July 19, 2026",
+            "focus": "Upper Body — Push & Vertical Pull + Glute Accessory",
+            "warmup": [
+              {
+                "name": "Air bike easy",
+                "duration": "3 min",
+                "reps": null,
+                "notes": "Final week prep — thoracic and shoulder focus"
+              },
+              {
+                "name": "Y/T/W raises (prone, light DBs)",
+                "duration": null,
+                "reps": "10 each position",
+                "notes": "Rotator cuff with added load if tolerated — 1–2 kg"
+              },
+              {
+                "name": "Band pull-apart",
+                "duration": null,
+                "reps": "15",
+                "notes": "Activation — light band"
+              },
+              {
+                "name": "Wrist flexor and extensor stretch",
+                "duration": "45 s each direction",
+                "reps": null,
+                "notes": "Mandatory wrist/forearm element this week — extend arm, bend wrist up then down; 45 s each"
+              },
+              {
+                "name": "Hip thrust bodyweight 3-second holds",
+                "duration": null,
+                "reps": "15",
+                "notes": "Glute prime before working sets"
+              }
+            ],
+            "strength": [
+              {
+                "type": "primary",
+                "order": 1,
+                "supersetGroup": null,
+                "movement": "Landmine Press",
+                "category": "PUSH",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "8",
+                "percentOfMax": 72,
+                "restSeconds": 150,
+                "coachingNotes": "Week 4 — add 2.5 kg from week 3. Final week DUP Moderate day. Focus on quality and power. This load should be the heaviest moderate-day press of the cycle. Record it for the next program's starting point."
+              },
+              {
+                "type": "secondary",
+                "order": 2,
+                "supersetGroup": "A",
+                "movement": "Lat Pulldown",
+                "category": "VERTICAL_PULL",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "10",
+                "percentOfMax": 67,
+                "restSeconds": 120,
+                "coachingNotes": "Superset with hip thrust (exercise 3). Add 2.5 kg from week 3. Final week — the pull should feel strong. Record the load."
+              },
+              {
+                "type": "secondary",
+                "order": 3,
+                "supersetGroup": "A",
+                "movement": "Barbell Hip Thrust",
+                "category": "GLUTES_HAMSTRINGS",
+                "isUnilateral": false,
+                "sets": 4,
+                "reps": "10",
+                "percentOfMax": 70,
+                "restSeconds": 120,
+                "coachingNotes": "Superset with lat pulldown (exercise 2). Add 5 kg from week 3 if able. Peak hip thrust load of the cycle — this is a significant bone-loading event at the hip. 2-second hold at full extension. Record the load for next program."
+              },
+              {
+                "type": "accessory",
+                "order": 4,
+                "supersetGroup": "B",
+                "movement": "Single-Arm DB Row",
+                "category": "UPPER_BACK_ERECTORS",
+                "isUnilateral": true,
+                "sets": 3,
+                "reps": "13 each side",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Week 4: add 1–2 kg if 13 reps in week 3 felt smooth at RPE ≤7. Choose approximately 18–22 kg DB. Superset with reverse lunge (exercise 5)."
+              },
+              {
+                "type": "accessory",
+                "order": 5,
+                "supersetGroup": "B",
+                "movement": "Reverse Lunge (DB)",
+                "category": "UNILATERAL_LOWER",
+                "isUnilateral": true,
+                "sets": 2,
+                "reps": "13 each leg",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Week 4: add 1–2 kg per DB if week 3 felt easy. Choose approximately 12–14 kg each hand. Superset with single-arm row (exercise 4)."
+              },
+              {
+                "type": "accessory",
+                "order": 6,
+                "supersetGroup": null,
+                "movement": "Dead Bug",
+                "category": "CORE",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "12 each side",
+                "percentOfMax": null,
+                "restSeconds": 60,
+                "coachingNotes": "Week 4 progression: 12 reps per side. Bodyweight. Final week — focus on perfect execution; this movement has been building anti-extension core stability across all 4 weeks."
+              }
+            ],
+            "metcon": {
+              "name": "For Time: Finale",
+              "format": "For Time",
+              "timeMinutes": 16,
+              "description": "For Time — 5 rounds: 15/12 cal air bike, 15 KB swings, 10 push-ups, 10 alternating reverse lunges. This is the final week push — aim for consistent round splits. Record total time and compare to week 1.",
+              "movements": [
+                {
+                  "name": "air bike",
+                  "reps": null,
+                  "load": null,
+                  "calories": 15,
+                  "distance": null,
+                  "notes": "Women: 12 cal; 5 rounds — pace yourself but push hard"
+                },
+                {
+                  "name": "KB swing",
+                  "reps": "15",
+                  "load": "14–16 kg",
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Heavier than week 1 if comfortable; hip snap; bell to eye level"
+                },
+                {
+                  "name": "push-up",
+                  "reps": "10",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "From toes; full range; maintain standard from week 1"
+                },
+                {
+                  "name": "lunge",
+                  "reps": "10 alternating (5 each leg)",
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Bodyweight; step back to reduce knee stress; upright torso"
+                }
+              ]
+            },
+            "mobility": [
+              {
+                "name": "Child's pose with arm reach (lat)",
+                "duration": "90 s each side",
+                "notes": "Final week — breathe for 6+ breaths each side; maximise the stretch"
+              },
+              {
+                "name": "Thread-the-needle thoracic rotation",
+                "duration": "10 reps each side",
+                "notes": "Compare range of motion to week 1 — you should notice improvement"
+              },
+              {
+                "name": "Cross-body shoulder stretch",
+                "duration": "60 s each side",
+                "notes": "Final week — hold longer; compare IR restriction to week 1"
+              }
+            ],
+            "timeEstimates": {
+              "warmupMinutes": 10,
+              "primaryMinutes": 9,
+              "secondaryMinutes": 18,
+              "accessoryMinutes": 14,
+              "metconMinutes": 16,
+              "mobilityMinutes": 8,
+              "totalMinutes": 70
+            }
+          },
+          {
+            "sessionNumber": 12,
+            "week": 4,
+            "dayWithinWeek": 3,
+            "suggestedDay": "Friday",
+            "label": "Workout 3 for the week starting July 19, 2026",
+            "focus": "Full Body — Squat Volume Peak + Upper Pull + Carries + Plyometric",
+            "warmup": [
+              {
+                "name": "Ski erg easy",
+                "duration": "3 min",
+                "reps": null,
+                "notes": "Final session of the 4-week cycle — prime thoroughly"
+              },
+              {
+                "name": "Wall slide with foam roller",
+                "duration": null,
+                "reps": "10",
+                "notes": "Shoulder IR and thoracic prep"
+              },
+              {
+                "name": "Band pull-apart",
+                "duration": null,
+                "reps": "15",
+                "notes": "Rotator cuff activation"
+              },
+              {
+                "name": "Low pogo hops on soft surface (low-impact plyometric)",
+                "duration": "20 s",
+                "reps": null,
+                "notes": "Mandatory plyometric element — gentle, small hops on a yoga mat or rubber flooring; stay light on your feet; prepare the bone and tendon for loading"
+              },
+              {
+                "name": "Single-leg balance with perturbation (coach taps or band)",
+                "duration": "30 s each leg",
+                "reps": null,
+                "notes": "Mandatory balance element — stand on one leg while coach gently perturbs balance; eyes open; improve proprioception"
+              },
+              {
+                "name": "Goblet squat pause (heavy-ish warm-up)",
+                "duration": null,
+                "reps": "6",
+                "notes": "Prep for the peak volume day goblet squat; use 80% of planned working load"
+              }
+            ],
+            "strength": [
+              {
+                "type": "primary",
+                "order": 1,
+                "supersetGroup": null,
+                "movement": "Goblet Squat (KB)",
+                "category": "QUAD_DOMINANT",
+                "isUnilateral": false,
+                "sets": 4,
+                "reps": "12",
+                "percentOfMax": 68,
+                "restSeconds": 150,
+                "coachingNotes": "DUP Volume day — peak week. Add 2–4 kg from week 3 KB. This is the heaviest goblet squat of the cycle; sets 3–4 should be an 8/10 effort. Record the KB weight as your baseline for the next program's volume day starting point."
+              },
+              {
+                "type": "secondary",
+                "order": 2,
+                "supersetGroup": "A",
+                "movement": "Romanian Deadlift (Barbell)",
+                "category": "GLUTES_HAMSTRINGS",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "10",
+                "percentOfMax": 68,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with DB row (exercise 3). Add 2.5–5 kg from week 3. Final RDL of the cycle — use it to reinforce perfect hip hinge mechanics. One hinge this session — hinge cap respected."
+              },
+              {
+                "type": "secondary",
+                "order": 3,
+                "supersetGroup": "A",
+                "movement": "DB Bent-Over Row (bilateral)",
+                "category": "UPPER_BACK_ERECTORS",
+                "isUnilateral": false,
+                "sets": 3,
+                "reps": "10",
+                "percentOfMax": 67,
+                "restSeconds": 150,
+                "coachingNotes": "Superset with RDL (exercise 2). Add 2 kg from week 3. Record the load — this becomes the week 1 secondary reference for the next cycle."
+              },
+              {
+                "type": "accessory",
+                "order": 4,
+                "supersetGroup": "B",
+                "movement": "Step-Up with DB (unilateral)",
+                "category": "UNILATERAL_LOWER",
+                "isUnilateral": true,
+                "sets": 2,
+                "reps": "13 each leg",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Week 4: add 1–2 kg per DB if week 3 felt smooth. Choose approximately 12–14 kg each hand. Superset with band pull-apart ER (exercise 5)."
+              },
+              {
+                "type": "accessory",
+                "order": 5,
+                "supersetGroup": "B",
+                "movement": "Band Pull-Apart with External Rotation Emphasis",
+                "category": "UPPER_BACK_ERECTORS",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "16",
+                "percentOfMax": null,
+                "restSeconds": 60,
+                "coachingNotes": "Week 4: same 16 reps as week 3; add a slightly stronger band if 16 reps felt very easy. Superset with step-up (exercise 4)."
+              },
+              {
+                "type": "accessory",
+                "order": 6,
+                "supersetGroup": null,
+                "movement": "Farmer Carry (KB) — Final Week Loaded",
+                "category": "CARRIES_LOADED",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "40 m each set",
+                "percentOfMax": null,
+                "restSeconds": 90,
+                "coachingNotes": "Mandatory loaded carry — final week. Increase distance to 40 m and/or increase load by 2–4 kg per hand vs week 3 if grip and posture held. End-of-cycle benchmark: record KB weight and note whether 40 m felt manageable. Shoulders packed; walk with purpose."
+              },
+              {
+                "type": "accessory",
+                "order": 7,
+                "supersetGroup": null,
+                "movement": "Plank (forearm)",
+                "category": "CORE",
+                "isUnilateral": false,
+                "sets": 2,
+                "reps": "45 s",
+                "percentOfMax": null,
+                "restSeconds": 60,
+                "coachingNotes": "Final week progression: 45 s. Compare to week 1 (30–40 s). Record this number — the next program will start here. Perfect form throughout; never sacrifice position for time."
+              }
+            ],
+            "metcon": {
+              "name": "Tabata Closer",
+              "format": "Tabata",
+              "timeMinutes": 16,
+              "description": "Tabata-style: 8 intervals of 20 s work / 10 s rest per movement, cycling through 4 movements — row machine, ring row, med ball slam, sit-up. Each movement gets 2 consecutive Tabata intervals before rotating. Score = total reps across all movements. Note: no skill movements in Tabata per protocol.",
+              "movements": [
+                {
+                  "name": "row machine",
+                  "reps": null,
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Max metres in 20 s; 2 intervals; powerful drive; final week — push harder than week 1"
+                },
+                {
+                  "name": "ring row",
+                  "reps": null,
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Max reps in 20 s; 2 intervals; more challenging angle than week 2 if possible"
+                },
+                {
+                  "name": "med ball slam",
+                  "reps": null,
+                  "load": "6–8 kg",
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Max reps in 20 s; 2 intervals; reach fully overhead each rep; hinge to retrieve — mandatory low-impact plyometric element"
+                },
+                {
+                  "name": "sit-up",
+                  "reps": null,
+                  "load": null,
+                  "calories": null,
+                  "distance": null,
+                  "notes": "Max reps in 20 s; 2 intervals; full range; controlled on the way down; compare score to week 2 session 6 AMRAP sit-up volume"
+                }
+              ]
+            },
+            "mobility": [
+              {
+                "name": "Lat stretch — doorframe or rig",
+                "duration": "90 s each side",
+                "notes": "End of the full 4-week cycle — maximum hold time; breathe for 6–8 breaths each side"
+              },
+              {
+                "name": "Thoracic extension over foam roller",
+                "duration": "2 min",
+                "notes": "5–6 positions; take your time; celebrate how much your thoracic mobility has improved"
+              },
+              {
+                "name": "Sleeper stretch",
+                "duration": "60 s each side",
+                "notes": "Final shoulder IR stretch of the cycle — note total improvement since week 1 and report to coach for next program design"
+              }
+            ],
+            "timeEstimates": {
+              "warmupMinutes": 10,
+              "primaryMinutes": 13,
+              "secondaryMinutes": 17,
+              "accessoryMinutes": 20,
+              "metconMinutes": 16,
+              "mobilityMinutes": 8,
+              "totalMinutes": 78
             }
           }
         ]
