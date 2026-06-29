@@ -298,6 +298,63 @@ textarea { resize: vertical; min-height: 80px; }
   line-height: 1.5;
 }
 
+/* ── Movement summary ────────────────────────────────────────────────────── */
+.movement-summary-details {
+  background: var(--surface);
+  border-radius: 12px;
+  margin-bottom: var(--sp-md);
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  overflow: hidden;
+}
+.movement-summary-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: .9rem;
+  list-style: none;
+  user-select: none;
+}
+.movement-summary-toggle::-webkit-details-marker { display: none; }
+.movement-summary-toggle::before {
+  content: '▶';
+  font-size: .65rem;
+  color: var(--text-muted);
+  transition: transform .2s;
+}
+.movement-summary-details[open] .movement-summary-toggle::before { transform: rotate(90deg); }
+.mv-hint { color: var(--text-muted); font-size: .75rem; font-weight: 400; }
+.movement-summary-details[open] .mv-hint { display: none; }
+.movement-summary-body {
+  padding: 4px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mv-tier { display: flex; flex-direction: column; gap: 6px; }
+.mv-tier-label {
+  font-size: .65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--text-muted);
+}
+.mv-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.mv-pill {
+  font-size: .78rem;
+  padding: 3px 9px;
+  border-radius: 100px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.mv-count { font-weight: 700; opacity: .75; }
+.mv-pill-primary   { background: rgba(217,119,6,.12);  color: #92400e; }
+.mv-pill-secondary { background: rgba(14,165,233,.12); color: #0369a1; }
+.mv-pill-accessory { background: #f1f5f9;              color: #475569; }
+.mv-pill-metcon    { background: rgba(124,58,237,.1);  color: #5b21b6; }
+
 /* ── Week nav ─────────────────────────────────────────────────────────────── */
 .week-nav {
   display: flex;

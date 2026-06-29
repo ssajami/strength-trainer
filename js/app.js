@@ -233,8 +233,49 @@ function renderProgramView() {
   $('prog-name').textContent = 'Strength Program';
   $('prog-meta').textContent =
     `${currentProgram.progressionModel} · ${currentProgram.weeks} weeks · starts ${fmtDate(currentProgram.startDate)}`;
+  renderMovementSummary();
   renderWeek(currentWeek);
   showScreen('program-screen');
+}
+
+function renderMovementSummary() {
+  const el = $('movement-summary');
+  if (!el || !currentProgram) return;
+
+  // Count appearances of each movement per tier across all sessions
+  const counts = { primary: {}, secondary: {}, accessory: {}, metcon: {} };
+
+  for (const s of currentProgram.sessions || []) {
+    for (const ex of s.strength || []) {
+      const tier = ['primary','main'].includes(ex.type) ? 'primary'
+                 : ex.type === 'secondary' ? 'secondary' : 'accessory';
+      counts[tier][ex.movement] = (counts[tier][ex.movement] || 0) + 1;
+    }
+    for (const m of s.metcon?.movements || []) {
+      counts.metcon[m.name] = (counts.metcon[m.name] || 0) + 1;
+    }
+  }
+
+  function tierRows(tierCounts, label, cls) {
+    const entries = Object.entries(tierCounts).sort((a, b) => b[1] - a[1]);
+    if (!entries.length) return '';
+    const pills = entries.map(([mv, n]) =>
+      `<span class="mv-pill mv-pill-${cls}">${mv} <span class="mv-count">×${n}</span></span>`
+    ).join('');
+    return `<div class="mv-tier"><span class="mv-tier-label">${label}</span><div class="mv-pills">${pills}</div></div>`;
+  }
+
+  const inner =
+    tierRows(counts.primary,   'Primary',   'primary')   +
+    tierRows(counts.secondary, 'Secondary', 'secondary') +
+    tierRows(counts.accessory, 'Accessory', 'accessory') +
+    tierRows(counts.metcon,    'Metcon',    'metcon');
+
+  el.innerHTML = `
+    <details class="movement-summary-details">
+      <summary class="movement-summary-toggle">Movement Summary <span class="mv-hint">tap to expand</span></summary>
+      <div class="movement-summary-body">${inner}</div>
+    </details>`;
 }
 
 function renderVolumeAudit() {
