@@ -491,7 +491,7 @@ function makeSessionCard(session) {
   card.innerHTML = `
     <div class="card-top">
       <div>
-        <h3 class="session-label">${session.label}</h3>
+        <h3 class="session-label">Session ${session.dayWithinWeek}</h3>
         <span class="focus-chip">${session.focus}</span>
       </div>
       <span class="day-badge">${session.suggestedDay}</span>
@@ -514,7 +514,7 @@ function makeSessionCard(session) {
 
 // ─── Session detail ───────────────────────────────────────────────────────────
 function renderSessionDetail(session) {
-  $('session-title').textContent = session.label;
+  $('session-title').textContent = `Week ${session.week} · Session ${session.dayWithinWeek}`;
   const root = $('session-detail');
   root.innerHTML = '';
 
