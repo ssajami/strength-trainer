@@ -81,9 +81,8 @@ function saveSettings() {
   const token = $('setting-github-token').value.trim();
   Storage.saveGithubToken(token);
   Sync.init(token);
-  toast('Settings saved', 'success');
   closeSettings();
-  // Don't auto-push or auto-pull on save — user controls direction explicitly
+  Sync.save().then(() => toast('Settings saved and synced ↑', 'success'));
 }
 
 function renderMaxLoadsList() {
