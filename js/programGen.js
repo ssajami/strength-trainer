@@ -288,10 +288,11 @@ PASS 1 — Volume architecture:
 PASS 2 — Metcon movement rotation plan:
   Before writing any session, plan ALL metcon movements for the entire program.
   List every session (1–12) and assign its movements now, verifying:
-    - No movement appears in more than 4 of the 12 sessions
-    - Each week's 3 sessions collectively use ≥ 8 distinct movements
-    - No movement appears in all 3 sessions of the same week
-    - At least half the movements differ between consecutive weeks
+    - No movement appears in more than 2 of the 12 sessions (hard cap)
+    - Exception: row machine, air bike, ski erg may appear up to 3 times each — but never two of the same machine in consecutive sessions, and never the same machine twice in one week
+    - At least 20 distinct movements used across the full program
+    - Each week's 3 sessions collectively use ≥ 9 distinct movements
+    - No movement appears more than once within the same week
     - Each of the 5 formats appears at least once; none more than 4 times
   Output this plan as the metconPlan array in the JSON. Do not deviate from it when writing sessions.
 
@@ -369,9 +370,10 @@ ${buildMetconMovementPrompt()}
 ## METCON HARD CONSTRAINTS (enforce strictly — never violate)
 
 0. VARIETY (planned in Pass 2 — enforced here):
-   - No movement in more than 4 of the 12 sessions
-   - Each week: ≥ 8 distinct movements across its 3 sessions
-   - No movement in all 3 sessions of the same week
+   - No movement in more than 2 of the 12 sessions (row machine / air bike / ski erg: max 3 each)
+   - No movement more than once in the same week
+   - Each week: ≥ 9 distinct movements across its 3 sessions
+   - At least 20 distinct movements across the full program
    - Each format used ≥ 1 time; no format used > 4 times
 
 1. OVERHEAD: max 1 ends_overhead movement per metcon.
