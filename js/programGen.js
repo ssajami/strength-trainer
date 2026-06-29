@@ -268,7 +268,7 @@ CARRIES_LOADED        1–2 per week (presence required; not counted in sets)
 
 ## EXERCISE SELECTION RULES
 
-- Rotate accessory selection across the cycle (do not repeat identical accessories every week — vary every 3–4 weeks)
+- Accessory exercises MUST rotate mid-cycle: choose one set of accessories for weeks 1–2 and a DIFFERENT set for weeks 3–4. At most 1 accessory movement may carry over between blocks. This applies per session slot — if Session A uses Bulgarian Split Squat in weeks 1–2, weeks 3–4 must use a different unilateral lower movement (e.g. Reverse Lunge, Step-Up)
 - Primary movements (deadlift variants, squat variants, press variants) stay consistent within a cycle for progressive overload
 - Include at least 1 unilateral lower body movement per session
 - Include at least 1 rowing movement per session
