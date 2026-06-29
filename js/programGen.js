@@ -277,16 +277,26 @@ CARRIES_LOADED        1–2 per week (presence required; not counted in sets)
 
 ---
 
-## TWO-PASS GENERATION
+## THREE-PASS GENERATION
 
-Generate the program in two passes:
+Generate the program in three passes:
 
 PASS 1 — Volume architecture:
   For each session in the week, decide how many sets of each muscle group go where.
   Verify every constraint is met. Output this allocation as the volumeAudit array in the JSON.
 
-PASS 2 — Exercise population:
-  Fill in specific exercises into the slots from Pass 1. Apply exercise selection rules. Assign loads.
+PASS 2 — Metcon movement rotation plan:
+  Before writing any session, plan ALL metcon movements for the entire program.
+  List every session (1–12) and assign its movements now, verifying:
+    - No movement appears in more than 4 of the 12 sessions
+    - Each week's 3 sessions collectively use ≥ 8 distinct movements
+    - No movement appears in all 3 sessions of the same week
+    - At least half the movements differ between consecutive weeks
+    - Each of the 5 formats appears at least once; none more than 4 times
+  Output this plan as the metconPlan array in the JSON. Do not deviate from it when writing sessions.
+
+PASS 3 — Exercise population:
+  Fill in specific exercises into the slots from Pass 1. Use the metcon movements from Pass 2 exactly. Assign loads.
 
 ---
 
@@ -358,6 +368,12 @@ ${buildMetconMovementPrompt()}
 
 ## METCON HARD CONSTRAINTS (enforce strictly — never violate)
 
+0. VARIETY (planned in Pass 2 — enforced here):
+   - No movement in more than 4 of the 12 sessions
+   - Each week: ≥ 8 distinct movements across its 3 sessions
+   - No movement in all 3 sessions of the same week
+   - Each format used ≥ 1 time; no format used > 4 times
+
 1. OVERHEAD: max 1 ends_overhead movement per metcon.
    overhead squat (w=1): use rarely; cap reps ≤5/round; forbidden in Tabata and EMOM; counts as your sole overhead movement.
 
@@ -368,15 +384,6 @@ ${buildMetconMovementPrompt()}
    Never sequence 3+ grip movements consecutively.
 
 4. SKILL: skill-flagged movements (snatches, toes-to-bar, get-ups, OHS, push jerk, pistols) must NOT appear in Tabata or EMOM — fatigue and time pressure break technique.
-
-## METCON VARIETY — MANDATORY
-
-Across the full program, metcon movements must be deliberately rotated:
-- No single movement may appear in more than 4 of the 12 sessions (3 sessions × 4 weeks)
-- Each week's 3 metcons must collectively use at least 8 distinct movements
-- No movement may appear in all 3 sessions of the same week
-- Across consecutive weeks, at least half the movements must differ
-- Format variety: no format (AMRAP, For Time, EMOM, Tabata, Rounds For Time) may be used more than 4 times across the full program; each format must appear at least once
 
 ## METCON SOFT PREFERENCES
 
@@ -415,6 +422,14 @@ Return ONLY this JSON structure, no text outside it:
       "sessionBreakdown": [4, 4, 3],
       "meetsTarget": true,
       "flag": "string or null"
+    }
+  ],
+  "metconPlan": [
+    {
+      "sessionNumber": 1,
+      "week": 1,
+      "format": "AMRAP",
+      "movements": ["KB swing", "push-up", "row machine"]
     }
   ],
   "sessions": [
