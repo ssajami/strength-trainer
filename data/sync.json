@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-29T17:25:01.755Z",
+  "updatedAt": "2026-06-29T17:45:01.505Z",
   "data": {
     "spt_profile": {
       "age": 55,
@@ -17,7 +17,8 @@
       "db step-up (weighted)": 5,
       "back squat": 70,
       "romanian deadlift (barbell)": 80,
-      "chest-supported db row": 20
+      "chest-supported db row": 20,
+      "front squat": 45
     },
     "spt_accessory_loads": null,
     "spt_programs": [
