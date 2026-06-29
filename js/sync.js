@@ -58,9 +58,16 @@ const Sync = (() => {
       _sha          = file.sha;
       const payload = decodeContent(file.content);
 
-      // Write each key into localStorage (GitHub is source of truth on load)
+      // Write each key into localStorage (GitHub is source of truth on load).
+      // spt_profile: merge rather than overwrite — apiKey is device-only and never synced.
       for (const key of SYNC_KEYS) {
-        if (payload.data?.[key] !== undefined) {
+        if (payload.data?.[key] === undefined) continue;
+        if (key === 'spt_profile') {
+          let local = {};
+          try { local = JSON.parse(localStorage.getItem(key) || '{}'); } catch {}
+          const merged = { ...local, ...payload.data[key], apiKey: local.apiKey || '' };
+          localStorage.setItem(key, JSON.stringify(merged));
+        } else {
           localStorage.setItem(key, JSON.stringify(payload.data[key]));
         }
       }
