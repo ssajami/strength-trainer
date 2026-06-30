@@ -222,7 +222,7 @@ function renderHomeSummary() {
   const card = $('current-program-card');
   if (!prog) { hide(card); return; }
   show(card);
-  $('home-prog-name').textContent  = prog.programName;
+  $('home-prog-name').textContent  = `${prog.weeks}-Week Strength Program`;
   $('home-prog-model').textContent = `${prog.progressionModel} · ${prog.weeks} weeks · from ${fmtDate(prog.startDate)}`;
 }
 
