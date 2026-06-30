@@ -1015,7 +1015,7 @@ function applyChatUpdate(updatedProgram, btn) {
     ...updatedProgram,
     id:        Date.now().toString(),
     createdAt: new Date().toISOString(),
-    startDate: currentProgram.startDate,
+    startDate: updatedProgram.startDate || currentProgram.startDate,
     weeks:     updatedProgram.weeks ?? currentProgram.weeks,
   };
   Storage.saveProgram(merged);
