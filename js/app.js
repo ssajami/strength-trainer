@@ -454,6 +454,12 @@ function renderWeek(week) {
   sessions.forEach(s => container.appendChild(makeSessionCard(s)));
 }
 
+function sessionWeekStart(session) {
+  const d = new Date(currentProgram.startDate);
+  d.setDate(d.getDate() + (session.week - 1) * 7);
+  return `${d.getDate()}/${d.getMonth() + 1}/${String(d.getFullYear()).slice(2)}`;
+}
+
 function makeSessionCard(session) {
   const totalSets = (session.strength || []).reduce((n, e) => n + (e.sets || 0), 0);
   const te = getTimeEstimates(session);
@@ -490,10 +496,9 @@ function makeSessionCard(session) {
   card.innerHTML = `
     <div class="card-top">
       <div>
-        <h3 class="session-label">Session ${session.dayWithinWeek}</h3>
+        <h3 class="session-label">Session ${session.dayWithinWeek} &mdash; week starting ${sessionWeekStart(session)}</h3>
         <span class="focus-chip">${session.focus}</span>
       </div>
-      <span class="day-badge">${session.suggestedDay}</span>
     </div>
     <div class="session-stats">
       <span>${session.strength.length} exercises · ${totalSets} sets</span>
@@ -513,7 +518,7 @@ function makeSessionCard(session) {
 
 // ─── Session detail ───────────────────────────────────────────────────────────
 function renderSessionDetail(session) {
-  $('session-title').textContent = `Week ${session.week} · Session ${session.dayWithinWeek}`;
+  $('session-title').textContent = `Session ${session.dayWithinWeek} — week starting ${sessionWeekStart(session)}`;
   const root = $('session-detail');
   root.innerHTML = '';
 
