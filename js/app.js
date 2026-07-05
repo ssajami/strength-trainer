@@ -803,7 +803,7 @@ function openLogWeightsModal(session) {
         rxText = working
           ? `${ex.sets}×${ex.reps} · planned ${working} kg`
           : `${ex.sets}×${ex.reps}${ex.percentOfMax ? ` · ${ex.percentOfMax}%` : ''}`;
-        inputValue = working ?? '';
+        inputValue = ''; // never pre-fill — only save what the user explicitly enters
       }
 
       const info = document.createElement('div');
@@ -819,13 +819,13 @@ function openLogWeightsModal(session) {
       const input = document.createElement('input');
       input.type = 'number';
       input.className = 'log-weight-input';
-      input.placeholder = 'kg';
+      input.placeholder = inputValue !== '' ? `planned: ${inputValue} kg` : 'kg used';
       input.min = '0';
       input.step = '0.5';
       input.dataset.movement  = ex.movement;
       input.dataset.entryType = isAccessory ? 'accessory' : 'max';
       input.dataset.reps      = ex.reps;
-      if (inputValue !== '') input.value = inputValue;
+      if (isAccessory && inputValue !== '') input.value = inputValue;
       inputWrap.appendChild(lbl);
       inputWrap.appendChild(input);
 
