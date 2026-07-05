@@ -86,6 +86,7 @@ p  { margin: 0; }
 }
 
 .app-title { font-size: 1.1rem; letter-spacing: -.01em; color: #f8fafc; }
+.app-version { font-size: .65rem; font-weight: 400; opacity: .55; vertical-align: middle; margin-left: 4px; }
 
 .header-actions { display: flex; align-items: center; gap: 8px; }
 
