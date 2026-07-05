@@ -367,7 +367,7 @@ function renderVolumeAudit() {
     : '<span class="audit-badge audit-badge-ok">all targets met</span>';
 
   el.innerHTML = `
-    <details class="audit-details"${totalFlags ? ' open' : ''}>
+    <details class="audit-details">
       <summary class="audit-summary">Volume audit ${badgeTxt}</summary>
 
       <p class="audit-section-label">Session load — Week ${currentWeek}</p>
