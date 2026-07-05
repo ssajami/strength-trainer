@@ -1396,6 +1396,23 @@ async function init() {
     closeSettings();
     toast('Data pulled from GitHub ↓', 'success');
   });
+  $('download-backup-btn').addEventListener('click', () => {
+    const KEYS = ['spt_profile','spt_max_loads','spt_accessory_loads','spt_session_logs','spt_programs','spt_last_comments'];
+    const data = {};
+    KEYS.forEach(k => {
+      try { const v = localStorage.getItem(k); data[k] = v ? JSON.parse(v) : null; } catch { data[k] = null; }
+    });
+    // Strip API key from backup
+    if (data.spt_profile) { const { apiKey, ...rest } = data.spt_profile; data.spt_profile = rest; }
+    const blob = new Blob([JSON.stringify({ version: 1, exportedAt: new Date().toISOString(), data }, null, 2)], { type: 'application/json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `strength-backup-${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast('Backup downloaded', 'success');
+  });
   $('add-max-load-btn').addEventListener('click', () => {
     const row = makeMaxLoadRow();
     $('max-loads-list').appendChild(row);
