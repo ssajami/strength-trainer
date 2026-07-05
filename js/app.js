@@ -798,12 +798,16 @@ function openLogWeightsModal(session) {
         }
         inputValue = saved?.kg ?? '';
       } else {
-        const max     = Storage.getMaxLoad(ex.movement);
-        const working = (max && ex.percentOfMax) ? Math.round((max * ex.percentOfMax / 100) / 2.5) * 2.5 : null;
-        rxText = working
-          ? `${ex.sets}×${ex.reps} · planned ${working} kg`
-          : `${ex.sets}×${ex.reps}${ex.percentOfMax ? ` · ${ex.percentOfMax}%` : ''}`;
-        inputValue = ''; // never pre-fill — only save what the user explicitly enters
+        const max      = Storage.getMaxLoad(ex.movement);
+        const working  = (max && ex.percentOfMax) ? Math.round((max * ex.percentOfMax / 100) / 2.5) * 2.5 : null;
+        const lastLog  = Storage.getSessionLog(ex.movement);
+        const lastKg   = lastLog?.kg ?? null;
+        rxText = [
+          `${ex.sets}×${ex.reps}`,
+          working  ? `planned ${working} kg`                               : null,
+          lastKg   ? `last logged ${lastKg} kg · ${fmtShortDate(lastLog.date)}` : null,
+        ].filter(Boolean).join(' · ');
+        inputValue = lastKg != null ? lastKg : '';
       }
 
       const info = document.createElement('div');
@@ -819,13 +823,14 @@ function openLogWeightsModal(session) {
       const input = document.createElement('input');
       input.type = 'number';
       input.className = 'log-weight-input';
-      input.placeholder = inputValue !== '' ? `planned: ${inputValue} kg` : 'kg used';
+      input.placeholder = 'kg used';
       input.min = '0';
       input.step = '0.5';
       input.dataset.movement  = ex.movement;
       input.dataset.entryType = isAccessory ? 'accessory' : 'max';
       input.dataset.reps      = ex.reps;
-      if (isAccessory && inputValue !== '') input.value = inputValue;
+      if (inputValue !== '') input.value = inputValue;
+      input.dataset.original  = String(inputValue); // change-detection guard
       inputWrap.appendChild(lbl);
       inputWrap.appendChild(input);
 
@@ -880,6 +885,7 @@ function openLogWeightsModal(session) {
 
     // Primary / secondary — calculate estimated 1RM from working weight + reps
     overlay.querySelectorAll('.log-weight-input[data-entry-type="max"]').forEach(input => {
+      if (input.value === input.dataset.original) return; // unchanged pre-fill — skip
       const kg = parseFloat(input.value);
       if (isNaN(kg) || kg <= 0) return;
       const repsStr = input.dataset.reps || '5';
@@ -889,6 +895,7 @@ function openLogWeightsModal(session) {
         : (parseInt(repsStr) || 5);
       const est1RM = Math.round((kg * (1 + reps / 30)) / 2.5) * 2.5;
       Storage.setMaxLoad(input.dataset.movement, est1RM);
+      Storage.setSessionLog(input.dataset.movement, kg);
       saved++;
     });
 
@@ -912,7 +919,9 @@ function openLogWeightsModal(session) {
     overlay.remove();
     if (saved > 0) {
       toast(`${saved} entr${saved > 1 ? 'ies' : 'y'} saved`, 'success');
-      Sync.save();
+      Sync.save().then(ok => {
+        if (ok === false) toast('Saved locally — sync failed, push manually to update other devices', 'error');
+      });
     }
   });
   footer.appendChild(saveBtn);

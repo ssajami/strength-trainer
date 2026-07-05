@@ -3,6 +3,7 @@ const Storage = (() => {
     PROFILE:          'spt_profile',
     MAX_LOADS:        'spt_max_loads',
     ACCESSORY_LOADS:  'spt_accessory_loads',
+    SESSION_LOGS:     'spt_session_logs',   // actual weight used per movement (primary/secondary)
     PROGRAMS:         'spt_programs',
     LAST_COMMENTS:    'spt_last_comments',
     GITHUB_TOKEN:     'spt_github_token',
@@ -34,6 +35,17 @@ const Storage = (() => {
     getMaxLoad(movement) {
       const m = read(KEYS.MAX_LOADS) || {};
       return m[movement.toLowerCase().trim()] ?? null;
+    },
+
+    // Last actual weight used for primary/secondary exercises (separate from estimated 1RM)
+    getSessionLog(movement) {
+      const m = read(KEYS.SESSION_LOGS) || {};
+      return m[movement.toLowerCase().trim()] ?? null;
+    },
+    setSessionLog(movement, kg) {
+      const m = read(KEYS.SESSION_LOGS) || {};
+      m[movement.toLowerCase().trim()] = { kg, date: new Date().toISOString().split('T')[0] };
+      write(KEYS.SESSION_LOGS, m);
     },
 
     getPrograms:      () => read(KEYS.PROGRAMS) || [],

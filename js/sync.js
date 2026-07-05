@@ -8,6 +8,7 @@ const Sync = (() => {
     'spt_profile',
     'spt_max_loads',
     'spt_accessory_loads',
+    'spt_session_logs',
     'spt_programs',
     'spt_last_comments',
   ];
@@ -128,9 +129,11 @@ const Sync = (() => {
       const result = await res.json();
       _sha = result.content.sha;
       setStatus('ok', payload.updatedAt);
+      return true;
     } catch (e) {
       console.error('Sync save failed:', e);
       setStatus('error');
+      return false;
     } finally {
       _saving = false;
       if (_pendingSave) { _pendingSave = false; save(); }
