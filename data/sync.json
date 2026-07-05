@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-05T18:41:49.810Z",
+  "updatedAt": "2026-07-05T18:42:16.190Z",
   "data": {
     "spt_profile": {
       "age": 55,
@@ -11,7 +11,7 @@
     "spt_max_loads": {
       "conventional deadlift": 80,
       "lat pulldown": 10,
-      "barbell hip thrust": 47,
+      "barbell hip thrust": 50,
       "landmine press": 35,
       "cable seated row (wide grip)": 20,
       "db step-up (weighted)": 5,
