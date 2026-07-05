@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-05T14:45:10.294Z",
+  "updatedAt": "2026-07-05T15:02:16.400Z",
   "data": {
     "spt_profile": {
       "age": 55,
@@ -9,9 +9,9 @@
       "weeklySetMax": 12
     },
     "spt_max_loads": {
-      "conventional deadlift": 57.5,
+      "conventional deadlift": 50,
       "lat pulldown": 10,
-      "barbell hip thrust": 47.5,
+      "barbell hip thrust": 37.5,
       "landmine press": 35,
       "cable seated row (wide grip)": 20,
       "db step-up (weighted)": 5,
@@ -20,7 +20,12 @@
       "chest-supported db row": 20,
       "front squat": 45
     },
-    "spt_accessory_loads": null,
+    "spt_accessory_loads": {
+      "bulgarian split squat (db)": {
+        "date": "2026-07-05",
+        "kg": 6
+      }
+    },
     "spt_programs": [
       {
         "id": "1782789742110",
