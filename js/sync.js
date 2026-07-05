@@ -12,8 +12,10 @@ const Sync = (() => {
     'spt_last_comments',
   ];
 
-  let _token = null;
-  let _sha   = null; // SHA of the current file — required by GitHub API to update
+  let _token      = null;
+  let _sha        = null;   // SHA of the current file — required by GitHub API to update
+  let _saving     = false;  // lock — prevents concurrent PUTs with a stale SHA
+  let _pendingSave = false; // if a save arrived while one was in flight, run it after
 
   function init(token) {
     _token = token || null;
@@ -82,6 +84,10 @@ const Sync = (() => {
 
   async function save() {
     if (!_token) return;
+
+    // If a save is already in flight, just flag that another one is needed
+    if (_saving) { _pendingSave = true; return; }
+    _saving = true;
     setStatus('syncing');
     try {
       const snapshot = {};
@@ -98,17 +104,25 @@ const Sync = (() => {
       }
 
       const payload = { version: 1, updatedAt: new Date().toISOString(), data: snapshot };
-      const body    = {
-        message: `sync ${new Date().toISOString()}`,
-        content: encodePayload(payload),
-        ...(_sha ? { sha: _sha } : {}),
-      };
 
-      const res = await fetch(API, {
-        method:  'PUT',
-        headers: githubHeaders(),
-        body:    JSON.stringify(body),
-      });
+      async function attemptPut(sha) {
+        const body = {
+          message: `sync ${new Date().toISOString()}`,
+          content: encodePayload(payload),
+          ...(sha ? { sha } : {}),
+        };
+        return fetch(API, { method: 'PUT', headers: githubHeaders(), body: JSON.stringify(body) });
+      }
+
+      let res = await attemptPut(_sha);
+
+      // SHA conflict — re-fetch current SHA from GitHub and retry once
+      if (res.status === 409 || res.status === 422) {
+        const fileRes = await fetch(API, { headers: githubHeaders() });
+        if (fileRes.ok) { const f = await fileRes.json(); _sha = f.sha; }
+        res = await attemptPut(_sha);
+      }
+
       if (!res.ok) throw new Error(`${res.status}`);
 
       const result = await res.json();
@@ -117,6 +131,9 @@ const Sync = (() => {
     } catch (e) {
       console.error('Sync save failed:', e);
       setStatus('error');
+    } finally {
+      _saving = false;
+      if (_pendingSave) { _pendingSave = false; save(); }
     }
   }
 
