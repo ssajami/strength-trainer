@@ -1409,8 +1409,10 @@ async function init() {
     const a    = document.createElement('a');
     a.href     = url;
     a.download = `strength-backup-${new Date().toISOString().slice(0,10)}.json`;
+    document.body.appendChild(a);
     a.click();
-    URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
     toast('Backup downloaded', 'success');
   });
   $('add-max-load-btn').addEventListener('click', () => {
