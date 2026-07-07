@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-05T18:42:16.190Z",
+  "updatedAt": "2026-07-07T13:40:09.129Z",
   "data": {
     "spt_profile": {
       "age": 55,
@@ -26,7 +26,12 @@
         "kg": 6
       }
     },
-    "spt_session_logs": null,
+    "spt_session_logs": {
+      "landmine press": {
+        "kg": 27.5,
+        "date": "2026-07-07"
+      }
+    },
     "spt_programs": [
       {
         "id": "1782789742110",
