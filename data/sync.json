@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-10T09:53:45.918Z",
+  "updatedAt": "2026-07-10T09:54:28.597Z",
   "data": {
     "spt_profile": {
       "age": 55,
@@ -16,7 +16,7 @@
       "cable seated row (wide grip)": 20,
       "db step-up (weighted)": 5,
       "back squat": 70,
-      "romanian deadlift (barbell)": 62.5,
+      "romanian deadlift (barbell)": 70,
       "chest-supported db row": 17.5,
       "front squat": 45
     },
@@ -40,7 +40,7 @@
         "date": "2026-07-07"
       },
       "romanian deadlift (barbell)": {
-        "kg": 50,
+        "kg": 55,
         "date": "2026-07-10"
       },
       "chest-supported db row": {
