@@ -23,17 +23,18 @@ This chat is embedded inside a training app. When you output a program update us
 
 2. CHANGE REQUEST → You MUST:
    a. Briefly explain what you are changing and why (2–4 sentences)
-   b. Output the complete updated program JSON inside <program-update> tags like this:
+   b. Output ONLY the session(s) you actually changed — never the whole program — inside <program-update> tags like this:
 
 <program-update>
-{ ...full updated JSON here... }
+{ "sessions": [ { ...one complete updated session object, full schema, not a diff... } ] }
 </program-update>
 
 CRITICAL rules for the JSON block:
 - Output raw JSON only — NO markdown code fences (no \`\`\`json), no comments, no ellipsis
-- Include ALL sessions for ALL weeks — never truncate or summarise
-- Follow the exact same schema as the input JSON below
-- supersetGroup field must be preserved or updated on all exercises
+- Include ONLY the session(s) you changed — omit every untouched session entirely. The app matches each returned session back into the full program by its "sessionNumber" field and replaces just that one.
+- Each session you DO include must be the COMPLETE session object (all fields: warmup, strength, metcon, mobility, sessionNumber, week, etc.) — never a partial diff of just the changed field
+- Follow the exact same per-session schema as the sessions in the input JSON below
+- supersetGroup field must be preserved or updated on all exercises in any session you return
 - Any change (swapping a movement, adjusting volume, rebuilding a metcon, etc.) MUST respect the full rulebook below — the same rules the program was originally generated under. In particular, pick metcon movements from the full METCON MOVEMENT POOL rather than reusing a small default set, and keep the per-program variety caps (no movement in more than 2 of 12 sessions, etc.) in mind relative to what's already in the rest of the program.
 
 ${ProgramGen.buildRulesPrompt()}
@@ -107,6 +108,7 @@ ${JSON.stringify(_program, null, 2)}`;
     let messageStartMs   = null;
     let blockStartMs     = null;
     let firstDeltaText   = null;
+    let stopReason       = null;
 
     while (true) {
       const { done, value } = await reader.read();
@@ -135,6 +137,7 @@ ${JSON.stringify(_program, null, 2)}`;
           onDelta?.(reply);
         } else if (evt.type === 'message_delta') {
           usage = { ...usage, ...evt.usage };
+          if (evt.delta?.stop_reason) stopReason = evt.delta.stop_reason;
         } else if (evt.type === 'error') {
           _history.pop();
           throw new Error(evt.error?.message || 'Stream error');
@@ -146,17 +149,24 @@ ${JSON.stringify(_program, null, 2)}`;
       `[Chat] fetch: ${Math.round(fetchMs)}ms, first-read: ${fmtMs(firstReadMs)}, ` +
       `message_start: ${fmtMs(messageStartMs)}, content_block_start: ${fmtMs(blockStartMs)}, ` +
       `first-delta: ${fmtMs(firstTokenMs)} (text: ${JSON.stringify(firstDeltaText)}), ` +
-      `total: ${Math.round(performance.now() - t0)}ms | ` +
+      `total: ${Math.round(performance.now() - t0)}ms, stop_reason: ${stopReason} | ` +
       `input: ${usage.input_tokens ?? '?'}, cache read: ${usage.cache_read_input_tokens ?? 0}, ` +
       `cache write: ${usage.cache_creation_input_tokens ?? 0}, output: ${usage.output_tokens ?? '?'}`
     );
+
+    // A response that got cut off mid-JSON (hit max_tokens) leaves a <program-update>
+    // tag with no closing tag. If we stored that verbatim it would (a) never produce
+    // a usable update — extractUpdate requires a closing tag — and (b) sit in history
+    // forever, resending a huge broken JSON blob on every future turn and derailing
+    // the model into repeating itself. Detect it and drop it instead.
+    const truncated = stopReason === 'max_tokens' && /<program-update>(?![\s\S]*<\/program-update>)/.test(reply);
 
     // Store only the explanation in history, not the (potentially huge) program
     // JSON — that JSON is already reflected in _program and re-sent fresh via
     // buildSystem() each turn, so keeping old copies here is pure dead weight.
     const trimmed = stripUpdateTag(reply);
     _history.push({ role: 'assistant', content: trimmed || '(program updated — see applied changes)' });
-    return reply;
+    return { text: reply, truncated };
   }
 
   function extractUpdate(reply) {
@@ -174,7 +184,13 @@ ${JSON.stringify(_program, null, 2)}`;
   }
 
   function stripUpdateTag(reply) {
-    return reply.replace(/\s*<program-update>[\s\S]*?<\/program-update>\s*/, '').trim();
+    // Strip a well-formed tag, or — if the response got cut off before closing —
+    // strip from the dangling opening tag to the end so a truncated JSON dump
+    // never ends up stored in chat history.
+    return reply
+      .replace(/\s*<program-update>[\s\S]*?<\/program-update>\s*/, '')
+      .replace(/\s*<program-update>[\s\S]*$/, '')
+      .trim();
   }
 
   return { init, updateProgram, send, extractUpdate, stripUpdateTag, visibleText };

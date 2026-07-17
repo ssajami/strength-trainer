@@ -1024,10 +1024,15 @@ async function handleChatSend() {
   };
 
   try {
-    const reply  = await Chat.send(text, profile.apiKey, onDelta);
+    const { text: reply, truncated } = await Chat.send(text, profile.apiKey, onDelta);
     hideChatTyping();
-    const update = Chat.extractUpdate(reply);
-    const finalText = update ? Chat.stripUpdateTag(reply) : reply;
+    const update = truncated ? null : Chat.extractUpdate(reply);
+    // If parsing failed on a well-formed (closed) tag, show the raw reply so the
+    // problem is visible; a truncated or successful update gets the tag stripped.
+    let finalText = (update || truncated) ? Chat.stripUpdateTag(reply) : reply;
+    if (truncated) {
+      finalText += '\n\n_(Response was cut off before the update finished — try asking for a smaller change, e.g. one session at a time.)_';
+    }
 
     if (streamBody) {
       streamBody.innerHTML = formatChatText(finalText);
@@ -1052,17 +1057,31 @@ async function handleChatSend() {
 }
 
 function applyChatUpdate(updatedProgram, btn) {
+  // Chat now returns only the session(s) it actually changed (see js/chat.js) —
+  // regenerating and re-sending the entire multi-week program on every edit was
+  // both slow and prone to truncating mid-JSON on large programs. Splice the
+  // returned sessions back into the existing program by sessionNumber.
+  const patches = updatedProgram.sessions || [];
+  const sessions = currentProgram.sessions.map(existing => {
+    const patch = patches.find(p => p.sessionNumber === existing.sessionNumber);
+    if (!patch) return existing;
+    const violations = ProgramGen.validateMetcon(patch.metcon, patch.metcon?.format);
+    return {
+      ...patch,
+      timeEstimates: ProgramGen.estimateSessionTimes(patch),
+      metcon: { ...patch.metcon, validationViolations: violations.length ? violations : undefined },
+    };
+  });
+
   const merged = {
-    ...updatedProgram,
+    ...currentProgram,
+    sessions,
     id:        Date.now().toString(),
     createdAt: new Date().toISOString(),
-    startDate: updatedProgram.startDate || currentProgram.startDate,
-    weeks:     updatedProgram.weeks ?? currentProgram.weeks,
   };
   Storage.saveProgram(merged);
   currentProgram = merged;
   chatProgramId  = merged.id;
-  currentWeek    = 1;
   Chat.updateProgram(merged);
   renderHomeSummary();
   Sync.save();
