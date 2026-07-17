@@ -126,6 +126,179 @@ const ProgramGen = (() => {
     return lines.join('\n');
   }
 
+  // Full rulebook shared by program generation AND chat-based edits, so the coach
+  // chat has the same movement pool / caps / taxonomy instead of improvising.
+  function buildRulesPrompt() {
+    return `## HARD CONSTRAINTS — NON-NEGOTIABLE
+- NO running, NO jump rope (any form), NO box jumps with hard landings
+- Low-impact plyometrics only: step-ups, low pogo hops on soft surface, medicine ball slams/throws
+- All weights in KILOGRAMS
+
+## WEEKLY VOLUME TARGETS (working sets, main-work only)
+
+GLUTES_HAMSTRINGS    10–12 sets/week, minimum 2 different movements
+UPPER_BACK_ERECTORS   8–10 sets/week, minimum 2 different movements
+QUAD_DOMINANT         8–10 sets/week
+PUSH                  6–8  sets/week
+VERTICAL_PULL         6–8  sets/week
+UNILATERAL_LOWER      6    sets/week per leg (count per leg, not bilateral)
+CORE                  4–6  sets/week
+CARRIES_LOADED        1–2 per week (presence required; not counted in sets)
+
+---
+
+## PER-SESSION CONSTRAINTS (enforce strictly)
+
+1. Maximum 5 working sets per muscle group per session
+2. Maximum 2 hinge-pattern movements per session
+   Hinge = any GLUTES_HAMSTRINGS or UPPER_BACK_ERECTORS movement that loads the lumbar spine (deadlift, RDL, good morning)
+   Hip thrust and cable pull-through do NOT count as hinges (hip-dominant, non-spinal-loading)
+3. No session may contain 3 or more exercises targeting the same primary muscle group consecutively
+4. Total working sets per session: 15–20
+5. Each muscle group's weekly volume must be spread across at least 2 of the 3 sessions
+6. If a muscle group target is ≥10 sets/week, it must appear in all 3 sessions
+7. No two consecutive sessions lead with the same primary movement pattern (if Session A leads with a hinge, Session B must lead with squat or push)
+
+---
+
+## EXERCISE SELECTION RULES
+
+- Accessory exercises MUST rotate mid-cycle: choose one set of accessories for weeks 1–2 and a DIFFERENT set for weeks 3–4. At most 1 accessory movement may carry over between blocks. This applies per session slot — if Session A uses Bulgarian Split Squat in weeks 1–2, weeks 3–4 must use a different unilateral lower movement (e.g. Reverse Lunge, Step-Up)
+- Primary movements (deadlift variants, squat variants, press variants) stay consistent within a cycle for progressive overload
+- Include at least 1 unilateral lower body movement per session
+- Include at least 1 rowing movement per session
+- Include hip thrust or glute bridge at least 2× per week
+- Prefer landmine press over barbell overhead press for shoulder safety
+
+---
+
+## PROGRAM STRUCTURE
+- 3 sessions per week
+- Each session must contain:
+  1. WARM-UP (8–12 min, specific to that day's work)
+     Include rotator cuff / scapular activation here (band pull-aparts, external rotation, Y/T/W) — NOT as working sets
+  2. STRENGTH — structured in three tiers (see MOVEMENT CLASSIFICATION below):
+     a. PRIMARY: 1 heavy compound lift — type: "primary"
+     b. SECONDARY: 1–2 supporting compounds — type: "secondary"
+     c. ACCESSORY: 2–3 isolation / lower-load movements — type: "accessory"
+  3. METCON (10–20 min, CrossFit-style — see allowed movements below)
+  4. MOBILITY/COOLDOWN (lat, thoracic, shoulder IR)
+
+## SUPERSET PAIRING (primary + secondary tiers only)
+
+Where primary and secondary exercises target non-competing muscle groups, pair them as supersets to reduce total session time (the rest period of one exercise is used to perform the other).
+
+Rules:
+- Assign the same supersetGroup letter ("A", "B", …) to exercises that should be supersetted
+- Non-competing = different primary muscle group patterns (e.g. squat + row, hinge + push, press + pull)
+- Groups can be 2 exercises (superset) or 3 exercises (tri-set) — never 4+
+- Primary may be supersetted with one or both secondaries when the primary is moderate-intensity (≤80% 1RM)
+  Do NOT superset a max-effort or near-max primary set (>85% 1RM) — full neural recovery required
+- Two secondary exercises may be supersetted if they target non-competing groups
+- Accessory exercises may also be supersetted with each other when they target non-competing muscles (e.g. face pull + tricep extension, single-leg RDL + lateral raise)
+- Standalone exercises (not in a superset) get supersetGroup: null
+- Each exercise's restSeconds still reflects the desired rest for that movement; the app handles timing
+
+## MOVEMENT CLASSIFICATION
+
+PRIMARY (type: "primary") — 1 per session:
+  The main compound lift, programmed to the DUP session type.
+  Sets/reps/load vary by session type (heavy/moderate/volume).
+  Examples: back squat, conventional deadlift, bench press, strict press, front squat
+
+SECONDARY (type: "secondary") — 1–2 per session:
+  Compound or semi-compound movements supporting the primary.
+  Fixed: 3–4 sets × 6–10 reps, moderate load, regardless of session type.
+  Examples: RDL, barbell row, hip thrust, Bulgarian split squat, landmine press, pull-up
+
+ACCESSORY (type: "accessory") — 2–3 per session:
+  Isolation or lower-load movements filling volume gaps or targeting weak points.
+  Fixed: 3 sets × 10–15 reps, load by feel (RPE 7–8).
+  Examples: single-leg RDL, cable pull-through, face pull, Pallof press, single-arm row, dead bug
+
+## ACCESSORY PROGRAMMING RULES
+
+1. Accessories must not duplicate the primary or secondary movement pattern in the same session
+   (e.g., if primary = deadlift and secondary = RDL, accessories must come from push, pull, unilateral, or core — no more hinges)
+
+2. After placing primary and secondary, check which muscle groups are still below their weekly target and prioritize those in accessory slots
+
+3. Accessory progression across the cycle:
+   Weeks 1–2: establish working weight at RPE 7
+   Weeks 3–4: add 1 rep per set at the same weight
+   Weeks 5–6: add 1–2 kg, reset to original rep target
+   Deload week (if applicable): 60% load, same reps
+
+4. Combined secondary + accessory sets per session must not exceed 15 working sets
+
+5. Core accessories always placed last in the session
+   Time-based: 2 sets × 20–40 s
+   Rep-based: 2 sets × 10–15 reps
+   Rotator cuff work belongs in the warm-up only — never as working sets
+
+${buildMetconMovementPrompt()}
+
+## METCON HARD CONSTRAINTS (enforce strictly — never violate)
+
+0. VARIETY (planned in Pass 2 — enforced here):
+   - No movement in more than 2 of the 12 sessions (row machine / air bike / ski erg: max 3 each)
+   - No movement more than once in the same week
+   - Each week: ≥ 9 distinct movements across its 3 sessions
+   - At least 20 distinct movements across the full program
+   - Each format used ≥ 1 time; no format used > 4 times
+
+1. OVERHEAD: max 1 ends_overhead movement per metcon.
+   overhead squat (w=1): use rarely; cap reps ≤5/round; forbidden in Tabata and EMOM; counts as your sole overhead movement.
+
+2. LUMBAR: max 1 lumbar-flagged movement per metcon.
+   Never pair KB swing or med ball slam (ballistic hinge) with loaded carry in the same metcon.
+
+3. GRIP: max 2 grip-flagged movements per metcon.
+   Never sequence 3+ grip movements consecutively.
+
+4. SKILL: skill-flagged movements (snatches, toes-to-bar, get-ups, OHS, push jerk, pistols) must NOT appear in Tabata or EMOM — fatigue and time pressure break technique.
+
+## METCON SOFT PREFERENCES
+
+- Push/pull balance: if the metcon has any push pattern, include at least one pull (and vice versa).
+- Modality variety: avoid all-weightlifting or all-gymnastics metcons; mix modalities.
+- Cardio machine rotation: rotate row machine / air bike / ski erg across sessions; avoid the same machine in consecutive sessions.
+- Spawn weight guidance: prefer w=3–4 movements for routine selection; w=1–2 sparingly (overhead squat at most once per 4 sessions).
+- Use DB/landmine overhead press only — never strict barbell press in a metcon.
+NOT allowed in any metcon: running, jump rope, double-unders, box jumps with hard landing.
+
+## MANDATORY ELEMENTS (at least once per 2-week block)
+- Wrist/forearm (wrist curls, reverse curls, or rice bucket drill)
+- Balance / proprioception (single-leg stance, perturbation drills)
+- Low-impact plyometrics (med ball slams, step-ups for power, low pogo on soft surface)
+- Erg cardio intervals for VO₂ (row, air bike, ski erg in metcon)
+
+## CATEGORY TAXONOMY
+category — use exactly these values:
+  GLUTES_HAMSTRINGS   = deadlift, RDL, hip thrust, cable pull-through, good morning, hamstring curl
+  UPPER_BACK_ERECTORS = barbell row, DB row, cable row, chest-supported row, back extension
+  QUAD_DOMINANT       = back squat, front squat, goblet squat, leg press, hack squat
+  PUSH                = bench press, incline press, push-up, dip, strict press, push press, landmine press
+  VERTICAL_PULL       = pull-up, chin-up, lat pulldown, straight-arm pulldown
+  UNILATERAL_LOWER    = single-leg RDL, Bulgarian split squat, step-up, reverse lunge, pistol
+  CORE                = plank, Pallof press, dead bug, hollow hold, GHD sit-up
+  CARRIES_LOADED      = farmer carry, suitcase carry, overhead carry, Zercher carry
+  ROTATOR_CUFF        = face pull, band pull-apart, external rotation, Y/T/W raise
+  GRIP                = plate pinch, dead hang, fat-grip, rice bucket
+  BALANCE             = single-leg stance, perturbation drills
+  PLYOMETRIC          = med ball slam, step-up for power, low pogo
+
+## LOAD & REST GUIDANCE
+- percentOfMax: set a number for ALL primary and secondary exercises — use a sensible training % (e.g. 75 for primary heavy day, 65 for secondary) regardless of whether the movement is in the saved maxes list; set to null ONLY for type "accessory" exercises
+- For accessory exercises (percentOfMax null): coachingNotes MUST describe how to choose weight (e.g. "moderate weight, RPE 7–8 — approximately 20–25 kg DB")
+- Carry loads should be absolute (e.g. "32 kg KB per hand") or bodyweight-based
+- restSeconds: post-menopausal women need full recovery — use these guidelines:
+  • Heavy compound (≤5 reps or ≥80% 1RM): 180–240 s
+  • Moderate compound (6–10 reps): 120–180 s
+  • Accessory / isolation (10+ reps): 90–120 s
+  • Carries, loaded holds, core: 60–90 s`;
+  }
+
   function validateMetcon(metcon, format) {
     const violations = [];
     const movements  = metcon.movements || [];
@@ -223,11 +396,6 @@ You output ONLY valid JSON — no markdown fences, no prose, no comments outside
 - Goals: get stronger; preserve bone density and muscle mass (sarcopenia prevention)
 - Mobility issues: lat tightness, thoracic stiffness, limited shoulder internal rotation
 
-## HARD CONSTRAINTS — NON-NEGOTIABLE
-- NO running, NO jump rope (any form), NO box jumps with hard landings
-- Low-impact plyometrics only: step-ups, low pogo hops on soft surface, medicine ball slams/throws
-- All weights in KILOGRAMS
-
 ## CURRENT MAX LOADS
 ${maxLoadsText}
 
@@ -239,41 +407,7 @@ ${accessoryLoadsText}
 ${prevText}
 ${commText}
 
-## WEEKLY VOLUME TARGETS (working sets, main-work only)
-
-GLUTES_HAMSTRINGS    10–12 sets/week, minimum 2 different movements
-UPPER_BACK_ERECTORS   8–10 sets/week, minimum 2 different movements
-QUAD_DOMINANT         8–10 sets/week
-PUSH                  6–8  sets/week
-VERTICAL_PULL         6–8  sets/week
-UNILATERAL_LOWER      6    sets/week per leg (count per leg, not bilateral)
-CORE                  4–6  sets/week
-CARRIES_LOADED        1–2 per week (presence required; not counted in sets)
-
----
-
-## PER-SESSION CONSTRAINTS (enforce strictly)
-
-1. Maximum 5 working sets per muscle group per session
-2. Maximum 2 hinge-pattern movements per session
-   Hinge = any GLUTES_HAMSTRINGS or UPPER_BACK_ERECTORS movement that loads the lumbar spine (deadlift, RDL, good morning)
-   Hip thrust and cable pull-through do NOT count as hinges (hip-dominant, non-spinal-loading)
-3. No session may contain 3 or more exercises targeting the same primary muscle group consecutively
-4. Total working sets per session: 15–20
-5. Each muscle group's weekly volume must be spread across at least 2 of the 3 sessions
-6. If a muscle group target is ≥10 sets/week, it must appear in all 3 sessions
-7. No two consecutive sessions lead with the same primary movement pattern (if Session A leads with a hinge, Session B must lead with squat or push)
-
----
-
-## EXERCISE SELECTION RULES
-
-- Accessory exercises MUST rotate mid-cycle: choose one set of accessories for weeks 1–2 and a DIFFERENT set for weeks 3–4. At most 1 accessory movement may carry over between blocks. This applies per session slot — if Session A uses Bulgarian Split Squat in weeks 1–2, weeks 3–4 must use a different unilateral lower movement (e.g. Reverse Lunge, Step-Up)
-- Primary movements (deadlift variants, squat variants, press variants) stay consistent within a cycle for progressive overload
-- Include at least 1 unilateral lower body movement per session
-- Include at least 1 rowing movement per session
-- Include hip thrust or glute bridge at least 2× per week
-- Prefer landmine press over barbell overhead press for shoulder safety
+${buildRulesPrompt()}
 
 ---
 
@@ -300,107 +434,6 @@ PASS 3 — Exercise population:
   Fill in specific exercises into the slots from Pass 1. Use the metcon movements from Pass 2 exactly. Assign loads.
 
 ---
-
-## PROGRAM STRUCTURE
-- 3 sessions per week
-- Each session must contain:
-  1. WARM-UP (8–12 min, specific to that day's work)
-     Include rotator cuff / scapular activation here (band pull-aparts, external rotation, Y/T/W) — NOT as working sets
-  2. STRENGTH — structured in three tiers (see MOVEMENT CLASSIFICATION below):
-     a. PRIMARY: 1 heavy compound lift — type: "primary"
-     b. SECONDARY: 1–2 supporting compounds — type: "secondary"
-     c. ACCESSORY: 2–3 isolation / lower-load movements — type: "accessory"
-
-## SUPERSET PAIRING (primary + secondary tiers only)
-
-Where primary and secondary exercises target non-competing muscle groups, pair them as supersets to reduce total session time (the rest period of one exercise is used to perform the other).
-
-Rules:
-- Assign the same supersetGroup letter ("A", "B", …) to exercises that should be supersetted
-- Non-competing = different primary muscle group patterns (e.g. squat + row, hinge + push, press + pull)
-- Groups can be 2 exercises (superset) or 3 exercises (tri-set) — never 4+
-- Primary may be supersetted with one or both secondaries when the primary is moderate-intensity (≤80% 1RM)
-  Do NOT superset a max-effort or near-max primary set (>85% 1RM) — full neural recovery required
-- Two secondary exercises may be supersetted if they target non-competing groups
-- Accessory exercises may also be supersetted with each other when they target non-competing muscles (e.g. face pull + tricep extension, single-leg RDL + lateral raise)
-- Standalone exercises (not in a superset) get supersetGroup: null
-- Each exercise's restSeconds still reflects the desired rest for that movement; the app handles timing
-  3. METCON (10–20 min, CrossFit-style — see allowed movements below)
-  4. MOBILITY/COOLDOWN (lat, thoracic, shoulder IR)
-
-## MOVEMENT CLASSIFICATION
-
-PRIMARY (type: "primary") — 1 per session:
-  The main compound lift, programmed to the DUP session type.
-  Sets/reps/load vary by session type (heavy/moderate/volume).
-  Examples: back squat, conventional deadlift, bench press, strict press, front squat
-
-SECONDARY (type: "secondary") — 1–2 per session:
-  Compound or semi-compound movements supporting the primary.
-  Fixed: 3–4 sets × 6–10 reps, moderate load, regardless of session type.
-  Examples: RDL, barbell row, hip thrust, Bulgarian split squat, landmine press, pull-up
-
-ACCESSORY (type: "accessory") — 2–3 per session:
-  Isolation or lower-load movements filling volume gaps or targeting weak points.
-  Fixed: 3 sets × 10–15 reps, load by feel (RPE 7–8).
-  Examples: single-leg RDL, cable pull-through, face pull, Pallof press, single-arm row, dead bug
-
-## ACCESSORY PROGRAMMING RULES
-
-1. Accessories must not duplicate the primary or secondary movement pattern in the same session
-   (e.g., if primary = deadlift and secondary = RDL, accessories must come from push, pull, unilateral, or core — no more hinges)
-
-2. After placing primary and secondary, check which muscle groups are still below their weekly target and prioritize those in accessory slots
-
-3. Accessory progression across the cycle:
-   Weeks 1–2: establish working weight at RPE 7
-   Weeks 3–4: add 1 rep per set at the same weight
-   Weeks 5–6: add 1–2 kg, reset to original rep target
-   Deload week (if applicable): 60% load, same reps
-
-4. Combined secondary + accessory sets per session must not exceed 15 working sets
-
-5. Core accessories always placed last in the session
-   Time-based: 2 sets × 20–40 s
-   Rep-based: 2 sets × 10–15 reps
-   Rotator cuff work belongs in the warm-up only — never as working sets
-
-${buildMetconMovementPrompt()}
-
-## METCON HARD CONSTRAINTS (enforce strictly — never violate)
-
-0. VARIETY (planned in Pass 2 — enforced here):
-   - No movement in more than 2 of the 12 sessions (row machine / air bike / ski erg: max 3 each)
-   - No movement more than once in the same week
-   - Each week: ≥ 9 distinct movements across its 3 sessions
-   - At least 20 distinct movements across the full program
-   - Each format used ≥ 1 time; no format used > 4 times
-
-1. OVERHEAD: max 1 ends_overhead movement per metcon.
-   overhead squat (w=1): use rarely; cap reps ≤5/round; forbidden in Tabata and EMOM; counts as your sole overhead movement.
-
-2. LUMBAR: max 1 lumbar-flagged movement per metcon.
-   Never pair KB swing or med ball slam (ballistic hinge) with loaded carry in the same metcon.
-
-3. GRIP: max 2 grip-flagged movements per metcon.
-   Never sequence 3+ grip movements consecutively.
-
-4. SKILL: skill-flagged movements (snatches, toes-to-bar, get-ups, OHS, push jerk, pistols) must NOT appear in Tabata or EMOM — fatigue and time pressure break technique.
-
-## METCON SOFT PREFERENCES
-
-- Push/pull balance: if the metcon has any push pattern, include at least one pull (and vice versa).
-- Modality variety: avoid all-weightlifting or all-gymnastics metcons; mix modalities.
-- Cardio machine rotation: rotate row machine / air bike / ski erg across sessions; avoid the same machine in consecutive sessions.
-- Spawn weight guidance: prefer w=3–4 movements for routine selection; w=1–2 sparingly (overhead squat at most once per 4 sessions).
-- Use DB/landmine overhead press only — never strict barbell press in a metcon.
-NOT allowed in any metcon: running, jump rope, double-unders, box jumps with hard landing.
-
-## MANDATORY ELEMENTS (at least once per 2-week block)
-- Wrist/forearm (wrist curls, reverse curls, or rice bucket drill)
-- Balance / proprioception (single-leg stance, perturbation drills)
-- Low-impact plyometrics (med ball slams, step-ups for power, low pogo on soft surface)
-- Erg cardio intervals for VO₂ (row, air bike, ski erg in metcon)
 
 ## PROGRESSION
 ${progReq}
@@ -480,30 +513,10 @@ Rules:
 - supersetGroup: assign matching letters ("A", "B", …) to exercises that should be performed as a superset; applies to any tier — primary, secondary, or accessory; set to null for standalone exercises
 - type: exactly 1 "primary", then 1–2 "secondary", then 2–3 "accessory" exercises (in that order in the array)
 - Primary and secondary must target different muscle groups (no two hinges, no two squats, no two pushes)
-- category — use exactly these values:
-  GLUTES_HAMSTRINGS   = deadlift, RDL, hip thrust, cable pull-through, good morning, hamstring curl
-  UPPER_BACK_ERECTORS = barbell row, DB row, cable row, chest-supported row, back extension
-  QUAD_DOMINANT       = back squat, front squat, goblet squat, leg press, hack squat
-  PUSH                = bench press, incline press, push-up, dip, strict press, push press, landmine press
-  VERTICAL_PULL       = pull-up, chin-up, lat pulldown, straight-arm pulldown
-  UNILATERAL_LOWER    = single-leg RDL, Bulgarian split squat, step-up, reverse lunge, pistol
-  CORE                = plank, Pallof press, dead bug, hollow hold, GHD sit-up
-  CARRIES_LOADED      = farmer carry, suitcase carry, overhead carry, Zercher carry
-  ROTATOR_CUFF        = face pull, band pull-apart, external rotation, Y/T/W raise
-  GRIP                = plate pinch, dead hang, fat-grip, rice bucket
-  BALANCE             = single-leg stance, perturbation drills
-  PLYOMETRIC          = med ball slam, step-up for power, low pogo
+- category, percentOfMax, restSeconds: follow the CATEGORY TAXONOMY and LOAD & REST GUIDANCE above
 - volumeAudit: populate one entry per tracked muscle group (GLUTES_HAMSTRINGS through CORE); sessionBreakdown is an array of primary + secondary working sets per session in order (do not count accessory sets); flag any violations
 - Do not reference a per-session set cap or per-session limit anywhere in coachingNotes, weeklyVolumeNotes, or any other text field — the only volume constraint is weekly
-- percentOfMax: set a number for ALL primary and secondary exercises — use a sensible training % (e.g. 75 for primary heavy day, 65 for secondary) regardless of whether the movement is in the saved maxes list (the app will show "65 kg" when a max is saved, or "65%" when it is not, which is still useful); set to null ONLY for type "accessory" exercises
-- For accessory exercises (percentOfMax null): coachingNotes MUST describe how to choose weight (e.g. "moderate weight, RPE 7–8 — approximately 20–25 kg DB")
-- Carry loads should be absolute (e.g. "32 kg KB per hand") or bodyweight-based
-- Keep metcons 10–20 min, CrossFit-style but fully low-impact; select exclusively from the METCON MOVEMENT POOL above and enforce all hard constraints before finalising
-- restSeconds: post-menopausal women need full recovery — use these guidelines:
-  • Heavy compound (≤5 reps or ≥80% 1RM): 180–240 s
-  • Moderate compound (6–10 reps): 120–180 s
-  • Accessory / isolation (10+ reps): 90–120 s
-  • Carries, loaded holds, core: 60–90 s`;
+- Keep metcons 10–20 min, CrossFit-style but fully low-impact; select exclusively from the METCON MOVEMENT POOL above and enforce all hard constraints before finalising`;
   }
 
   // ─── API call ────────────────────────────────────────────────────────────────
@@ -692,6 +705,7 @@ Rules:
   return {
     validateMetcon,
     estimateSessionTimes,
+    buildRulesPrompt,
 
     async generate(params) {
       const { profile } = params;

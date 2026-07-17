@@ -11,7 +11,7 @@ const Chat = (() => {
       ? `post-menopausal woman, age ${_profile.age}, bodyweight ${_profile.bodyweight} kg`
       : 'post-menopausal woman';
 
-    return `You are an expert strength and conditioning coach who designed the training program below for a ${who}. Hard constraints: no running, jump rope, or box jumps. All loads in kg.
+    return `You are an expert strength and conditioning coach who designed the training program below for a ${who}. All loads in kg.
 
 ## HOW THIS CHAT WORKS — READ THIS FIRST
 
@@ -34,6 +34,11 @@ CRITICAL rules for the JSON block:
 - Include ALL sessions for ALL weeks — never truncate or summarise
 - Follow the exact same schema as the input JSON below
 - supersetGroup field must be preserved or updated on all exercises
+- Any change (swapping a movement, adjusting volume, rebuilding a metcon, etc.) MUST respect the full rulebook below — the same rules the program was originally generated under. In particular, pick metcon movements from the full METCON MOVEMENT POOL rather than reusing a small default set, and keep the per-program variety caps (no movement in more than 2 of 12 sessions, etc.) in mind relative to what's already in the rest of the program.
+
+${ProgramGen.buildRulesPrompt()}
+
+---
 
 CURRENT PROGRAM JSON:
 ${JSON.stringify(_program, null, 2)}`;
