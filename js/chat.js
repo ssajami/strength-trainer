@@ -49,6 +49,10 @@ ${JSON.stringify(_program, null, 2)}`;
     _program = program;
   }
 
+  function fmtMs(ms) {
+    return ms === null ? '?' : `${Math.round(ms)}ms`;
+  }
+
   // Text visible to the user while streaming — hides the <program-update> JSON blob
   // so it doesn't flash raw into the chat as it's generated.
   function visibleText(text) {
@@ -86,16 +90,23 @@ ${JSON.stringify(_program, null, 2)}`;
       throw new Error(msg);
     }
 
+    const fetchMs = performance.now() - t0;
+
     const reader  = res.body.getReader();
     const decoder = new TextDecoder();
     let buffer = '';
     let reply  = '';
     let usage  = {};
-    let firstTokenMs = null;
+    let firstTokenMs     = null;
+    let firstReadMs      = null;
+    let messageStartMs   = null;
+    let blockStartMs     = null;
+    let firstDeltaText   = null;
 
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
+      if (firstReadMs === null) firstReadMs = performance.now() - t0;
       buffer += decoder.decode(value, { stream: true });
 
       const lines = buffer.split('\n');
@@ -106,9 +117,15 @@ ${JSON.stringify(_program, null, 2)}`;
         let evt;
         try { evt = JSON.parse(line.slice(6)); } catch { continue; }
         if (evt.type === 'message_start') {
+          if (messageStartMs === null) messageStartMs = performance.now() - t0;
           usage = { ...usage, ...evt.message?.usage };
+        } else if (evt.type === 'content_block_start') {
+          if (blockStartMs === null) blockStartMs = performance.now() - t0;
         } else if (evt.type === 'content_block_delta' && evt.delta?.type === 'text_delta') {
-          if (firstTokenMs === null) firstTokenMs = performance.now() - t0;
+          if (firstTokenMs === null) {
+            firstTokenMs = performance.now() - t0;
+            firstDeltaText = evt.delta.text;
+          }
           reply += evt.delta.text;
           onDelta?.(reply);
         } else if (evt.type === 'message_delta') {
@@ -121,7 +138,10 @@ ${JSON.stringify(_program, null, 2)}`;
     }
 
     console.log(
-      `[Chat] time-to-first-token: ${Math.round(firstTokenMs)}ms, total: ${Math.round(performance.now() - t0)}ms | ` +
+      `[Chat] fetch: ${Math.round(fetchMs)}ms, first-read: ${fmtMs(firstReadMs)}, ` +
+      `message_start: ${fmtMs(messageStartMs)}, content_block_start: ${fmtMs(blockStartMs)}, ` +
+      `first-delta: ${fmtMs(firstTokenMs)} (text: ${JSON.stringify(firstDeltaText)}), ` +
+      `total: ${Math.round(performance.now() - t0)}ms | ` +
       `input: ${usage.input_tokens ?? '?'}, cache read: ${usage.cache_read_input_tokens ?? 0}, ` +
       `cache write: ${usage.cache_creation_input_tokens ?? 0}, output: ${usage.output_tokens ?? '?'}`
     );
