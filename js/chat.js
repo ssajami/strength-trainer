@@ -59,6 +59,7 @@ ${JSON.stringify(_program, null, 2)}`;
   async function send(userText, apiKey, onDelta) {
     _history.push({ role: 'user', content: userText });
 
+    const t0 = performance.now();
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: {
@@ -90,7 +91,6 @@ ${JSON.stringify(_program, null, 2)}`;
     let buffer = '';
     let reply  = '';
     let usage  = {};
-    const t0 = performance.now();
     let firstTokenMs = null;
 
     while (true) {
