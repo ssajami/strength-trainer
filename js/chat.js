@@ -49,7 +49,14 @@ ${JSON.stringify(_program, null, 2)}`;
     _program = program;
   }
 
-  async function send(userText, apiKey) {
+  // Text visible to the user while streaming — hides the <program-update> JSON blob
+  // so it doesn't flash raw into the chat as it's generated.
+  function visibleText(text) {
+    const idx = text.indexOf('<program-update>');
+    return idx === -1 ? text : text.slice(0, idx).trim();
+  }
+
+  async function send(userText, apiKey, onDelta) {
     _history.push({ role: 'user', content: userText });
 
     const res = await fetch(API_URL, {
@@ -63,7 +70,10 @@ ${JSON.stringify(_program, null, 2)}`;
       body: JSON.stringify({
         model:      MODEL,
         max_tokens: 32000,
-        system:     buildSystem(),
+        stream:     true,
+        // cache_control lets Anthropic reuse the (large, mostly-unchanged) system
+        // prompt across turns in this session instead of reprocessing it every time.
+        system:     [{ type: 'text', text: buildSystem(), cache_control: { type: 'ephemeral' } }],
         messages:   _history,
       }),
     });
@@ -75,9 +85,52 @@ ${JSON.stringify(_program, null, 2)}`;
       throw new Error(msg);
     }
 
-    const data  = await res.json();
-    const reply = data.content[0].text;
-    _history.push({ role: 'assistant', content: reply });
+    const reader  = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let reply  = '';
+    let usage  = {};
+    const t0 = performance.now();
+    let firstTokenMs = null;
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+
+      const lines = buffer.split('\n');
+      buffer = lines.pop();
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        let evt;
+        try { evt = JSON.parse(line.slice(6)); } catch { continue; }
+        if (evt.type === 'message_start') {
+          usage = { ...usage, ...evt.message?.usage };
+        } else if (evt.type === 'content_block_delta' && evt.delta?.type === 'text_delta') {
+          if (firstTokenMs === null) firstTokenMs = performance.now() - t0;
+          reply += evt.delta.text;
+          onDelta?.(reply);
+        } else if (evt.type === 'message_delta') {
+          usage = { ...usage, ...evt.usage };
+        } else if (evt.type === 'error') {
+          _history.pop();
+          throw new Error(evt.error?.message || 'Stream error');
+        }
+      }
+    }
+
+    console.log(
+      `[Chat] time-to-first-token: ${Math.round(firstTokenMs)}ms, total: ${Math.round(performance.now() - t0)}ms | ` +
+      `input: ${usage.input_tokens ?? '?'}, cache read: ${usage.cache_read_input_tokens ?? 0}, ` +
+      `cache write: ${usage.cache_creation_input_tokens ?? 0}, output: ${usage.output_tokens ?? '?'}`
+    );
+
+    // Store only the explanation in history, not the (potentially huge) program
+    // JSON — that JSON is already reflected in _program and re-sent fresh via
+    // buildSystem() each turn, so keeping old copies here is pure dead weight.
+    const trimmed = stripUpdateTag(reply);
+    _history.push({ role: 'assistant', content: trimmed || '(program updated — see applied changes)' });
     return reply;
   }
 
@@ -99,5 +152,5 @@ ${JSON.stringify(_program, null, 2)}`;
     return reply.replace(/\s*<program-update>[\s\S]*?<\/program-update>\s*/, '').trim();
   }
 
-  return { init, updateProgram, send, extractUpdate, stripUpdateTag };
+  return { init, updateProgram, send, extractUpdate, stripUpdateTag, visibleText };
 })();

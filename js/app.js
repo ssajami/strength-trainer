@@ -950,6 +950,13 @@ function openChat() {
   setTimeout(() => $('chat-input').focus(), 100);
 }
 
+function formatChatText(text) {
+  return text
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+
 function appendChatMessage(role, text, update) {
   const container = $('chat-messages');
   const bubble = document.createElement('div');
@@ -957,10 +964,7 @@ function appendChatMessage(role, text, update) {
 
   const body = document.createElement('div');
   body.className = 'chat-bubble-body';
-  body.innerHTML = text
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\n/g, '<br>');
+  body.innerHTML = formatChatText(text);
   bubble.appendChild(body);
 
   if (update) {
@@ -973,6 +977,7 @@ function appendChatMessage(role, text, update) {
 
   container.appendChild(bubble);
   container.scrollTop = container.scrollHeight;
+  return body;
 }
 
 function showChatTyping() {
@@ -1005,13 +1010,40 @@ async function handleChatSend() {
   showChatTyping();
   $('chat-send-btn').disabled = true;
 
+  let streamBody = null;
+  const onDelta = (fullText) => {
+    const visible = Chat.visibleText(fullText);
+    if (!visible) return;
+    if (!streamBody) {
+      hideChatTyping();
+      streamBody = appendChatMessage('assistant', visible);
+    } else {
+      streamBody.innerHTML = formatChatText(visible);
+      $('chat-messages').scrollTop = $('chat-messages').scrollHeight;
+    }
+  };
+
   try {
-    const reply  = await Chat.send(text, profile.apiKey);
+    const reply  = await Chat.send(text, profile.apiKey, onDelta);
     hideChatTyping();
     const update = Chat.extractUpdate(reply);
-    appendChatMessage('assistant', update ? Chat.stripUpdateTag(reply) : reply, update);
+    const finalText = update ? Chat.stripUpdateTag(reply) : reply;
+
+    if (streamBody) {
+      streamBody.innerHTML = formatChatText(finalText);
+      if (update) {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-sm btn-primary chat-apply-btn';
+        btn.textContent = 'Apply changes to program';
+        btn.onclick = () => applyChatUpdate(update, btn);
+        streamBody.parentElement.appendChild(btn);
+      }
+    } else {
+      appendChatMessage('assistant', finalText, update);
+    }
   } catch (err) {
     hideChatTyping();
+    if (streamBody) streamBody.closest('.chat-bubble').remove();
     appendChatMessage('assistant', `Sorry, something went wrong: ${err.message}`);
   } finally {
     $('chat-send-btn').disabled = false;
