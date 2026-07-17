@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-05T18:42:16.190Z",
+  "updatedAt": "2026-07-15T09:33:19.833Z",
   "data": {
     "spt_profile": {
       "age": 55,
@@ -10,23 +10,52 @@
     },
     "spt_max_loads": {
       "conventional deadlift": 80,
-      "lat pulldown": 10,
+      "lat pulldown": 12.5,
       "barbell hip thrust": 50,
       "landmine press": 35,
       "cable seated row (wide grip)": 20,
       "db step-up (weighted)": 5,
       "back squat": 70,
-      "romanian deadlift (barbell)": 80,
-      "chest-supported db row": 20,
+      "romanian deadlift (barbell)": 72.5,
+      "chest-supported db row": 17.5,
       "front squat": 45
     },
     "spt_accessory_loads": {
       "bulgarian split squat (db)": {
-        "date": "2026-07-05",
+        "date": "2026-07-13",
         "kg": 6
+      },
+      "single-leg romanian deadlift (db)": {
+        "date": "2026-07-15",
+        "kg": 12.5
       }
     },
-    "spt_session_logs": null,
+    "spt_session_logs": {
+      "landmine press": {
+        "kg": 27.5,
+        "date": "2026-07-07"
+      },
+      "db step-up (weighted)": {
+        "kg": 3,
+        "date": "2026-07-07"
+      },
+      "romanian deadlift (barbell)": {
+        "kg": 57.5,
+        "date": "2026-07-10"
+      },
+      "chest-supported db row": {
+        "kg": 12.5,
+        "date": "2026-07-10"
+      },
+      "conventional deadlift": {
+        "kg": 70,
+        "date": "2026-07-13"
+      },
+      "lat pulldown": {
+        "kg": 10,
+        "date": "2026-07-13"
+      }
+    },
     "spt_programs": [
       {
         "id": "1782789742110",
