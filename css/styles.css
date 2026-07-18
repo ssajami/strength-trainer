@@ -433,6 +433,7 @@ textarea { resize: vertical; min-height: 80px; }
   padding: 2px 8px;
   border-radius: 100px;
 }
+.metcon-chip-empty { background: var(--bg); color: var(--text-muted); }
 
 .strength-preview { margin-bottom: var(--sp-md); }
 
@@ -910,46 +911,41 @@ textarea { resize: vertical; min-height: 80px; }
   border-left: none;
 }
 
-/* ── Metcon block ─────────────────────────────────────────────────────────── */
-.metcon-block { padding: var(--sp-md); }
-
-.metcon-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: var(--sp-sm);
-  margin-bottom: var(--sp-sm);
-}
-.metcon-name   { font-weight: 700; font-size: 1rem; }
-.metcon-format {
-  background: #ede9fe;
-  color: #5b21b6;
-  font-size: .78rem;
+/* ── Metcon: requirements panel + trainee-entered metcon ─────────────────── */
+.metcon-requirements { padding: var(--sp-md); padding-bottom: 0; }
+.metcon-req-heading {
+  font-size: .72rem;
   font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #5b21b6;
+  margin: var(--sp-sm) 0 4px;
 }
-.metcon-desc {
-  font-size: .875rem;
+.metcon-req-heading:first-child { margin-top: 0; }
+.metcon-req-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: .85rem;
   color: var(--text-muted);
-  margin-bottom: var(--sp-md);
-  line-height: 1.5;
+  line-height: 1.45;
 }
-.metcon-movements { display: flex; flex-direction: column; gap: 6px; }
-.metcon-row {
+.metcon-req-avoid { color: #5b21b6; }
+.metcon-suggestions { font-size: .85rem; color: var(--text-muted); line-height: 1.5; }
+
+.metcon-current { padding: 0 var(--sp-md) var(--sp-sm); }
+.metcon-current-body {
   background: var(--bg);
   border-radius: var(--r-sm);
-  padding: 8px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--sp-sm);
-  flex-wrap: wrap;
+  padding: 10px 12px;
+  font-size: .875rem;
+  line-height: 1.5;
 }
-.metcon-mv-name  { font-weight: 600; font-size: .9rem; }
-.metcon-mv-rx    { font-size: .85rem; color: #5b21b6; font-weight: 700; }
-.metcon-mv-note  { font-size: .78rem; color: var(--text-muted); width: 100%; }
+
+.metcon-editor { padding: var(--sp-sm) var(--sp-md) var(--sp-md); display: flex; flex-direction: column; gap: var(--sp-sm); }
+.metcon-textarea { min-height: 120px; }
+.metcon-save-btn { align-self: flex-start; }
 
 /* ── Modal ────────────────────────────────────────────────────────────────── */
 .modal {

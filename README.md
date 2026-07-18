@@ -54,7 +54,8 @@ Everything is persisted in **localStorage** (your browser, no server needed):
 
 ## Features
 
-- **Generates complete programs** via Claude AI (`claude-sonnet-4-6`): warm-up, strength, CrossFit-style metcon, and mobility/cooldown per session.
+- **Generates complete programs** via Claude AI (`claude-sonnet-4-6`): warm-up, strength, and mobility/cooldown per session.
+- **You write your own metcons**: the AI does not generate metcons. Each session instead shows deterministic, session-specific guidance (computed in-app, no AI call) — what muscle groups/patterns the strength work already hit and what to avoid layering on top — plus a free-text box to paste or type your own metcon in any format.
 - **Builds on prior programs**: the prompt includes your previous program's movements, the progression model used, and your feedback.
 - **Max-load tracking**: when a movement uses percentage-based loading, you're prompted for your 1RM. Working weight is then displayed as e.g. `70 kg (70% of 100 kg)`, rounded to the nearest 2.5 kg.
 - **Low-impact hard constraint**: no running, jump rope, or box jumps ever appear.
@@ -87,11 +88,11 @@ To change how programs are displayed: edit `app.js` and `css/styles.css`.
 
 ## Customising your profile
 
-Beyond age/bodyweight in Settings, the hard-coded profile constraints live in `programGen.js` → `buildUserMessage()`. You can edit:
+Beyond age/bodyweight in Settings, the hard-coded profile constraints live in `programGen.js` → `buildUserMessage()` / `buildRulesPrompt()`. You can edit:
 - Equipment list
 - Mobility issues
 - Volume targets per muscle group
-- Metcon allowed/forbidden movements
+- The metcon movement pool (`METCON_MOVEMENTS`) used only for the in-app "what to avoid" guidance and movement suggestions — not for AI-generated metcons
 
 ---
 

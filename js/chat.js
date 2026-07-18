@@ -32,10 +32,11 @@ This chat is embedded inside a training app. When you output a program update us
 CRITICAL rules for the JSON block:
 - Output raw JSON only — NO markdown code fences (no \`\`\`json), no comments, no ellipsis
 - Include ONLY the session(s) you changed — omit every untouched session entirely. The app matches each returned session back into the full program by its "sessionNumber" field and replaces just that one.
-- Each session you DO include must be the COMPLETE session object (all fields: warmup, strength, metcon, mobility, sessionNumber, week, etc.) — never a partial diff of just the changed field
+- Each session you DO include must be the COMPLETE session object (all fields: warmup, strength, metcon, metconText, mobility, sessionNumber, week, etc.) — never a partial diff of just the changed field
 - Follow the exact same per-session schema as the sessions in the input JSON below
 - supersetGroup field must be preserved or updated on all exercises in any session you return
-- Any change (swapping a movement, adjusting volume, rebuilding a metcon, etc.) MUST respect the full rulebook below — the same rules the program was originally generated under. In particular, pick metcon movements from the full METCON MOVEMENT POOL rather than reusing a small default set, and keep the per-program variety caps (no movement in more than 2 of 12 sessions, etc.) in mind relative to what's already in the rest of the program.
+- Any change (swapping a movement, adjusting volume, etc.) MUST respect the full rulebook below — the same rules the program was originally generated under
+- METCON IS NOT YOUR JOB: the trainee enters her own metcon via a text box in the app — never generate, invent, or edit metcon/metconText content. If she asks you to change a metcon, explain that she should use the "enter your metcon" box for that session (the app shows her session-specific avoid-guidance there), and copy the metcon/metconText fields through completely unchanged on any session you do return for other reasons.
 
 ${ProgramGen.buildRulesPrompt()}
 

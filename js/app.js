@@ -502,7 +502,7 @@ function makeSessionCard(session) {
     </div>
     <div class="session-stats">
       <span>${session.strength.length} exercises · ${totalSets} sets</span>
-      <span class="metcon-chip">${session.metcon.format || 'Metcon'} ${session.metcon.timeMinutes} min</span>
+      <span class="metcon-chip${hasMetcon(session) ? '' : ' metcon-chip-empty'}">${metconChipText(session)}</span>
       <span class="time-chip">~${te.totalMinutes} min total</span>
     </div>
     <div class="strength-preview">${preview}</div>
@@ -536,7 +536,7 @@ function renderSessionDetail(session) {
   root.appendChild(timeSummary);
   if (session.warmup?.length)   root.appendChild(mkSection(`🔥 Warm-Up · ~${te.warmupMinutes} min`,            renderWarmup(session.warmup),          'warmup'));
   if (session.strength?.length) root.appendChild(mkSection('💪 Strength',                                       renderStrength(session.strength, te),   'strength'));
-  root.appendChild(mkSection(`⚡ Metcon · ~${te.metconMinutes} min`,                                            renderMetcon(session.metcon),           'metcon'));
+  root.appendChild(renderMetconSection(session, te));
   if (session.mobility?.length) root.appendChild(mkSection(`🧘 Mobility & Cooldown · ~${te.mobilityMinutes} min`, renderMobility(session.mobility),     'mobility'));
 
   const logBtn = document.createElement('button');
@@ -686,33 +686,109 @@ function renderStrength(items, te) {
   return wrap;
 }
 
-function renderMetcon(m) {
-  const el = document.createElement('div');
-  el.className = 'metcon-block';
+// A session "has" a metcon once the trainee entered her own text, or (for
+// programs generated before this feature) the AI left legacy structured data.
+function hasMetcon(session) {
+  return !!(session.metconText || session.metcon?.movements?.length || session.metcon?.description);
+}
 
-  const movRows = (m.movements || []).map(mv => {
-    const qty = [
-      mv.reps     ? `${mv.reps} reps`   : null,
-      mv.calories ? `${mv.calories} cal` : null,
-      mv.distance || null,
-    ].filter(Boolean).join('/');
+function metconChipText(session) {
+  if (session.metconText) return 'Metcon added';
+  if (session.metcon?.movements?.length || session.metcon?.description) {
+    return `${session.metcon.format || 'Metcon'}${session.metcon.timeMinutes ? ' ' + session.metcon.timeMinutes + ' min' : ''}`;
+  }
+  return 'Metcon: add yours';
+}
+
+// Prefers the trainee's own entered text; falls back to formatting legacy
+// AI-generated structured metcon data for programs from before this feature.
+function metconDisplayText(session) {
+  if (session.metconText) return session.metconText;
+  if (!session.metcon?.description && !session.metcon?.movements?.length) return '';
+
+  const lines = [];
+  if (session.metcon.name) lines.push(session.metcon.name);
+  const meta = [session.metcon.format, session.metcon.timeMinutes ? `${session.metcon.timeMinutes} min` : null].filter(Boolean).join(' · ');
+  if (meta) lines.push(meta);
+  if (session.metcon.description) lines.push(session.metcon.description);
+  for (const mv of session.metcon.movements || []) {
+    const qty = [mv.reps ? `${mv.reps} reps` : null, mv.calories ? `${mv.calories} cal` : null, mv.distance || null].filter(Boolean).join('/');
     const right = [qty, mv.load].filter(Boolean).join(' @ ');
-    return `<div class="metcon-row">
-      <span class="metcon-mv-name">${mv.name}</span>
-      ${right ? `<span class="metcon-mv-rx">${right}</span>` : ''}
-      ${mv.notes ? `<span class="metcon-mv-note">${mv.notes}</span>` : ''}
-    </div>`;
-  }).join('');
+    lines.push(`- ${mv.name}${right ? ` — ${right}` : ''}${mv.notes ? ` (${mv.notes})` : ''}`);
+  }
+  return lines.join('\n');
+}
 
-  el.innerHTML = `
-    <div class="metcon-header">
-      <span class="metcon-name">${m.name}</span>
-      <span class="metcon-format">${m.format} · ${m.timeMinutes} min</span>
-    </div>
-    <p class="metcon-desc">${m.description}</p>
-    <div class="metcon-movements">${movRows}</div>
+function renderMetconSection(session, te) {
+  const sec = document.createElement('div');
+  sec.className = 'session-section section-metcon';
+
+  const h = document.createElement('h3');
+  h.className = 'section-title';
+  h.textContent = `⚡ Metcon${te ? ` · ~${te.metconMinutes} min` : ''}`;
+  sec.appendChild(h);
+
+  const req = ProgramGen.buildMetconRequirements(session);
+  const reqEl = document.createElement('div');
+  reqEl.className = 'metcon-requirements';
+  reqEl.innerHTML = `
+    ${req.worked.length ? `
+      <p class="metcon-req-heading">Worked in strength today</p>
+      <ul class="metcon-req-list">${req.worked.map(w => `<li>${w}</li>`).join('')}</ul>` : ''}
+    ${req.avoid.length ? `
+      <p class="metcon-req-heading">Avoid in your metcon</p>
+      <ul class="metcon-req-list metcon-req-avoid">${req.avoid.map(a => `<li>${a}</li>`).join('')}</ul>` : ''}
+    <p class="metcon-req-heading">General guardrails</p>
+    <ul class="metcon-req-list">${req.general.map(g => `<li>${g}</li>`).join('')}</ul>
+    ${req.suggestions.length ? `
+      <p class="metcon-req-heading">Movements that fit today</p>
+      <p class="metcon-suggestions">${req.suggestions.join(', ')}</p>` : ''}
   `;
-  return el;
+  sec.appendChild(reqEl);
+
+  const currentText = metconDisplayText(session);
+  if (currentText) {
+    const cur = document.createElement('div');
+    cur.className = 'metcon-current';
+    cur.innerHTML = `<p class="metcon-req-heading">Current metcon</p><div class="metcon-current-body">${formatChatText(currentText)}</div>`;
+    sec.appendChild(cur);
+  }
+
+  const editor = document.createElement('div');
+  editor.className = 'metcon-editor';
+  const textarea = document.createElement('textarea');
+  textarea.className = 'metcon-textarea';
+  textarea.placeholder = 'Paste or type your metcon here — any format (AMRAP, EMOM, For Time, etc.)';
+  textarea.value = session.metconText || '';
+  const saveBtn = document.createElement('button');
+  saveBtn.className = 'btn btn-primary btn-sm metcon-save-btn';
+  saveBtn.textContent = currentText ? 'Replace metcon' : 'Save metcon';
+  saveBtn.addEventListener('click', () => saveSessionMetcon(session, textarea.value));
+  editor.appendChild(textarea);
+  editor.appendChild(saveBtn);
+  sec.appendChild(editor);
+
+  return sec;
+}
+
+function saveSessionMetcon(session, text) {
+  const trimmed = text.trim();
+  const sessions = currentProgram.sessions.map(s =>
+    s.sessionNumber === session.sessionNumber ? { ...s, metconText: trimmed || null } : s
+  );
+  const merged = {
+    ...currentProgram,
+    sessions,
+    id:        Date.now().toString(),
+    createdAt: new Date().toISOString(),
+  };
+  Storage.saveProgram(merged);
+  currentProgram = merged;
+  chatProgramId  = merged.id;
+  Chat.updateProgram(merged);
+  Sync.save();
+  toast(trimmed ? 'Metcon saved' : 'Metcon cleared', 'success');
+  renderSessionDetail(sessions.find(s => s.sessionNumber === session.sessionNumber));
 }
 
 function renderMobility(items) {
@@ -1065,11 +1141,13 @@ function applyChatUpdate(updatedProgram, btn) {
   const sessions = currentProgram.sessions.map(existing => {
     const patch = patches.find(p => p.sessionNumber === existing.sessionNumber);
     if (!patch) return existing;
-    const violations = ProgramGen.validateMetcon(patch.metcon, patch.metcon?.format);
+    // Metcons are entered by the trainee via their own save flow, not by chat —
+    // always keep the existing metcon/metconText regardless of what chat returned.
     return {
       ...patch,
-      timeEstimates: ProgramGen.estimateSessionTimes(patch),
-      metcon: { ...patch.metcon, validationViolations: violations.length ? violations : undefined },
+      metcon:         existing.metcon,
+      metconText:     existing.metconText,
+      timeEstimates:  ProgramGen.estimateSessionTimes({ ...patch, metcon: existing.metcon }),
     };
   });
 
@@ -1184,11 +1262,8 @@ function exportToHTML() {
 
       const strengthRows = buildStrengthRows(s.strength || []);
 
-      const metconMoves = (s.metcon.movements || []).map(m => {
-        const qty = [m.reps ? `${m.reps} reps` : null, m.calories ? `${m.calories} cal` : null, m.distance || null].filter(Boolean).join('/');
-        const right = [qty, m.load].filter(Boolean).join(' @ ');
-        return `<li><strong>${m.name}</strong>${right ? ` — ${right}` : ''}${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`;
-      }).join('');
+      const metconReq = ProgramGen.buildMetconRequirements(s);
+      const metconText = metconDisplayText(s);
 
       const mobilityRows = (s.mobility || []).map(m =>
         `<li><strong>${m.name}</strong> — ${m.duration} <a href="${ytUrl(m.name)}" target="_blank" rel="noopener" class="yt-link">▶ Demo</a>${m.notes ? `<br><span class="note">${m.notes}</span>` : ''}</li>`
@@ -1209,9 +1284,10 @@ function exportToHTML() {
           ${strengthRows ? `<section class="sec strength-sec"><h3>💪 Strength</h3><div class="ex-list">${strengthRows}</div></section>` : ''}
           <section class="sec metcon-sec">
             <h3>⚡ Metcon</h3>
-            <div class="metcon-header-row"><strong>${s.metcon.name}</strong> <span class="m-format">${s.metcon.format} · ${s.metcon.timeMinutes} min</span></div>
-            <p class="metcon-desc">${s.metcon.description}</p>
-            ${metconMoves ? `<ul>${metconMoves}</ul>` : ''}
+            ${metconReq.avoid.length ? `<div class="metcon-avoid"><strong>Avoid:</strong> ${metconReq.avoid.join(' ')}</div>` : ''}
+            ${metconText
+              ? `<div class="metcon-desc">${formatChatText(metconText)}</div>`
+              : `<p class="metcon-desc muted">No metcon entered yet — open the app to add one.</p>`}
           </section>
           ${mobilityRows ? `<section class="sec mobility-sec"><h3>🧘 Mobility & Cooldown</h3><ul>${mobilityRows}</ul></section>` : ''}
         </div>
@@ -1335,12 +1411,10 @@ function exportToHTML() {
   .ex-name { font-weight: 600; font-size: 1rem; margin-bottom: 4px;
     display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
   .ex-rx   { font-size: .95rem; margin-bottom: 4px; }
-  .metcon-header-row { display: flex; justify-content: space-between; flex-wrap: wrap;
-    gap: 6px; margin-bottom: 6px; align-items: baseline; }
-  .metcon-header-row strong { font-size: 1rem; }
-  .m-format { background: #ede9fe; color: #5b21b6; font-size: .75rem;
-    font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+  .metcon-avoid { font-size: .82rem; color: #5b21b6; background: #f5f3ff;
+    border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; line-height: 1.5; }
   .metcon-desc { font-size: .85rem; color: var(--muted); margin-bottom: 8px; }
+  .metcon-desc.muted { font-style: italic; }
   @media (max-width: 640px) {
     body { padding: 12px; font-size: 17px; }
     .sec { padding: 12px 14px; }
