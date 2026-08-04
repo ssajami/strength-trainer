@@ -1,5 +1,5 @@
 const Chat = (() => {
-  const MODEL   = 'claude-sonnet-4-6';
+  const MODEL   = 'claude-sonnet-5';
   const API_URL = 'https://api.anthropic.com/v1/messages';
 
   let _history = [];

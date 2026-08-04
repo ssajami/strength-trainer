@@ -1,30 +1,4 @@
 const ProgramGen = (() => {
-  const MODEL   = 'claude-sonnet-4-6';
-  const API_URL = 'https://api.anthropic.com/v1/messages';
-
-  // ─── Prompt building ────────────────────────────────────────────────────────
-
-  function weekStartDates(startDate, weeks) {
-    return Array.from({ length: weeks }, (_, i) => {
-      const d = new Date(startDate + 'T12:00:00');
-      d.setDate(d.getDate() + i * 7);
-      return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    });
-  }
-
-  function prevProgramSummary(prog) {
-    if (!prog) return 'No previous program.';
-    const focuses = [...new Set((prog.sessions || []).map(s => s.focus).filter(Boolean))];
-    const movs = [...new Set(
-      (prog.sessions || []).flatMap(s => (s.strength || []).map(e => e.movement))
-    )].slice(0, 8).join(', ');
-    return (
-      `Previous: "${prog.programName}" (${prog.progressionModel}, ${prog.weeks} weeks, ` +
-      `started ${prog.startDate}). Focus areas: ${focuses.join(', ')}. ` +
-      `Key movements used: ${movs || 'N/A'}.`
-    );
-  }
-
   // ─── Metcon movement pool ────────────────────────────────────────────────────
 
   const METCON_MOVEMENTS = {
@@ -305,91 +279,18 @@ category — use exactly these values:
   • Heavy compound (≤5 reps or ≥80% 1RM): 180–240 s
   • Moderate compound (6–10 reps): 120–180 s
   • Accessory / isolation (10+ reps): 90–120 s
-  • Carries, loaded holds, core: 60–90 s`;
-  }
+  • Carries, loaded holds, core: 60–90 s
 
-  function buildSystemPrompt() {
-    return `You are a world-class strength and conditioning coach specialising in training post-menopausal women. You have deep expertise in:
-- Periodisation models (LP, DUP, double progression, block)
-- Evidence-based set/rep volume for bone density and sarcopenia prevention
-- CrossFit-style programming with low-impact modifications
-- Mobility for lat tightness, thoracic stiffness, and shoulder internal rotation
-
-You output ONLY valid JSON — no markdown fences, no prose, no comments outside the JSON object. Your JSON must exactly match the schema given.`;
-  }
-
-  function buildUserMessage({ profile, maxLoads, accessoryLoads, previousProgram, comments, weeks, progressionModel, startDate }) {
-    const dates = weekStartDates(startDate, weeks);
-
-    const maxLoadsText = Object.keys(maxLoads).length
-      ? Object.entries(maxLoads).map(([k, v]) => `  ${k}: ${v} kg`).join('\n')
-      : '  (none saved yet — use "start conservative" guidance for all lifts)';
-
-    const accessoryLoadsText = Object.keys(accessoryLoads || {}).length
-      ? Object.entries(accessoryLoads).map(([mv, { kg, date }]) => `  ${mv}: ${kg} kg (last used ${date})`).join('\n')
-      : '  (none saved yet)';
-
-    const prevText  = prevProgramSummary(previousProgram);
-    const commText  = comments?.trim()
-      ? `Trainee feedback on last program: "${comments}"`
-      : 'No feedback on previous program.';
-
-    const progReq = progressionModel === 'auto'
-      ? 'Choose the optimal progression model (LP, double, DUP, wave, or other) and justify your choice in 1–2 sentences based on her profile.'
-      : `Use ${progressionModel} progression and briefly justify why it fits this trainee.`;
-
-    const weekLines = dates.map((d, i) => `  Week ${i + 1}: starts ${d}`).join('\n');
-
-    return `Generate a complete ${weeks}-week strength training program for this trainee.
-
-## TRAINEE
-- Post-menopausal woman, age ${profile.age}, bodyweight ${profile.bodyweight} kg
-- Trains at a CrossFit gym with: rower, air bike, ski erg, barbells, full free weights, all sizes of KBs and DBs
-- Goals: get stronger; preserve bone density and muscle mass (sarcopenia prevention)
-- Mobility issues: lat tightness, thoracic stiffness, limited shoulder internal rotation
-
-## CURRENT MAX LOADS
-${maxLoadsText}
-
-## PREVIOUSLY USED ACCESSORY WEIGHTS
-When an accessory exercise matches one of these, reference the saved weight in coachingNotes to maintain continuity (e.g. "start at 20 kg — your last logged weight").
-${accessoryLoadsText}
-
-## HISTORY
-${prevText}
-${commText}
-
-${buildRulesPrompt()}
-
----
-
-## TWO-PASS GENERATION
-
-Generate the program in two passes:
-
-PASS 1 — Volume architecture:
-  For each session in the week, decide how many sets of each muscle group go where.
-  Verify every constraint is met. Output this allocation as the volumeAudit array in the JSON.
-
-PASS 2 — Exercise population:
-  Fill in specific exercises into the slots from Pass 1. Assign loads. Do not include a metcon — see METCON section above.
-
----
-
-## PROGRESSION
-${progReq}
-
-## WEEK SCHEDULE
-${weekLines}
-
-## OUTPUT SCHEMA
-Return ONLY this JSON structure, no text outside it:
+## PROGRAM JSON SCHEMA
+Programs are generated outside the app (in Claude Code) and imported as JSON via the "Import New Program" box on the home screen. Return ONLY this JSON structure, no text outside it:
 
 {
   "programName": "string",
   "progressionModel": "string",
   "progressionJustification": "1–2 sentences",
   "weeklyVolumeNotes": "brief summary of how volume is distributed across muscle groups",
+  "startDate": "YYYY-MM-DD",
+  "weeks": 6,
   "volumeAudit": [
     {
       "muscleGroup": "GLUTES_HAMSTRINGS",
@@ -441,35 +342,6 @@ Rules:
 - volumeAudit: populate one entry per tracked muscle group (GLUTES_HAMSTRINGS through CORE); sessionBreakdown is an array of primary + secondary working sets per session in order (do not count accessory sets); flag any violations
 - Do not reference a per-session set cap or per-session limit anywhere in coachingNotes, weeklyVolumeNotes, or any other text field — the only volume constraint is weekly
 - Do not include a "metcon" field on any session — metcons are entered by the trainee separately, see METCON section above`;
-  }
-
-  // ─── API call ────────────────────────────────────────────────────────────────
-
-  async function callClaude(systemPrompt, userMessage, apiKey) {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true',
-      },
-      body: JSON.stringify({
-        model:      MODEL,
-        max_tokens: 32000,
-        system:     systemPrompt,
-        messages:   [{ role: 'user', content: userMessage }],
-      }),
-    });
-
-    if (!res.ok) {
-      let msg = `API error ${res.status}`;
-      try { const e = await res.json(); msg = e?.error?.message || msg; } catch {}
-      throw new Error(msg);
-    }
-
-    const data = await res.json();
-    return data.content[0].text;
   }
 
   // ─── Response parsing ────────────────────────────────────────────────────────
@@ -583,7 +455,10 @@ Rules:
     return session;
   }
 
-  function parseResponse(text, { weeks, startDate, comments }) {
+  // Programs are generated outside the app (in Claude Code, against the rulebook
+  // in buildRulesPrompt()) and pasted in as JSON via the "Import New Program" box.
+  // This parses + coerces that JSON into the same shape the app has always used.
+  function parseProgramJSON(text) {
     let json = text.trim();
     // Strip accidental markdown fences
     json = json.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '');
@@ -592,12 +467,17 @@ Rules:
     if (start > 0) json = json.slice(start);
 
     const raw = JSON.parse(json);
+    if (!Array.isArray(raw.sessions) || !raw.sessions.length) {
+      throw new Error('JSON has no "sessions" array');
+    }
+    if (!raw.startDate) throw new Error('JSON is missing "startDate"');
+
     return {
       id:                   Date.now().toString(),
       createdAt:            new Date().toISOString(),
-      startDate,
-      weeks:                parseInt(weeks),
-      commentsUsed:         comments || '',
+      startDate:            raw.startDate,
+      weeks:                parseInt(raw.weeks) || Math.max(...raw.sessions.map(s => s.week || 1)),
+      commentsUsed:         raw.commentsUsed || '',
       programName:          raw.programName          || 'Training Program',
       progressionModel:     raw.progressionModel     || 'Custom',
       progressionJustification: raw.progressionJustification || '',
@@ -610,7 +490,7 @@ Rules:
         meetsTarget:         a.meetsTarget          ?? null,
         flag:                a.flag                 || null,
       })),
-      sessions:             (raw.sessions || []).map(coerceSession),
+      sessions:             raw.sessions.map(coerceSession),
     };
   }
 
@@ -620,16 +500,6 @@ Rules:
     estimateSessionTimes,
     buildRulesPrompt,
     buildMetconRequirements,
-
-    async generate(params) {
-      const { profile } = params;
-      if (!profile.apiKey?.trim()) {
-        throw new Error('API key not set. Please add your Anthropic API key in Settings.');
-      }
-      const sys     = buildSystemPrompt();
-      const user    = buildUserMessage(params);
-      const text    = await callClaude(sys, user, profile.apiKey.trim());
-      return parseResponse(text, params);
-    },
+    parseProgramJSON,
   };
 })();
