@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-05T08:41:38.226Z",
+  "updatedAt": "2026-08-05T08:45:12.339Z",
   "data": {
     "spt_profile": {
       "age": 55,
@@ -18,7 +18,8 @@
       "back squat": 70,
       "romanian deadlift (barbell)": 72.5,
       "chest-supported db row": 17.5,
-      "front squat": 45
+      "front squat": 45,
+      "trap bar deadlift": 100
     },
     "spt_accessory_loads": {
       "bulgarian split squat (db)": {
