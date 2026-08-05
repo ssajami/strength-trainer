@@ -4,6 +4,7 @@ let currentWeek    = 1;
 let maxLoadQueue   = [];
 let maxLoadResolve = null;
 let chatProgramId  = null;
+let currentSession = null; // the session object shown on the session-detail screen, if any
 
 // ─── DOM helpers ─────────────────────────────────────────────────────────────
 const $     = id => document.getElementById(id);
@@ -82,6 +83,16 @@ function saveSettings() {
   Storage.saveGithubToken(token);
   Sync.init(token);
   closeSettings();
+
+  // Max-load edits change what session/program screens display (working
+  // weights) — refresh whichever one is currently open so the new numbers
+  // show immediately instead of only after navigating away and back.
+  if ($('session-screen').classList.contains('active') && currentSession) {
+    renderSessionDetail(currentSession);
+  } else if ($('program-screen').classList.contains('active') && currentProgram) {
+    renderProgramView();
+  }
+
   Sync.save().then(ok => {
     if (!token) toast('Settings saved', 'success');
     else if (ok) toast('Settings saved and synced ↑', 'success');
@@ -506,6 +517,7 @@ function makeSessionCard(session) {
 
 // ─── Session detail ───────────────────────────────────────────────────────────
 function renderSessionDetail(session) {
+  currentSession = session;
   $('session-title').textContent = `Session ${session.dayWithinWeek} — week starting ${sessionWeekStart(session)}`;
   const root = $('session-detail');
   root.innerHTML = '';
