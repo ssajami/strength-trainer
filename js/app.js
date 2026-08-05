@@ -82,7 +82,11 @@ function saveSettings() {
   Storage.saveGithubToken(token);
   Sync.init(token);
   closeSettings();
-  Sync.save().then(() => toast('Settings saved and synced ↑', 'success'));
+  Sync.save().then(ok => {
+    if (!token) toast('Settings saved', 'success');
+    else if (ok) toast('Settings saved and synced ↑', 'success');
+    else toast('Settings saved on this device, but GitHub sync failed — check your token in Settings', 'error');
+  });
 }
 
 function renderMaxLoadsList() {
@@ -1482,8 +1486,9 @@ async function init() {
   $('clear-data-btn').addEventListener('click',   clearAllData);
   $('sync-push-btn').addEventListener('click', async () => {
     if (!Sync.isConfigured()) { toast('Enter a GitHub token in settings first', 'error'); return; }
-    await Sync.save();
-    toast('Data pushed to GitHub ↑', 'success');
+    const ok = await Sync.save();
+    if (ok) toast('Data pushed to GitHub ↑', 'success');
+    else toast('GitHub push failed — check your token in Settings', 'error');
   });
   $('sync-pull-btn').addEventListener('click', async () => {
     if (!Sync.isConfigured()) { toast('Enter a GitHub token in settings first', 'error'); return; }
