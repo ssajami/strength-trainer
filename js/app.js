@@ -158,7 +158,7 @@ function resolveLoad(movement, pct) {
   if (pct === null || pct === undefined) return null;
   const max = Storage.getMaxLoad(movement);
   if (!max) return `${pct}%  ·  (save your 1RM to see kg)`;
-  const actual = Math.round((max * pct / 100) / 2.5) * 2.5;
+  const actual = Math.round((max * pct / 100) / 0.5) * 0.5;
   return `${actual} kg  (${pct}% of ${max} kg)`;
 }
 
@@ -859,7 +859,7 @@ function openLogWeightsModal(session) {
         inputValue = saved?.kg ?? '';
       } else {
         const max      = Storage.getMaxLoad(ex.movement);
-        const working  = (max && ex.percentOfMax) ? Math.round((max * ex.percentOfMax / 100) / 2.5) * 2.5 : null;
+        const working  = (max && ex.percentOfMax) ? Math.round((max * ex.percentOfMax / 100) / 0.5) * 0.5 : null;
         const lastLog  = Storage.getSessionLog(ex.movement);
         const lastKg   = lastLog?.kg ?? null;
         rxText = [
@@ -901,7 +901,7 @@ function openLogWeightsModal(session) {
           const kg = parseFloat(input.value);
           const reps = parseLogReps(ex.reps);
           if (!isNaN(kg) && kg > 0 && reps > 0) {
-            const est = Math.round((kg * (1 + reps / 30)) / 2.5) * 2.5;
+            const est = Math.round((kg * (1 + reps / 30)) / 0.5) * 0.5;
             hint.textContent = `→ est. 1RM: ~${est} kg`;
           } else {
             hint.textContent = '';
@@ -953,7 +953,7 @@ function openLogWeightsModal(session) {
       const reps = repsRange
         ? Math.round((parseInt(repsRange[1]) + parseInt(repsRange[2])) / 2)
         : (parseInt(repsStr) || 5);
-      const est1RM = Math.round((kg * (1 + reps / 30)) / 2.5) * 2.5;
+      const est1RM = Math.round((kg * (1 + reps / 30)) / 0.5) * 0.5;
       Storage.setMaxLoad(input.dataset.movement, est1RM);
       Storage.setSessionLog(input.dataset.movement, kg);
       saved++;
@@ -1162,7 +1162,7 @@ function exportToHTML() {
     if (pct == null) return null;
     const max = loads[movement.toLowerCase().trim()];
     if (!max) return `${pct}%`;
-    const kg = Math.round((max * pct / 100) / 2.5) * 2.5;
+    const kg = Math.round((max * pct / 100) / 0.5) * 0.5;
     return `${kg} kg <span class="pct">(${pct}% of ${max} kg)</span>`;
   }
 
