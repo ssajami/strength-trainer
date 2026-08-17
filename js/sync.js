@@ -13,10 +13,10 @@ const Sync = (() => {
     'spt_last_comments',
   ];
 
-  // GitHub's Contents API only inlines file content up to ~1MB; programs carry
-  // verbose AI-generated text (justifications, notes) so only the most recent
-  // few are synced to keep the payload well under that limit.
-  const SYNCED_PROGRAM_LIMIT = 5;
+  // Matches storage.js's PROGRAM_HISTORY_LIMIT -- local storage should never
+  // hold more than this many programs, but slice defensively in case an
+  // older device hasn't picked up that cap yet.
+  const SYNCED_PROGRAM_LIMIT = 3;
 
   let _token      = null;
   let _sha        = null;   // SHA of the current file — required by GitHub API to update
@@ -41,7 +41,7 @@ const Sync = (() => {
   }
 
   function encodePayload(obj) {
-    const json  = JSON.stringify(obj, null, 2);
+    const json  = JSON.stringify(obj);
     const bytes = new TextEncoder().encode(json);
     let binary  = '';
     bytes.forEach(b => binary += String.fromCharCode(b));

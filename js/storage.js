@@ -10,6 +10,7 @@ const Storage = (() => {
   };
 
   const DEFAULT_PROFILE = { age: 55, bodyweight: 65, apiKey: '', weeklySetMin: 9, weeklySetMax: 12 };
+  const PROGRAM_HISTORY_LIMIT = 3; // current + 2 previous finalized programs
 
   function read(key) {
     try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : null; }
@@ -53,10 +54,21 @@ const Storage = (() => {
       const p = read(KEYS.PROGRAMS) || [];
       return p[0] || null;
     },
+    // Programs keep a stable programNumber across edits (chat tweaks, metcon
+    // saves, re-imports of a revised draft) -- matched by programName, so
+    // re-saving the program you're iterating on overwrites its entry instead
+    // of piling up a new history row. Only a genuinely new programName gets
+    // the next number. History is capped at PROGRAM_HISTORY_LIMIT (current +
+    // a couple of finalized priors) to keep the synced payload small.
     saveProgram(program) {
       const p = read(KEYS.PROGRAMS) || [];
-      p.unshift(program);
-      if (p.length > 15) p.length = 15;
+      const existingIdx = p.findIndex(x => x.programName === program.programName);
+      const programNumber = existingIdx !== -1
+        ? p[existingIdx].programNumber
+        : p.reduce((max, x) => Math.max(max, x.programNumber || 0), 0) + 1;
+      if (existingIdx !== -1) p.splice(existingIdx, 1);
+      p.unshift({ ...program, programNumber });
+      if (p.length > PROGRAM_HISTORY_LIMIT) p.length = PROGRAM_HISTORY_LIMIT;
       write(KEYS.PROGRAMS, p);
     },
 
