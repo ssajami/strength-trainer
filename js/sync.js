@@ -71,7 +71,7 @@ const Sync = (() => {
       if (file.content) {
         payload = decodeContent(file.content);
       } else {
-        const rawRes = await fetch(file.download_url, { headers: { 'Authorization': `Bearer ${_token}` } });
+        const rawRes = await fetch(file.download_url);
         if (!rawRes.ok) throw new Error(`${rawRes.status}`);
         payload = await rawRes.json();
       }
