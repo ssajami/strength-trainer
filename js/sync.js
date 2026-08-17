@@ -66,14 +66,18 @@ const Sync = (() => {
       _sha       = file.sha;
 
       // Files over ~1MB come back with content omitted (encoding: "none") --
-      // fall back to the raw blob, which has no such size cap.
+      // fall back to the Git Blobs API, which has no such size cap. (Not
+      // raw.githubusercontent.com: it's unauthenticated and rate-limits by
+      // IP, and sending it an Authorization header trips a CORS preflight
+      // it doesn't answer.)
       let payload;
       if (file.content) {
         payload = decodeContent(file.content);
       } else {
-        const rawRes = await fetch(file.download_url);
-        if (!rawRes.ok) throw new Error(`${rawRes.status}`);
-        payload = await rawRes.json();
+        const blobRes = await fetch(file.git_url, { headers: githubHeaders() });
+        if (!blobRes.ok) throw new Error(`${blobRes.status}`);
+        const blob = await blobRes.json();
+        payload = decodeContent(blob.content);
       }
 
       // Write each key into localStorage (GitHub is source of truth on load).
