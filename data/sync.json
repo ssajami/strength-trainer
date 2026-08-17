@@ -67,7 +67,7 @@
         "commentsUsed": "No feedback logged on the numbers since the last cycle; maxes confirmed still accurate. Trainee requested 3 changes after reviewing the first draft: Conventional Deadlift -> Trap Bar Deadlift, Front Squat -> Back Squat, and Lat Pulldown -> band-assisted Pull-Up (no cable machine; she has pull-up rig access and can do assisted reps). Also fixed vs. the pre-Claude-Code cycle: accessories now actually rotate at the week-2/3 boundary, rotator-cuff work moved to warm-up only (was incorrectly an accessory working set), a rowing and a unilateral-lower movement are now present in every session, GRIP/BALANCE/PLYOMETRIC categories are each covered, and QUAD_DOMINANT now hits its weekly volume target (previously under-programmed).",
         "programName": "4-Week Bone & Muscle Preservation Program — Post-Menopausal Strength (Block 6)",
         "progressionModel": "Daily Undulating Periodisation (DUP)",
-        "progressionJustification": "Continuing DUP from the prior block: it rotates intensity domains (heavy/moderate/volume) across the three weekly sessions, giving superior combined strength and hypertrophy stimulus versus linear progression, which matters for sarcopenia and bone-density work in a post-menopausal trainee. Primary-lift intensities are nudged up ~2% over the prior block given no reported issues completing it. At the trainee's request, Conventional Deadlift was swapped for Trap Bar Deadlift and Front Squat for Back Squat — same categories/volume math, no other changes needed. Lat Pulldown was swapped for band-assisted Pull-Up (no lat pulldown machine available) — bodyweight+band movements don't have a natural %1RM, so this one is progressed by reps/band-assistance level instead and is a documented exception to the \"secondary needs percentOfMax\" rule. Goblet Squat was added as a new secondary to bring QUAD_DOMINANT up to its weekly target — the prior block only programmed it once.",
+        "progressionJustification": "Continuing DUP from the prior block: it rotates intensity domains (heavy/moderate/volume) across the three weekly sessions, giving superior combined strength and hypertrophy stimulus versus linear progression, which matters for sarcopenia and bone-density work in a post-menopausal trainee. Primary-lift intensities are nudged up ~2% over the prior block given no reported issues completing it. At the trainee's request, Conventional Deadlift was swapped for Trap Bar Deadlift and Front Squat for Back Squat — same categories/volume math, no other changes needed. Lat Pulldown was swapped for band-assisted Pull-Up (no lat pulldown machine available) — bodyweight+band movements don't have a natural %1RM, so this one is progressed by reps/band-assistance level instead and is a documented exception to the \"secondary needs percentOfMax\" rule. Goblet Squat was added as a new secondary to bring QUAD_DOMINANT up to its weekly target — the prior block only programmed it once. Cable Seated Row was swapped for a Banded Seated Row across all sessions this block — no cable machine available; like the Pull-Up entries above, band-resisted movements don't have a clean %1RM, so this is progressed by reps and band tension instead and is another documented exception to the percentOfMax rule.",
         "weeklyVolumeNotes": "GLUTES_HAMSTRINGS (10 sets/week) appears in all 3 sessions via Trap Bar Deadlift primary, Barbell Hip Thrust secondary (S2), and Romanian Deadlift secondary (S3) — the prior block left S2 with no glutes work at all; fixed here. UPPER_BACK_ERECTORS (8/week) via Cable Seated Row (S2) and Chest-Supported DB Row (S3), each bumped to 4 sets to close a gap the prior block left. QUAD_DOMINANT (8/week) now spans 2 sessions — Back Squat primary (S3) plus a new Goblet Squat secondary (S1); the prior block only programmed it once. VERTICAL_PULL is band-assisted Pull-Up (S1, no lat pulldown machine available) — progressed by reps/band-assistance level rather than %1RM since bodyweight+band movements don't have a clean 1RM. UNILATERAL_LOWER (6/leg) via Bulgarian Split Squat/Walking Lunge (S1), DB Step-Up variants (S2), and the explosive step-up (S3, doubles as the plyometric element). CORE (4/week) spread across S1 and S3 only (2 of 3 sessions, meets the spread rule). GRIP and BALANCE each get a dedicated accessory slot in S2 every week; PLYOMETRIC is folded into S3’s step-up. Rowing and a unilateral-lower movement are present in every session. Rotator-cuff activation lives in warm-ups only (not counted as working sets). KNOWN GAPS (see PUSH/VERTICAL_PULL flags): both remain single-session and ~2 sets under target — every other accessory/secondary slot this cycle went to closing gaps left by the prior (unverified) block. Also: hip thrust appears once per week (S2) rather than the rulebook’s 2x/week — traded for actually hitting the GLUTES_HAMSTRINGS 10-12/week target via real secondary-tier volume, which the prior block also failed to do. Flag if you’d rather trade one of the above for the other next cycle.",
         "volumeAudit": [
           {
@@ -361,14 +361,14 @@
                 "type": "secondary",
                 "order": 2,
                 "supersetGroup": "A",
-                "movement": "Cable Seated Row (wide grip)",
+                "movement": "Banded Seated Row",
                 "category": "UPPER_BACK_ERECTORS",
                 "isUnilateral": false,
                 "sets": 4,
                 "reps": "10",
-                "percentOfMax": 62,
+                "percentOfMax": null,
                 "restSeconds": 120,
-                "coachingNotes": null
+                "coachingNotes": "New movement (swapped from Cable Seated Row — no cable machine available). Loop a resistance band around your feet while seated with legs extended, or anchor it to a fixed point at chest height. Sit tall, pull to the torso, retract scapulae at the end of the row and hold 1 s, avoid using momentum. Start with a light-medium band, RPE 7-8 for 10 reps."
               },
               {
                 "type": "secondary",
@@ -805,14 +805,14 @@
                 "type": "secondary",
                 "order": 2,
                 "supersetGroup": "A",
-                "movement": "Cable Seated Row (wide grip)",
+                "movement": "Banded Seated Row",
                 "category": "UPPER_BACK_ERECTORS",
                 "isUnilateral": false,
                 "sets": 4,
                 "reps": "10",
-                "percentOfMax": 64,
+                "percentOfMax": null,
                 "restSeconds": 120,
-                "coachingNotes": null
+                "coachingNotes": "Same band setup as Week 1. If Week 1 felt easy at RPE 7-8, add a rep or two, or step up to a slightly heavier band."
               },
               {
                 "type": "secondary",
@@ -1249,14 +1249,14 @@
                 "type": "secondary",
                 "order": 2,
                 "supersetGroup": "A",
-                "movement": "Cable Seated Row (wide grip)",
+                "movement": "Banded Seated Row",
                 "category": "UPPER_BACK_ERECTORS",
                 "isUnilateral": false,
                 "sets": 4,
                 "reps": "8",
-                "percentOfMax": 70,
+                "percentOfMax": null,
                 "restSeconds": 120,
-                "coachingNotes": null
+                "coachingNotes": "Heavy day — move up one band tension level (or shorten the band between hands and anchor) from Weeks 1-2 to match the lower rep target. RPE 8 on the final set."
               },
               {
                 "type": "secondary",
@@ -1693,14 +1693,14 @@
                 "type": "secondary",
                 "order": 2,
                 "supersetGroup": "A",
-                "movement": "Cable Seated Row (wide grip)",
+                "movement": "Banded Seated Row",
                 "category": "UPPER_BACK_ERECTORS",
                 "isUnilateral": false,
                 "sets": 4,
                 "reps": "10",
-                "percentOfMax": 70,
+                "percentOfMax": null,
                 "restSeconds": 120,
-                "coachingNotes": null
+                "coachingNotes": "Week 4 moderate day, completing the band progression for this block. Hold Week 3's band tension or drop back one level for the higher rep count; RPE 8 on the final set."
               },
               {
                 "type": "secondary",
