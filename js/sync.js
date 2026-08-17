@@ -13,6 +13,11 @@ const Sync = (() => {
     'spt_last_comments',
   ];
 
+  // GitHub's Contents API only inlines file content up to ~1MB; programs carry
+  // verbose AI-generated text (justifications, notes) so only the most recent
+  // few are synced to keep the payload well under that limit.
+  const SYNCED_PROGRAM_LIMIT = 5;
+
   let _token      = null;
   let _sha        = null;   // SHA of the current file — required by GitHub API to update
   let _saving     = false;  // lock — prevents concurrent PUTs with a stale SHA
@@ -57,9 +62,19 @@ const Sync = (() => {
       if (res.status === 404) { setStatus('ok'); return null; } // file not created yet
       if (!res.ok) throw new Error(`${res.status}`);
 
-      const file    = await res.json();
-      _sha          = file.sha;
-      const payload = decodeContent(file.content);
+      const file = await res.json();
+      _sha       = file.sha;
+
+      // Files over ~1MB come back with content omitted (encoding: "none") --
+      // fall back to the raw blob, which has no such size cap.
+      let payload;
+      if (file.content) {
+        payload = decodeContent(file.content);
+      } else {
+        const rawRes = await fetch(file.download_url, { headers: { 'Authorization': `Bearer ${_token}` } });
+        if (!rawRes.ok) throw new Error(`${rawRes.status}`);
+        payload = await rawRes.json();
+      }
 
       // Write each key into localStorage (GitHub is source of truth on load).
       // spt_profile: merge rather than overwrite — apiKey is device-only and never synced.
@@ -102,6 +117,11 @@ const Sync = (() => {
       if (snapshot['spt_profile']) {
         const { apiKey, ...rest } = snapshot['spt_profile'];
         snapshot['spt_profile'] = rest;
+      }
+
+      // Keep the payload under GitHub's ~1MB inline-content limit
+      if (Array.isArray(snapshot['spt_programs'])) {
+        snapshot['spt_programs'] = snapshot['spt_programs'].slice(0, SYNCED_PROGRAM_LIMIT);
       }
 
       const payload = { version: 1, updatedAt: new Date().toISOString(), data: snapshot };
