@@ -183,6 +183,24 @@ CARRIES_LOADED        1–2 per week (presence required; not counted in sets)
 
 ---
 
+## PENDING FOR NEXT CYCLE (Block 7) — shoulder IR progression
+Block 6 dropped the Face Pull accessory that Block 5 had for external-rotation
+strength (only warm-up-level activation — band pull-apart, banded external
+rotation — remains, which is too light to build capacity). When building
+Block 7:
+1. Add Face Pull (or banded external rotation) back as a real ACCESSORY with
+   working sets, progressed like any other accessory (RPE 7 in weeks 1–2, add
+   a rep in weeks 3–4) — not just warm-up activation.
+2. Add a sleeper stretch to the mobility/cooldown block — it directly targets
+   posterior capsule tightness, the usual cause of limited IR; none of the
+   current mobility work (pec stretch, open book, Y-T-W) actually stretches
+   that direction.
+Do NOT yet introduce a real overhead press variant (even light/accessory) —
+that's the step after this, once a cycle of the above shows real improvement.
+Delete this section once Block 7 has actually been built with these two additions.
+
+---
+
 ## PROGRAM STRUCTURE
 - 3 sessions per week
 - Each session must contain:
