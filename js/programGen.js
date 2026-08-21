@@ -84,6 +84,20 @@ const ProgramGen = (() => {
     'BB incline press':           { pattern:'horizontal_push',   modality:'weightlifting',  equipment:'barbell',    unilateral:false, ends_overhead:false, risk_flags:[],                                  spawnWeight:3 },
   };
 
+  // Maps a session's primary-lift category to the metcon movement pattern(s)
+  // that would repeat the same muscle group — e.g. a back squat (QUAD_DOMINANT)
+  // day shouldn't also suggest metcon movements with pattern 'squat'.
+  const CATEGORY_TO_METCON_PATTERNS = {
+    GLUTES_HAMSTRINGS:   ['hinge'],
+    UPPER_BACK_ERECTORS: ['horizontal_pull'],
+    QUAD_DOMINANT:       ['squat'],
+    PUSH:                ['horizontal_push', 'vertical_push'],
+    VERTICAL_PULL:       ['vertical_pull'],
+    UNILATERAL_LOWER:    ['lunge'],
+    CORE:                ['core_isometric', 'core_flexion', 'core_antirotation', 'core_rotational'],
+    CARRIES_LOADED:      ['carry'],
+  };
+
   // Deterministic (no AI involved) "what to avoid in your metcon" guidance,
   // derived purely from the strength work already programmed in this session.
   // Metcons are authored by the trainee herself in the app now, not generated —
@@ -123,16 +137,30 @@ const ProgramGen = (() => {
     ];
 
     // Inspiration only, not a requirement — pool movements that don't trip a
-    // flag already avoided above.
-    const suggestions = Object.entries(METCON_MOVEMENTS)
+    // flag already avoided above, don't repeat today's primary muscle group,
+    // and aren't a cardio machine (the trainee adds her own each day).
+    const primary = strength.find(e => e.type === 'primary');
+    const excludedPatterns = new Set(CATEGORY_TO_METCON_PATTERNS[primary?.category] || []);
+
+    const eligible = Object.entries(METCON_MOVEMENTS)
       .filter(([, m]) =>
         m.spawnWeight >= 3 &&
+        m.modality !== 'monostructural' &&
+        !excludedPatterns.has(m.pattern) &&
         !(overhead && m.ends_overhead) &&
         !(hinge && m.risk_flags.includes('lumbar')) &&
         !(grip && m.risk_flags.includes('grip'))
       )
-      .map(([name]) => name)
-      .slice(0, 10);
+      .map(([name]) => name);
+
+    // Shuffle (Fisher-Yates) so the pick varies day to day instead of always
+    // handing back the same movements in object-declaration order.
+    const shuffled = [...eligible];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    const suggestions = shuffled.slice(0, 2 + Math.floor(Math.random() * 3)); // 2-4
 
     return { worked, avoid, general, suggestions };
   }
