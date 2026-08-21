@@ -138,13 +138,14 @@ const ProgramGen = (() => {
 
     // Inspiration only, not a requirement — pool movements that don't trip a
     // flag already avoided above, don't repeat today's primary muscle group,
-    // and aren't a cardio machine (the trainee adds her own each day).
+    // and aren't a cardio machine (the trainee adds her own each day). Every
+    // movement in the pool is fair game regardless of spawnWeight -- the
+    // trainee built this list herself and is fine with any of them showing up.
     const primary = strength.find(e => e.type === 'primary');
     const excludedPatterns = new Set(CATEGORY_TO_METCON_PATTERNS[primary?.category] || []);
 
     const eligible = Object.entries(METCON_MOVEMENTS)
       .filter(([, m]) =>
-        m.spawnWeight >= 3 &&
         m.modality !== 'monostructural' &&
         !excludedPatterns.has(m.pattern) &&
         !(overhead && m.ends_overhead) &&
