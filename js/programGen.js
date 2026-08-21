@@ -162,7 +162,7 @@ CARRIES_LOADED        1–2 per week (presence required; not counted in sets)
 
 1. Maximum 5 working sets per muscle group per session
 2. Maximum 2 hinge-pattern movements per session
-   Hinge = any GLUTES_HAMSTRINGS or UPPER_BACK_ERECTORS movement that loads the lumbar spine (deadlift, RDL, good morning)
+   Hinge = any GLUTES_HAMSTRINGS or UPPER_BACK_ERECTORS movement that loads the lumbar spine (deadlift, RDL, good morning, clean/snatch pull)
    Hip thrust and cable pull-through do NOT count as hinges (hip-dominant, non-spinal-loading)
 3. No session may contain 3 or more exercises targeting the same primary muscle group consecutively
 4. Total working sets per session: 15–20
@@ -215,7 +215,8 @@ Rules:
 PRIMARY (type: "primary") — 1 per session:
   The main compound lift, programmed to the DUP session type.
   Sets/reps/load vary by session type (heavy/moderate/volume).
-  Examples: back squat, conventional deadlift, bench press, strict press, front squat
+  Examples: back squat, conventional deadlift, bench press, strict press, front squat, power clean, hang power clean, power snatch, hang power snatch
+  Clean/snatch variants: trainee has years of Olympic-lifting experience and trains with coach supervision available — see OLYMPIC LIFT VARIANTS below for the constraints specific to these movements
 
 SECONDARY (type: "secondary") — 1–2 per session:
   Compound or semi-compound movements supporting the primary.
@@ -226,6 +227,17 @@ ACCESSORY (type: "accessory") — 2–3 per session:
   Isolation or lower-load movements filling volume gaps or targeting weak points.
   Fixed: 3 sets × 10–15 reps, load by feel (RPE 7–8).
   Examples: single-leg RDL, cable pull-through, face pull, Pallof press, single-arm row, dead bug
+
+## OLYMPIC LIFT VARIANTS (PRIMARY ONLY)
+
+Power clean, hang power clean, power snatch, hang power snatch are permitted as PRIMARY movements ONLY — never secondary or accessory (neither tier's rep/load scheme fits a technical, explosive lift). category: GLUTES_HAMSTRINGS.
+
+- Default to power/hang variants (power clean, hang power clean, power snatch, hang power snatch), not full squat clean / squat snatch — the trainee has a documented shoulder IR limitation (already the reason landmine press is preferred over barbell overhead press elsewhere), and a full-catch position asks more of that same shoulder than a power/hang catch does. Only use a full squat-catch variant if the trainee explicitly requests it for a specific cycle.
+- Reps: 3–5 sets × 1–3 reps regardless of DUP session type (heavy/moderate/volume days adjust %1RM only, never push reps higher — these are never programmed for "volume" in the 6-10 rep sense the way squats/deadlifts are)
+- restSeconds: 180–240 s (full recovery between technical attempts)
+- Never assign a supersetGroup to a clean/snatch primary, at any %1RM — technical execution needs full focus and a fresh CNS between sets, unlike the ≤80%/>85% intensity-based superset rule that applies to other primaries
+- Counts as a hinge movement toward the "max 2 hinge-pattern movements per session" cap (see PER-SESSION CONSTRAINTS)
+- coachingNotes should note that supervision is available/recommended for these sessions
 
 ## ACCESSORY PROGRAMMING RULES
 
