@@ -735,11 +735,6 @@ function renderMetconSection(session, te) {
     ${req.worked.length ? `
       <p class="metcon-req-heading">Worked in strength today</p>
       <ul class="metcon-req-list">${req.worked.map(w => `<li>${w}</li>`).join('')}</ul>` : ''}
-    ${req.avoid.length ? `
-      <p class="metcon-req-heading">Avoid in your metcon</p>
-      <ul class="metcon-req-list metcon-req-avoid">${req.avoid.map(a => `<li>${a}</li>`).join('')}</ul>` : ''}
-    <p class="metcon-req-heading">General guardrails</p>
-    <ul class="metcon-req-list">${req.general.map(g => `<li>${g}</li>`).join('')}</ul>
     ${req.suggestions.length ? `
       <p class="metcon-req-heading">Movements that fit today</p>
       <p class="metcon-suggestions">${req.suggestions.join(', ')}</p>` : ''}
