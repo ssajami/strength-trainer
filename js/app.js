@@ -728,17 +728,28 @@ function renderMetconSection(session, te) {
   h.textContent = `⚡ Metcon${te ? ` · ~${te.metconMinutes} min` : ''}`;
   sec.appendChild(h);
 
-  const req = ProgramGen.buildMetconRequirements(session);
+  function renderMetconReqBody(r) {
+    return `
+      ${r.worked.length ? `
+        <p class="metcon-req-heading">Worked in strength today</p>
+        <ul class="metcon-req-list">${r.worked.map(w => `<li>${w}</li>`).join('')}</ul>` : ''}
+      ${r.suggestions.length ? `
+        <p class="metcon-req-heading">Movements that fit today</p>
+        <p class="metcon-suggestions">${r.suggestions.join(', ')}</p>
+        <a href="#" class="metcon-reroll-link">🔁 Reselect movements</a>` : ''}
+    `;
+  }
+
   const reqEl = document.createElement('div');
   reqEl.className = 'metcon-requirements';
-  reqEl.innerHTML = `
-    ${req.worked.length ? `
-      <p class="metcon-req-heading">Worked in strength today</p>
-      <ul class="metcon-req-list">${req.worked.map(w => `<li>${w}</li>`).join('')}</ul>` : ''}
-    ${req.suggestions.length ? `
-      <p class="metcon-req-heading">Movements that fit today</p>
-      <p class="metcon-suggestions">${req.suggestions.join(', ')}</p>` : ''}
-  `;
+  reqEl.innerHTML = renderMetconReqBody(ProgramGen.buildMetconRequirements(session));
+  // Delegated listener survives the innerHTML replacement on each reroll
+  reqEl.addEventListener('click', (e) => {
+    const link = e.target.closest('.metcon-reroll-link');
+    if (!link) return;
+    e.preventDefault();
+    reqEl.innerHTML = renderMetconReqBody(ProgramGen.buildMetconRequirements(session));
+  });
   sec.appendChild(reqEl);
 
   const currentText = metconDisplayText(session);

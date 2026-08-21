@@ -933,6 +933,14 @@ textarea { resize: vertical; min-height: 80px; }
 }
 .metcon-req-avoid { color: #5b21b6; }
 .metcon-suggestions { font-size: .85rem; color: var(--text-muted); line-height: 1.5; }
+.metcon-reroll-link {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: .8rem;
+  color: var(--primary-dark);
+  text-decoration: none;
+}
+.metcon-reroll-link:hover { text-decoration: underline; }
 
 .metcon-current { padding: 0 var(--sp-md) var(--sp-sm); }
 .metcon-current-body {
