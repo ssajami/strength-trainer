@@ -873,7 +873,7 @@ function openLogWeightsModal(session) {
         return isNaN(n) ? 8 : n;
       }
 
-      let rxText, inputValue;
+      let rxText, inputValue, lastLog;
       if (isAccessory) {
         const saved = Storage.getAccessoryLoad(ex.movement);
         if (saved) {
@@ -888,12 +888,12 @@ function openLogWeightsModal(session) {
       } else {
         const max      = Storage.getMaxLoad(ex.movement);
         const working  = (max && ex.percentOfMax) ? Math.round((max * ex.percentOfMax / 100) / 0.5) * 0.5 : null;
-        const lastLog  = Storage.getSessionLog(ex.movement);
+        lastLog        = Storage.getSessionLog(ex.movement);
         const lastKg   = lastLog?.kg ?? null;
         rxText = [
           `${ex.sets}×${ex.reps}`,
           working  ? `planned ${working} kg`                               : null,
-          lastKg   ? `last logged ${lastKg} kg · ${fmtShortDate(lastLog.date)}` : null,
+          lastKg   ? `last logged ${lastKg} kg${lastLog.reps ? ` × ${lastLog.reps}` : ''} · ${fmtShortDate(lastLog.date)}` : null,
         ].filter(Boolean).join(' · ');
         inputValue = lastKg != null ? lastKg : '';
       }
@@ -916,19 +916,37 @@ function openLogWeightsModal(session) {
       input.step = '0.5';
       input.dataset.movement  = ex.movement;
       input.dataset.entryType = isAccessory ? 'accessory' : 'max';
-      input.dataset.reps      = ex.reps;
       if (inputValue !== '') input.value = inputValue;
       input.dataset.original  = String(inputValue); // change-detection guard
       inputWrap.appendChild(lbl);
       inputWrap.appendChild(input);
 
+      let repsInput = null;
       if (!isAccessory) {
+        // Reps actually completed -- defaults to the prescribed count, but
+        // editable, since an estimated 1RM computed from the prescribed reps
+        // when you actually completed fewer overstates your true max.
+        const repsLbl = document.createElement('label');
+        repsLbl.className = 'log-input-label';
+        repsLbl.textContent = 'Reps completed';
+        repsInput = document.createElement('input');
+        repsInput.type = 'number';
+        repsInput.className = 'log-reps-input';
+        repsInput.min = '1';
+        repsInput.step = '1';
+        repsInput.dataset.movement = ex.movement;
+        const defaultReps = String(lastLog?.reps ?? parseLogReps(ex.reps));
+        repsInput.value = defaultReps;
+        repsInput.dataset.original = defaultReps; // change-detection guard
+        inputWrap.appendChild(repsLbl);
+        inputWrap.appendChild(repsInput);
+
         const hint = document.createElement('span');
         hint.className = 'est-1rm-hint';
         const updateHint = () => {
           const kg = parseFloat(input.value);
-          const reps = parseLogReps(ex.reps);
-          if (!isNaN(kg) && kg > 0 && reps > 0) {
+          const reps = parseInt(repsInput.value);
+          if (!isNaN(kg) && kg > 0 && !isNaN(reps) && reps > 0) {
             const est = Math.round((kg * (1 + reps / 30)) / 0.5) * 0.5;
             hint.textContent = `→ est. 1RM: ~${est} kg`;
           } else {
@@ -936,6 +954,7 @@ function openLogWeightsModal(session) {
           }
         };
         input.addEventListener('input', updateHint);
+        repsInput.addEventListener('input', updateHint);
         updateHint();
         inputWrap.appendChild(hint);
       }
@@ -971,19 +990,24 @@ function openLogWeightsModal(session) {
   saveBtn.addEventListener('click', () => {
     let saved = 0;
 
-    // Primary / secondary — calculate estimated 1RM from working weight + reps
+    // Primary / secondary — calculate estimated 1RM from weight actually used
+    // and reps actually completed (not the prescribed reps — completing fewer
+    // than prescribed at a given weight is real, common feedback that a
+    // prescribed-reps assumption would silently overstate as a higher max).
     overlay.querySelectorAll('.log-weight-input[data-entry-type="max"]').forEach(input => {
-      if (input.value === input.dataset.original) return; // unchanged pre-fill — skip
+      const movement  = input.dataset.movement;
+      const repsInput = overlay.querySelector(`.log-reps-input[data-movement="${movement}"]`);
+      const weightChanged = input.value !== input.dataset.original;
+      const repsChanged    = repsInput && repsInput.value !== repsInput.dataset.original;
+      if (!weightChanged && !repsChanged) return; // nothing touched — skip
+
       const kg = parseFloat(input.value);
       if (isNaN(kg) || kg <= 0) return;
-      const repsStr = input.dataset.reps || '5';
-      const repsRange = repsStr.match(/^(\d+)[–\-](\d+)/);
-      const reps = repsRange
-        ? Math.round((parseInt(repsRange[1]) + parseInt(repsRange[2])) / 2)
-        : (parseInt(repsStr) || 5);
+      const reps = repsInput ? (parseInt(repsInput.value) || 5) : 5;
+
       const est1RM = Math.round((kg * (1 + reps / 30)) / 0.5) * 0.5;
-      Storage.setMaxLoad(input.dataset.movement, est1RM);
-      Storage.setSessionLog(input.dataset.movement, kg);
+      Storage.setMaxLoad(movement, est1RM);
+      Storage.setSessionLog(movement, kg, reps);
       saved++;
     });
 

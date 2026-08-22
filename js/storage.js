@@ -38,14 +38,17 @@ const Storage = (() => {
       return m[movement.toLowerCase().trim()] ?? null;
     },
 
-    // Last actual weight used for primary/secondary exercises (separate from estimated 1RM)
+    // Last actual weight (and reps actually completed) for primary/secondary
+    // exercises -- separate from estimated 1RM, which is derived from these.
     getSessionLog(movement) {
       const m = read(KEYS.SESSION_LOGS) || {};
       return m[movement.toLowerCase().trim()] ?? null;
     },
-    setSessionLog(movement, kg) {
+    setSessionLog(movement, kg, reps) {
       const m = read(KEYS.SESSION_LOGS) || {};
-      m[movement.toLowerCase().trim()] = { kg, date: new Date().toISOString().split('T')[0] };
+      const entry = { kg, date: new Date().toISOString().split('T')[0] };
+      if (reps != null) entry.reps = reps;
+      m[movement.toLowerCase().trim()] = entry;
       write(KEYS.SESSION_LOGS, m);
     },
 
