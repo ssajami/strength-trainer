@@ -820,6 +820,16 @@ function renderMobility(items) {
 }
 
 // ─── Log weights modal ────────────────────────────────────────────────────────
+// RPE 10 = taken to failure (0 reps in reserve); each point below adds ~1 rep
+// in reserve. A 1RM estimated from reps completed alone assumes the set was
+// taken to failure -- wrong for RPE 7-8 work (the intended target for most
+// primary/secondary lifts here), where the trainee deliberately stops short.
+// Folding in RPE corrects for that instead of quietly understating the max.
+function effectiveReps(actualReps, rpe) {
+  if (rpe == null || isNaN(rpe)) return actualReps;
+  return actualReps + Math.max(0, 10 - rpe);
+}
+
 function openLogWeightsModal(session) {
   const existing = document.getElementById('log-weights-modal');
   if (existing) existing.remove();
@@ -893,7 +903,7 @@ function openLogWeightsModal(session) {
         rxText = [
           `${ex.sets}×${ex.reps}`,
           working  ? `planned ${working} kg`                               : null,
-          lastKg   ? `last logged ${lastKg} kg${lastLog.reps ? ` × ${lastLog.reps}` : ''} · ${fmtShortDate(lastLog.date)}` : null,
+          lastKg   ? `last logged ${lastKg} kg${lastLog.reps ? ` × ${lastLog.reps}` : ''}${lastLog.rpe ? ` @ RPE ${lastLog.rpe}` : ''} · ${fmtShortDate(lastLog.date)}` : null,
         ].filter(Boolean).join(' · ');
         inputValue = lastKg != null ? lastKg : '';
       }
@@ -941,13 +951,35 @@ function openLogWeightsModal(session) {
         inputWrap.appendChild(repsLbl);
         inputWrap.appendChild(repsInput);
 
+        // RPE (optional) -- how hard the set actually was. Without it, the
+        // estimate assumes you took the set to failure, which understates
+        // your true max on a properly-executed RPE 7-8 set.
+        const rpeLbl = document.createElement('label');
+        rpeLbl.className = 'log-input-label';
+        rpeLbl.textContent = 'RPE (optional)';
+        const rpeInput = document.createElement('input');
+        rpeInput.type = 'number';
+        rpeInput.className = 'log-rpe-input';
+        rpeInput.min = '5';
+        rpeInput.max = '10';
+        rpeInput.step = '0.5';
+        rpeInput.placeholder = 'e.g. 7.5';
+        rpeInput.dataset.movement = ex.movement;
+        const defaultRpe = lastLog?.rpe != null ? String(lastLog.rpe) : '';
+        if (defaultRpe) rpeInput.value = defaultRpe;
+        rpeInput.dataset.original = defaultRpe; // change-detection guard
+        inputWrap.appendChild(rpeLbl);
+        inputWrap.appendChild(rpeInput);
+
         const hint = document.createElement('span');
         hint.className = 'est-1rm-hint';
         const updateHint = () => {
           const kg = parseFloat(input.value);
           const reps = parseInt(repsInput.value);
+          const rpe = rpeInput.value === '' ? null : parseFloat(rpeInput.value);
           if (!isNaN(kg) && kg > 0 && !isNaN(reps) && reps > 0) {
-            const est = Math.round((kg * (1 + reps / 30)) / 0.5) * 0.5;
+            const eReps = effectiveReps(reps, rpe);
+            const est = Math.round((kg * (1 + eReps / 30)) / 0.5) * 0.5;
             hint.textContent = `→ est. 1RM: ~${est} kg`;
           } else {
             hint.textContent = '';
@@ -955,6 +987,7 @@ function openLogWeightsModal(session) {
         };
         input.addEventListener('input', updateHint);
         repsInput.addEventListener('input', updateHint);
+        rpeInput.addEventListener('input', updateHint);
         updateHint();
         inputWrap.appendChild(hint);
       }
@@ -997,17 +1030,21 @@ function openLogWeightsModal(session) {
     overlay.querySelectorAll('.log-weight-input[data-entry-type="max"]').forEach(input => {
       const movement  = input.dataset.movement;
       const repsInput = overlay.querySelector(`.log-reps-input[data-movement="${movement}"]`);
+      const rpeInput  = overlay.querySelector(`.log-rpe-input[data-movement="${movement}"]`);
       const weightChanged = input.value !== input.dataset.original;
       const repsChanged    = repsInput && repsInput.value !== repsInput.dataset.original;
-      if (!weightChanged && !repsChanged) return; // nothing touched — skip
+      const rpeChanged      = rpeInput && rpeInput.value !== rpeInput.dataset.original;
+      if (!weightChanged && !repsChanged && !rpeChanged) return; // nothing touched — skip
 
       const kg = parseFloat(input.value);
       if (isNaN(kg) || kg <= 0) return;
       const reps = repsInput ? (parseInt(repsInput.value) || 5) : 5;
+      const rpe  = (rpeInput && rpeInput.value !== '') ? parseFloat(rpeInput.value) : null;
 
-      const est1RM = Math.round((kg * (1 + reps / 30)) / 0.5) * 0.5;
+      const eReps = effectiveReps(reps, rpe);
+      const est1RM = Math.round((kg * (1 + eReps / 30)) / 0.5) * 0.5;
       Storage.setMaxLoad(movement, est1RM);
-      Storage.setSessionLog(movement, kg, reps);
+      Storage.setSessionLog(movement, kg, reps, rpe);
       saved++;
     });
 
