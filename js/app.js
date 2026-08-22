@@ -459,6 +459,12 @@ function sessionWeekStart(session) {
   return `${d.getDate()}/${d.getMonth() + 1}/${String(d.getFullYear()).slice(2)}`;
 }
 
+// A "session" with no primary lift is a dedicated mobility/stretch day, not a
+// strength day — it doesn't need a metcon prompt or the metcon time estimate.
+function hasPrimaryWork(session) {
+  return (session.strength || []).some(e => e.type === 'primary' || e.type === 'main');
+}
+
 function makeSessionCard(session) {
   const totalSets = (session.strength || []).reduce((n, e) => n + (e.sets || 0), 0);
   const te = getTimeEstimates(session);
@@ -501,7 +507,7 @@ function makeSessionCard(session) {
     </div>
     <div class="session-stats">
       <span>${session.strength.length} exercises · ${totalSets} sets</span>
-      <span class="metcon-chip${hasMetcon(session) ? '' : ' metcon-chip-empty'}">${metconChipText(session)}</span>
+      ${hasPrimaryWork(session) ? `<span class="metcon-chip${hasMetcon(session) ? '' : ' metcon-chip-empty'}">${metconChipText(session)}</span>` : ''}
       <span class="time-chip">~${te.totalMinutes} min total</span>
     </div>
     <div class="strength-preview">${preview}</div>
@@ -536,7 +542,7 @@ function renderSessionDetail(session) {
   root.appendChild(timeSummary);
   if (session.warmup?.length)   root.appendChild(mkSection(`🔥 Warm-Up · ~${te.warmupMinutes} min`,            renderWarmup(session.warmup),          'warmup'));
   if (session.strength?.length) root.appendChild(mkSection('💪 Strength',                                       renderStrength(session.strength, te),   'strength'));
-  root.appendChild(renderMetconSection(session, te));
+  if (hasPrimaryWork(session))  root.appendChild(renderMetconSection(session, te));
   if (session.mobility?.length) root.appendChild(mkSection(`🧘 Mobility & Cooldown · ~${te.mobilityMinutes} min`, renderMobility(session.mobility),     'mobility'));
 
   const logBtn = document.createElement('button');

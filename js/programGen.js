@@ -220,19 +220,18 @@ Block 7:
 1. Add Face Pull (or banded external rotation) back as a real ACCESSORY with
    working sets, progressed like any other accessory (RPE 7 in weeks 1–2, add
    a rep in weeks 3–4) — not just warm-up activation.
-2. Add a sleeper stretch to the mobility/cooldown block — it directly targets
-   posterior capsule tightness, the usual cause of limited IR; none of the
-   current mobility work (pec stretch, open book, Y-T-W) actually stretches
-   that direction.
 Do NOT yet introduce a real overhead press variant (even light/accessory) —
 that's the step after this, once a cycle of the above shows real improvement.
-Delete this section once Block 7 has actually been built with these two additions.
+Delete this section once Block 7 has actually been built with this addition.
+(The sleeper-stretch item that used to be here is done — it now lives in the
+weekly mobility session below, which is a better fit than the daily cooldown
+blocks since it isn't time-squeezed.)
 
 ---
 
 ## PROGRAM STRUCTURE
-- 3 sessions per week
-- Each session must contain:
+- 3 strength sessions per week, plus 1 dedicated weekly mobility/stretch session (4 sessions/week total)
+- Each STRENGTH session must contain:
   1. WARM-UP (8–12 min, specific to that day's work)
      Include rotator cuff / scapular activation here (band pull-aparts, external rotation, Y/T/W) — NOT as working sets
   2. STRENGTH — structured in three tiers (see MOVEMENT CLASSIFICATION below):
@@ -240,7 +239,49 @@ Delete this section once Block 7 has actually been built with these two addition
      b. SECONDARY: 1–2 supporting compounds — type: "secondary"
      c. ACCESSORY: 2–3 isolation / lower-load movements — type: "accessory"
   3. METCON — NOT your job, see METCON section below
-  4. MOBILITY/COOLDOWN (lat, thoracic, shoulder IR)
+  4. MOBILITY/COOLDOWN (lat, thoracic, shoulder IR) — short, 3 items, not the main mobility work (see below)
+
+## WEEKLY MOBILITY SESSION (dedicated 4th session)
+
+A standing part of every cycle, not something to ask about each time. Distinct
+from the short per-strength-session cooldown blocks above — this is a real
+~25–30 min session in its own right.
+
+Schema: strength: [] (empty — no primary/secondary/accessory tiers, no
+percentOfMax, no metcon prompt), all content in mobility: [{name, duration,
+notes}]. dayWithinWeek: 4, a suggestedDay on whatever day fits best
+around the 3 strength days (default: the day after the last strength session,
+e.g. Sunday if strength days are Mon/Wed/Fri) — set focus to something like
+"Weekly Mobility — Shoulder IR, Thoracic Spine, Hips".
+
+Two tiers, matching the trainee's age (55, post-menopausal — reduced collagen
+elasticity means real fall-risk and adhesive-capsulitis ("frozen shoulder")
+considerations, not just comfort) and her documented shoulder IR limitation:
+
+1. CORE CORRECTIVE (identical every week, all 4 weeks of the cycle — unlike
+   accessories, this should NOT rotate; ROM corrections need repeated,
+   consistent exposure to actually change something):
+   - Sleeper stretch (targets posterior capsule tightness — the usual cause of
+     limited shoulder IR)
+   - Thoracic extension over foam roller
+   - Shoulder CARs (controlled articular rotations — slow, full-range, no
+     weight; safe for a stiff/at-risk shoulder since the trainee controls the
+     range herself)
+   - Couch stretch (hip flexor length — offsets the heavy weekly hinge volume)
+
+2. SUPPLEMENTARY (rotates at the week-2/3 boundary, same convention as
+   strength-day accessories — weeks 1–2 one set, weeks 3–4 a different set,
+   at most 1 carryover): pick ~4 from cross-body shoulder stretch, hip
+   internal/external rotation work (90/90, pigeon), ankle dorsiflexion (wall
+   stretch), adductor rock-back, standing quad stretch, single-leg balance
+   hold (fall-risk work — can progress eyes-open to eyes-closed, or add band
+   perturbation, across the rotation).
+
+Nothing here needs percentOfMax or restSeconds (it's all in the mobility
+array, not strength). Skip anything ballistic or forced — tightness
+discomfort is fine, sharp/pinching pain is not (flag in coachingNotes-
+equivalent text that persistent pain, not just stiffness, warrants a PT
+look rather than pushing through it).
 
 ## SUPERSET PAIRING (primary + secondary tiers only)
 
@@ -440,7 +481,13 @@ Rules:
     const primaryMinutes   = Math.round(sum(byType.primary,   120));
     const secondaryMinutes = Math.round(sum(byType.secondary,  90));
     const accessoryMinutes = Math.round(sum(byType.accessory,  60));
-    const metconMinutes    = session.metcon?.timeMinutes ?? 15;
+    // A session with no primary lift is a dedicated mobility/stretch day —
+    // no metcon applies, and its "mobility" content isn't a short cooldown
+    // block but the actual point of the session, so estimate from item count
+    // instead of the flat cooldown default.
+    const hasPrimary = byType.primary.length > 0;
+    const metconMinutes = hasPrimary ? (session.metcon?.timeMinutes ?? 15) : 0;
+    const mobilityMinutes = hasPrimary ? 8 : Math.max(15, (session.mobility || []).length * 3);
 
     // Superset savings: each paired exercise saves (sets-1) × its own rest (the shared rest
     // comes from the partner; only the max rest of the pair is used per round)
@@ -462,14 +509,16 @@ Rules:
     }
     const supersetSavingsMinutes = Math.round(supersetSavingsSec / 60);
 
+    const warmupMinutes = hasPrimary ? 10 : 5;
+
     return {
-      warmupMinutes:    10,
+      warmupMinutes,
       primaryMinutes,
       secondaryMinutes,
       accessoryMinutes,
       metconMinutes,
-      mobilityMinutes:  8,
-      totalMinutes:     10 + primaryMinutes + secondaryMinutes + accessoryMinutes - supersetSavingsMinutes + metconMinutes + 8,
+      mobilityMinutes,
+      totalMinutes: warmupMinutes + primaryMinutes + secondaryMinutes + accessoryMinutes - supersetSavingsMinutes + metconMinutes + mobilityMinutes,
     };
   }
 
