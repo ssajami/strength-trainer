@@ -238,8 +238,39 @@ blocks since it isn't time-squeezed.)
      a. PRIMARY: 1 heavy compound lift — type: "primary"
      b. SECONDARY: 1–2 supporting compounds — type: "secondary"
      c. ACCESSORY: 2–3 isolation / lower-load movements — type: "accessory"
+        (one session per week is an exception — see DESIGNATED METCON DAY below)
   3. METCON — NOT your job, see METCON section below
   4. MOBILITY/COOLDOWN (lat, thoracic, shoulder IR) — short, 3 items, not the main mobility work (see below)
+
+## DESIGNATED METCON DAY (accessory tier dropped for time)
+
+One of the 3 strength sessions each week — the one whose PRIMARY is the
+upper-body press (not a hinge or squat day) — drops its ACCESSORY tier
+entirely (primary + secondary only) to leave real time for a proper
+metcon. This is a standing structural choice for every cycle, not
+optional or something to ask about each time.
+
+- Why this specific day: it's the only strength day without a heavy
+  hip-hinge or squat primary, so a conditioning piece here doesn't stack
+  extra fatigue on the same lower-body/hip tissues already loaded hard
+  on the other two days. (Currently also directly relevant: the trainee
+  is managing a lateral hip/glute-tendon issue — keeping conditioning
+  work off the heavy hinge/squat days specifically avoids adding
+  cumulative compressive load on that hip while it's settling.)
+- Where this came from: the trainee was consistently skipping metcons
+  most sessions from lack of time — confirmed from her own logs, done
+  in every session for weeks 1–2 of Block 6, then none from week 3 on.
+  Trying to fit a metcon into all 3 sessions wasn't sustainable; one
+  reliably-protected day beats three attempted and mostly abandoned.
+- Relocate anything that would have lived in that day's now-removed
+  accessory tier: any weekly-volume-target contribution that slot was
+  covering must move to one of the other two sessions' accessory tiers
+  instead (see ACCESSORY PROGRAMMING RULES #2), and if a MANDATORY
+  ACCESSORY ELEMENT (GRIP/BALANCE/PLYOMETRIC) would have landed on this
+  day, place it on one of the other two strength days instead — it
+  still needs to happen somewhere every 2-week block.
+- This frees roughly 15–20 real minutes for the metcon; the day's short
+  mobility/cooldown block can stay as-is, it's brief already.
 
 ## WEEKLY MOBILITY SESSION (dedicated 4th session)
 
