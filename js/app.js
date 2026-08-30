@@ -49,6 +49,7 @@ function openSettings() {
   $('setting-github-token').value  = Storage.getGithubToken();
   $('setting-age').value           = p.age          || 55;
   $('setting-bodyweight').value    = p.bodyweight   || 65;
+  $('setting-bar-weight').value    = p.barWeight    ?? 20;
   $('setting-set-min').value       = p.weeklySetMin ?? 9;
   $('setting-set-max').value       = p.weeklySetMax ?? 12;
   renderMaxLoadsList();
@@ -75,6 +76,7 @@ function saveSettings() {
     apiKey:       $('setting-api-key').value.trim(),
     age:          parseInt($('setting-age').value)          || 55,
     bodyweight:   parseFloat($('setting-bodyweight').value) || 65,
+    barWeight:    parseFloat($('setting-bar-weight').value) || 0,
     weeklySetMin: parseInt($('setting-set-min').value)      || 9,
     weeklySetMax: parseInt($('setting-set-max').value)      || 12,
   });
@@ -169,12 +171,35 @@ function promptNextMaxLoad() {
 }
 
 // ─── Load resolution ─────────────────────────────────────────────────────────
+// Movements loaded symmetrically on a barbell/trap bar -- plates split evenly
+// each side, so "total kg" can be translated to "kg per side". The schema has
+// no explicit equipment field, so this is inferred from the movement name;
+// DB/KB/band/landmine/bodyweight movements are excluded since their working
+// weight isn't split across two sides the same way (or at all).
+function isBarLoaded(movement) {
+  const name = (movement || '').toLowerCase();
+  const notBar = /\bdb\b|dumbbell|\bkb\b|kettlebell|band|landmine|goblet|pull-?up|push-?up|machine|cable/;
+  if (notBar.test(name)) return false;
+  const barHint = /barbell|\bbb\b|squat|deadlift|press|bench|\brdl\b|row|good morning|clean|snatch|jerk|thruster|lunge/;
+  return barHint.test(name);
+}
+
+// Plates needed per side for a given total, assuming the profile's barbell
+// weight. Returns null if the total is at or below the bar itself (nothing
+// meaningful to display, and negative plates make no sense).
+function perSideKg(totalKg) {
+  const barWeight = Storage.getProfile().barWeight ?? 20;
+  const perSide = Math.round(((totalKg - barWeight) / 2) / 0.5) * 0.5;
+  return perSide > 0 ? perSide : null;
+}
+
 function resolveLoad(movement, pct) {
   if (pct === null || pct === undefined) return null;
   const max = Storage.getMaxLoad(movement);
   if (!max) return `${pct}%  ·  (save your 1RM to see kg)`;
   const actual = Math.round((max * pct / 100) / 0.5) * 0.5;
-  return `${actual} kg  (${pct}% of ${max} kg)`;
+  const perSide = isBarLoaded(movement) ? perSideKg(actual) : null;
+  return `${actual} kg  (${pct}% of ${max} kg)${perSide != null ? ` / ${perSide} kg e.s.` : ''}`;
 }
 
 // ─── Program import ─────────────────────────────────────────────────────────
@@ -898,11 +923,12 @@ function openLogWeightsModal(session) {
       } else {
         const max      = Storage.getMaxLoad(ex.movement);
         const working  = (max && ex.percentOfMax) ? Math.round((max * ex.percentOfMax / 100) / 0.5) * 0.5 : null;
+        const workingSide = working != null && isBarLoaded(ex.movement) ? perSideKg(working) : null;
         lastLog        = Storage.getSessionLog(ex.movement);
         const lastKg   = lastLog?.kg ?? null;
         rxText = [
           `${ex.sets}×${ex.reps}`,
-          working  ? `planned ${working} kg`                               : null,
+          working  ? `planned ${working} kg${workingSide != null ? ` (${workingSide} kg e.s.)` : ''}` : null,
           lastKg   ? `last logged ${lastKg} kg${lastLog.reps ? ` × ${lastLog.reps}` : ''}${lastLog.rpe ? ` @ RPE ${lastLog.rpe}` : ''} · ${fmtShortDate(lastLog.date)}` : null,
         ].filter(Boolean).join(' · ');
         inputValue = lastKg != null ? lastKg : '';
@@ -1252,7 +1278,8 @@ function exportToHTML() {
     const max = loads[movement.toLowerCase().trim()];
     if (!max) return `${pct}%`;
     const kg = Math.round((max * pct / 100) / 0.5) * 0.5;
-    return `${kg} kg <span class="pct">(${pct}% of ${max} kg)</span>`;
+    const perSide = isBarLoaded(movement) ? perSideKg(kg) : null;
+    return `${kg} kg <span class="pct">(${pct}% of ${max} kg)${perSide != null ? ` / ${perSide} kg e.s.` : ''}</span>`;
   }
 
   function ytUrl(name) {

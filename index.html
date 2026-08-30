@@ -11,7 +11,7 @@
 
   <!-- ── Header ──────────────────────────────────────────────────────────── -->
   <header class="app-header">
-    <h1 class="app-title">Strength Program <span class="app-version">v1.22</span></h1>
+    <h1 class="app-title">Strength Program <span class="app-version">v1.23</span></h1>
     <div class="header-actions">
       <span id="sync-status" data-state="off" title="Sync not configured"></span>
       <button class="icon-btn" id="settings-btn" aria-label="Open settings">
@@ -149,6 +149,12 @@
         </div>
 
         <div class="form-group">
+          <label for="setting-bar-weight">Barbell weight (kg)</label>
+          <input type="number" id="setting-bar-weight" min="0" max="30" step="0.5" value="20">
+          <p class="hint">Used to show plates needed per side next to barbell/trap-bar working weights (e.g. "33 kg e.s."). Doesn't apply to landmine, dumbbell, kettlebell, or banded movements.</p>
+        </div>
+
+        <div class="form-group">
           <label>Sets per muscle group / week</label>
           <div class="form-row form-row-tight">
             <div class="form-group">
@@ -205,10 +211,10 @@
   <!-- ── Toast container ──────────────────────────────────────────────────── -->
   <div id="toast-container" aria-live="polite"></div>
 
-  <script src="js/storage.js?v=1.22"></script>
-  <script src="js/sync.js?v=1.22"></script>
-  <script src="js/programGen.js?v=1.22"></script>
-  <script src="js/chat.js?v=1.22"></script>
-  <script src="js/app.js?v=1.22"></script>
+  <script src="js/storage.js?v=1.23"></script>
+  <script src="js/sync.js?v=1.23"></script>
+  <script src="js/programGen.js?v=1.23"></script>
+  <script src="js/chat.js?v=1.23"></script>
+  <script src="js/app.js?v=1.23"></script>
 </body>
 </html>

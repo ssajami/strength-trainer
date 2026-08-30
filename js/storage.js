@@ -9,7 +9,7 @@ const Storage = (() => {
     GITHUB_TOKEN:     'spt_github_token',
   };
 
-  const DEFAULT_PROFILE = { age: 55, bodyweight: 65, apiKey: '', weeklySetMin: 9, weeklySetMax: 12 };
+  const DEFAULT_PROFILE = { age: 55, bodyweight: 65, apiKey: '', weeklySetMin: 9, weeklySetMax: 12, barWeight: 20 };
   const PROGRAM_HISTORY_LIMIT = 3; // current + 2 previous finalized programs
 
   function read(key) {
