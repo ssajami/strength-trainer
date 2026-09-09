@@ -1,10 +1,10 @@
 {
   "startDate": "2026-10-04",
   "weeks": 4,
-  "commentsUsed": "Trainee feedback for Block 7: ~3-week gap between blocks (various vacations/travel, not a full break — kept doing strength pieces and metcons when possible), so Week 1 intensities are held flat/conservative rather than nudged up. Trap Bar Deadlift retired for roughly the next 2 months (problematic to use) — swapped back to Conventional Deadlift; last confirmed conventional max was 80 kg, but Block 6 trap bar work reached 83.5 kg x5 @ RPE 8 in Week 4, so a conservative ~88 kg estimate is used pending a real logged set. Reported slight elbow pain, unclear cause, worse at full elbow flexion — flagged on Pull-Up and the new Face Pull accessory specifically (the two most end-range-elbow-flexion-under-load movements in the program), with a note to get it checked if it doesn't resolve; several fresh accessory choices this cycle (Dead Hang, Zercher/Front-Rack Carry, Bird Dog) were also picked partly because they're elbow-friendly where the category allowed it. No other Block 6 issues reported beyond the single missed squat day already addressed via the Spanish Squat accessory (continuing this block per the rulebook's pending note) — deadlifts in particular went well.",
+  "commentsUsed": "Trainee feedback for Block 7: ~3-week gap between blocks (various vacations/travel, not a full break — kept doing strength pieces and metcons when possible), so Week 1 intensities are held flat/conservative rather than nudged up. Trap Bar Deadlift retired for roughly the next 2 months (problematic to use) — swapped back to Conventional Deadlift; last confirmed conventional max was 80 kg, but Block 6 trap bar work reached 83.5 kg x5 @ RPE 8 in Week 4, so a conservative ~88 kg estimate is used pending a real logged set. Reported slight elbow pain, unclear cause, worse at full elbow flexion — flagged on Pull-Up and the new Face Pull accessory specifically (the two most end-range-elbow-flexion-under-load movements in the program), with a note to get it checked if it doesn't resolve; several fresh accessory choices this cycle (Dead Hang, Zercher/Front-Rack Carry, Bird Dog) were also picked partly because they're elbow-friendly where the category allowed it. No other Block 6 issues reported beyond the single missed squat day already addressed via the Spanish Squat accessory (continuing this block per the rulebook's pending note) — deadlifts in particular went well. Also swapped Landmine Press -> DB Floor Press for the PUSH primary going into this fresh cycle (same shoulder-safety rationale, just varying the primary now that it's a natural cycle boundary rather than mid-block) -- Back Squat stays as-is since it's the fixed reference point for the in-flight quad-endurance fix.",
   "programName": "4-Week Bone & Muscle Preservation Program — Post-Menopausal Strength (Block 7)",
   "progressionModel": "Daily Undulating Periodisation (DUP)",
-  "progressionJustification": "Continuing DUP from Block 6. Training was irregular through the ~3-week gap between blocks (vacations/travel, various strength pieces and metcons rather than a full break) — Week 1 intensities are held flat/conservative across all three sessions rather than nudged up, treating it as a re-establish week rather than assuming uninterrupted progress. Trap Bar Deadlift is retired for roughly the next two months (equipment access issue) and replaced with Conventional Deadlift; Block 6 trap bar work (up to 83.5 kg x5 @ RPE 8 in Week 4) suggests real strength gains since the last confirmed conventional max of 80 kg, so a conservative ~88 kg estimate is used pending a real logged set — treat Week 1 as a technical/confirmation week on this lift specifically. Back Squat and the other secondaries continue unchanged (no reported issues). Face Pull returns as a real ACCESSORY (not just warm-up activation) per the Block 6 pending note, progressing RPE 7 in weeks 1–2 to +1 rep in weeks 3–4 — addressing the shoulder IR rebuild. Spanish Squat continues as a quad-isolation accessory on the Friday squat day per the other Block 6 pending note (a multi-block fix, not resolved in one cycle). New this block: reported slight elbow pain at full flexion of unclear origin — Pull-Up and Face Pull coachingNotes flag this explicitly (heavier assistance band, stop on sharp pain, get it checked if it persists), and several accessory choices were deliberately picked to minimize end-range elbow flexion under load where the category allowed it (Dead Hang, Zercher/Front-Rack Carry, Bird Dog).",
+  "progressionJustification": "Continuing DUP from Block 6. Training was irregular through the ~3-week gap between blocks (vacations/travel, various strength pieces and metcons rather than a full break) — Week 1 intensities are held flat/conservative across all three sessions rather than nudged up, treating it as a re-establish week rather than assuming uninterrupted progress. Trap Bar Deadlift is retired for roughly the next two months (equipment access issue) and replaced with Conventional Deadlift; Block 6 trap bar work (up to 83.5 kg x5 @ RPE 8 in Week 4) suggests real strength gains since the last confirmed conventional max of 80 kg, so a conservative ~88 kg estimate is used pending a real logged set — treat Week 1 as a technical/confirmation week on this lift specifically. Back Squat and the other secondaries continue unchanged (no reported issues). Face Pull returns as a real ACCESSORY (not just warm-up activation) per the Block 6 pending note, progressing RPE 7 in weeks 1–2 to +1 rep in weeks 3–4 — addressing the shoulder IR rebuild. Spanish Squat continues as a quad-isolation accessory on the Friday squat day per the other Block 6 pending note (a multi-block fix, not resolved in one cycle). New this block: reported slight elbow pain at full flexion of unclear origin — Pull-Up and Face Pull coachingNotes flag this explicitly (heavier assistance band, stop on sharp pain, get it checked if it persists), and several accessory choices were deliberately picked to minimize end-range elbow flexion under load where the category allowed it (Dead Hang, Zercher/Front-Rack Carry, Bird Dog). PUSH primary also swapped this cycle: Landmine Press -> DB Floor Press. Same non-overhead shoulder-safety rationale as before (this doesn't reintroduce the blocked overhead-press step), just varying the primary at a natural cycle boundary now that there's no in-flight experiment pinned to it the way Back Squat is pinned to the quad-endurance fix -- no saved max yet, Week 1 doubles as an assessment week on this lift too.",
   "weeklyVolumeNotes": "GLUTES_HAMSTRINGS (10 sets/week) via Conventional Deadlift primary (S1), Barbell Hip Thrust secondary (S2), Romanian Deadlift secondary (S3) — same volume math as Block 6, only the S1 movement changed. UPPER_BACK_ERECTORS (8/week) via Banded Seated Row (S2) and Chest-Supported DB Row (S3), 4 sets each. QUAD_DOMINANT (8/week) via Back Squat primary (S3) and Goblet Squat secondary (S1) — plus Spanish Squat continuing as an ACCESSORY on S3 (not counted toward this total, per the accessory-sets-don't-count rule for this category, but real quad stimulus nonetheless). VERTICAL_PULL is band-assisted Pull-Up (S1) — still single-session and under target, same known gap as Block 6 (see PUSH/VERTICAL_PULL flags). UNILATERAL_LOWER (6/leg) spread evenly across all 3 sessions via fresh movements this cycle (Reverse Lunge/Cossack Squat on S1, B-Stance RDL/Single-Leg Glute Bridge on S2, Step-Up variants on S3 — doubling as the low-impact-plyometric element, same efficient pairing Block 6 used). CORE (4/week) spread across S1 and S3. GRIP and BALANCE each get a dedicated slot in S2, both using fresh movements (Dead Hang/Farmer Hold for GRIP, Tandem Stance/eyes-closed single-leg for BALANCE) rather than repeating Block 6's choices, per the accessory-rotation rule. Rotator-cuff activation still lives in warm-ups, but S2 now ALSO carries a real ROTATOR_CUFF accessory (Face Pull, working sets) per the Block 6 pending note — a deliberate exception to the normal 2–3-accessory-per-session cap (S2 runs 4 accessories: Face Pull, GRIP, BALANCE, plus the UNILATERAL_LOWER slot). S3 also still runs 4 accessories this cycle for the same reason (Spanish Squat, kept per its own Block 6 pending note). KNOWN GAPS (see PUSH/VERTICAL_PULL flags): both remain single-session and under target — every free accessory/secondary slot this cycle is committed to the two carried-over fixes rather than closing these. Only 1 accessory movement carried over from Block 6 (Spanish Squat, kept deliberately per its pending note) — every other accessory across the program was rotated to a genuinely new movement per the 'at most 1 carryover' rule; Face Pull is new, not a carryover, so it doesn't count against that limit.",
   "volumeAudit": [
     {
@@ -274,7 +274,7 @@
           "notes": null
         },
         {
-          "name": "A few light landmine presses",
+          "name": "A few light DB floor presses",
           "duration": null,
           "reps": 8,
           "notes": "Ramp to working load"
@@ -285,14 +285,14 @@
           "type": "primary",
           "order": 1,
           "supersetGroup": "A",
-          "movement": "Landmine Press",
+          "movement": "DB Floor Press",
           "category": "PUSH",
           "isUnilateral": false,
           "sets": 4,
           "reps": "8",
           "percentOfMax": 70,
           "restSeconds": 150,
-          "coachingNotes": null
+          "coachingNotes": "New primary movement (swapped from Landmine Press at the start of this cycle — same shoulder-safety logic: this is a horizontal press, not overhead, and floor-pressing limits the range so the shoulder never reaches the vulnerable fully-stretched-back position a full bench press allows). No saved max for this movement yet — start around 12.5-15 kg per hand and treat Week 1 as an assessment/confirmation week rather than a hard target; log the actual work set and update this number in Settings once you have real data. Elbows lightly touch the floor at the bottom of each rep — that's your depth cue, not a bounce."
         },
         {
           "type": "secondary",
@@ -818,7 +818,7 @@
           "notes": null
         },
         {
-          "name": "A few light landmine presses",
+          "name": "A few light DB floor presses",
           "duration": null,
           "reps": 8,
           "notes": "Ramp to working load"
@@ -829,14 +829,14 @@
           "type": "primary",
           "order": 1,
           "supersetGroup": "A",
-          "movement": "Landmine Press",
+          "movement": "DB Floor Press",
           "category": "PUSH",
           "isUnilateral": false,
           "sets": 4,
           "reps": "10",
           "percentOfMax": 66,
           "restSeconds": 150,
-          "coachingNotes": null
+          "coachingNotes": "New primary movement (swapped from Landmine Press at the start of this cycle — same shoulder-safety logic: this is a horizontal press, not overhead, and floor-pressing limits the range so the shoulder never reaches the vulnerable fully-stretched-back position a full bench press allows). No saved max for this movement yet — start around 12.5-15 kg per hand and treat Week 1 as an assessment/confirmation week rather than a hard target; log the actual work set and update this number in Settings once you have real data. Elbows lightly touch the floor at the bottom of each rep — that's your depth cue, not a bounce."
         },
         {
           "type": "secondary",
@@ -1362,7 +1362,7 @@
           "notes": null
         },
         {
-          "name": "A few light landmine presses",
+          "name": "A few light DB floor presses",
           "duration": null,
           "reps": 8,
           "notes": "Ramp to working load"
@@ -1373,14 +1373,14 @@
           "type": "primary",
           "order": 1,
           "supersetGroup": "A",
-          "movement": "Landmine Press",
+          "movement": "DB Floor Press",
           "category": "PUSH",
           "isUnilateral": false,
           "sets": 4,
           "reps": "6",
           "percentOfMax": 75,
           "restSeconds": 150,
-          "coachingNotes": null
+          "coachingNotes": "New primary movement (swapped from Landmine Press at the start of this cycle — same shoulder-safety logic: this is a horizontal press, not overhead, and floor-pressing limits the range so the shoulder never reaches the vulnerable fully-stretched-back position a full bench press allows). No saved max for this movement yet — start around 12.5-15 kg per hand and treat Week 1 as an assessment/confirmation week rather than a hard target; log the actual work set and update this number in Settings once you have real data. Elbows lightly touch the floor at the bottom of each rep — that's your depth cue, not a bounce."
         },
         {
           "type": "secondary",
@@ -1906,7 +1906,7 @@
           "notes": null
         },
         {
-          "name": "A few light landmine presses",
+          "name": "A few light DB floor presses",
           "duration": null,
           "reps": 8,
           "notes": "Ramp to working load"
@@ -1917,14 +1917,14 @@
           "type": "primary",
           "order": 1,
           "supersetGroup": "A",
-          "movement": "Landmine Press",
+          "movement": "DB Floor Press",
           "category": "PUSH",
           "isUnilateral": false,
           "sets": 4,
           "reps": "8",
           "percentOfMax": 71,
           "restSeconds": 150,
-          "coachingNotes": null
+          "coachingNotes": "New primary movement (swapped from Landmine Press at the start of this cycle — same shoulder-safety logic: this is a horizontal press, not overhead, and floor-pressing limits the range so the shoulder never reaches the vulnerable fully-stretched-back position a full bench press allows). No saved max for this movement yet — start around 12.5-15 kg per hand and treat Week 1 as an assessment/confirmation week rather than a hard target; log the actual work set and update this number in Settings once you have real data. Elbows lightly touch the floor at the bottom of each rep — that's your depth cue, not a bounce."
         },
         {
           "type": "secondary",
