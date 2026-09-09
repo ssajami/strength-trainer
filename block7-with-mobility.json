@@ -1,0 +1,2274 @@
+{
+  "startDate": "2026-10-04",
+  "weeks": 4,
+  "commentsUsed": "Trainee feedback for Block 7: ~3-week gap between blocks (various vacations/travel, not a full break — kept doing strength pieces and metcons when possible), so Week 1 intensities are held flat/conservative rather than nudged up. Trap Bar Deadlift retired for roughly the next 2 months (problematic to use) — swapped back to Conventional Deadlift; last confirmed conventional max was 80 kg, but Block 6 trap bar work reached 83.5 kg x5 @ RPE 8 in Week 4, so a conservative ~88 kg estimate is used pending a real logged set. Reported slight elbow pain, unclear cause, worse at full elbow flexion — flagged on Pull-Up and the new Face Pull accessory specifically (the two most end-range-elbow-flexion-under-load movements in the program), with a note to get it checked if it doesn't resolve; several fresh accessory choices this cycle (Dead Hang, Zercher/Front-Rack Carry, Bird Dog) were also picked partly because they're elbow-friendly where the category allowed it. No other Block 6 issues reported beyond the single missed squat day already addressed via the Spanish Squat accessory (continuing this block per the rulebook's pending note) — deadlifts in particular went well.",
+  "programName": "4-Week Bone & Muscle Preservation Program — Post-Menopausal Strength (Block 7)",
+  "progressionModel": "Daily Undulating Periodisation (DUP)",
+  "progressionJustification": "Continuing DUP from Block 6. Training was irregular through the ~3-week gap between blocks (vacations/travel, various strength pieces and metcons rather than a full break) — Week 1 intensities are held flat/conservative across all three sessions rather than nudged up, treating it as a re-establish week rather than assuming uninterrupted progress. Trap Bar Deadlift is retired for roughly the next two months (equipment access issue) and replaced with Conventional Deadlift; Block 6 trap bar work (up to 83.5 kg x5 @ RPE 8 in Week 4) suggests real strength gains since the last confirmed conventional max of 80 kg, so a conservative ~88 kg estimate is used pending a real logged set — treat Week 1 as a technical/confirmation week on this lift specifically. Back Squat and the other secondaries continue unchanged (no reported issues). Face Pull returns as a real ACCESSORY (not just warm-up activation) per the Block 6 pending note, progressing RPE 7 in weeks 1–2 to +1 rep in weeks 3–4 — addressing the shoulder IR rebuild. Spanish Squat continues as a quad-isolation accessory on the Friday squat day per the other Block 6 pending note (a multi-block fix, not resolved in one cycle). New this block: reported slight elbow pain at full flexion of unclear origin — Pull-Up and Face Pull coachingNotes flag this explicitly (heavier assistance band, stop on sharp pain, get it checked if it persists), and several accessory choices were deliberately picked to minimize end-range elbow flexion under load where the category allowed it (Dead Hang, Zercher/Front-Rack Carry, Bird Dog).",
+  "weeklyVolumeNotes": "GLUTES_HAMSTRINGS (10 sets/week) via Conventional Deadlift primary (S1), Barbell Hip Thrust secondary (S2), Romanian Deadlift secondary (S3) — same volume math as Block 6, only the S1 movement changed. UPPER_BACK_ERECTORS (8/week) via Banded Seated Row (S2) and Chest-Supported DB Row (S3), 4 sets each. QUAD_DOMINANT (8/week) via Back Squat primary (S3) and Goblet Squat secondary (S1) — plus Spanish Squat continuing as an ACCESSORY on S3 (not counted toward this total, per the accessory-sets-don't-count rule for this category, but real quad stimulus nonetheless). VERTICAL_PULL is band-assisted Pull-Up (S1) — still single-session and under target, same known gap as Block 6 (see PUSH/VERTICAL_PULL flags). UNILATERAL_LOWER (6/leg) spread evenly across all 3 sessions via fresh movements this cycle (Reverse Lunge/Cossack Squat on S1, B-Stance RDL/Single-Leg Glute Bridge on S2, Step-Up variants on S3 — doubling as the low-impact-plyometric element, same efficient pairing Block 6 used). CORE (4/week) spread across S1 and S3. GRIP and BALANCE each get a dedicated slot in S2, both using fresh movements (Dead Hang/Farmer Hold for GRIP, Tandem Stance/eyes-closed single-leg for BALANCE) rather than repeating Block 6's choices, per the accessory-rotation rule. Rotator-cuff activation still lives in warm-ups, but S2 now ALSO carries a real ROTATOR_CUFF accessory (Face Pull, working sets) per the Block 6 pending note — a deliberate exception to the normal 2–3-accessory-per-session cap (S2 runs 4 accessories: Face Pull, GRIP, BALANCE, plus the UNILATERAL_LOWER slot). S3 also still runs 4 accessories this cycle for the same reason (Spanish Squat, kept per its own Block 6 pending note). KNOWN GAPS (see PUSH/VERTICAL_PULL flags): both remain single-session and under target — every free accessory/secondary slot this cycle is committed to the two carried-over fixes rather than closing these. Only 1 accessory movement carried over from Block 6 (Spanish Squat, kept deliberately per its pending note) — every other accessory across the program was rotated to a genuinely new movement per the 'at most 1 carryover' rule; Face Pull is new, not a carryover, so it doesn't count against that limit.",
+  "volumeAudit": [
+    {
+      "muscleGroup": "GLUTES_HAMSTRINGS",
+      "weeklyTarget": "10-12",
+      "weeklySetsProgrammed": 10,
+      "sessionBreakdown": [
+        4,
+        3,
+        3
+      ],
+      "meetsTarget": true,
+      "flag": null
+    },
+    {
+      "muscleGroup": "UPPER_BACK_ERECTORS",
+      "weeklyTarget": "8-10",
+      "weeklySetsProgrammed": 8,
+      "sessionBreakdown": [
+        0,
+        4,
+        4
+      ],
+      "meetsTarget": true,
+      "flag": null
+    },
+    {
+      "muscleGroup": "QUAD_DOMINANT",
+      "weeklyTarget": "8-10",
+      "weeklySetsProgrammed": 8,
+      "sessionBreakdown": [
+        4,
+        0,
+        4
+      ],
+      "meetsTarget": true,
+      "flag": null
+    },
+    {
+      "muscleGroup": "PUSH",
+      "weeklyTarget": "6-8",
+      "weeklySetsProgrammed": 4,
+      "sessionBreakdown": [
+        0,
+        4,
+        0
+      ],
+      "meetsTarget": false,
+      "flag": "Single-session (Landmine Press, S2) and 2–4 sets under target. Every accessory/secondary slot this cycle went to the two carried-over fixes from Block 6 (Face Pull for the shoulder IR rebuild, Spanish Squat for the quad-endurance deficit) — flagging honestly rather than silently shipping it. Once both of those show enough progress to taper, a future cycle can trade one for a second push movement (e.g. DB incline press)."
+    },
+    {
+      "muscleGroup": "VERTICAL_PULL",
+      "weeklyTarget": "6-8",
+      "weeklySetsProgrammed": 4,
+      "sessionBreakdown": [
+        4,
+        0,
+        0
+      ],
+      "meetsTarget": false,
+      "flag": "Single-session (Pull-Up, S1) and 2 sets under target, same root cause as PUSH above."
+    },
+    {
+      "muscleGroup": "UNILATERAL_LOWER",
+      "weeklyTarget": "6 per leg",
+      "weeklySetsProgrammed": 6,
+      "sessionBreakdown": [
+        2,
+        2,
+        2
+      ],
+      "meetsTarget": true,
+      "flag": "S3's exercise doubles as the low-impact-plyometric element (Split-Stance Box Step-Up weeks 1–2, Single-Leg Box Step-Down weeks 3–4) — tagged UNILATERAL_LOWER so the app's volume audit credits it correctly, but it also satisfies the mandatory plyometric requirement by movement selection."
+    },
+    {
+      "muscleGroup": "CORE",
+      "weeklyTarget": "4-6",
+      "weeklySetsProgrammed": 4,
+      "sessionBreakdown": [
+        2,
+        0,
+        2
+      ],
+      "meetsTarget": true,
+      "flag": null
+    }
+  ],
+  "sessions": [
+    {
+      "sessionNumber": 1,
+      "week": 1,
+      "dayWithinWeek": 1,
+      "suggestedDay": "Monday",
+      "label": "Workout 1 for the week starting October 4, 2026",
+      "focus": "Lower Body — Posterior Chain (DUP) + Vertical Pull + Quad",
+      "warmup": [
+        {
+          "name": "Easy bike / row / ski",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Build to a light sweat"
+        },
+        {
+          "name": "Band pull-apart",
+          "duration": null,
+          "reps": 15,
+          "notes": "Scapular activation"
+        },
+        {
+          "name": "Banded external rotation",
+          "duration": null,
+          "reps": 12,
+          "notes": "Per side — rotator cuff activation, not a working set"
+        },
+        {
+          "name": "Bodyweight glute bridge",
+          "duration": null,
+          "reps": 10,
+          "notes": "Wake the posterior chain"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": null,
+          "reps": 5,
+          "notes": "Per side"
+        }
+      ],
+      "strength": [
+        {
+          "type": "primary",
+          "order": 1,
+          "supersetGroup": null,
+          "movement": "Conventional Deadlift",
+          "category": "GLUTES_HAMSTRINGS",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "5",
+          "percentOfMax": 72,
+          "restSeconds": 210,
+          "coachingNotes": "Reintroduced movement (Trap Bar retired for roughly the next 2 months — problematic to use, back to a regular deadlift bar). Last confirmed conventional 1RM was 80 kg, but Trap Bar work this past block reached 83.5 kg x5 @ RPE 8 in Week 4, suggesting real strength gains since then. Conservatively estimating ~88 kg as your new working max — grip and bar path differ enough from Trap Bar that this is a genuine re-entry, not a straight carryover, so treat Week 1 as a technical/confirmation week and update this number in Settings once you've logged a real work set. Cue: keep the bar close, brace hard, drive the floor away — don't let early-rep torque round your lower back."
+        },
+        {
+          "type": "secondary",
+          "order": 2,
+          "supersetGroup": "A",
+          "movement": "Pull-Up (band-assisted as needed)",
+          "category": "VERTICAL_PULL",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "5",
+          "percentOfMax": null,
+          "restSeconds": 120,
+          "coachingNotes": "You mentioned slight elbow pain at full flexion — pull-ups load exactly that end-range under bodyweight. Use a heavier assistance band than you'd otherwise pick to keep this at RPE 6–7 rather than 7–8, and stop the set on any sharp/pinching pain (dull fatigue is fine). If it hasn't eased up by the end of this block, get the elbow looked at rather than continuing to load through it."
+        },
+        {
+          "type": "secondary",
+          "order": 3,
+          "supersetGroup": "A",
+          "movement": "Goblet Squat",
+          "category": "QUAD_DOMINANT",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "12",
+          "percentOfMax": 55,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "accessory",
+          "order": 4,
+          "supersetGroup": "B",
+          "movement": "DB Renegade Row",
+          "category": "UPPER_BACK_ERECTORS",
+          "isUnilateral": true,
+          "sets": 3,
+          "reps": "8",
+          "percentOfMax": null,
+          "restSeconds": 100,
+          "coachingNotes": "Plank position, DB in each hand — row one side at a time while resisting rotation. Light-moderate DB, RPE 7–8, core stays square to the floor throughout."
+        },
+        {
+          "type": "accessory",
+          "order": 5,
+          "supersetGroup": "B",
+          "movement": "Reverse Lunge (DB)",
+          "category": "UNILATERAL_LOWER",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "10",
+          "percentOfMax": null,
+          "restSeconds": 100,
+          "coachingNotes": "Light-moderate DB each hand, RPE 7–8 — step back into the lunge rather than forward, softer on the front knee. Each leg."
+        },
+        {
+          "type": "accessory",
+          "order": 6,
+          "supersetGroup": null,
+          "movement": "Pallof Press (band, anti-rotation)",
+          "category": "CORE",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "10",
+          "percentOfMax": null,
+          "restSeconds": 75,
+          "coachingNotes": "Band anchored to the side at chest height, press straight out and resist the pull rotating your torso. Slow and controlled, each side."
+        }
+      ],
+      "metcon": null,
+      "metconText": null,
+      "mobility": [
+        {
+          "name": "Lat stretch (doorway or overhead)",
+          "duration": "30 s/side",
+          "notes": null
+        },
+        {
+          "name": "Thoracic extension over foam roller",
+          "duration": "60 s",
+          "notes": null
+        },
+        {
+          "name": "Hip flexor stretch",
+          "duration": "30 s/side",
+          "notes": null
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 10,
+        "primaryMinutes": 14,
+        "secondaryMinutes": 20,
+        "accessoryMinutes": 14,
+        "metconMinutes": 15,
+        "mobilityMinutes": 8,
+        "totalMinutes": 74
+      }
+    },
+    {
+      "sessionNumber": 2,
+      "week": 1,
+      "dayWithinWeek": 2,
+      "suggestedDay": "Wednesday",
+      "label": "Workout 2 for the week starting October 4, 2026",
+      "focus": "Upper Body Push & Pull (DUP) + Posterior Chain",
+      "warmup": [
+        {
+          "name": "Easy bike / row / ski",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Build to a light sweat"
+        },
+        {
+          "name": "Band pull-apart",
+          "duration": null,
+          "reps": 15,
+          "notes": "Scapular activation"
+        },
+        {
+          "name": "Banded external rotation",
+          "duration": null,
+          "reps": 12,
+          "notes": "Per side — rotator cuff activation, not a working set"
+        },
+        {
+          "name": "Wall slide",
+          "duration": null,
+          "reps": 8,
+          "notes": null
+        },
+        {
+          "name": "A few light landmine presses",
+          "duration": null,
+          "reps": 8,
+          "notes": "Ramp to working load"
+        }
+      ],
+      "strength": [
+        {
+          "type": "primary",
+          "order": 1,
+          "supersetGroup": "A",
+          "movement": "Landmine Press",
+          "category": "PUSH",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "8",
+          "percentOfMax": 70,
+          "restSeconds": 150,
+          "coachingNotes": null
+        },
+        {
+          "type": "secondary",
+          "order": 2,
+          "supersetGroup": "A",
+          "movement": "Banded Seated Row",
+          "category": "UPPER_BACK_ERECTORS",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "10",
+          "percentOfMax": null,
+          "restSeconds": 120,
+          "coachingNotes": "Loop a resistance band around your feet while seated with legs extended, or anchor it to a fixed point at chest height. Sit tall, pull to the torso, pause 1 s at the top, avoid momentum. Light-medium band, RPE 7–8. Ease off the end-range squeeze if your elbow talks to you here."
+        },
+        {
+          "type": "secondary",
+          "order": 3,
+          "supersetGroup": null,
+          "movement": "Barbell Hip Thrust",
+          "category": "GLUTES_HAMSTRINGS",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "10",
+          "percentOfMax": 60,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "accessory",
+          "order": 4,
+          "supersetGroup": "B",
+          "movement": "B-Stance Romanian Deadlift (DB)",
+          "category": "UNILATERAL_LOWER",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "9",
+          "percentOfMax": null,
+          "restSeconds": 100,
+          "coachingNotes": "Staggered stance — back foot's toe lightly kissing the floor for balance, ~80% of the load on the front leg. Light-moderate DB, RPE 7–8, hinge at the hip. Posterior-chain unilateral work, keeps Wednesday quad-free alongside Monday/Friday's squat-pattern quad days."
+        },
+        {
+          "type": "accessory",
+          "order": 5,
+          "supersetGroup": "B",
+          "movement": "Face Pull",
+          "category": "ROTATOR_CUFF",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "12",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Band anchored around chest height, pull to the face leading with the elbows, squeeze the shoulder blades together at the end. Light-moderate band, RPE 7 — this is a real working accessory now (was warm-up-only activation last block), specifically to build external-rotation strength for the shoulder. If the elbow talks to you at the fully-pulled-back position, shorten the range slightly rather than push through it."
+        },
+        {
+          "type": "accessory",
+          "order": 6,
+          "supersetGroup": "C",
+          "movement": "Dead Hang (from pull-up rig, band-assisted if needed)",
+          "category": "GRIP",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "20 s hold",
+          "percentOfMax": null,
+          "restSeconds": 60,
+          "coachingNotes": "Just hang — active shoulders (don't let them fully shrug up) or fully passive, either is fine. Arms stay straight, which makes this an elbow-friendly grip/shoulder-traction drill given what you mentioned. Band-assist if a full bodyweight hang isn't comfortable yet."
+        },
+        {
+          "type": "accessory",
+          "order": 7,
+          "supersetGroup": "C",
+          "movement": "Tandem (Heel-to-Toe) Stance Hold",
+          "category": "BALANCE",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "30 s hold",
+          "percentOfMax": null,
+          "restSeconds": 60,
+          "coachingNotes": "Feet in a straight line, one heel touching the other's toes. Eyes open, arms out for balance if needed."
+        }
+      ],
+      "metcon": null,
+      "metconText": null,
+      "mobility": [
+        {
+          "name": "Doorway pec stretch",
+          "duration": "20 s x 3 heights/side",
+          "notes": null
+        },
+        {
+          "name": "Open book",
+          "duration": "8/side",
+          "notes": null
+        },
+        {
+          "name": "Prone Y-T-W",
+          "duration": "8 each",
+          "notes": null
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 10,
+        "primaryMinutes": 12,
+        "secondaryMinutes": 18,
+        "accessoryMinutes": 16,
+        "metconMinutes": 15,
+        "mobilityMinutes": 8,
+        "totalMinutes": 72
+      }
+    },
+    {
+      "sessionNumber": 3,
+      "week": 1,
+      "dayWithinWeek": 3,
+      "suggestedDay": "Friday",
+      "label": "Workout 3 for the week starting October 4, 2026",
+      "focus": "Lower Body — Quad Dominant (DUP) + Carries",
+      "warmup": [
+        {
+          "name": "Easy bike / row / ski",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Build to a light sweat"
+        },
+        {
+          "name": "Band pull-apart",
+          "duration": null,
+          "reps": 15,
+          "notes": "Scapular activation"
+        },
+        {
+          "name": "Banded external rotation",
+          "duration": null,
+          "reps": 12,
+          "notes": "Per side — rotator cuff activation, not a working set"
+        },
+        {
+          "name": "Bodyweight squats",
+          "duration": null,
+          "reps": 10,
+          "notes": "Sink to depth"
+        },
+        {
+          "name": "Ankle rock-to-wall",
+          "duration": null,
+          "reps": 8,
+          "notes": "Per side"
+        }
+      ],
+      "strength": [
+        {
+          "type": "primary",
+          "order": 1,
+          "supersetGroup": null,
+          "movement": "Back Squat",
+          "category": "QUAD_DOMINANT",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "10",
+          "percentOfMax": 65,
+          "restSeconds": 180,
+          "coachingNotes": null
+        },
+        {
+          "type": "secondary",
+          "order": 2,
+          "supersetGroup": "A",
+          "movement": "Romanian Deadlift (Barbell)",
+          "category": "GLUTES_HAMSTRINGS",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "8",
+          "percentOfMax": 62,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "secondary",
+          "order": 3,
+          "supersetGroup": "A",
+          "movement": "Chest-Supported DB Row",
+          "category": "UPPER_BACK_ERECTORS",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "10",
+          "percentOfMax": 62,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "accessory",
+          "order": 4,
+          "supersetGroup": "B",
+          "movement": "Split-Stance Box Step-Up (power focus, low box)",
+          "category": "UNILATERAL_LOWER",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "8",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Bodyweight, drive up explosively through the lead leg, step down with control — soft landing, each leg. Low-impact plyometric — covers that requirement for the block."
+        },
+        {
+          "type": "accessory",
+          "order": 5,
+          "supersetGroup": "B",
+          "movement": "Zercher Carry (barbell, front-loaded)",
+          "category": "CARRIES_LOADED",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "25 m walk",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Bar cradled in the crooks of both elbows, tall posture, brace hard — front-loaded carry, no overhead component (keeps load off the shoulder you're protecting). Moderate weight, walk under control."
+        },
+        {
+          "type": "accessory",
+          "order": 6,
+          "supersetGroup": null,
+          "movement": "Copenhagen Plank (adductor-focused, top leg on bench)",
+          "category": "CORE",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "20 s hold/side",
+          "percentOfMax": null,
+          "restSeconds": 75,
+          "coachingNotes": "Top leg supported on a bench, bottom leg lifted, hold a straight line — regress to bent-knee version if the full straight-leg hold is too much. Each side."
+        },
+        {
+          "type": "accessory",
+          "order": 7,
+          "supersetGroup": null,
+          "movement": "Spanish Squat (band-anchored)",
+          "category": "QUAD_DOMINANT",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "12",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Low-systemic-fatigue quad isolation finisher, continued from last block to keep building local muscular endurance without compromising Monday's Deadlift or the following week's squat-pattern days. Anchor a band low around a rack/post, loop it behind both knees, heels together, sit back keeping torso upright so the band takes the horizontal load off the lower back/hips — nearly all tension stays in the quads. Controlled 3–4 s lowering each rep, RPE 6–7 (deliberately submaximal). No anchor point available? Sub a 30–45 s wall sit instead."
+        }
+      ],
+      "metcon": null,
+      "metconText": null,
+      "mobility": [
+        {
+          "name": "Couch stretch (hip flexor)",
+          "duration": "30 s/side",
+          "notes": null
+        },
+        {
+          "name": "Pigeon or figure-4 stretch",
+          "duration": "30 s/side",
+          "notes": null
+        },
+        {
+          "name": "Child's pose reaching lat stretch",
+          "duration": "30 s",
+          "notes": null
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 10,
+        "primaryMinutes": 14,
+        "secondaryMinutes": 17,
+        "accessoryMinutes": 19,
+        "metconMinutes": 15,
+        "mobilityMinutes": 8,
+        "totalMinutes": 78
+      }
+    },
+    {
+      "sessionNumber": 4,
+      "week": 1,
+      "dayWithinWeek": 4,
+      "suggestedDay": "Sunday",
+      "label": "Workout 4 for the week starting October 4, 2026",
+      "focus": "Weekly Mobility — Shoulder IR, Thoracic Spine, Hips",
+      "warmup": [
+        {
+          "name": "Easy walk or bike",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Raise tissue temperature before stretching"
+        },
+        {
+          "name": "Cat-Cow",
+          "duration": null,
+          "reps": 8,
+          "notes": "Gentle spinal warm-up"
+        }
+      ],
+      "strength": [],
+      "mobility": [
+        {
+          "name": "Sleeper stretch",
+          "duration": "2 x 45 s/side",
+          "notes": "Lie on your side, shoulder + elbow at 90°, gently rotate forearm down toward the floor with the OTHER hand — stop at a stretch, not pain. Targets posterior capsule tightness, the usual cause of limited internal rotation."
+        },
+        {
+          "name": "Thoracic extension over foam roller",
+          "duration": "2 x 60 s",
+          "notes": "Roller across mid-back, hands behind head, gently extend over it. A lot of apparent shoulder restriction is actually t-spine stiffness."
+        },
+        {
+          "name": "Shoulder CARs (controlled articular rotations)",
+          "duration": "2 x 5 slow reps/side",
+          "notes": "Slow, full-range shoulder circles, standing tall, no weight — you control the range, so this is safe even on a stiff/at-risk shoulder. Stay pain-free."
+        },
+        {
+          "name": "Couch stretch (hip flexor)",
+          "duration": "2 x 45 s/side",
+          "notes": "Back knee down against a couch/wall, brace the glute — offsets the heavy weekly hip-hinge volume."
+        },
+        {
+          "name": "Cross-body shoulder stretch",
+          "duration": "2 x 30 s/side",
+          "notes": "Pull arm across chest with the other hand, posterior capsule."
+        },
+        {
+          "name": "90/90 hip switch",
+          "duration": "2 x 8/side",
+          "notes": "Controlled hip internal/external rotation, both directions."
+        },
+        {
+          "name": "Calf/ankle wall stretch",
+          "duration": "2 x 30 s/side",
+          "notes": "Knee to wall, heel down — ankle dorsiflexion supports squat depth and general fall-risk reduction."
+        },
+        {
+          "name": "Single-leg balance hold",
+          "duration": "2 x 30 s/side",
+          "notes": "Eyes open. Progress toward eyes closed as it gets easy."
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 5,
+        "primaryMinutes": 0,
+        "secondaryMinutes": 0,
+        "accessoryMinutes": 0,
+        "metconMinutes": 0,
+        "mobilityMinutes": 24,
+        "totalMinutes": 29
+      }
+    },
+    {
+      "sessionNumber": 5,
+      "week": 2,
+      "dayWithinWeek": 1,
+      "suggestedDay": "Monday",
+      "label": "Workout 1 for the week starting October 11, 2026",
+      "focus": "Lower Body — Posterior Chain (DUP) + Vertical Pull + Quad",
+      "warmup": [
+        {
+          "name": "Easy bike / row / ski",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Build to a light sweat"
+        },
+        {
+          "name": "Band pull-apart",
+          "duration": null,
+          "reps": 15,
+          "notes": "Scapular activation"
+        },
+        {
+          "name": "Banded external rotation",
+          "duration": null,
+          "reps": 12,
+          "notes": "Per side — rotator cuff activation, not a working set"
+        },
+        {
+          "name": "Bodyweight glute bridge",
+          "duration": null,
+          "reps": 10,
+          "notes": "Wake the posterior chain"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": null,
+          "reps": 5,
+          "notes": "Per side"
+        }
+      ],
+      "strength": [
+        {
+          "type": "primary",
+          "order": 1,
+          "supersetGroup": null,
+          "movement": "Conventional Deadlift",
+          "category": "GLUTES_HAMSTRINGS",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "5",
+          "percentOfMax": 74,
+          "restSeconds": 210,
+          "coachingNotes": "Reintroduced movement (Trap Bar retired for roughly the next 2 months — problematic to use, back to a regular deadlift bar). Last confirmed conventional 1RM was 80 kg, but Trap Bar work this past block reached 83.5 kg x5 @ RPE 8 in Week 4, suggesting real strength gains since then. Conservatively estimating ~88 kg as your new working max — grip and bar path differ enough from Trap Bar that this is a genuine re-entry, not a straight carryover, so treat Week 1 as a technical/confirmation week and update this number in Settings once you've logged a real work set. Cue: keep the bar close, brace hard, drive the floor away — don't let early-rep torque round your lower back."
+        },
+        {
+          "type": "secondary",
+          "order": 2,
+          "supersetGroup": "A",
+          "movement": "Pull-Up (band-assisted as needed)",
+          "category": "VERTICAL_PULL",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "6",
+          "percentOfMax": null,
+          "restSeconds": 120,
+          "coachingNotes": "You mentioned slight elbow pain at full flexion — pull-ups load exactly that end-range under bodyweight. Use a heavier assistance band than you'd otherwise pick to keep this at RPE 6–7 rather than 7–8, and stop the set on any sharp/pinching pain (dull fatigue is fine). If it hasn't eased up by the end of this block, get the elbow looked at rather than continuing to load through it."
+        },
+        {
+          "type": "secondary",
+          "order": 3,
+          "supersetGroup": "A",
+          "movement": "Goblet Squat",
+          "category": "QUAD_DOMINANT",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "12",
+          "percentOfMax": 57,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "accessory",
+          "order": 4,
+          "supersetGroup": "B",
+          "movement": "DB Renegade Row",
+          "category": "UPPER_BACK_ERECTORS",
+          "isUnilateral": true,
+          "sets": 3,
+          "reps": "8",
+          "percentOfMax": null,
+          "restSeconds": 100,
+          "coachingNotes": "Plank position, DB in each hand — row one side at a time while resisting rotation. Light-moderate DB, RPE 7–8, core stays square to the floor throughout."
+        },
+        {
+          "type": "accessory",
+          "order": 5,
+          "supersetGroup": "B",
+          "movement": "Reverse Lunge (DB)",
+          "category": "UNILATERAL_LOWER",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "10",
+          "percentOfMax": null,
+          "restSeconds": 100,
+          "coachingNotes": "Light-moderate DB each hand, RPE 7–8 — step back into the lunge rather than forward, softer on the front knee. Each leg."
+        },
+        {
+          "type": "accessory",
+          "order": 6,
+          "supersetGroup": null,
+          "movement": "Pallof Press (band, anti-rotation)",
+          "category": "CORE",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "10",
+          "percentOfMax": null,
+          "restSeconds": 75,
+          "coachingNotes": "Band anchored to the side at chest height, press straight out and resist the pull rotating your torso. Slow and controlled, each side."
+        }
+      ],
+      "metcon": null,
+      "metconText": null,
+      "mobility": [
+        {
+          "name": "Lat stretch (doorway or overhead)",
+          "duration": "30 s/side",
+          "notes": null
+        },
+        {
+          "name": "Thoracic extension over foam roller",
+          "duration": "60 s",
+          "notes": null
+        },
+        {
+          "name": "Hip flexor stretch",
+          "duration": "30 s/side",
+          "notes": null
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 10,
+        "primaryMinutes": 14,
+        "secondaryMinutes": 20,
+        "accessoryMinutes": 14,
+        "metconMinutes": 15,
+        "mobilityMinutes": 8,
+        "totalMinutes": 74
+      }
+    },
+    {
+      "sessionNumber": 6,
+      "week": 2,
+      "dayWithinWeek": 2,
+      "suggestedDay": "Wednesday",
+      "label": "Workout 2 for the week starting October 11, 2026",
+      "focus": "Upper Body Push & Pull (DUP) + Posterior Chain",
+      "warmup": [
+        {
+          "name": "Easy bike / row / ski",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Build to a light sweat"
+        },
+        {
+          "name": "Band pull-apart",
+          "duration": null,
+          "reps": 15,
+          "notes": "Scapular activation"
+        },
+        {
+          "name": "Banded external rotation",
+          "duration": null,
+          "reps": 12,
+          "notes": "Per side — rotator cuff activation, not a working set"
+        },
+        {
+          "name": "Wall slide",
+          "duration": null,
+          "reps": 8,
+          "notes": null
+        },
+        {
+          "name": "A few light landmine presses",
+          "duration": null,
+          "reps": 8,
+          "notes": "Ramp to working load"
+        }
+      ],
+      "strength": [
+        {
+          "type": "primary",
+          "order": 1,
+          "supersetGroup": "A",
+          "movement": "Landmine Press",
+          "category": "PUSH",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "10",
+          "percentOfMax": 66,
+          "restSeconds": 150,
+          "coachingNotes": null
+        },
+        {
+          "type": "secondary",
+          "order": 2,
+          "supersetGroup": "A",
+          "movement": "Banded Seated Row",
+          "category": "UPPER_BACK_ERECTORS",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "10",
+          "percentOfMax": null,
+          "restSeconds": 120,
+          "coachingNotes": "Same band setup as Week 1 — if that felt easy at RPE 7–8, add a rep or step up to a slightly heavier band."
+        },
+        {
+          "type": "secondary",
+          "order": 3,
+          "supersetGroup": null,
+          "movement": "Barbell Hip Thrust",
+          "category": "GLUTES_HAMSTRINGS",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "10",
+          "percentOfMax": 63,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "accessory",
+          "order": 4,
+          "supersetGroup": "B",
+          "movement": "B-Stance Romanian Deadlift (DB)",
+          "category": "UNILATERAL_LOWER",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "9",
+          "percentOfMax": null,
+          "restSeconds": 100,
+          "coachingNotes": "Staggered stance — back foot's toe lightly kissing the floor for balance, ~80% of the load on the front leg. Light-moderate DB, RPE 7–8, hinge at the hip. Posterior-chain unilateral work, keeps Wednesday quad-free alongside Monday/Friday's squat-pattern quad days."
+        },
+        {
+          "type": "accessory",
+          "order": 5,
+          "supersetGroup": "B",
+          "movement": "Face Pull",
+          "category": "ROTATOR_CUFF",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "12",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Band anchored around chest height, pull to the face leading with the elbows, squeeze the shoulder blades together at the end. Light-moderate band, RPE 7 — this is a real working accessory now (was warm-up-only activation last block), specifically to build external-rotation strength for the shoulder. If the elbow talks to you at the fully-pulled-back position, shorten the range slightly rather than push through it."
+        },
+        {
+          "type": "accessory",
+          "order": 6,
+          "supersetGroup": "C",
+          "movement": "Dead Hang (from pull-up rig, band-assisted if needed)",
+          "category": "GRIP",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "20 s hold",
+          "percentOfMax": null,
+          "restSeconds": 60,
+          "coachingNotes": "Just hang — active shoulders (don't let them fully shrug up) or fully passive, either is fine. Arms stay straight, which makes this an elbow-friendly grip/shoulder-traction drill given what you mentioned. Band-assist if a full bodyweight hang isn't comfortable yet."
+        },
+        {
+          "type": "accessory",
+          "order": 7,
+          "supersetGroup": "C",
+          "movement": "Tandem (Heel-to-Toe) Stance Hold",
+          "category": "BALANCE",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "30 s hold",
+          "percentOfMax": null,
+          "restSeconds": 60,
+          "coachingNotes": "Feet in a straight line, one heel touching the other's toes. Eyes open, arms out for balance if needed."
+        }
+      ],
+      "metcon": null,
+      "metconText": null,
+      "mobility": [
+        {
+          "name": "Doorway pec stretch",
+          "duration": "20 s x 3 heights/side",
+          "notes": null
+        },
+        {
+          "name": "Open book",
+          "duration": "8/side",
+          "notes": null
+        },
+        {
+          "name": "Prone Y-T-W",
+          "duration": "8 each",
+          "notes": null
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 10,
+        "primaryMinutes": 12,
+        "secondaryMinutes": 18,
+        "accessoryMinutes": 16,
+        "metconMinutes": 15,
+        "mobilityMinutes": 8,
+        "totalMinutes": 72
+      }
+    },
+    {
+      "sessionNumber": 7,
+      "week": 2,
+      "dayWithinWeek": 3,
+      "suggestedDay": "Friday",
+      "label": "Workout 3 for the week starting October 11, 2026",
+      "focus": "Lower Body — Quad Dominant (DUP) + Carries",
+      "warmup": [
+        {
+          "name": "Easy bike / row / ski",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Build to a light sweat"
+        },
+        {
+          "name": "Band pull-apart",
+          "duration": null,
+          "reps": 15,
+          "notes": "Scapular activation"
+        },
+        {
+          "name": "Banded external rotation",
+          "duration": null,
+          "reps": 12,
+          "notes": "Per side — rotator cuff activation, not a working set"
+        },
+        {
+          "name": "Bodyweight squats",
+          "duration": null,
+          "reps": 10,
+          "notes": "Sink to depth"
+        },
+        {
+          "name": "Ankle rock-to-wall",
+          "duration": null,
+          "reps": 8,
+          "notes": "Per side"
+        }
+      ],
+      "strength": [
+        {
+          "type": "primary",
+          "order": 1,
+          "supersetGroup": null,
+          "movement": "Back Squat",
+          "category": "QUAD_DOMINANT",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "8",
+          "percentOfMax": 68,
+          "restSeconds": 180,
+          "coachingNotes": null
+        },
+        {
+          "type": "secondary",
+          "order": 2,
+          "supersetGroup": "A",
+          "movement": "Romanian Deadlift (Barbell)",
+          "category": "GLUTES_HAMSTRINGS",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "8",
+          "percentOfMax": 65,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "secondary",
+          "order": 3,
+          "supersetGroup": "A",
+          "movement": "Chest-Supported DB Row",
+          "category": "UPPER_BACK_ERECTORS",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "10",
+          "percentOfMax": 65,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "accessory",
+          "order": 4,
+          "supersetGroup": "B",
+          "movement": "Split-Stance Box Step-Up (power focus, low box)",
+          "category": "UNILATERAL_LOWER",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "8",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Bodyweight, drive up explosively through the lead leg, step down with control — soft landing, each leg. Low-impact plyometric — covers that requirement for the block."
+        },
+        {
+          "type": "accessory",
+          "order": 5,
+          "supersetGroup": "B",
+          "movement": "Zercher Carry (barbell, front-loaded)",
+          "category": "CARRIES_LOADED",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "25 m walk",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Bar cradled in the crooks of both elbows, tall posture, brace hard — front-loaded carry, no overhead component (keeps load off the shoulder you're protecting). Moderate weight, walk under control."
+        },
+        {
+          "type": "accessory",
+          "order": 6,
+          "supersetGroup": null,
+          "movement": "Copenhagen Plank (adductor-focused, top leg on bench)",
+          "category": "CORE",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "20 s hold/side",
+          "percentOfMax": null,
+          "restSeconds": 75,
+          "coachingNotes": "Top leg supported on a bench, bottom leg lifted, hold a straight line — regress to bent-knee version if the full straight-leg hold is too much. Each side."
+        },
+        {
+          "type": "accessory",
+          "order": 7,
+          "supersetGroup": null,
+          "movement": "Spanish Squat (band-anchored)",
+          "category": "QUAD_DOMINANT",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "12",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Low-systemic-fatigue quad isolation finisher, continued from last block to keep building local muscular endurance without compromising Monday's Deadlift or the following week's squat-pattern days. Anchor a band low around a rack/post, loop it behind both knees, heels together, sit back keeping torso upright so the band takes the horizontal load off the lower back/hips — nearly all tension stays in the quads. Controlled 3–4 s lowering each rep, RPE 6–7 (deliberately submaximal). No anchor point available? Sub a 30–45 s wall sit instead."
+        }
+      ],
+      "metcon": null,
+      "metconText": null,
+      "mobility": [
+        {
+          "name": "Couch stretch (hip flexor)",
+          "duration": "30 s/side",
+          "notes": null
+        },
+        {
+          "name": "Pigeon or figure-4 stretch",
+          "duration": "30 s/side",
+          "notes": null
+        },
+        {
+          "name": "Child's pose reaching lat stretch",
+          "duration": "30 s",
+          "notes": null
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 10,
+        "primaryMinutes": 13,
+        "secondaryMinutes": 17,
+        "accessoryMinutes": 19,
+        "metconMinutes": 15,
+        "mobilityMinutes": 8,
+        "totalMinutes": 77
+      }
+    },
+    {
+      "sessionNumber": 8,
+      "week": 2,
+      "dayWithinWeek": 4,
+      "suggestedDay": "Sunday",
+      "label": "Workout 4 for the week starting October 11, 2026",
+      "focus": "Weekly Mobility — Shoulder IR, Thoracic Spine, Hips",
+      "warmup": [
+        {
+          "name": "Easy walk or bike",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Raise tissue temperature before stretching"
+        },
+        {
+          "name": "Cat-Cow",
+          "duration": null,
+          "reps": 8,
+          "notes": "Gentle spinal warm-up"
+        }
+      ],
+      "strength": [],
+      "mobility": [
+        {
+          "name": "Sleeper stretch",
+          "duration": "2 x 45 s/side",
+          "notes": "Lie on your side, shoulder + elbow at 90°, gently rotate forearm down toward the floor with the OTHER hand — stop at a stretch, not pain. Targets posterior capsule tightness, the usual cause of limited internal rotation."
+        },
+        {
+          "name": "Thoracic extension over foam roller",
+          "duration": "2 x 60 s",
+          "notes": "Roller across mid-back, hands behind head, gently extend over it. A lot of apparent shoulder restriction is actually t-spine stiffness."
+        },
+        {
+          "name": "Shoulder CARs (controlled articular rotations)",
+          "duration": "2 x 5 slow reps/side",
+          "notes": "Slow, full-range shoulder circles, standing tall, no weight — you control the range, so this is safe even on a stiff/at-risk shoulder. Stay pain-free."
+        },
+        {
+          "name": "Couch stretch (hip flexor)",
+          "duration": "2 x 45 s/side",
+          "notes": "Back knee down against a couch/wall, brace the glute — offsets the heavy weekly hip-hinge volume."
+        },
+        {
+          "name": "Cross-body shoulder stretch",
+          "duration": "2 x 30 s/side",
+          "notes": "Pull arm across chest with the other hand, posterior capsule."
+        },
+        {
+          "name": "90/90 hip switch",
+          "duration": "2 x 8/side",
+          "notes": "Controlled hip internal/external rotation, both directions."
+        },
+        {
+          "name": "Calf/ankle wall stretch",
+          "duration": "2 x 30 s/side",
+          "notes": "Knee to wall, heel down — ankle dorsiflexion supports squat depth and general fall-risk reduction."
+        },
+        {
+          "name": "Single-leg balance hold",
+          "duration": "2 x 30 s/side",
+          "notes": "Eyes open. Progress toward eyes closed as it gets easy."
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 5,
+        "primaryMinutes": 0,
+        "secondaryMinutes": 0,
+        "accessoryMinutes": 0,
+        "metconMinutes": 0,
+        "mobilityMinutes": 24,
+        "totalMinutes": 29
+      }
+    },
+    {
+      "sessionNumber": 9,
+      "week": 3,
+      "dayWithinWeek": 1,
+      "suggestedDay": "Monday",
+      "label": "Workout 1 for the week starting October 18, 2026",
+      "focus": "Lower Body — Posterior Chain (DUP) + Vertical Pull + Quad",
+      "warmup": [
+        {
+          "name": "Easy bike / row / ski",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Build to a light sweat"
+        },
+        {
+          "name": "Band pull-apart",
+          "duration": null,
+          "reps": 15,
+          "notes": "Scapular activation"
+        },
+        {
+          "name": "Banded external rotation",
+          "duration": null,
+          "reps": 12,
+          "notes": "Per side — rotator cuff activation, not a working set"
+        },
+        {
+          "name": "Bodyweight glute bridge",
+          "duration": null,
+          "reps": 10,
+          "notes": "Wake the posterior chain"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": null,
+          "reps": 5,
+          "notes": "Per side"
+        }
+      ],
+      "strength": [
+        {
+          "type": "primary",
+          "order": 1,
+          "supersetGroup": null,
+          "movement": "Conventional Deadlift",
+          "category": "GLUTES_HAMSTRINGS",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "4",
+          "percentOfMax": 77,
+          "restSeconds": 210,
+          "coachingNotes": "Reintroduced movement (Trap Bar retired for roughly the next 2 months — problematic to use, back to a regular deadlift bar). Last confirmed conventional 1RM was 80 kg, but Trap Bar work this past block reached 83.5 kg x5 @ RPE 8 in Week 4, suggesting real strength gains since then. Conservatively estimating ~88 kg as your new working max — grip and bar path differ enough from Trap Bar that this is a genuine re-entry, not a straight carryover, so treat Week 1 as a technical/confirmation week and update this number in Settings once you've logged a real work set. Cue: keep the bar close, brace hard, drive the floor away — don't let early-rep torque round your lower back."
+        },
+        {
+          "type": "secondary",
+          "order": 2,
+          "supersetGroup": "A",
+          "movement": "Pull-Up (band-assisted as needed)",
+          "category": "VERTICAL_PULL",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "5",
+          "percentOfMax": null,
+          "restSeconds": 120,
+          "coachingNotes": "Switch to a lighter assistance band (or less assistance) than weeks 1–2 — reps may drop as it gets harder, that's expected. Keep watching the elbow at the top of each rep; stay on the heavier/easier side of the band progression rather than push through any sharp pain there."
+        },
+        {
+          "type": "secondary",
+          "order": 3,
+          "supersetGroup": "A",
+          "movement": "Goblet Squat",
+          "category": "QUAD_DOMINANT",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "10",
+          "percentOfMax": 60,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "accessory",
+          "order": 4,
+          "supersetGroup": "B",
+          "movement": "Seal Row (DB, prone on bench)",
+          "category": "UPPER_BACK_ERECTORS",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "11",
+          "percentOfMax": null,
+          "restSeconds": 100,
+          "coachingNotes": "Prone on a bench, DBs hang straight down, row to the ribs and pause briefly at the top. Bench support removes any lower-back involvement — if the elbow twinges at the top squeeze, shorten the range slightly rather than push through it."
+        },
+        {
+          "type": "accessory",
+          "order": 5,
+          "supersetGroup": "B",
+          "movement": "Cossack Squat (bodyweight or light DB)",
+          "category": "UNILATERAL_LOWER",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "8",
+          "percentOfMax": null,
+          "restSeconds": 100,
+          "coachingNotes": "Wide stance, shift weight side to side sinking into one hip at a time, opposite leg stays straight. Bodyweight or one light DB at the chest, RPE 7, each side — also opens up the hips/adductors."
+        },
+        {
+          "type": "accessory",
+          "order": 6,
+          "supersetGroup": null,
+          "movement": "Hollow Hold",
+          "category": "CORE",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "25 s hold",
+          "percentOfMax": null,
+          "restSeconds": 75,
+          "coachingNotes": "Lower back pressed to the floor, arms and legs extended and lifted — don't let the lower back arch."
+        }
+      ],
+      "metcon": null,
+      "metconText": null,
+      "mobility": [
+        {
+          "name": "Lat stretch (doorway or overhead)",
+          "duration": "30 s/side",
+          "notes": null
+        },
+        {
+          "name": "Thoracic extension over foam roller",
+          "duration": "60 s",
+          "notes": null
+        },
+        {
+          "name": "Hip flexor stretch",
+          "duration": "30 s/side",
+          "notes": null
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 10,
+        "primaryMinutes": 14,
+        "secondaryMinutes": 19,
+        "accessoryMinutes": 13,
+        "metconMinutes": 15,
+        "mobilityMinutes": 8,
+        "totalMinutes": 72
+      }
+    },
+    {
+      "sessionNumber": 10,
+      "week": 3,
+      "dayWithinWeek": 2,
+      "suggestedDay": "Wednesday",
+      "label": "Workout 2 for the week starting October 18, 2026",
+      "focus": "Upper Body Push & Pull (DUP) + Posterior Chain",
+      "warmup": [
+        {
+          "name": "Easy bike / row / ski",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Build to a light sweat"
+        },
+        {
+          "name": "Band pull-apart",
+          "duration": null,
+          "reps": 15,
+          "notes": "Scapular activation"
+        },
+        {
+          "name": "Banded external rotation",
+          "duration": null,
+          "reps": 12,
+          "notes": "Per side — rotator cuff activation, not a working set"
+        },
+        {
+          "name": "Wall slide",
+          "duration": null,
+          "reps": 8,
+          "notes": null
+        },
+        {
+          "name": "A few light landmine presses",
+          "duration": null,
+          "reps": 8,
+          "notes": "Ramp to working load"
+        }
+      ],
+      "strength": [
+        {
+          "type": "primary",
+          "order": 1,
+          "supersetGroup": "A",
+          "movement": "Landmine Press",
+          "category": "PUSH",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "6",
+          "percentOfMax": 75,
+          "restSeconds": 150,
+          "coachingNotes": null
+        },
+        {
+          "type": "secondary",
+          "order": 2,
+          "supersetGroup": "A",
+          "movement": "Banded Seated Row",
+          "category": "UPPER_BACK_ERECTORS",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "8",
+          "percentOfMax": null,
+          "restSeconds": 120,
+          "coachingNotes": "Heavy day — move up one band tension level (or shorten the band) to match the lower rep target. RPE 8 on the final set."
+        },
+        {
+          "type": "secondary",
+          "order": 3,
+          "supersetGroup": null,
+          "movement": "Barbell Hip Thrust",
+          "category": "GLUTES_HAMSTRINGS",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "10",
+          "percentOfMax": 66,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "accessory",
+          "order": 4,
+          "supersetGroup": "B",
+          "movement": "Single-Leg Glute Bridge (bench-supported, DB)",
+          "category": "UNILATERAL_LOWER",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "10",
+          "percentOfMax": null,
+          "restSeconds": 100,
+          "coachingNotes": "Shoulders on a bench, one foot planted, drive the hips up, squeeze at the top. Bodyweight or light DB on the hips, RPE 7–8, each leg."
+        },
+        {
+          "type": "accessory",
+          "order": 5,
+          "supersetGroup": "B",
+          "movement": "Face Pull",
+          "category": "ROTATOR_CUFF",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "13",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Same band as weeks 1–2, one more rep per set. Keep leading with the elbows, not the hands."
+        },
+        {
+          "type": "accessory",
+          "order": 6,
+          "supersetGroup": "C",
+          "movement": "Farmer Hold (heavy DB or KB, static)",
+          "category": "GRIP",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "25 s hold",
+          "percentOfMax": null,
+          "restSeconds": 60,
+          "coachingNotes": "Heaviest DB/KB you can hold with a solid grip for the full time, arms at your sides. Tall posture, no shrugging."
+        },
+        {
+          "type": "accessory",
+          "order": 7,
+          "supersetGroup": "C",
+          "movement": "Single-Leg Box/Step Balance, eyes closed",
+          "category": "BALANCE",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "30 s hold",
+          "percentOfMax": null,
+          "restSeconds": 60,
+          "coachingNotes": "Progression from Weeks 1–2’s tandem stance — single-leg on a low step or the floor, eyes closed once stable. Each side."
+        }
+      ],
+      "metcon": null,
+      "metconText": null,
+      "mobility": [
+        {
+          "name": "Doorway pec stretch",
+          "duration": "20 s x 3 heights/side",
+          "notes": null
+        },
+        {
+          "name": "Open book",
+          "duration": "8/side",
+          "notes": null
+        },
+        {
+          "name": "Prone Y-T-W",
+          "duration": "8 each",
+          "notes": null
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 10,
+        "primaryMinutes": 11,
+        "secondaryMinutes": 17,
+        "accessoryMinutes": 16,
+        "metconMinutes": 15,
+        "mobilityMinutes": 8,
+        "totalMinutes": 70
+      }
+    },
+    {
+      "sessionNumber": 11,
+      "week": 3,
+      "dayWithinWeek": 3,
+      "suggestedDay": "Friday",
+      "label": "Workout 3 for the week starting October 18, 2026",
+      "focus": "Lower Body — Quad Dominant (DUP) + Carries",
+      "warmup": [
+        {
+          "name": "Easy bike / row / ski",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Build to a light sweat"
+        },
+        {
+          "name": "Band pull-apart",
+          "duration": null,
+          "reps": 15,
+          "notes": "Scapular activation"
+        },
+        {
+          "name": "Banded external rotation",
+          "duration": null,
+          "reps": 12,
+          "notes": "Per side — rotator cuff activation, not a working set"
+        },
+        {
+          "name": "Bodyweight squats",
+          "duration": null,
+          "reps": 10,
+          "notes": "Sink to depth"
+        },
+        {
+          "name": "Ankle rock-to-wall",
+          "duration": null,
+          "reps": 8,
+          "notes": "Per side"
+        }
+      ],
+      "strength": [
+        {
+          "type": "primary",
+          "order": 1,
+          "supersetGroup": null,
+          "movement": "Back Squat",
+          "category": "QUAD_DOMINANT",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "10",
+          "percentOfMax": 67,
+          "restSeconds": 180,
+          "coachingNotes": null
+        },
+        {
+          "type": "secondary",
+          "order": 2,
+          "supersetGroup": "A",
+          "movement": "Romanian Deadlift (Barbell)",
+          "category": "GLUTES_HAMSTRINGS",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "9",
+          "percentOfMax": 65,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "secondary",
+          "order": 3,
+          "supersetGroup": "A",
+          "movement": "Chest-Supported DB Row",
+          "category": "UPPER_BACK_ERECTORS",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "11",
+          "percentOfMax": 65,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "accessory",
+          "order": 4,
+          "supersetGroup": "B",
+          "movement": "Single-Leg Box Step-Down (eccentric focus, controlled)",
+          "category": "UNILATERAL_LOWER",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "9",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Stand on a low box, lower the free leg to lightly tap the floor with control, then return — slow 3 s lowering. Still low-impact (no landing force), different stimulus (eccentric control vs. concentric power) from weeks 1–2."
+        },
+        {
+          "type": "accessory",
+          "order": 5,
+          "supersetGroup": "B",
+          "movement": "Front-Rack Carry (double KB)",
+          "category": "CARRIES_LOADED",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "25 m walk",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Two KBs racked at the shoulders, elbows down, tall posture. Moderate-heavy, resist leaning back."
+        },
+        {
+          "type": "accessory",
+          "order": 6,
+          "supersetGroup": null,
+          "movement": "Bird Dog",
+          "category": "CORE",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "10/side",
+          "percentOfMax": null,
+          "restSeconds": 75,
+          "coachingNotes": "Opposite arm/leg extension from all fours, slow and controlled, don't let the hips rotate. Each side. Low elbow demand if you're still favoring it."
+        },
+        {
+          "type": "accessory",
+          "order": 7,
+          "supersetGroup": null,
+          "movement": "Spanish Squat (band-anchored)",
+          "category": "QUAD_DOMINANT",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "14",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Same setup as weeks 1–2, two more reps per set — still RPE 6–7, still submaximal on purpose."
+        }
+      ],
+      "metcon": null,
+      "metconText": null,
+      "mobility": [
+        {
+          "name": "Couch stretch (hip flexor)",
+          "duration": "30 s/side",
+          "notes": null
+        },
+        {
+          "name": "Pigeon or figure-4 stretch",
+          "duration": "30 s/side",
+          "notes": null
+        },
+        {
+          "name": "Child's pose reaching lat stretch",
+          "duration": "30 s",
+          "notes": null
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 10,
+        "primaryMinutes": 14,
+        "secondaryMinutes": 18,
+        "accessoryMinutes": 20,
+        "metconMinutes": 15,
+        "mobilityMinutes": 8,
+        "totalMinutes": 80
+      }
+    },
+    {
+      "sessionNumber": 12,
+      "week": 3,
+      "dayWithinWeek": 4,
+      "suggestedDay": "Sunday",
+      "label": "Workout 4 for the week starting October 18, 2026",
+      "focus": "Weekly Mobility — Shoulder IR, Thoracic Spine, Hips",
+      "warmup": [
+        {
+          "name": "Easy walk or bike",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Raise tissue temperature before stretching"
+        },
+        {
+          "name": "Cat-Cow",
+          "duration": null,
+          "reps": 8,
+          "notes": "Gentle spinal warm-up"
+        }
+      ],
+      "strength": [],
+      "mobility": [
+        {
+          "name": "Sleeper stretch",
+          "duration": "2 x 45 s/side",
+          "notes": "Lie on your side, shoulder + elbow at 90°, gently rotate forearm down toward the floor with the OTHER hand — stop at a stretch, not pain. Targets posterior capsule tightness, the usual cause of limited internal rotation."
+        },
+        {
+          "name": "Thoracic extension over foam roller",
+          "duration": "2 x 60 s",
+          "notes": "Roller across mid-back, hands behind head, gently extend over it. A lot of apparent shoulder restriction is actually t-spine stiffness."
+        },
+        {
+          "name": "Shoulder CARs (controlled articular rotations)",
+          "duration": "2 x 5 slow reps/side",
+          "notes": "Slow, full-range shoulder circles, standing tall, no weight — you control the range, so this is safe even on a stiff/at-risk shoulder. Stay pain-free."
+        },
+        {
+          "name": "Couch stretch (hip flexor)",
+          "duration": "2 x 45 s/side",
+          "notes": "Back knee down against a couch/wall, brace the glute — offsets the heavy weekly hip-hinge volume."
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": "2 x 45 s/side",
+          "notes": "Deeper hip external rotation than 90/90 — ease in, don’t force it."
+        },
+        {
+          "name": "Adductor rock-back",
+          "duration": "2 x 8/side",
+          "notes": "Wide stance, rock hips back over one leg — supports squat depth."
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": "2 x 30 s/side",
+          "notes": "Hold onto something for balance if needed."
+        },
+        {
+          "name": "Single-leg balance hold, eyes closed",
+          "duration": "2 x 30 s/side",
+          "notes": "Progression from weeks 1-2 — harder balance challenge, same fall-risk rationale."
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 5,
+        "primaryMinutes": 0,
+        "secondaryMinutes": 0,
+        "accessoryMinutes": 0,
+        "metconMinutes": 0,
+        "mobilityMinutes": 24,
+        "totalMinutes": 29
+      }
+    },
+    {
+      "sessionNumber": 13,
+      "week": 4,
+      "dayWithinWeek": 1,
+      "suggestedDay": "Monday",
+      "label": "Workout 1 for the week starting October 25, 2026",
+      "focus": "Lower Body — Posterior Chain (DUP) + Vertical Pull + Quad",
+      "warmup": [
+        {
+          "name": "Easy bike / row / ski",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Build to a light sweat"
+        },
+        {
+          "name": "Band pull-apart",
+          "duration": null,
+          "reps": 15,
+          "notes": "Scapular activation"
+        },
+        {
+          "name": "Banded external rotation",
+          "duration": null,
+          "reps": 12,
+          "notes": "Per side — rotator cuff activation, not a working set"
+        },
+        {
+          "name": "Bodyweight glute bridge",
+          "duration": null,
+          "reps": 10,
+          "notes": "Wake the posterior chain"
+        },
+        {
+          "name": "World's greatest stretch",
+          "duration": null,
+          "reps": 5,
+          "notes": "Per side"
+        }
+      ],
+      "strength": [
+        {
+          "type": "primary",
+          "order": 1,
+          "supersetGroup": null,
+          "movement": "Conventional Deadlift",
+          "category": "GLUTES_HAMSTRINGS",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "5",
+          "percentOfMax": 73,
+          "restSeconds": 210,
+          "coachingNotes": "Reintroduced movement (Trap Bar retired for roughly the next 2 months — problematic to use, back to a regular deadlift bar). Last confirmed conventional 1RM was 80 kg, but Trap Bar work this past block reached 83.5 kg x5 @ RPE 8 in Week 4, suggesting real strength gains since then. Conservatively estimating ~88 kg as your new working max — grip and bar path differ enough from Trap Bar that this is a genuine re-entry, not a straight carryover, so treat Week 1 as a technical/confirmation week and update this number in Settings once you've logged a real work set. Cue: keep the bar close, brace hard, drive the floor away — don't let early-rep torque round your lower back."
+        },
+        {
+          "type": "secondary",
+          "order": 2,
+          "supersetGroup": "A",
+          "movement": "Pull-Up (band-assisted as needed)",
+          "category": "VERTICAL_PULL",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "6",
+          "percentOfMax": null,
+          "restSeconds": 120,
+          "coachingNotes": "Switch to a lighter assistance band (or less assistance) than weeks 1–2 — reps may drop as it gets harder, that's expected. Keep watching the elbow at the top of each rep; stay on the heavier/easier side of the band progression rather than push through any sharp pain there."
+        },
+        {
+          "type": "secondary",
+          "order": 3,
+          "supersetGroup": "A",
+          "movement": "Goblet Squat",
+          "category": "QUAD_DOMINANT",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "12",
+          "percentOfMax": 58,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "accessory",
+          "order": 4,
+          "supersetGroup": "B",
+          "movement": "Seal Row (DB, prone on bench)",
+          "category": "UPPER_BACK_ERECTORS",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "11",
+          "percentOfMax": null,
+          "restSeconds": 100,
+          "coachingNotes": "Prone on a bench, DBs hang straight down, row to the ribs and pause briefly at the top. Bench support removes any lower-back involvement — if the elbow twinges at the top squeeze, shorten the range slightly rather than push through it."
+        },
+        {
+          "type": "accessory",
+          "order": 5,
+          "supersetGroup": "B",
+          "movement": "Cossack Squat (bodyweight or light DB)",
+          "category": "UNILATERAL_LOWER",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "8",
+          "percentOfMax": null,
+          "restSeconds": 100,
+          "coachingNotes": "Wide stance, shift weight side to side sinking into one hip at a time, opposite leg stays straight. Bodyweight or one light DB at the chest, RPE 7, each side — also opens up the hips/adductors."
+        },
+        {
+          "type": "accessory",
+          "order": 6,
+          "supersetGroup": null,
+          "movement": "Hollow Hold",
+          "category": "CORE",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "25 s hold",
+          "percentOfMax": null,
+          "restSeconds": 75,
+          "coachingNotes": "Lower back pressed to the floor, arms and legs extended and lifted — don't let the lower back arch."
+        }
+      ],
+      "metcon": null,
+      "metconText": null,
+      "mobility": [
+        {
+          "name": "Lat stretch (doorway or overhead)",
+          "duration": "30 s/side",
+          "notes": null
+        },
+        {
+          "name": "Thoracic extension over foam roller",
+          "duration": "60 s",
+          "notes": null
+        },
+        {
+          "name": "Hip flexor stretch",
+          "duration": "30 s/side",
+          "notes": null
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 10,
+        "primaryMinutes": 14,
+        "secondaryMinutes": 20,
+        "accessoryMinutes": 13,
+        "metconMinutes": 15,
+        "mobilityMinutes": 8,
+        "totalMinutes": 73
+      }
+    },
+    {
+      "sessionNumber": 14,
+      "week": 4,
+      "dayWithinWeek": 2,
+      "suggestedDay": "Wednesday",
+      "label": "Workout 2 for the week starting October 25, 2026",
+      "focus": "Upper Body Push & Pull (DUP) + Posterior Chain",
+      "warmup": [
+        {
+          "name": "Easy bike / row / ski",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Build to a light sweat"
+        },
+        {
+          "name": "Band pull-apart",
+          "duration": null,
+          "reps": 15,
+          "notes": "Scapular activation"
+        },
+        {
+          "name": "Banded external rotation",
+          "duration": null,
+          "reps": 12,
+          "notes": "Per side — rotator cuff activation, not a working set"
+        },
+        {
+          "name": "Wall slide",
+          "duration": null,
+          "reps": 8,
+          "notes": null
+        },
+        {
+          "name": "A few light landmine presses",
+          "duration": null,
+          "reps": 8,
+          "notes": "Ramp to working load"
+        }
+      ],
+      "strength": [
+        {
+          "type": "primary",
+          "order": 1,
+          "supersetGroup": "A",
+          "movement": "Landmine Press",
+          "category": "PUSH",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "8",
+          "percentOfMax": 71,
+          "restSeconds": 150,
+          "coachingNotes": null
+        },
+        {
+          "type": "secondary",
+          "order": 2,
+          "supersetGroup": "A",
+          "movement": "Banded Seated Row",
+          "category": "UPPER_BACK_ERECTORS",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "10",
+          "percentOfMax": null,
+          "restSeconds": 120,
+          "coachingNotes": "Week 4 moderate day, closing out the band progression for this block. Hold Week 3's tension or drop back one level for the higher rep count."
+        },
+        {
+          "type": "secondary",
+          "order": 3,
+          "supersetGroup": null,
+          "movement": "Barbell Hip Thrust",
+          "category": "GLUTES_HAMSTRINGS",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "10",
+          "percentOfMax": 63,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "accessory",
+          "order": 4,
+          "supersetGroup": "B",
+          "movement": "Single-Leg Glute Bridge (bench-supported, DB)",
+          "category": "UNILATERAL_LOWER",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "10",
+          "percentOfMax": null,
+          "restSeconds": 100,
+          "coachingNotes": "Shoulders on a bench, one foot planted, drive the hips up, squeeze at the top. Bodyweight or light DB on the hips, RPE 7–8, each leg."
+        },
+        {
+          "type": "accessory",
+          "order": 5,
+          "supersetGroup": "B",
+          "movement": "Face Pull",
+          "category": "ROTATOR_CUFF",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "13",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Same band as weeks 1–2, one more rep per set. Keep leading with the elbows, not the hands."
+        },
+        {
+          "type": "accessory",
+          "order": 6,
+          "supersetGroup": "C",
+          "movement": "Farmer Hold (heavy DB or KB, static)",
+          "category": "GRIP",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "25 s hold",
+          "percentOfMax": null,
+          "restSeconds": 60,
+          "coachingNotes": "Heaviest DB/KB you can hold with a solid grip for the full time, arms at your sides. Tall posture, no shrugging."
+        },
+        {
+          "type": "accessory",
+          "order": 7,
+          "supersetGroup": "C",
+          "movement": "Single-Leg Box/Step Balance, eyes closed",
+          "category": "BALANCE",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "30 s hold",
+          "percentOfMax": null,
+          "restSeconds": 60,
+          "coachingNotes": "Progression from Weeks 1–2’s tandem stance — single-leg on a low step or the floor, eyes closed once stable. Each side."
+        }
+      ],
+      "metcon": null,
+      "metconText": null,
+      "mobility": [
+        {
+          "name": "Doorway pec stretch",
+          "duration": "20 s x 3 heights/side",
+          "notes": null
+        },
+        {
+          "name": "Open book",
+          "duration": "8/side",
+          "notes": null
+        },
+        {
+          "name": "Prone Y-T-W",
+          "duration": "8 each",
+          "notes": null
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 10,
+        "primaryMinutes": 12,
+        "secondaryMinutes": 18,
+        "accessoryMinutes": 16,
+        "metconMinutes": 15,
+        "mobilityMinutes": 8,
+        "totalMinutes": 72
+      }
+    },
+    {
+      "sessionNumber": 15,
+      "week": 4,
+      "dayWithinWeek": 3,
+      "suggestedDay": "Friday",
+      "label": "Workout 3 for the week starting October 25, 2026",
+      "focus": "Lower Body — Quad Dominant (DUP) + Carries",
+      "warmup": [
+        {
+          "name": "Easy bike / row / ski",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Build to a light sweat"
+        },
+        {
+          "name": "Band pull-apart",
+          "duration": null,
+          "reps": 15,
+          "notes": "Scapular activation"
+        },
+        {
+          "name": "Banded external rotation",
+          "duration": null,
+          "reps": 12,
+          "notes": "Per side — rotator cuff activation, not a working set"
+        },
+        {
+          "name": "Bodyweight squats",
+          "duration": null,
+          "reps": 10,
+          "notes": "Sink to depth"
+        },
+        {
+          "name": "Ankle rock-to-wall",
+          "duration": null,
+          "reps": 8,
+          "notes": "Per side"
+        }
+      ],
+      "strength": [
+        {
+          "type": "primary",
+          "order": 1,
+          "supersetGroup": null,
+          "movement": "Back Squat",
+          "category": "QUAD_DOMINANT",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "6",
+          "percentOfMax": 71,
+          "restSeconds": 180,
+          "coachingNotes": null
+        },
+        {
+          "type": "secondary",
+          "order": 2,
+          "supersetGroup": "A",
+          "movement": "Romanian Deadlift (Barbell)",
+          "category": "GLUTES_HAMSTRINGS",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "9",
+          "percentOfMax": 67,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "secondary",
+          "order": 3,
+          "supersetGroup": "A",
+          "movement": "Chest-Supported DB Row",
+          "category": "UPPER_BACK_ERECTORS",
+          "isUnilateral": false,
+          "sets": 4,
+          "reps": "12",
+          "percentOfMax": 67,
+          "restSeconds": 120,
+          "coachingNotes": null
+        },
+        {
+          "type": "accessory",
+          "order": 4,
+          "supersetGroup": "B",
+          "movement": "Single-Leg Box Step-Down (eccentric focus, controlled)",
+          "category": "UNILATERAL_LOWER",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "9",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Stand on a low box, lower the free leg to lightly tap the floor with control, then return — slow 3 s lowering. Still low-impact (no landing force), different stimulus (eccentric control vs. concentric power) from weeks 1–2."
+        },
+        {
+          "type": "accessory",
+          "order": 5,
+          "supersetGroup": "B",
+          "movement": "Front-Rack Carry (double KB)",
+          "category": "CARRIES_LOADED",
+          "isUnilateral": false,
+          "sets": 2,
+          "reps": "25 m walk",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Two KBs racked at the shoulders, elbows down, tall posture. Moderate-heavy, resist leaning back."
+        },
+        {
+          "type": "accessory",
+          "order": 6,
+          "supersetGroup": null,
+          "movement": "Bird Dog",
+          "category": "CORE",
+          "isUnilateral": true,
+          "sets": 2,
+          "reps": "10/side",
+          "percentOfMax": null,
+          "restSeconds": 75,
+          "coachingNotes": "Opposite arm/leg extension from all fours, slow and controlled, don't let the hips rotate. Each side. Low elbow demand if you're still favoring it."
+        },
+        {
+          "type": "accessory",
+          "order": 7,
+          "supersetGroup": null,
+          "movement": "Spanish Squat (band-anchored)",
+          "category": "QUAD_DOMINANT",
+          "isUnilateral": false,
+          "sets": 3,
+          "reps": "14",
+          "percentOfMax": null,
+          "restSeconds": 90,
+          "coachingNotes": "Same setup as weeks 1–2, two more reps per set — still RPE 6–7, still submaximal on purpose."
+        }
+      ],
+      "metcon": null,
+      "metconText": null,
+      "mobility": [
+        {
+          "name": "Couch stretch (hip flexor)",
+          "duration": "30 s/side",
+          "notes": null
+        },
+        {
+          "name": "Pigeon or figure-4 stretch",
+          "duration": "30 s/side",
+          "notes": null
+        },
+        {
+          "name": "Child's pose reaching lat stretch",
+          "duration": "30 s",
+          "notes": null
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 10,
+        "primaryMinutes": 13,
+        "secondaryMinutes": 18,
+        "accessoryMinutes": 20,
+        "metconMinutes": 15,
+        "mobilityMinutes": 8,
+        "totalMinutes": 79
+      }
+    },
+    {
+      "sessionNumber": 16,
+      "week": 4,
+      "dayWithinWeek": 4,
+      "suggestedDay": "Sunday",
+      "label": "Workout 4 for the week starting October 25, 2026",
+      "focus": "Weekly Mobility — Shoulder IR, Thoracic Spine, Hips",
+      "warmup": [
+        {
+          "name": "Easy walk or bike",
+          "duration": "5 min",
+          "reps": null,
+          "notes": "Raise tissue temperature before stretching"
+        },
+        {
+          "name": "Cat-Cow",
+          "duration": null,
+          "reps": 8,
+          "notes": "Gentle spinal warm-up"
+        }
+      ],
+      "strength": [],
+      "mobility": [
+        {
+          "name": "Sleeper stretch",
+          "duration": "2 x 45 s/side",
+          "notes": "Lie on your side, shoulder + elbow at 90°, gently rotate forearm down toward the floor with the OTHER hand — stop at a stretch, not pain. Targets posterior capsule tightness, the usual cause of limited internal rotation."
+        },
+        {
+          "name": "Thoracic extension over foam roller",
+          "duration": "2 x 60 s",
+          "notes": "Roller across mid-back, hands behind head, gently extend over it. A lot of apparent shoulder restriction is actually t-spine stiffness."
+        },
+        {
+          "name": "Shoulder CARs (controlled articular rotations)",
+          "duration": "2 x 5 slow reps/side",
+          "notes": "Slow, full-range shoulder circles, standing tall, no weight — you control the range, so this is safe even on a stiff/at-risk shoulder. Stay pain-free."
+        },
+        {
+          "name": "Couch stretch (hip flexor)",
+          "duration": "2 x 45 s/side",
+          "notes": "Back knee down against a couch/wall, brace the glute — offsets the heavy weekly hip-hinge volume."
+        },
+        {
+          "name": "Pigeon stretch",
+          "duration": "2 x 45 s/side",
+          "notes": "Deeper hip external rotation than 90/90 — ease in, don’t force it."
+        },
+        {
+          "name": "Adductor rock-back",
+          "duration": "2 x 8/side",
+          "notes": "Wide stance, rock hips back over one leg — supports squat depth."
+        },
+        {
+          "name": "Standing quad stretch",
+          "duration": "2 x 30 s/side",
+          "notes": "Hold onto something for balance if needed."
+        },
+        {
+          "name": "Single-leg balance hold, eyes closed",
+          "duration": "2 x 30 s/side",
+          "notes": "Progression from weeks 1-2 — harder balance challenge, same fall-risk rationale."
+        }
+      ],
+      "timeEstimates": {
+        "warmupMinutes": 5,
+        "primaryMinutes": 0,
+        "secondaryMinutes": 0,
+        "accessoryMinutes": 0,
+        "metconMinutes": 0,
+        "mobilityMinutes": 24,
+        "totalMinutes": 29
+      }
+    }
+  ],
+  "programNumber": 1
+}

@@ -212,25 +212,47 @@ CARRIES_LOADED        1–2 per week (presence required; not counted in sets)
 
 ---
 
-## PENDING FOR NEXT CYCLE (Block 7) — shoulder IR progression
-Block 6 dropped the Face Pull accessory that Block 5 had for external-rotation
-strength (only warm-up-level activation — band pull-apart, banded external
-rotation — remains, which is too light to build capacity). When building
-Block 7:
-1. Add Face Pull (or banded external rotation) back as a real ACCESSORY with
-   working sets, progressed like any other accessory (RPE 7 in weeks 1–2, add
-   a rep in weeks 3–4) — not just warm-up activation.
-Do NOT yet introduce a real overhead press variant (even light/accessory) —
-that's the step after this, once a cycle of the above shows real improvement.
-Delete this section once Block 7 has actually been built with this addition.
+## RESOLVED — shoulder IR progression (Block 7)
+Block 7 added Face Pull back as a real ACCESSORY with working sets (3 sets,
+RPE 7 in weeks 1–2, +1 rep in weeks 3–4) on Wednesday, per the prior pending
+note. Still do NOT introduce a real overhead press variant (even light/
+accessory) — that's the step after this, once a cycle of Face Pull shows
+real improvement. Revisit that decision when building Block 8.
 (The sleeper-stretch item that used to be here is done — it now lives in the
 weekly mobility session below, which is a better fit than the daily cooldown
 blocks since it isn't time-squeezed.)
 
-## PENDING FOR NEXT CYCLE (Block 7+) — quad local-endurance deficit
+## PENDING FOR NEXT CYCLE (Block 8+) — Trap Bar retirement, revisit viability
+Block 7 (starting 2026-10-04) swapped Conventional Deadlift back in for Trap
+Bar Deadlift — the trainee reported the Trap Bar "problematic to use" for
+roughly the next two months. When building Block 8 (or whichever block
+starts on/after ~2026-11-09), ask whether Trap Bar access/use is viable
+again before deciding to keep Conventional Deadlift or swap back. Also: a
+real conventional 1RM should be logged during Block 7 (was only an ~88 kg
+estimate going in) — use that logged number rather than re-estimating.
+Delete this section once Block 8 has actually asked/decided this.
+
+## PENDING FOR NEXT CYCLE (Block 8+) — elbow pain, monitor
+Trainee reported slight elbow pain going into Block 7, unclear cause, worse
+at full elbow flexion — flagged in Block 7 on Pull-Up and the new Face Pull
+accessory (the two biggest end-range-flexion-under-load movements in the
+program) with cautions to stay submaximal and stop on sharp pain, plus a
+few accessory choices this block leaned elbow-friendly where the category
+allowed it (Dead Hang, Zercher/Front-Rack Carry, Bird Dog). When building
+Block 8, ask whether it resolved, is unchanged, or got worse:
+- Resolved: drop the extra cautions, no longer a constraint.
+- Unchanged/worse: keep the same cautions, and if it hasn't improved after
+  a second block of monitoring, that's a stronger signal it warrants an
+  actual look (PT/doctor) rather than continuing to program around it
+  indefinitely — say so plainly rather than just quietly flagging forever.
+Delete this section once resolved, or once escalated to "get it checked"
+and the trainee has confirmed they will.
+
+## PENDING FOR NEXT CYCLE (Block 8+) — quad local-endurance deficit
 Block 6 added Spanish Squat (band-anchored, 3 sets x 12, controlled 3–4s
 eccentric, RPE 6–7) as an ACCESSORY after the Back Squat on all four Friday
-sessions. Trigger: the trainee reported disproportionate quad soreness/
+sessions; Block 7 continued it (3x12 weeks 1–2, 3x14 weeks 3–4, per the
+standard accessory progression). Trigger: the trainee reported disproportionate quad soreness/
 burning from squat-pattern and unilateral-lower work (lunges, step-ups, air
 bike) despite leg press feeling fine — read as a local muscular-endurance/
 conditioning gap specific to the quads, not a strength deficit, and directly
