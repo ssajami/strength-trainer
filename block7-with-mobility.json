@@ -1,10 +1,10 @@
 {
   "startDate": "2026-10-04",
   "weeks": 4,
-  "commentsUsed": "Trainee feedback for Block 7: ~3-week gap between blocks (various vacations/travel, not a full break — kept doing strength pieces and metcons when possible), so Week 1 intensities are held flat/conservative rather than nudged up. Trap Bar Deadlift retired for roughly the next 2 months (problematic to use) — swapped back to Conventional Deadlift; last confirmed conventional max was 80 kg, but Block 6 trap bar work reached 83.5 kg x5 @ RPE 8 in Week 4, so a conservative ~88 kg estimate is used pending a real logged set. Reported slight elbow pain, unclear cause, worse at full elbow flexion — flagged on Pull-Up and the new Face Pull accessory specifically (the two most end-range-elbow-flexion-under-load movements in the program), with a note to get it checked if it doesn't resolve; several fresh accessory choices this cycle (Dead Hang, Zercher/Front-Rack Carry, Bird Dog) were also picked partly because they're elbow-friendly where the category allowed it. No other Block 6 issues reported beyond the single missed squat day already addressed via the Spanish Squat accessory (continuing this block per the rulebook's pending note) — deadlifts in particular went well. Also swapped Landmine Press -> DB Floor Press for the PUSH primary going into this fresh cycle (same shoulder-safety rationale, just varying the primary now that it's a natural cycle boundary rather than mid-block) -- Back Squat stays as-is since it's the fixed reference point for the in-flight quad-endurance fix. UPDATE 2026-09-20: the gap turned out to be ~3 weeks of illness with essentially no lifting (bodyweight work at most), not partial training — so Week 1 was changed to a reduced re-entry week (one fewer set on primaries/secondaries and longer accessories, RPE 6–7, load by feel). The deadlift/floor-press confirmation moved to Week 2. Weeks 2–4 unchanged. UPDATE 2026-10-06: PUSH primary swapped DB Floor Press -> Push Press for all four Wednesday sessions (only Week 1 Session 1 had been done). Trainee reported strict press at 25 kg x8 in recent metcons felt fine on shoulder and elbow, so the overhead step the rulebook was deferring to Block 8 is taken now at the trainee's request. Same sets/reps/% scheme; coaching notes give a DB push press fallback if the front rack aggravates the elbow.",
+  "commentsUsed": "Trainee feedback for Block 7: ~3-week gap between blocks (various vacations/travel, not a full break — kept doing strength pieces and metcons when possible), so Week 1 intensities are held flat/conservative rather than nudged up. Trap Bar Deadlift retired for roughly the next 2 months (problematic to use) — swapped back to Conventional Deadlift; last confirmed conventional max was 80 kg, but Block 6 trap bar work reached 83.5 kg x5 @ RPE 8 in Week 4, so a conservative ~88 kg estimate is used pending a real logged set. Reported slight elbow pain, unclear cause, worse at full elbow flexion — flagged on Pull-Up and the new Face Pull accessory specifically (the two most end-range-elbow-flexion-under-load movements in the program), with a note to get it checked if it doesn't resolve; several fresh accessory choices this cycle (Dead Hang, Zercher/Front-Rack Carry, Bird Dog) were also picked partly because they're elbow-friendly where the category allowed it. No other Block 6 issues reported beyond the single missed squat day already addressed via the Spanish Squat accessory (continuing this block per the rulebook's pending note) — deadlifts in particular went well. Also swapped Landmine Press -> DB Floor Press for the PUSH primary going into this fresh cycle (same shoulder-safety rationale, just varying the primary now that it's a natural cycle boundary rather than mid-block) -- Back Squat stays as-is since it's the fixed reference point for the in-flight quad-endurance fix. UPDATE 2026-09-20: the gap turned out to be ~3 weeks of illness with essentially no lifting (bodyweight work at most), not partial training — so Week 1 was changed to a reduced re-entry week (one fewer set on primaries/secondaries and longer accessories, RPE 6–7, load by feel). The deadlift/floor-press confirmation moved to Week 2. Weeks 2–4 unchanged. UPDATE 2026-10-06: PUSH primary swapped DB Floor Press -> Strict Press for all four Wednesday sessions (only Week 1 Session 1 had been done). Trainee reported strict press at 25 kg x8 in recent metcons felt fine on shoulder and elbow, so the overhead step the rulebook was deferring to Block 8 is taken now at the trainee's request. Strict rather than push press: no ballistic catch at lockout and less loaded elbow flexion, with push press as the Block 8 progression if this goes well. Same sets/reps/% scheme; coaching notes give a DB strict press fallback if the front rack aggravates the elbow.",
   "programName": "4-Week Bone & Muscle Preservation Program — Post-Menopausal Strength (Block 7)",
   "progressionModel": "Daily Undulating Periodisation (DUP)",
-  "progressionJustification": "Continuing DUP from Block 6. Training was irregular through the ~3-week gap between blocks (vacations/travel, various strength pieces and metcons rather than a full break) — Week 1 is a reduced re-entry week (~1 set lighter on primaries/secondaries, RPE 6–7, load by feel) because the gap turned out to be ~3 weeks of illness with little to no lifting; Weeks 2–4 run as originally written. Trap Bar Deadlift is retired for roughly the next two months (equipment access issue) and replaced with Conventional Deadlift; Block 6 trap bar work (up to 83.5 kg x5 @ RPE 8 in Week 4) suggests real strength gains since the last confirmed conventional max of 80 kg, so a conservative ~88 kg estimate is used pending a real logged set — treat Week 2 as the technical/confirmation week on this lift specifically. Back Squat and the other secondaries continue unchanged (no reported issues). Face Pull returns as a real ACCESSORY (not just warm-up activation) per the Block 6 pending note, progressing RPE 7 in weeks 1–2 to +1 rep in weeks 3–4 — addressing the shoulder IR rebuild. Spanish Squat continues as a quad-isolation accessory on the Friday squat day per the other Block 6 pending note (a multi-block fix, not resolved in one cycle). New this block: reported slight elbow pain at full flexion of unclear origin — Pull-Up and Face Pull coachingNotes flag this explicitly (heavier assistance band, stop on sharp pain, get it checked if it persists), and several accessory choices were deliberately picked to minimize end-range elbow flexion under load where the category allowed it (Dead Hang, Zercher/Front-Rack Carry, Bird Dog). PUSH primary also swapped this cycle: Landmine Press -> DB Floor Press. Same non-overhead shoulder-safety rationale as before (this doesn't reintroduce the blocked overhead-press step), just varying the primary at a natural cycle boundary now that there's no in-flight experiment pinned to it the way Back Squat is pinned to the quad-endurance fix -- no saved max yet, Week 2 doubles as an assessment week on this lift too. UPDATE 2026-10-06: PUSH primary swapped DB Floor Press -> Push Press for all four Wednesday sessions (only Week 1 Session 1 had been done). Trainee reported strict press at 25 kg x8 in recent metcons felt fine on shoulder and elbow, so the overhead step the rulebook was deferring to Block 8 is taken now at the trainee's request. Same sets/reps/% scheme; coaching notes give a DB push press fallback if the front rack aggravates the elbow.",
+  "progressionJustification": "Continuing DUP from Block 6. Training was irregular through the ~3-week gap between blocks (vacations/travel, various strength pieces and metcons rather than a full break) — Week 1 is a reduced re-entry week (~1 set lighter on primaries/secondaries, RPE 6–7, load by feel) because the gap turned out to be ~3 weeks of illness with little to no lifting; Weeks 2–4 run as originally written. Trap Bar Deadlift is retired for roughly the next two months (equipment access issue) and replaced with Conventional Deadlift; Block 6 trap bar work (up to 83.5 kg x5 @ RPE 8 in Week 4) suggests real strength gains since the last confirmed conventional max of 80 kg, so a conservative ~88 kg estimate is used pending a real logged set — treat Week 2 as the technical/confirmation week on this lift specifically. Back Squat and the other secondaries continue unchanged (no reported issues). Face Pull returns as a real ACCESSORY (not just warm-up activation) per the Block 6 pending note, progressing RPE 7 in weeks 1–2 to +1 rep in weeks 3–4 — addressing the shoulder IR rebuild. Spanish Squat continues as a quad-isolation accessory on the Friday squat day per the other Block 6 pending note (a multi-block fix, not resolved in one cycle). New this block: reported slight elbow pain at full flexion of unclear origin — Pull-Up and Face Pull coachingNotes flag this explicitly (heavier assistance band, stop on sharp pain, get it checked if it persists), and several accessory choices were deliberately picked to minimize end-range elbow flexion under load where the category allowed it (Dead Hang, Zercher/Front-Rack Carry, Bird Dog). PUSH primary also swapped this cycle: Landmine Press -> DB Floor Press. Same non-overhead shoulder-safety rationale as before (this doesn't reintroduce the blocked overhead-press step), just varying the primary at a natural cycle boundary now that there's no in-flight experiment pinned to it the way Back Squat is pinned to the quad-endurance fix -- no saved max yet, Week 2 doubles as an assessment week on this lift too. UPDATE 2026-10-06: PUSH primary swapped DB Floor Press -> Strict Press for all four Wednesday sessions (only Week 1 Session 1 had been done). Trainee reported strict press at 25 kg x8 in recent metcons felt fine on shoulder and elbow, so the overhead step the rulebook was deferring to Block 8 is taken now at the trainee's request. Strict rather than push press: no ballistic catch at lockout and less loaded elbow flexion, with push press as the Block 8 progression if this goes well. Same sets/reps/% scheme; coaching notes give a DB strict press fallback if the front rack aggravates the elbow.",
   "weeklyVolumeNotes": "NOTE: Week 1 only runs one set lighter on most primaries/secondaries and a few accessories (re-entry after illness); the figures below describe the full-volume Weeks 2–4. GLUTES_HAMSTRINGS (10 sets/week) via Conventional Deadlift primary (S1), Barbell Hip Thrust secondary (S2), Romanian Deadlift secondary (S3) — same volume math as Block 6, only the S1 movement changed. UPPER_BACK_ERECTORS (8/week) via Banded Seated Row (S2) and Chest-Supported DB Row (S3), 4 sets each. QUAD_DOMINANT (8/week) via Back Squat primary (S3) and Goblet Squat secondary (S1) — plus Spanish Squat continuing as an ACCESSORY on S3 (not counted toward this total, per the accessory-sets-don't-count rule for this category, but real quad stimulus nonetheless). VERTICAL_PULL is band-assisted Pull-Up (S1) — still single-session and under target, same known gap as Block 6 (see PUSH/VERTICAL_PULL flags). UNILATERAL_LOWER (6/leg) spread evenly across all 3 sessions via fresh movements this cycle (Reverse Lunge/Cossack Squat on S1, B-Stance RDL/Single-Leg Glute Bridge on S2, Step-Up variants on S3 — doubling as the low-impact-plyometric element, same efficient pairing Block 6 used). CORE (4/week) spread across S1 and S3. GRIP and BALANCE each get a dedicated slot in S2, both using fresh movements (Dead Hang/Farmer Hold for GRIP, Tandem Stance/eyes-closed single-leg for BALANCE) rather than repeating Block 6's choices, per the accessory-rotation rule. Rotator-cuff activation still lives in warm-ups, but S2 now ALSO carries a real ROTATOR_CUFF accessory (Face Pull, working sets) per the Block 6 pending note — a deliberate exception to the normal 2–3-accessory-per-session cap (S2 runs 4 accessories: Face Pull, GRIP, BALANCE, plus the UNILATERAL_LOWER slot). S3 also still runs 4 accessories this cycle for the same reason (Spanish Squat, kept per its own Block 6 pending note). KNOWN GAPS (see PUSH/VERTICAL_PULL flags): both remain single-session and under target — every free accessory/secondary slot this cycle is committed to the two carried-over fixes rather than closing these. Only 1 accessory movement carried over from Block 6 (Spanish Squat, kept deliberately per its pending note) — every other accessory across the program was rotated to a genuinely new movement per the 'at most 1 carryover' rule; Face Pull is new, not a carryover, so it doesn't count against that limit.",
   "volumeAudit": [
     {
@@ -53,7 +53,7 @@
         0
       ],
       "meetsTarget": false,
-      "flag": "Single-session (Push Press, S2) and 2–4 sets under target. Every accessory/secondary slot this cycle went to the two carried-over fixes from Block 6 (Face Pull for the shoulder IR rebuild, Spanish Squat for the quad-endurance deficit) — flagging honestly rather than silently shipping it. Once both of those show enough progress to taper, a future cycle can trade one for a second push movement (e.g. DB incline press)."
+      "flag": "Single-session (Strict Press, S2) and 2–4 sets under target. Every accessory/secondary slot this cycle went to the two carried-over fixes from Block 6 (Face Pull for the shoulder IR rebuild, Spanish Squat for the quad-endurance deficit) — flagging honestly rather than silently shipping it. Once both of those show enough progress to taper, a future cycle can trade one for a second push movement (e.g. DB incline press)."
     },
     {
       "muscleGroup": "VERTICAL_PULL",
@@ -274,7 +274,7 @@
           "notes": null
         },
         {
-          "name": "A few light push presses (empty bar)",
+          "name": "A few light strict presses (empty bar)",
           "duration": null,
           "reps": 8,
           "notes": "Ramp to working load"
@@ -285,14 +285,14 @@
           "type": "primary",
           "order": 1,
           "supersetGroup": "A",
-          "movement": "Push Press",
+          "movement": "Strict Press",
           "category": "PUSH",
           "isUnilateral": false,
           "sets": 3,
           "reps": "8",
           "percentOfMax": 70,
           "restSeconds": 150,
-          "coachingNotes": "RE-ENTRY WEEK: one set lighter than the rest of the block, load by feel and stop at RPE 6–7 — don't chase the % column. Roughly 20–25 kg (your strict-press weight; the leg drive makes it easier). No saved max yet — save the assessment for Week 2. Swapped in from DB Floor Press before Week 1 Session 2 (trainee request): strict press at 25 kg x8 in recent metcons felt fine on both shoulder and elbow, so the overhead step the rulebook was holding back is being taken now instead of at Block 8. Barbell from the front rack: brace, short dip straight down (knees forward, torso vertical, no forward lean), drive hard with the legs and finish with the arms, head through at lockout. Lower under control back to the rack position and reset each rep — no bouncing out of the catch. Elbow: the front rack keeps the elbow deeply bent under load — if that's what aggravates the elbow, switch to DB push press (DBs at the shoulders, palms facing in) for the remaining sets. Shoulder: stop the set on any pinch at the top rather than grinding a lockout."
+          "coachingNotes": "RE-ENTRY WEEK: one set lighter than the rest of the block, load by feel and stop at RPE 6–7 — don't chase the % column. Roughly 17.5–20 kg. No saved max yet — save the assessment for Week 2. Swapped in from DB Floor Press before Week 1 Session 2 (trainee request): strict press at 25 kg x8 in recent metcons felt fine on both shoulder and elbow, so the overhead step the rulebook was holding back is being taken now instead of at Block 8 — strict first, push press is the next step if this block goes well. Barbell from the front rack, hands just outside the shoulders: squeeze glutes, brace, ribs down — no leg drive and no leaning back to finish the rep. Press straight up, move the head back out of the bar's path, then push it through at lockout. Lower under control to the front rack. Elbow: let the bar sit a little higher in the hands rather than deep in a full front rack if the elbow complains; if it still aggravates it, switch to seated or standing DB strict press (palms facing in) for the remaining sets. Shoulder: stop the set on any pinch at the top rather than grinding a lockout."
         },
         {
           "type": "secondary",
@@ -818,7 +818,7 @@
           "notes": null
         },
         {
-          "name": "A few light push presses (empty bar)",
+          "name": "A few light strict presses (empty bar)",
           "duration": null,
           "reps": 8,
           "notes": "Ramp to working load"
@@ -829,14 +829,14 @@
           "type": "primary",
           "order": 1,
           "supersetGroup": "A",
-          "movement": "Push Press",
+          "movement": "Strict Press",
           "category": "PUSH",
           "isUnilateral": false,
           "sets": 4,
           "reps": "10",
           "percentOfMax": 66,
           "restSeconds": 150,
-          "coachingNotes": "Assessment week on this lift: ~25 kg as a starting point (estimated push press max ~38 kg from strict press 25 kg x8). Ten reps is a lot of push press — keep every rep crisp; if technique degrades, stop the set. Log the work set and update the max in Settings. Swapped in from DB Floor Press before Week 1 Session 2 (trainee request): strict press at 25 kg x8 in recent metcons felt fine on both shoulder and elbow, so the overhead step the rulebook was holding back is being taken now instead of at Block 8. Barbell from the front rack: brace, short dip straight down (knees forward, torso vertical, no forward lean), drive hard with the legs and finish with the arms, head through at lockout. Lower under control back to the rack position and reset each rep — no bouncing out of the catch. Elbow: the front rack keeps the elbow deeply bent under load — if that's what aggravates the elbow, switch to DB push press (DBs at the shoulders, palms facing in) for the remaining sets. Shoulder: stop the set on any pinch at the top rather than grinding a lockout."
+          "coachingNotes": "Assessment week on this lift: ~20 kg as a starting point (estimated strict press max ~31 kg from 25 kg x8 in metcons). Keep every rep strict; if you need to lean back or dip to finish, the set is over. Log the work set and update the max in Settings. Swapped in from DB Floor Press before Week 1 Session 2 (trainee request): strict press at 25 kg x8 in recent metcons felt fine on both shoulder and elbow, so the overhead step the rulebook was holding back is being taken now instead of at Block 8 — strict first, push press is the next step if this block goes well. Barbell from the front rack, hands just outside the shoulders: squeeze glutes, brace, ribs down — no leg drive and no leaning back to finish the rep. Press straight up, move the head back out of the bar's path, then push it through at lockout. Lower under control to the front rack. Elbow: let the bar sit a little higher in the hands rather than deep in a full front rack if the elbow complains; if it still aggravates it, switch to seated or standing DB strict press (palms facing in) for the remaining sets. Shoulder: stop the set on any pinch at the top rather than grinding a lockout."
         },
         {
           "type": "secondary",
@@ -1362,7 +1362,7 @@
           "notes": null
         },
         {
-          "name": "A few light push presses (empty bar)",
+          "name": "A few light strict presses (empty bar)",
           "duration": null,
           "reps": 8,
           "notes": "Ramp to working load"
@@ -1373,14 +1373,14 @@
           "type": "primary",
           "order": 1,
           "supersetGroup": "A",
-          "movement": "Push Press",
+          "movement": "Strict Press",
           "category": "PUSH",
           "isUnilateral": false,
           "sets": 4,
           "reps": "6",
           "percentOfMax": 75,
           "restSeconds": 150,
-          "coachingNotes": "Heavy day: roughly 27.5–30 kg (use your Week 2 logged max if you saved one). Fast, sharp drive each rep. Swapped in from DB Floor Press before Week 1 Session 2 (trainee request): strict press at 25 kg x8 in recent metcons felt fine on both shoulder and elbow, so the overhead step the rulebook was holding back is being taken now instead of at Block 8. Barbell from the front rack: brace, short dip straight down (knees forward, torso vertical, no forward lean), drive hard with the legs and finish with the arms, head through at lockout. Lower under control back to the rack position and reset each rep — no bouncing out of the catch. Elbow: the front rack keeps the elbow deeply bent under load — if that's what aggravates the elbow, switch to DB push press (DBs at the shoulders, palms facing in) for the remaining sets. Shoulder: stop the set on any pinch at the top rather than grinding a lockout."
+          "coachingNotes": "Heavy day: roughly 22.5–25 kg (use your Week 2 logged max if you saved one). Swapped in from DB Floor Press before Week 1 Session 2 (trainee request): strict press at 25 kg x8 in recent metcons felt fine on both shoulder and elbow, so the overhead step the rulebook was holding back is being taken now instead of at Block 8 — strict first, push press is the next step if this block goes well. Barbell from the front rack, hands just outside the shoulders: squeeze glutes, brace, ribs down — no leg drive and no leaning back to finish the rep. Press straight up, move the head back out of the bar's path, then push it through at lockout. Lower under control to the front rack. Elbow: let the bar sit a little higher in the hands rather than deep in a full front rack if the elbow complains; if it still aggravates it, switch to seated or standing DB strict press (palms facing in) for the remaining sets. Shoulder: stop the set on any pinch at the top rather than grinding a lockout."
         },
         {
           "type": "secondary",
@@ -1906,7 +1906,7 @@
           "notes": null
         },
         {
-          "name": "A few light push presses (empty bar)",
+          "name": "A few light strict presses (empty bar)",
           "duration": null,
           "reps": 8,
           "notes": "Ramp to working load"
@@ -1917,14 +1917,14 @@
           "type": "primary",
           "order": 1,
           "supersetGroup": "A",
-          "movement": "Push Press",
+          "movement": "Strict Press",
           "category": "PUSH",
           "isUnilateral": false,
           "sets": 4,
           "reps": "8",
           "percentOfMax": 71,
           "restSeconds": 150,
-          "coachingNotes": "Roughly 27.5 kg, or let the % column drive it if Week 2 gave you a real max. Swapped in from DB Floor Press before Week 1 Session 2 (trainee request): strict press at 25 kg x8 in recent metcons felt fine on both shoulder and elbow, so the overhead step the rulebook was holding back is being taken now instead of at Block 8. Barbell from the front rack: brace, short dip straight down (knees forward, torso vertical, no forward lean), drive hard with the legs and finish with the arms, head through at lockout. Lower under control back to the rack position and reset each rep — no bouncing out of the catch. Elbow: the front rack keeps the elbow deeply bent under load — if that's what aggravates the elbow, switch to DB push press (DBs at the shoulders, palms facing in) for the remaining sets. Shoulder: stop the set on any pinch at the top rather than grinding a lockout."
+          "coachingNotes": "Roughly 22.5 kg, or let the % column drive it if Week 2 gave you a real max. Swapped in from DB Floor Press before Week 1 Session 2 (trainee request): strict press at 25 kg x8 in recent metcons felt fine on both shoulder and elbow, so the overhead step the rulebook was holding back is being taken now instead of at Block 8 — strict first, push press is the next step if this block goes well. Barbell from the front rack, hands just outside the shoulders: squeeze glutes, brace, ribs down — no leg drive and no leaning back to finish the rep. Press straight up, move the head back out of the bar's path, then push it through at lockout. Lower under control to the front rack. Elbow: let the bar sit a little higher in the hands rather than deep in a full front rack if the elbow complains; if it still aggravates it, switch to seated or standing DB strict press (palms facing in) for the remaining sets. Shoulder: stop the set on any pinch at the top rather than grinding a lockout."
         },
         {
           "type": "secondary",
