@@ -215,9 +215,12 @@ CARRIES_LOADED        1–2 per week (presence required; not counted in sets)
 ## RESOLVED — shoulder IR progression (Block 7)
 Block 7 added Face Pull back as a real ACCESSORY with working sets (3 sets,
 RPE 7 in weeks 1–2, +1 rep in weeks 3–4) on Wednesday, per the prior pending
-note. Still do NOT introduce a real overhead press variant (even light/
-accessory) — that's the step after this, once a cycle of Face Pull shows
-real improvement. Revisit that decision when building Block 8.
+note. The overhead step was originally deferred to Block 8, but on 2026-10-06
+(after Week 1 Session 1) the trainee asked to swap the PUSH primary DB Floor
+Press -> Push Press for all of Block 7: strict press at 25 kg x8 in metcons
+felt fine on shoulder and elbow. When building Block 8, ask how Push Press
+went (shoulder pinch at lockout? elbow in the front rack?) before deciding
+whether to keep an overhead primary, progress it, or step back to landmine.
 (The sleeper-stretch item that used to be here is done — it now lives in the
 weekly mobility session below, which is a better fit than the daily cooldown
 blocks since it isn't time-squeezed.)
