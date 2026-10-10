@@ -39,7 +39,12 @@ Program generation happens in Claude Code, not in the browser — this gives the
 
 1. Ask Claude Code to generate the next cycle (mention any feedback — it can also read the "Notes for next cycle" text you leave in the app, synced via GitHub).
 2. Claude Code generates and verifies a program JSON matching the schema documented in `js/programGen.js` → `buildRulesPrompt()`.
-3. Paste that JSON into **Import New Program** on the home screen and hit **Import Program**.
+3. Run the independent rule check before importing (the coach's own volume audit has missed rules before):
+   ```bash
+   python tools/check_cycle.py blockN.json --prev blockN-1.json
+   ```
+   Every FAIL gets fixed or consciously accepted, and every PENDING/RESOLVED note in the checklist gets asked about. A rule you accept breaking repeatedly belongs in the rulebook as an explicit exception.
+4. Paste that JSON into **Import New Program** on the home screen and hit **Import Program**.
 
 The in-app chat is still available for quick questions or small tweaks to the current program.
 
