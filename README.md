@@ -69,9 +69,10 @@ Everything is persisted in **localStorage** (your browser, no server needed):
 
 - **Programs generated in Claude Code, imported as JSON**: warm-up, strength, and mobility/cooldown per session, checked against the rulebook before you paste it in.
 - **On-the-fly coach chat** (`claude-sonnet-5`) for questions and small in-app tweaks to the current program.
-- **You write your own metcons**: the app shows deterministic, session-specific guidance (computed in-app, no AI call) — what muscle groups/patterns the strength work already hit and what to avoid layering on top — plus a free-text box to paste or type your own metcon in any format.
+- **You write your own metcons** (on the Friday metcon day): the app shows deterministic, session-specific guidance (computed in-app, no AI call) — what muscle groups/patterns the strength work already hit and what to avoid layering on top — plus a free-text box to paste or type your own metcon in any format.
 - **Max-load tracking**: when a movement uses percentage-based loading, you're prompted for your 1RM. Working weight is then displayed as e.g. `70 kg (70% of 100 kg)`, rounded to the nearest 2.5 kg.
-- **Low-impact hard constraint**: no running, jump rope, or box jumps ever appear.
+- **Weekly layout** (since Block 8): strength Sunday + Wednesday, a long self-authored metcon Friday, mobility Saturday.
+- **Low-impact hard constraint**: no running, jump rope, or box jumps with hard landings (low box jump-up with a step-down is allowed for bone loading).
 - **Evidence-based volume**: the rulebook encodes per-muscle weekly set targets for post-menopausal trainees, with posterior chain never underloaded.
 - **Mobile-first layout**: one session at a time, large tap targets, readable on a phone.
 - **GitHub sync**: weights, logs, and programs sync to `data/sync.json` in this repo, so they're available across devices and to Claude Code when generating the next cycle.

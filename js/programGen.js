@@ -102,7 +102,29 @@ const ProgramGen = (() => {
   // derived purely from the strength work already programmed in this session.
   // Metcons are authored by the trainee herself in the app now, not generated —
   // this replaces relying on the model to remember overhead/lumbar/grip caps.
+  // Which sessions get the metcon box. Programs from Block 8 on tag every
+  // session with sessionType and only the Friday "metcon" session has one;
+  // older programs (no sessionType) keep a metcon slot on every strength day.
+  function hasMetconSlot(session) {
+    if (session.sessionType) return session.sessionType === 'metcon';
+    return (session.strength || []).some(e => e.type === 'primary' || e.type === 'main');
+  }
+
   function buildMetconRequirements(session) {
+    if (session.sessionType === 'metcon') {
+      const avoid = [
+        'Heavy or high-volume lumbar loading (heavy deadlifts, lots of heavy swings) — Sunday is the heavy hinge day, keep it moderate here.',
+      ];
+      const general = [
+        'Aim for 30–45 minutes — one long piece, or 2–3 shorter pieces back to back',
+        'Include one power / impact piece for bone loading — KB swing, sled push, step-up, med ball slam, jump-up/step-down',
+        'Max 1 overhead-loading movement per piece, max 2 grip-heavy movements (never 3+ back to back)',
+        'No running, jump rope, or box jumps with hard landings',
+      ];
+      // guidelines is shown in-app on the long-metcon day only; strength-day
+      // metcons (older programs) show worked/suggestions instead.
+      return { worked: [], avoid, general, suggestions: [], guidelines: [...general, ...avoid.map(a => `Avoid: ${a}`)] };
+    }
     const strength = session.strength || [];
 
     const isHinge = e =>
@@ -171,7 +193,9 @@ const ProgramGen = (() => {
   function buildRulesPrompt() {
     return `## HARD CONSTRAINTS — NON-NEGOTIABLE
 - NO running, NO jump rope (any form), NO box jumps with hard landings
-- Low-impact plyometrics only: step-ups, low pogo hops on soft surface, medicine ball slams/throws
+- Low-impact plyometrics only: step-ups, low pogo hops on soft surface, medicine ball slams/throws,
+  and low box jump-UP with a STEP-DOWN (jump onto a box <=30 cm, always step down, never jump down —
+  the bone-loading stimulus comes from the take-off; the hard landing is what's banned)
 - All weights in KILOGRAMS
 
 ## WEEKLY VOLUME TARGETS (working sets, main-work only)
@@ -179,25 +203,57 @@ const ProgramGen = (() => {
 GLUTES_HAMSTRINGS    10–12 sets/week, minimum 2 different movements
 UPPER_BACK_ERECTORS   8–10 sets/week, minimum 2 different movements
 QUAD_DOMINANT         8–10 sets/week
-PUSH                  6–8  sets/week
+PUSH                  8–10 sets/week
 VERTICAL_PULL         6–8  sets/week
 UNILATERAL_LOWER      6    sets/week per leg (count per leg, not bilateral)
 CORE                  4–6  sets/week
 CARRIES_LOADED        1–2 per week (presence required; not counted in sets)
+PLYOMETRIC (impact)   1 element in EVERY strength session (presence required; see BONE LOADING)
+
+Total working sets per week (both strength sessions, all tiers): ~52–58 (Block 7 ran ~59 in weeks 2–4) — weekly
+volume stays where the 3-session split had it; the sessions get longer instead.
+
+---
+
+## WEEKLY STRUCTURE (since Block 8 — standing choice, not something to ask about each cycle)
+
+Four sessions per week, fixed days (the gym is closed Saturdays, so Saturday is
+the at-home mobility day):
+
+  dayWithinWeek 1  Sunday     STRENGTH A — hinge-led   (sessionType "strength")
+  dayWithinWeek 2  Wednesday  STRENGTH B — squat-led   (sessionType "strength")
+  dayWithinWeek 3  Friday     LONG METCON              (sessionType "metcon")
+  dayWithinWeek 4  Saturday   WEEKLY MOBILITY          (sessionType "mobility")
+
+Week start dates (startDate, label) are Sundays.
+
+Why: the trainee was skipping the short post-strength metcons — not only for
+time but because she was too tired and unmotivated after lifting (reported
+2026-10-16). Two longer strength sessions plus one stand-alone metcon she does
+fresh beats three strength sessions with metcons that mostly don't happen.
+Two full-body sessions/week is enough to keep and build strength at this age
+as long as loads stay heavy and weekly volume is held.
+
+Why squat on Wednesday: the Friday metcon is trainee-authored and often has
+lunges/step-ups; Wednesday is 5 days after it, Sunday's hinge day only 2. That
+satisfies the quad-endurance note's "no quad-heavy metcon in the 48h before
+the QUAD_DOMINANT day" rule by construction.
 
 ---
 
 ## PER-SESSION CONSTRAINTS (enforce strictly)
 
-1. Maximum 5 working sets per muscle group per session
+1. Maximum 6 working sets per muscle group per session
 2. Maximum 2 hinge-pattern movements per session
    Hinge = any GLUTES_HAMSTRINGS or UPPER_BACK_ERECTORS movement that loads the lumbar spine (deadlift, RDL, good morning, clean/snatch pull)
    Hip thrust and cable pull-through do NOT count as hinges (hip-dominant, non-spinal-loading)
 3. No session may contain 3 or more exercises targeting the same primary muscle group consecutively
-4. Total working sets per session: 15–20
-5. Each muscle group's weekly volume must be spread across at least 2 of the 3 sessions
-6. If a muscle group target is ≥10 sets/week, it must appear in all 3 sessions
-7. No two consecutive sessions lead with the same primary movement pattern (if Session A leads with a hinge, Session B must lead with squat or push)
+4. Total working sets per strength session: 24–30 (week 1 of a re-entry block may run lower)
+5. Every tracked muscle group with a target of ≥6 sets/week (GLUTES_HAMSTRINGS, UPPER_BACK_ERECTORS,
+   QUAD_DOMINANT, PUSH, VERTICAL_PULL, UNILATERAL_LOWER) must appear in BOTH strength sessions
+6. Strength A leads with a hinge, Strength B leads with a squat (see WEEKLY STRUCTURE)
+7. Supersets are how the longer sessions stay manageable — pair non-competing work wherever the
+   SUPERSET PAIRING rules allow; aim for an estimated session time of roughly 80–100 min
 
 ---
 
@@ -207,7 +263,10 @@ CARRIES_LOADED        1–2 per week (presence required; not counted in sets)
 - Primary movements (deadlift variants, squat variants, press variants) stay consistent within a cycle for progressive overload
 - Include at least 1 unilateral lower body movement per session
 - Include at least 1 rowing movement per session
-- Include hip thrust or glute bridge at least 2× per week
+- Include hip thrust or glute bridge at least 2× per week (i.e. in both strength sessions)
+- Include 1 PLYOMETRIC / impact element in every strength session (see BONE LOADING)
+- Include 1 power / explosive movement per week beyond the plyometric (push press, KB swing,
+  hang power clean, med ball chest pass/throw) — power declines faster than strength with age
 - Prefer landmine press over barbell overhead press for shoulder safety
 
 ---
@@ -283,59 +342,48 @@ the accessory has been dropped/tapered accordingly.
 ---
 
 ## PROGRAM STRUCTURE
-- 3 strength sessions per week, plus 1 dedicated weekly mobility/stretch session (4 sessions/week total)
+- 2 strength sessions + 1 long metcon session + 1 weekly mobility session per week (see WEEKLY STRUCTURE)
 - Each STRENGTH session must contain:
   1. WARM-UP (8–12 min, specific to that day's work)
      Include rotator cuff / scapular activation here (band pull-aparts, external rotation, Y/T/W) — NOT as working sets
   2. STRENGTH — structured in three tiers (see MOVEMENT CLASSIFICATION below):
-     a. PRIMARY: 1 heavy compound lift — type: "primary"
-     b. SECONDARY: 1–2 supporting compounds — type: "secondary"
-     c. ACCESSORY: 2–3 isolation / lower-load movements — type: "accessory"
-        (one session per week is an exception — see DESIGNATED METCON DAY below)
-  3. METCON — NOT your job, see METCON section below
+     a. PRIMARY: 2 heavy compound lifts — one LOWER (hinge on Strength A, squat on Strength B)
+        and one UPPER press — type: "primary", lower first
+     b. SECONDARY: 2–3 supporting compounds — type: "secondary"
+     c. ACCESSORY: 3–5 isolation / lower-load movements, including the PLYOMETRIC element — type: "accessory"
+  3. No metcon — strength sessions no longer carry a metcon slot
   4. MOBILITY/COOLDOWN (lat, thoracic, shoulder IR) — short, 3 items, not the main mobility work (see below)
 
-## DESIGNATED METCON DAY (accessory tier dropped for time)
+## DUP ACROSS TWO SESSIONS
+Each primary lift is trained once per week, so DUP works across the two days:
+the session whose LOWER primary is the heavy type (3–5 reps, ~75–85%) pairs it
+with an UPPER primary on the moderate/volume type (6–8 reps, ~65–75%), and the
+other session flips it (lower moderate/volume, upper heavy). Note the pairing in
+progressionJustification. Week-to-week progression within the cycle is unchanged.
 
-One of the 3 strength sessions each week — the one whose PRIMARY is the
-upper-body press (not a hinge or squat day) — drops its ACCESSORY tier
-entirely (primary + secondary only) to leave real time for a proper
-metcon. This is a standing structural choice for every cycle, not
-optional or something to ask about each time.
+## LONG METCON SESSION (Friday — trainee-authored)
 
-- Why this specific day: it's the only strength day without a heavy
-  hip-hinge or squat primary, so a conditioning piece here doesn't stack
-  extra fatigue on the same lower-body/hip tissues already loaded hard
-  on the other two days. (Currently also directly relevant: the trainee
-  is managing a lateral hip/glute-tendon issue — keeping conditioning
-  work off the heavy hinge/squat days specifically avoids adding
-  cumulative compressive load on that hip while it's settling.)
-- Where this came from: the trainee was consistently skipping metcons
-  most sessions from lack of time — confirmed from her own logs, done
-  in every session for weeks 1–2 of Block 6, then none from week 3 on.
-  Trying to fit a metcon into all 3 sessions wasn't sustainable; one
-  reliably-protected day beats three attempted and mostly abandoned.
-- Relocate anything that would have lived in that day's now-removed
-  accessory tier: any weekly-volume-target contribution that slot was
-  covering must move to one of the other two sessions' accessory tiers
-  instead (see ACCESSORY PROGRAMMING RULES #2), and if a MANDATORY
-  ACCESSORY ELEMENT (GRIP/BALANCE/PLYOMETRIC) would have landed on this
-  day, place it on one of the other two strength days instead — it
-  still needs to happen somewhere every 2-week block.
-- This frees roughly 15–20 real minutes for the metcon; the day's short
-  mobility/cooldown block can stay as-is, it's brief already.
+dayWithinWeek 3, suggestedDay "Friday", sessionType "metcon". The trainee writes
+the metcon herself in the app (see METCON — NOT YOUR JOB); the generator only
+provides the frame:
+- strength: [] (empty — no tiers, no percentOfMax)
+- warmup: a general 8–10 min warm-up (cyclical machine + dynamic hips/shoulders/T-spine)
+- mobility: a short 3-item cooldown
+- focus: something like "Long Metcon — 30–45 min, your choice"
+- Never add a "metcon" field or any metcon content.
+The app shows her the long-metcon guidance (duration, include a power/impact
+piece, keep heavy lumbar loading moderate before Sunday's hinge day).
 
 ## WEEKLY MOBILITY SESSION (dedicated 4th session)
 
-A standing part of every cycle, not something to ask about each time. Distinct
+Saturday, sessionType "mobility" (done at home — the gym is closed). A standing
+part of every cycle, not something to ask about each time. Distinct
 from the short per-strength-session cooldown blocks above — this is a real
 ~25–30 min session in its own right.
 
 Schema: strength: [] (empty — no primary/secondary/accessory tiers, no
 percentOfMax, no metcon prompt), all content in mobility: [{name, duration,
-notes}]. dayWithinWeek: 4, a suggestedDay on whatever day fits best
-around the 3 strength days (default: the day after the last strength session,
-e.g. Sunday if strength days are Mon/Wed/Fri) — set focus to something like
+notes}]. dayWithinWeek: 4, suggestedDay "Saturday" — set focus to something like
 "Weekly Mobility — Shoulder IR, Thoracic Spine, Hips".
 
 Two tiers, matching the trainee's age (55, post-menopausal — reduced collagen
@@ -379,23 +427,24 @@ Rules:
   Do NOT superset a max-effort or near-max primary set (>85% 1RM) — full neural recovery required
 - Two secondary exercises may be supersetted if they target non-competing groups
 - Accessory exercises may also be supersetted with each other when they target non-competing muscles (e.g. face pull + tricep extension, single-leg RDL + lateral raise)
+- With 2 primaries per session, the lower + upper primary are the natural superset when both are ≤80% 1RM
 - Standalone exercises (not in a superset) get supersetGroup: null
 - Each exercise's restSeconds still reflects the desired rest for that movement; the app handles timing
 
 ## MOVEMENT CLASSIFICATION
 
-PRIMARY (type: "primary") — 1 per session:
-  The main compound lift, programmed to the DUP session type.
+PRIMARY (type: "primary") — 2 per strength session (one lower squat/hinge, one upper press):
+  The main compound lifts, programmed to the DUP type (see DUP ACROSS TWO SESSIONS).
   Sets/reps/load vary by session type (heavy/moderate/volume).
   Examples: back squat, conventional deadlift, bench press, strict press, front squat, power clean, hang power clean, power snatch, hang power snatch
   Clean/snatch variants: trainee has years of Olympic-lifting experience and trains with coach supervision available — see OLYMPIC LIFT VARIANTS below for the constraints specific to these movements
 
-SECONDARY (type: "secondary") — 1–2 per session:
+SECONDARY (type: "secondary") — 2–3 per session:
   Compound or semi-compound movements supporting the primary.
   Fixed: 3–4 sets × 6–10 reps, moderate load, regardless of session type.
   Examples: RDL, barbell row, hip thrust, Bulgarian split squat, landmine press, pull-up
 
-ACCESSORY (type: "accessory") — 2–3 per session:
+ACCESSORY (type: "accessory") — 3–5 per session:
   Isolation or lower-load movements filling volume gaps or targeting weak points.
   Fixed: 3 sets × 10–15 reps, load by feel (RPE 7–8).
   Examples: single-leg RDL, cable pull-through, face pull, Pallof press, single-arm row, dead bug
@@ -409,6 +458,7 @@ Power clean, hang power clean, power snatch, hang power snatch are permitted as 
 - restSeconds: 180–240 s (full recovery between technical attempts)
 - Never assign a supersetGroup to a clean/snatch primary, at any %1RM — technical execution needs full focus and a fresh CNS between sets, unlike the ≤80%/>85% intensity-based superset rule that applies to other primaries
 - Counts as a hinge movement toward the "max 2 hinge-pattern movements per session" cap (see PER-SESSION CONSTRAINTS)
+- Takes the LOWER primary slot on Strength A (it is the hinge); it also satisfies the weekly power-movement rule
 - coachingNotes should note that supervision is available/recommended for these sessions
 
 ## ACCESSORY PROGRAMMING RULES
@@ -424,7 +474,7 @@ Power clean, hang power clean, power snatch, hang power snatch are permitted as 
    Weeks 5–6: add 1–2 kg, reset to original rep target
    Deload week (if applicable): 60% load, same reps
 
-4. Combined secondary + accessory sets per session must not exceed 15 working sets
+4. Combined secondary + accessory sets per session must not exceed 20 working sets
 
 5. Core accessories always placed last in the session
    Time-based: 2 sets × 20–40 s
@@ -433,12 +483,41 @@ Power clean, hang power clean, power snatch, hang power snatch are permitted as 
 
 ## METCON — NOT YOUR JOB
 
-Metcons are entered by the trainee herself in the app, not generated by you. Never invent metcon movements, a format, a description, or a metconPlan for any session. The app independently computes session-specific "what to avoid" guidance from the strength work you programmed, and gives her a free-text box to enter her own metcon.
+Metcons are entered by the trainee herself in the app, not generated by you — and only on the Friday LONG METCON SESSION; strength sessions have no metcon slot. Never invent metcon movements, a format, a description, or a metconPlan for any session. The app independently computes session-specific "what to avoid" guidance from the strength work you programmed, and gives her a free-text box to enter her own metcon.
 
 ## MANDATORY ACCESSORY ELEMENTS (at least once per 2-week block, via ACCESSORY-tier exercises)
 - Wrist/forearm (wrist curls, reverse curls, or rice bucket drill) — category GRIP
 - Balance / proprioception (single-leg stance, perturbation drills) — category BALANCE
-- Low-impact plyometrics (med ball slams, step-ups for power, low pogo on soft surface) — category PLYOMETRIC
+- (PLYOMETRIC is no longer once per block — it is in every strength session, see BONE LOADING)
+
+## BONE LOADING (every strength session)
+Post-menopausal bone responds to high-strain, high-rate loading, and weight
+loss (calorie deficit, GLP-1 medication) adds bone loss on top. Heavy primaries
+cover the strain; add the rate with 1 PLYOMETRIC accessory per strength session:
+- Options: low box jump-up with step-down (<=30 cm), low pogo hops on a soft
+  surface, med ball slam, med ball chest pass / scoop toss against a wall,
+  jumping step-up onto a low box (step down)
+- Dose: 3 × 5 (pogo: 3 × 10–15 contacts), full intent on every rep, 60–90 s rest
+- Place it first in the accessory tier (fresh, before fatigue); core still goes last
+- Rotates at the week-2/3 boundary like other accessories; progress by box
+  height/intent, not by adding reps
+- Hip-tendon caveat: if the lateral hip flares, switch to med ball variants
+  (upper-body-driven) rather than dropping the element
+
+## MUSCLE PRESERVATION IN A CALORIE DEFICIT / ON GLP-1
+Applies whenever the trainee is losing weight (deficit or GLP-1 medication) or
+reports unusual fatigue — she reported more fatigue in Oct 2026, so treat it
+as active until she says otherwise:
+- Load is what preserves muscle, more than set count. When a session has to
+  be cut short or she is low on energy: drop accessory sets first, then
+  secondary sets — keep the primaries at the programmed load (fewer sets is
+  fine, lighter is the last resort). Say this in the primaries' coachingNotes.
+- At each cycle review, compare the logged primary loads/e1RMs against the
+  previous block. If 2+ primaries dropped ~5% or more, say so plainly as a
+  possible sign of lean-mass loss or under-fuelling (protein, total energy,
+  sleep) rather than just lowering the targets — and ask about it.
+- Don't push volume above the weekly targets during a deficit; recovery is
+  reduced and the extra sets cost more than they return.
 
 ## CATEGORY TAXONOMY
 category — use exactly these values:
@@ -474,13 +553,13 @@ Programs are generated outside the app (in Claude Code) and imported as JSON via
   "progressionJustification": "1–2 sentences",
   "weeklyVolumeNotes": "brief summary of how volume is distributed across muscle groups",
   "startDate": "YYYY-MM-DD",
-  "weeks": 6,
+  "weeks": 4,
   "volumeAudit": [
     {
       "muscleGroup": "GLUTES_HAMSTRINGS",
       "weeklyTarget": "10–12",
       "weeklySetsProgrammed": 11,
-      "sessionBreakdown": [4, 4, 3],
+      "sessionBreakdown": [6, 5],
       "meetsTarget": true,
       "flag": "string or null"
     }
@@ -490,8 +569,9 @@ Programs are generated outside the app (in Claude Code) and imported as JSON via
       "sessionNumber": 1,
       "week": 1,
       "dayWithinWeek": 1,
-      "suggestedDay": "Monday",
-      "label": "Workout 1 for the week starting January 6, 2025",
+      "suggestedDay": "Sunday",
+      "sessionType": "strength | metcon | mobility",
+      "label": "Workout 1 for the week starting January 5, 2025",
       "focus": "Lower Body — Posterior Chain + Grip",
       "warmup": [
         { "name": "string", "duration": "string or null", "reps": "number or null", "notes": "string or null" }
@@ -520,10 +600,11 @@ Programs are generated outside the app (in Claude Code) and imported as JSON via
 
 Rules:
 - supersetGroup: assign matching letters ("A", "B", …) to exercises that should be performed as a superset; applies to any tier — primary, secondary, or accessory; set to null for standalone exercises
-- type: exactly 1 "primary", then 1–2 "secondary", then 2–3 "accessory" exercises (in that order in the array)
-- Primary and secondary must target different muscle groups (no two hinges, no two squats, no two pushes)
+- sessionType: required on every session — "strength" (2 per week), "metcon" (Friday, strength: []), "mobility" (Saturday, strength: [])
+- type (strength sessions): exactly 2 "primary" (lower, then upper press), then 2–3 "secondary", then 3–5 "accessory" exercises (in that order in the array)
+- Secondaries must not repeat a primary's pattern (no second squat on squat day, no second overhead press on press day); an RDL secondary on hinge day still counts toward the 2-hinge cap
 - category, percentOfMax, restSeconds: follow the CATEGORY TAXONOMY and LOAD & REST GUIDANCE above
-- volumeAudit: populate one entry per tracked muscle group (GLUTES_HAMSTRINGS through CORE); sessionBreakdown is an array of primary + secondary working sets per session in order (do not count accessory sets); flag any violations
+- volumeAudit: populate one entry per tracked muscle group (GLUTES_HAMSTRINGS through CORE); sessionBreakdown is an array of primary + secondary working sets per STRENGTH session in order (2 entries) (do not count accessory sets); flag any violations
 - Do not reference a per-session set cap or per-session limit anywhere in coachingNotes, weeklyVolumeNotes, or any other text field — the only volume constraint is weekly
 - Do not include a "metcon" field on any session — metcons are entered by the trainee separately, see METCON section above`;
   }
@@ -570,8 +651,10 @@ Rules:
     // block but the actual point of the session, so estimate from item count
     // instead of the flat cooldown default.
     const hasPrimary = byType.primary.length > 0;
-    const metconMinutes = hasPrimary ? (session.metcon?.timeMinutes ?? 15) : 0;
-    const mobilityMinutes = hasPrimary ? 8 : Math.max(15, (session.mobility || []).length * 3);
+    const isMetconDay = session.sessionType === 'metcon';
+    const metconMinutes = isMetconDay ? (session.metcon?.timeMinutes ?? 40)
+                        : hasMetconSlot(session) ? (session.metcon?.timeMinutes ?? 15) : 0;
+    const mobilityMinutes = hasPrimary || isMetconDay ? 8 : Math.max(15, (session.mobility || []).length * 3);
 
     // Superset savings: each paired exercise saves (sets-1) × its own rest (the shared rest
     // comes from the partner; only the max rest of the pair is used per round)
@@ -593,7 +676,7 @@ Rules:
     }
     const supersetSavingsMinutes = Math.round(supersetSavingsSec / 60);
 
-    const warmupMinutes = hasPrimary ? 10 : 5;
+    const warmupMinutes = hasPrimary || isMetconDay ? 10 : 5;
 
     return {
       warmupMinutes,
@@ -614,6 +697,7 @@ Rules:
       suggestedDay:   s.suggestedDay   ?? '',
       label:          s.label          ?? `Session ${i + 1}`,
       focus:          s.focus          ?? '',
+      sessionType:    ['strength', 'metcon', 'mobility'].includes(s.sessionType) ? s.sessionType : null,
       warmup:         (s.warmup  || []).map(w => ({
         name:     w.name     || '',
         duration: w.duration || null,
@@ -690,6 +774,7 @@ Rules:
 
   return {
     estimateSessionTimes,
+    hasMetconSlot,
     buildRulesPrompt,
     buildMetconRequirements,
     parseProgramJSON,

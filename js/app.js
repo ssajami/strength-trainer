@@ -314,7 +314,7 @@ function renderVolumeAudit() {
     const accessory = sum('accessory');
     const total  = primary + secondary + accessory;
     const secAcc = secondary + accessory;
-    return { label: s.suggestedDay || `Session ${i + 1}`, primary, secondary, accessory, total, secAcc, flagged: secAcc > 15 };
+    return { label: s.suggestedDay || `Session ${i + 1}`, primary, secondary, accessory, total, secAcc, flagged: secAcc > 20 };
   });
   const anyLoadFlagged = sessionLoads.some(s => s.flagged);
   const loadRows = sessionLoads.map(s => `
@@ -332,7 +332,7 @@ function renderVolumeAudit() {
     { cat: 'GLUTES_HAMSTRINGS',   label: '10–12', min: 10, max: 12 },
     { cat: 'UPPER_BACK_ERECTORS', label: '8–10',  min: 8,  max: 10 },
     { cat: 'QUAD_DOMINANT',       label: '8–10',  min: 8,  max: 10 },
-    { cat: 'PUSH',                label: '6–8',   min: 6,  max: 8  },
+    { cat: 'PUSH',                label: '8–10',  min: 8,  max: 10 },
     { cat: 'VERTICAL_PULL',       label: '6–8',   min: 6,  max: 8  },
     { cat: 'UNILATERAL_LOWER',    label: '6/leg', min: 6,  max: null },
     { cat: 'CORE',                label: '4–6',   min: 4,  max: 6  },
@@ -403,7 +403,7 @@ function renderVolumeAudit() {
       ${groupRows ? `
       <p class="audit-section-label">Weekly volume by muscle group</p>
       <table class="audit-table">
-        <thead><tr><th>Muscle group</th><th>Target</th><th>Sets (S1/S2/S3)</th><th>Met?</th><th>Flag</th></tr></thead>
+        <thead><tr><th>Muscle group</th><th>Target</th><th>Sets (by session)</th><th>Met?</th><th>Flag</th></tr></thead>
         <tbody>${groupRows}</tbody>
       </table>` : ''}
     </details>`;
@@ -484,12 +484,6 @@ function sessionWeekStart(session) {
   return `${d.getDate()}/${d.getMonth() + 1}/${String(d.getFullYear()).slice(2)}`;
 }
 
-// A "session" with no primary lift is a dedicated mobility/stretch day, not a
-// strength day — it doesn't need a metcon prompt or the metcon time estimate.
-function hasPrimaryWork(session) {
-  return (session.strength || []).some(e => e.type === 'primary' || e.type === 'main');
-}
-
 function makeSessionCard(session) {
   const totalSets = (session.strength || []).reduce((n, e) => n + (e.sets || 0), 0);
   const te = getTimeEstimates(session);
@@ -532,7 +526,7 @@ function makeSessionCard(session) {
     </div>
     <div class="session-stats">
       <span>${session.strength.length} exercises · ${totalSets} sets</span>
-      ${hasPrimaryWork(session) ? `<span class="metcon-chip${hasMetcon(session) ? '' : ' metcon-chip-empty'}">${metconChipText(session)}</span>` : ''}
+      ${ProgramGen.hasMetconSlot(session) ? `<span class="metcon-chip${hasMetcon(session) ? '' : ' metcon-chip-empty'}">${metconChipText(session)}</span>` : ''}
       <span class="time-chip">~${te.totalMinutes} min total</span>
     </div>
     <div class="strength-preview">${preview}</div>
@@ -567,7 +561,7 @@ function renderSessionDetail(session) {
   root.appendChild(timeSummary);
   if (session.warmup?.length)   root.appendChild(mkSection(`🔥 Warm-Up · ~${te.warmupMinutes} min`,            renderWarmup(session.warmup),          'warmup'));
   if (session.strength?.length) root.appendChild(mkSection('💪 Strength',                                       renderStrength(session.strength, te),   'strength'));
-  if (hasPrimaryWork(session))  root.appendChild(renderMetconSection(session, te));
+  if (ProgramGen.hasMetconSlot(session)) root.appendChild(renderMetconSection(session, te));
   if (session.mobility?.length) root.appendChild(mkSection(`🧘 Mobility & Cooldown · ~${te.mobilityMinutes} min`, renderMobility(session.mobility),     'mobility'));
 
   const logBtn = document.createElement('button');
@@ -761,6 +755,9 @@ function renderMetconSection(session, te) {
 
   function renderMetconReqBody(r) {
     return `
+      ${r.guidelines?.length ? `
+        <p class="metcon-req-heading">For today's long metcon</p>
+        <ul class="metcon-req-list">${r.guidelines.map(g => `<li>${g}</li>`).join('')}</ul>` : ''}
       ${r.worked.length ? `
         <p class="metcon-req-heading">Worked in strength today</p>
         <ul class="metcon-req-list">${r.worked.map(w => `<li>${w}</li>`).join('')}</ul>` : ''}
@@ -1382,13 +1379,13 @@ function exportToHTML() {
           <div class="s-time-breakdown">~${te.totalMinutes} min total &nbsp;·&nbsp; Warm-up ${te.warmupMinutes} &nbsp;·&nbsp; Primary ~${te.primaryMinutes} &nbsp;·&nbsp; Secondary ~${te.secondaryMinutes} &nbsp;·&nbsp; Accessory ~${te.accessoryMinutes} &nbsp;·&nbsp; Metcon ${te.metconMinutes} &nbsp;·&nbsp; Mobility ${te.mobilityMinutes}</div>
           ${warmupRows ? `<section class="sec warmup-sec"><h3>🔥 Warm-Up</h3><ul>${warmupRows}</ul></section>` : ''}
           ${strengthRows ? `<section class="sec strength-sec"><h3>💪 Strength</h3><div class="ex-list">${strengthRows}</div></section>` : ''}
-          <section class="sec metcon-sec">
+          ${ProgramGen.hasMetconSlot(s) ? `<section class="sec metcon-sec">
             <h3>⚡ Metcon</h3>
             ${metconReq.avoid.length ? `<div class="metcon-avoid"><strong>Avoid:</strong> ${metconReq.avoid.join(' ')}</div>` : ''}
             ${metconText
               ? `<div class="metcon-desc">${formatChatText(metconText)}</div>`
               : `<p class="metcon-desc muted">No metcon entered yet — open the app to add one.</p>`}
-          </section>
+          </section>` : ''}
           ${mobilityRows ? `<section class="sec mobility-sec"><h3>🧘 Mobility & Cooldown</h3><ul>${mobilityRows}</ul></section>` : ''}
         </div>
       </details>`;
